@@ -9,6 +9,7 @@
     <version>1.0.0</version>
     <modules>
         <module>e-money-web</module>
+        <module>emoney-core</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
