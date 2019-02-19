@@ -26,7 +26,6 @@ public abstract class RestTemplateControllerBase<Dto> {
 
     @PostMapping(WebResourceConstant.CREATE)
     public ResponseEntity<ResponseObj> create(@RequestBody @Valid Dto dto) {
-//        return restTemplate.postForEntity(this.getServiceURI() +WebResourceConstant.CREATE, dto, ResponseObj.class);
         HttpEntity<Dto> requestHttpEntity = new HttpEntity<>(dto);
         ResponseEntity<ResponseObj> emoneyResponse = restTemplate.exchange(this.getServiceURI() + WebResourceConstant.CREATE, HttpMethod.POST, requestHttpEntity, ResponseObj.class);
         return emoneyResponse;
@@ -34,7 +33,6 @@ public abstract class RestTemplateControllerBase<Dto> {
 
     @PutMapping(WebResourceConstant.UPDATE)
     public ResponseEntity<ResponseObj> update(@RequestBody @Valid Dto dto) {
-//       return restTemplate.postForEntity(this.getServiceURI()+WebResourceConstant.UPDATE,dto,ResponseObj.class);
         HttpEntity<Dto> requestHttpEntity = new HttpEntity<>(dto);
         ResponseEntity<ResponseObj> emoneyResponse = restTemplate.exchange(this.getServiceURI() + WebResourceConstant.UPDATE, HttpMethod.PUT, requestHttpEntity, ResponseObj.class);
         return emoneyResponse;
