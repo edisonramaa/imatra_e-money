@@ -3,10 +3,7 @@ package com.emoney.core.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 /**
  * Created by Anil Kumal on 02/02/2019.
@@ -16,6 +13,7 @@ import javax.persistence.Version;
 @MappedSuperclass
 public class EntityBase extends ModelBase {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 

@@ -20,19 +20,19 @@ import java.util.List;
 public abstract class ControllerBase<Entity, Dto> {
 
     protected ICrudService iCrudService;
-    protected IBeanMapper<Entity, Dto> ekeaReqBeanMapper;
-    protected IBeanMapper<Entity, Dto> ekeaResBeanMapper;
+    protected IBeanMapper<Entity, Dto> reqBeanMapper;
+    protected IBeanMapper<Entity, Dto> resBeanMapper;
 
 
-    public ControllerBase(ICrudService iCrudService, IBeanMapper ekeaReqBeanMapper, IBeanMapper ekeaResBeanMapper) {
+    public ControllerBase(ICrudService iCrudService, IBeanMapper reqBeanMapper, IBeanMapper resBeanMapper) {
         this.iCrudService = iCrudService;
-        this.ekeaReqBeanMapper = ekeaReqBeanMapper;
-        this.ekeaResBeanMapper = ekeaResBeanMapper;
+        this.reqBeanMapper = reqBeanMapper;
+        this.resBeanMapper = resBeanMapper;
     }
 
     @PostMapping(WebResourceConstant.CREATE)
     public ResponseEntity<ResponseObj> create(@RequestBody @Valid Dto dto) {
-        Entity entity = ekeaReqBeanMapper.mapToEntity(dto);
+        Entity entity = reqBeanMapper.mapToEntity(dto);
         iCrudService.save(entity);
         // setCreateEntityProperties(entity);
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("Record has been created.").build(), HttpStatus.OK);
@@ -40,7 +40,7 @@ public abstract class ControllerBase<Entity, Dto> {
 
     @PutMapping(WebResourceConstant.UPDATE)
     public ResponseEntity<ResponseObj> update(@RequestBody @Valid Dto dto) {
-        Entity entity = ekeaReqBeanMapper.mapToEntity(dto);
+        Entity entity = reqBeanMapper.mapToEntity(dto);
         //  setUpdateEntityProperties(entity);
         iCrudService.update(entity);
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("Record has been updated.").build(), HttpStatus.OK);
@@ -58,7 +58,8 @@ public abstract class ControllerBase<Entity, Dto> {
         if (entity == null) {
             throw new EmoneyException("Sorry!! No Records Found");
         }
-        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(ekeaResBeanMapper.mapToDTO(entity)).message("Success").build(), HttpStatus.OK);
+
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entity)).message("Success").build(), HttpStatus.OK);
     }
 
     @GetMapping(WebResourceConstant.GET_ALL)
@@ -67,7 +68,7 @@ public abstract class ControllerBase<Entity, Dto> {
         if (entities.size() == 0) {
             throw new EmoneyException("Sorry!! No Records Found");
         }
-        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(ekeaResBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
     }
 
     public ResponseEntity<ResponseObj> getAll(Integer currentPage, Integer pageSize) {
