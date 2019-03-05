@@ -49,7 +49,9 @@ public class WebResourceConstant {
 
     public interface EMONEY {
         String EMONEY_BASE = BASE_API + "/emoney";
+        String EMONEY_ADMIN = EMONEY_BASE + "/admin";
         String USER = EMONEY_BASE + "/user";
+        String BENEFIT = EMONEY_ADMIN + "/benefit";
 
 
     }
