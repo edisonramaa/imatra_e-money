@@ -11,6 +11,7 @@
         <module>e-money-web</module>
         <module>emoney-core</module>
         <module>e-money-admin</module>
+        <module>e-money-ui</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
