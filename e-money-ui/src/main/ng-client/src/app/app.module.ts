@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {CustomMaterialModule} from "./core/module/CustomMaterialModule";
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import {CustomMaterialModule} from "./core/module/CustomMaterialModule";
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
-    CustomMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
