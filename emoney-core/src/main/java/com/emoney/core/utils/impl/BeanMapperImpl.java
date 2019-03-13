@@ -16,6 +16,7 @@ public class BeanMapperImpl<Entity, DTO> implements IBeanMapper<Entity, DTO> {
     protected Class<DTO> viewModelClass;
 
     public BeanMapperImpl(Class<Entity> entityClass, Class<DTO> viewModelClass) {
+
         this.entityClass = entityClass;
         this.viewModelClass = viewModelClass;
     }
