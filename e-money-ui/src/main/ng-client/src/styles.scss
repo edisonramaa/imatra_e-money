@@ -45,3 +45,7 @@ body { margin: 0; font-family: Raleway, "Helvetica Neue", sans-serif; }
 }
 
 .header,.footer,.content { position:absolute; right:0;left:0}
+
+.header > .mat-toolbar.mat-primary, .footer > .mat-toolbar.mat-primary{
+  background: #ED6C41;
+}
