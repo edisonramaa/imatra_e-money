@@ -19,7 +19,7 @@ public class CrudRepositoryImpl<T, ID extends Serializable> implements ICrudRepo
     @PersistenceContext
     protected EntityManager entityManager;
     protected String tableName;
-    private Class<T> classType;
+    protected Class<T> classType;
 
     public CrudRepositoryImpl(Class<T> classType) {
         this.classType = classType;
