@@ -2,6 +2,9 @@ package com.emoney.web.service.impl;
 
 
 import com.emoney.core.service.impl.CrudServiceImpl;
+import com.emoney.core.utils.GlobalSettingUtils;
+import com.emoney.core.utils.QRCodeUtil;
+import com.emoney.core.utils.SecurityUtils;
 import com.emoney.web.model.JobEntity;
 import com.emoney.web.repository.IJobRepository;
 import com.emoney.web.service.IJobService;
@@ -33,5 +36,24 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
     @Override
     public List<JobEntity> getExpiredJobs() {
         return jobRepository.getExpiredJobs();
+    }
+
+    @Override
+    public JobEntity save(JobEntity jobEntity) {
+        String qrUniqueCode = SecurityUtils.generateRandomString(10, 10);
+        String fileName = SecurityUtils.generateRandomString(6, 6);
+        String folderLocation = GlobalSettingUtils.QR_JOB_LOCATION;
+        QRCodeUtil.generateQRCodeImage(qrUniqueCode, fileName, folderLocation);
+        jobEntity.setQr_unique_code(qrUniqueCode);
+        jobEntity.setQrFileName(fileName.concat(".png"));
+        return super.save(jobEntity);
+    }
+
+    @Override
+    public JobEntity update(JobEntity entity) {
+        JobEntity existingJobEntity = jobRepository.findOne(entity.getId());
+        entity.setQrFileName(existingJobEntity.getQrFileName());
+        entity.setQr_unique_code(existingJobEntity.getQr_unique_code());
+        return super.update(entity);
     }
 }

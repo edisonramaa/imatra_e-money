@@ -34,5 +34,9 @@ public class JobEntity extends EntityBase {
     private String postCode;
     @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "qr_file_name")
+    private String qrFileName;
+    @Column(name = "qr_unique_code")
+    private String qr_unique_code;
 
 }
