@@ -13,6 +13,13 @@ import java.util.List;
  */
 public class MultiPartFileUtils {
 
+    public static String getRootLocation() {
+        String rootPath = GlobalSettingUtils.getGlobalSettingByKey(GlobalSettingUtils.ROOT_UPLOAD_LOCATION);
+        String imaagePath = GlobalSettingUtils.getGlobalSettingByKey(GlobalSettingUtils.IMAGE_UPLOAD_LOCATION);
+        String finalFilePath = rootPath + File.separator + imaagePath;
+        return finalFilePath;
+    }
+
     public static String writeFile(List<FileInfoModel> fileInfoModels) {
 
         for (FileInfoModel fileInfoModel : fileInfoModels) {
