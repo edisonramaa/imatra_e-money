@@ -14,3 +14,22 @@
 /deep/ .mat-expansion-panel-body{
   background: lightgrey;
 }
+.mat-stroked-button {
+  border-color: #e78666;
+} .mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn {
+  color: #e78666;
+} .mat-stroked-button:active {
+  background-color: #e78666;
+}.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn:active {
+  color: #ffffff;
+}
+ .mat-stroked-button:hover {
+  background-color: #e78666;
+} .mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn:hover {
+  color: #ffffff;
+}
+.mat-expansion-panel-header-description {
+  flex-grow: 0;
+  color: #13dc13;
+}
+
