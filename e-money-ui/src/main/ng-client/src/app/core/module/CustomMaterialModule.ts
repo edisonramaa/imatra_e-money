@@ -8,7 +8,7 @@ import {
   MatListModule,
   MatSidenavModule,
   MatTabsModule,
-  MatToolbarModule,
+  MatToolbarModule
 } from "@angular/material";
 import { CountDownModule } from  'ng6-countdown/dist/ng6-countdown-lib';
 import {CountdownTimerModule} from "angular-countdown-timer";
