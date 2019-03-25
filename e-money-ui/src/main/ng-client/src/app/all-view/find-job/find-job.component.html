@@ -7,12 +7,13 @@
           <mat-panel-title>
             Help the elderly
           </mat-panel-title>
+          <mat-panel-description style="float: right">40</mat-panel-description>
           <mat-icon>
             <img style="float: right" width="20" height="20" src="../../../assets/images/coins.png"/>
           </mat-icon>
         </mat-expansion-panel-header>
-        <p>Description:</p>
-        <p style="color: darkgrey">Greetings, I need to go shopping and I need someone to help me with groceries. </p>
+        <p style="margin-top: 9px; font-style: italic;">Description:</p>
+        <p style="color: #7c7070">Greetings, I need to go shopping and I need someone to help me with groceries. </p>
         <!--<lib-countdown  date="April 1, 2019 00:33"></lib-countdown>-->
         <lib-countdown
           [date]="finishDate"
@@ -26,21 +27,15 @@
                 <div style="display: inline"  style="float: left" >
                   <table>
                     <tr>
-                      <td>{{days}}</td>
-                      <td>{{hours}}</td>
-                      <td>{{minutes}}</td>
-                      <td>{{seconds}}</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Days</strong></td>
-                      <td><strong>Hours</strong></td>
-                      <td><strong>Minutes</strong></td>
-                      <td><strong>Seconds</strong></td>
+                      <td style="text-align: center; margin-right: 2px; color: #ED6C41">{{days}}d</td>
+                      <td style="text-align: center; margin-right: 2px; color: #ED6C41">{{hours}}h</td>
+                      <td style="text-align: center; margin-right: 2px; color: #ED6C41">{{minutes}}m</td>
+                      <td style="text-align: center; margin-right: 2px; color: #ED6C41">{{seconds}}s</td>
                     </tr>
                   </table>
                 </div>
                 <div style="float: right">
-                  <button>Apply</button>
+                  <button class="mat-stroked-button mat-warn">Apply</button>
                 </div>
                 <!--<div  class="card-content"  [style.background]="backgroundColor">-->
                   <!--<span  class="card-title activator white-text text-darken-4 center-align"  [style.color]="textColor">I'm a custom card</span>-->
