@@ -8,8 +8,7 @@ import {CustomMaterialModule} from "../../core/module/CustomMaterialModule";
 @NgModule({
   imports: [
     CommonModule,
-    FindJobRoutingModule,
-    CustomMaterialModule
+    FindJobRoutingModule
   ],
   declarations: [FindJobComponent],
   providers: [JobService]
