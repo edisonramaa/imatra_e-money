@@ -5,10 +5,13 @@ import {
   MatIconModule,
   MatListModule,
   MatSidenavModule,
+  MatTabsModule,
   MatToolbarModule,
   MatExpansionModule,
-  MatDividerModule
+  MatDividerModule,
 } from "@angular/material";
+import { CountDownModule } from  'ng6-countdown/dist/ng6-countdown-lib';
+import {CountdownTimerModule} from "angular-countdown-timer";
 
 @NgModule({
   imports: [
@@ -18,8 +21,11 @@ import {
     MatSidenavModule,
     MatListModule,
     MatIconModule,
+    MatTabsModule,
     MatExpansionModule,
-    MatDividerModule
+    MatDividerModule,
+    CountDownModule,
+    CountdownTimerModule
   ],
   exports: [
     MatButtonModule,
@@ -28,8 +34,11 @@ import {
     MatSidenavModule,
     MatListModule,
     MatIconModule,
+    MatTabsModule,
     MatExpansionModule,
-    MatDividerModule
+    MatDividerModule,
+    CountDownModule,
+    CountdownTimerModule
   ],
 })
 export class CustomMaterialModule {
