@@ -22,6 +22,7 @@ import {ZXingScannerModule} from "@zxing/ngx-scanner";
     MatSidenavModule,
     MatListModule,
     MatIconModule,
+    MatTabsModule,
     MatExpansionModule,
     MatDividerModule,
     ZXingScannerModule,
