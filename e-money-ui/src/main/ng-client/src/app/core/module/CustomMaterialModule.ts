@@ -2,13 +2,14 @@ import {NgModule} from "@angular/core";
 import {
   MatButtonModule,
   MatCheckboxModule,
+  MatDividerModule,
+  MatExpansionModule,
   MatIconModule,
   MatListModule,
   MatSidenavModule,
-  MatToolbarModule,
-  MatExpansionModule,
-  MatDividerModule
+  MatToolbarModule
 } from "@angular/material";
+import {ZXingScannerModule} from "@zxing/ngx-scanner";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {
     MatListModule,
     MatIconModule,
     MatExpansionModule,
-    MatDividerModule
+    MatDividerModule,
+    ZXingScannerModule
   ],
   exports: [
     MatButtonModule,
@@ -29,7 +31,8 @@ import {
     MatListModule,
     MatIconModule,
     MatExpansionModule,
-    MatDividerModule
+    MatDividerModule,
+    ZXingScannerModule
   ],
 })
 export class CustomMaterialModule {

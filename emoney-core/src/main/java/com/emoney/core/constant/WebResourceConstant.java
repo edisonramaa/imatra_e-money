@@ -51,6 +51,9 @@ public class WebResourceConstant {
         String EMONEY_BASE = BASE_API + "/emoney";
         String EMONEY_ADMIN = EMONEY_BASE + "/admin";
         String USER = EMONEY_BASE + "/user";
+        String JOB = EMONEY_BASE + "/job";
+        String GET_ACTIVE_JOB = "/active-job";
+        String GET_EXPIRED_JOB = "/expired-job";
         String BENEFIT = EMONEY_ADMIN + "/benefit";
 
 

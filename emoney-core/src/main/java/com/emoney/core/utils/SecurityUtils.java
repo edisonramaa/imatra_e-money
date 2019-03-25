@@ -8,7 +8,7 @@ public class SecurityUtils {
     private static final String CHARACTER = "abcEefHghijklmABCyDFzGsUI";
     private static final String NUMBER = "0123456789";
 
-    public static String generateRandomPassword(int characterLength, int numericLength) {
+    public static String generateRandomString(int characterLength, int numericLength) {
 
         StringBuilder sb = new StringBuilder();
 
