@@ -2,16 +2,17 @@ import {NgModule} from "@angular/core";
 import {
   MatButtonModule,
   MatCheckboxModule,
+  MatDividerModule,
+  MatExpansionModule,
   MatIconModule,
   MatListModule,
   MatSidenavModule,
   MatTabsModule,
   MatToolbarModule,
-  MatExpansionModule,
-  MatDividerModule,
 } from "@angular/material";
 import { CountDownModule } from  'ng6-countdown/dist/ng6-countdown-lib';
 import {CountdownTimerModule} from "angular-countdown-timer";
+import {ZXingScannerModule} from "@zxing/ngx-scanner";
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import {CountdownTimerModule} from "angular-countdown-timer";
     MatExpansionModule,
     MatDividerModule,
     CountDownModule,
-    CountdownTimerModule
+    CountdownTimerModule,
+    ZXingScannerModule
   ],
   exports: [
     MatButtonModule,
@@ -38,7 +40,8 @@ import {CountdownTimerModule} from "angular-countdown-timer";
     MatExpansionModule,
     MatDividerModule,
     CountDownModule,
-    CountdownTimerModule
+    CountdownTimerModule,
+    ZXingScannerModule
   ],
 })
 export class CustomMaterialModule {
