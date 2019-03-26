@@ -1,0 +1,51 @@
+/deep/.mat-tab-label, /deep/.mat-tab-label-active{
+  min-width: 50% !important;
+  width: 50% !important;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+}
+/deep/.content[_ngcontent-c1] {
+  top: 56px;
+}
+.mat-expansion-panel-spacing{
+  margin: 0px;
+}
+
+/deep/ .mat-expansion-panel-body{
+  background: #e2e2e2;
+}
+/deep/ .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+}
+.balance{
+  color: #47525E;
+  text-align: center;
+  size: 20px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+.recent-trans{
+  color: #47525E;
+  text-align: center;
+  size: 20px;
+  font-weight: 700;
+  margin-top: 15px;
+}
+.table-center{
+  color: #8190A5; display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-border-horizontal-spacing: 37px;
+  -webkit-border-vertical-spacing: 17px;
+}
+/deep/ hr {
+  border: none;
+  height: 1px;
+  color: #bebebe; /* old IE */
+  background-color: #bebebe; /* Modern Browsers */
+  margin-left: 10%;
+  margin-right: 10%;
+}
