@@ -41,6 +41,18 @@
   -webkit-border-horizontal-spacing: 37px;
   -webkit-border-vertical-spacing: 17px;
 }
+.example-right-align {
+  text-align: right;
+}
+.amount-value{
+  width: 80%;
+  margin-left: 6px;
+}
+.amount{
+  font-weight: bold;
+  margin-right:10px;
+  color: #47525E
+}
 /deep/ hr {
   border: none;
   height: 1px;
@@ -48,4 +60,27 @@
   background-color: #bebebe; /* Modern Browsers */
   margin-left: 10%;
   margin-right: 10%;
+}
+/deep/
+.mat-stroked-button {
+  border-color: #e78666!important;
+}
+.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn {
+    color: #e78666;
+}
+.mat-stroked-button:active {
+      background-color: #e78666;
+}
+.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn:active {
+       color: #ffffff;
+}
+.mat-stroked-button:hover {
+  background-color: #e78666;
+}
+.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn:hover {
+    color: #ffffff;
+}
+.button-padding{
+  padding-left: 30px;
+  padding-right: 30px;
 }
