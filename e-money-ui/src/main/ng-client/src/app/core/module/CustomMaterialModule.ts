@@ -32,7 +32,7 @@ import { BarRatingModule } from "ngx-bar-rating";
     CountDownModule,
     CountdownTimerModule,
     ZXingScannerModule,
-    MatInputModule
+    MatInputModule,
     MatCardModule,
     BarRatingModule
   ],
@@ -49,7 +49,7 @@ import { BarRatingModule } from "ngx-bar-rating";
     CountDownModule,
     CountdownTimerModule,
     ZXingScannerModule,
-    MatInputModule
+    MatInputModule,
     MatCardModule,
     BarRatingModule
   ],
