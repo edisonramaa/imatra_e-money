@@ -1,15 +1,16 @@
 import {NgModule} from "@angular/core";
 import {
-  MatButtonModule,
-  MatCheckboxModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatIconModule,
-  MatListModule,
-  MatSidenavModule,
-  MatToolbarModule
+    MatButtonModule, MatCardModule,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatListModule,
+    MatSidenavModule,
+    MatToolbarModule
 } from "@angular/material";
 import {ZXingScannerModule} from "@zxing/ngx-scanner";
+import { BarRatingModule } from "ngx-bar-rating";
 
 @NgModule({
   imports: [
@@ -21,7 +22,9 @@ import {ZXingScannerModule} from "@zxing/ngx-scanner";
     MatIconModule,
     MatExpansionModule,
     MatDividerModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    MatCardModule,
+    BarRatingModule
   ],
   exports: [
     MatButtonModule,
@@ -32,7 +35,9 @@ import {ZXingScannerModule} from "@zxing/ngx-scanner";
     MatIconModule,
     MatExpansionModule,
     MatDividerModule,
-    ZXingScannerModule
+    ZXingScannerModule,
+    MatCardModule,
+    BarRatingModule
   ],
 })
 export class CustomMaterialModule {
