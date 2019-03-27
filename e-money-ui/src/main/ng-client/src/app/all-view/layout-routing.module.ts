@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {LayoutComponent} from "./layout.component";
-import {MAIN_URL, MY_JOB_URL, PAY_URL, REDEEM_URL, WALLET_URL, SERVICE_URL} from "../core/utility/navigation-url";
+import {CREATE_JOB_URL, MAIN_URL, MY_JOB_URL, PAY_URL, REDEEM_URL, WALLET_URL, SERVICE_URL} from "../core/utility/navigation-url";
 
 const routes: Routes = [
     {
@@ -15,6 +15,7 @@ const routes: Routes = [
             {path: REDEEM_URL, loadChildren: './redeem/redeem.module#RedeemModule'},
             {path: WALLET_URL, loadChildren: './wallet/wallet.module#WalletModule'},
             {path: SERVICE_URL, loadChildren: './services/service.module#ServiceModule'},
+            {path: CREATE_JOB_URL, loadChildren: './create-job/create-job.module#CreateJobModule'},
 
             // {path: 'sign-in', loadChildren: './register/register.module#RegisterModule'},
 

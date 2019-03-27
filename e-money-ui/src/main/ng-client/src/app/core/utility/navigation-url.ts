@@ -6,3 +6,4 @@ export const PAY_URL: string = 'pay';
 export const REDEEM_URL: string = 'redeem';
 export const WALLET_URL: string = 'wallet';
 export const SERVICE_URL: string = 'service';
+export const CREATE_JOB_URL: string = 'create-job';
