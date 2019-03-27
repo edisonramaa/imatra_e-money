@@ -46,10 +46,14 @@ public class DataSourceInitializer implements CommandLineRunner {
         GlobalSettingEntity rootPath = new GlobalSettingEntity(GlobalSettingUtils.ROOT_UPLOAD_LOCATION, "../imatra-files");
         GlobalSettingEntity imagePath = new GlobalSettingEntity(GlobalSettingUtils.IMAGE_UPLOAD_LOCATION, "/images");
         GlobalSettingEntity qrCodePath = new GlobalSettingEntity(GlobalSettingUtils.QR_JOB_LOCATION, "/QR-JOB");
+        GlobalSettingEntity qrCodeServicePath = new GlobalSettingEntity(GlobalSettingUtils.QR_SERVICE, "/QR-SERVICE");
         globalSettingEntities.add(rootPath);
         globalSettingEntities.add(imagePath);
         globalSettingEntities.add(qrCodePath);
+        globalSettingEntities.add(qrCodeServicePath);
         return globalSettingEntities;
     }
+
+
 
 }

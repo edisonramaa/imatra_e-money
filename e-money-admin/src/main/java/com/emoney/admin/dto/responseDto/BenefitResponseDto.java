@@ -4,7 +4,7 @@ import com.emoney.core.model.ResponseDtoBase;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
+import java.util.Date;
 
 
 @Getter
