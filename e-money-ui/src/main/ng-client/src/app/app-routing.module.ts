@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'icredit', pathMatch: 'full'},
+    {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'icredit', loadChildren: './all-view/layout.module#LayoutModule'},
-  // {path: 'login', loadChildren: './cms-login/cms-login.module#CmsLoginModule'}
+    {path: 'login', loadChildren: './login/login.module#LoginModule'}
   //{path: '**', redirectTo: 'login'}
 
 

@@ -157,5 +157,12 @@
 }
 
 .mat-mini-fab.mat-accent{
-  
+  background: #ED6C41;
+  font-size: 50px;
+  color: white;
+  font-weight: lighter;
+  z-index: 9999;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
