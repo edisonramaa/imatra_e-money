@@ -11,6 +11,32 @@ import {ResponseModel} from "../../core/lib/model/response.model";
 export class FindJobComponent implements OnInit {
   jobList: JobModel[];
 
+  finishDate = 'April 1, 2019 00:33';
+  isCustomTemplate = true;
+  days;
+  hours;
+  minutes;
+  seconds;
+  backgroundColor = 'red';
+  textColor = 'black';
+  date = new Date('2019-04-26T00:00:00');
+
+  onDaysChanged(days) {
+    this.days  =  days;
+  }
+
+  onHoursChanged(hours) {
+    this.hours  =  hours;
+  }
+
+  onMinutesChanged(minutes) {
+    this.minutes  =  minutes;
+  }
+
+  onSecondsChanged(seconds) {
+    this.seconds  =  seconds;
+  }
+
   constructor(private _jobService: JobService) {
   }
 

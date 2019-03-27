@@ -5,3 +5,4 @@ export const MY_JOB_URL: string = 'myjob';
 export const PAY_URL: string = 'pay';
 export const REDEEM_URL: string = 'redeem';
 export const WALLET_URL: string = 'wallet';
+export const SERVICE_URL: string = 'service';

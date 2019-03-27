@@ -1,3 +1,94 @@
-<p>
-  find-job works!
-</p>
+<mat-tab-group animationDuration="0ms">
+  <mat-tab label="Map View">Map</mat-tab>
+  <mat-tab label="List View">
+    <mat-accordion>
+      <mat-expansion-panel [hideToggle]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Help the elderly
+          </mat-panel-title>
+          <mat-panel-description style="float: right">40</mat-panel-description>
+          <mat-icon>
+            <img style="float: right" width="20" height="20" src="../../../assets/images/coins.png"/>
+          </mat-icon>
+        </mat-expansion-panel-header>
+        <p style="margin-top: 9px; font-style: italic;">Description:</p>
+        <p style="color: #7c7070">Greetings, I need to go shopping and I need someone to help me with groceries. </p>
+        <!--<lib-countdown  date="April 1, 2019 00:33"></lib-countdown>-->
+        <lib-countdown
+          [date]="finishDate"
+          [isCustomTemplate]="isCustomTemplate"
+          (daysChanged)="onDaysChanged($event)"
+          (hoursChanged)="onHoursChanged($event)"
+          (minutesChanged)="onMinutesChanged($event)"
+          (secondsChanged)="onSecondsChanged($event)">
+          <div  class="row">
+            <div  class="col s12">
+                <div style="display: inline"  style="float: left" >
+                  <table>
+                    <tr>
+                      <td style="text-align: center; margin-right: 2px; color: #ED6C41">{{days}}d</td>
+                      <td style="text-align: center; margin-right: 2px; color: #ED6C41">{{hours}}h</td>
+                      <td style="text-align: center; margin-right: 2px; color: #ED6C41">{{minutes}}m</td>
+                      <td style="text-align: center; margin-right: 2px; color: #ED6C41">{{seconds}}s</td>
+                    </tr>
+                  </table>
+                </div>
+                <div style="float: right">
+                  <button class="mat-stroked-button mat-warn">Apply</button>
+                </div>
+                <!--<div  class="card-content"  [style.background]="backgroundColor">-->
+                  <!--<span  class="card-title activator white-text text-darken-4 center-align"  [style.color]="textColor">I'm a custom card</span>-->
+                <!--</div>-->
+            </div>
+          </div>
+        </lib-countdown>
+        <!--<countdown-timer [end]="date"></countdown-timer>-->
+      </mat-expansion-panel>
+      <mat-expansion-panel [hideToggle]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Clean the park
+          </mat-panel-title>
+          <mat-icon>
+            <img style="float: right" width="20" height="20" src="../../../assets/images/coins.png"/>
+          </mat-icon>
+        </mat-expansion-panel-header>
+        <p>Applicant information</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel [hideToggle]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Clean the garden
+          </mat-panel-title>
+          <mat-icon>
+            <img style="float: right" width="20" height="20" src="../../../assets/images/coins.png"/>
+          </mat-icon>
+        </mat-expansion-panel-header>
+        <p>Applicant information</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel [hideToggle]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Cut the grass
+          </mat-panel-title>
+          <mat-icon>
+            <img style="float: right" width="20" height="20" src="../../../assets/images/coins.png"/>
+          </mat-icon>
+        </mat-expansion-panel-header>
+        <p>Applicant information</p>
+      </mat-expansion-panel>
+      <mat-expansion-panel [hideToggle]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Chop the wood
+          </mat-panel-title>
+          <mat-icon>
+            <img style="float: right" width="20" height="20" src="../../../assets/images/coins.png"/>
+          </mat-icon>
+        </mat-expansion-panel-header>
+        <p>Applicant information</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-tab>
+</mat-tab-group>

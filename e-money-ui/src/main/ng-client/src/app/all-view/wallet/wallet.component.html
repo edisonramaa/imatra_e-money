@@ -1,3 +1,54 @@
-<p>
-  wallet works!
-</p>
+<mat-tab-group animationDuration="0ms">
+  <mat-tab label="Wallet">
+    <img class="center" width="100" height="100" src="../../../assets/images/coins.png"/>
+    <p  class="balance">Balance: $$$</p>
+    <hr size="10" >
+    <p  class="recent-trans">Recent Transactions</p>
+    <table class="table-center">
+      <tr>
+        <td >Transaction 1</td>
+        <td>+200</td>
+      </tr>
+      <tr>
+        <td>Transaction 1</td>
+        <td>+200</td>
+      </tr>
+      <tr>
+        <td>Transaction 1</td>
+        <td>+200</td>
+      </tr>
+      <tr>
+        <td>Transaction 1</td>
+        <td>+200</td>
+      </tr>
+    </table>
+  </mat-tab>
+  <mat-tab label="Transfer">
+    <img class="center" width="100" height="100" src="../../../assets/images/coins.png"/>
+    <p  class="balance">Balance: $$$</p>
+    <hr size="10" >
+    <table class="table-center-2" >
+      <tr>
+        <td><span style="font-weight: bold; color: #47525E">Wallet ID</span></td>
+        <td>
+          <mat-form-field style="margin-left: 10px;" class="example-full-width">
+            <input matInput >
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="amount">Amount</span></td>
+        <td>
+          <mat-form-field class="amount-value">
+            <input matInput type="number" class="example-right-align">
+            <span matPrefix><img style="float: right" width="20" height="20" src="../../../assets/images/coins.png"/>&nbsp;</span>
+            <span matSuffix>.00</span>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <div class="table-center" style="margin-top: 50px;">
+      <button class="mat-stroked-button mat-warn button-padding"><strong>Transfer</strong></button>
+    </div>
+  </mat-tab>
+</mat-tab-group>
