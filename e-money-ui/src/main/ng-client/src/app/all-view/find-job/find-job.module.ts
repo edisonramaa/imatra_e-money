@@ -4,12 +4,16 @@ import {FindJobComponent} from './find-job.component';
 import {FindJobRoutingModule} from "./find-job-routing.module";
 import {JobService} from "../services/job.service";
 import {CustomMaterialModule} from "../../core/module/CustomMaterialModule";
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FindJobRoutingModule,
-    CustomMaterialModule
+    CustomMaterialModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAKCaFt6BdyqUm95rDCrAWD0yG0940OrZs'
+    })
   ],
   declarations: [FindJobComponent],
   providers: [JobService]

@@ -36,4 +36,9 @@
   flex-grow: 0;
   color: #13dc13;
 }
-
+agm-map {
+  height: 800px;
+}
+.agm-map-container-inner .sebm-google-map-container-inner{
+  overflow: visible;
+}
