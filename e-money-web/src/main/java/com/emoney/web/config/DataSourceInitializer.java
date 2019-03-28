@@ -3,6 +3,8 @@ package com.emoney.web.config;
 import com.emoney.core.model.GlobalSettingEntity;
 import com.emoney.core.repository.IGlobalSettingRepository;
 import com.emoney.core.utils.GlobalSettingUtils;
+import com.emoney.web.model.UserEntity;
+import com.emoney.web.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -23,11 +25,14 @@ import java.util.List;
 public class DataSourceInitializer implements CommandLineRunner {
     @Autowired
     private IGlobalSettingRepository globalSettingRepository;
+    @Autowired
+    private IUserRepository userRepository;
 
     @Override
     public void run(String... args) throws Exception {
         //initializing default values in global_setting table
         this.initGlobalSettingInDB();
+        this.initDefaultUser();
     }
 
     private void initGlobalSettingInDB() {
@@ -52,6 +57,21 @@ public class DataSourceInitializer implements CommandLineRunner {
         globalSettingEntities.add(qrCodePath);
         globalSettingEntities.add(qrCodeServicePath);
         return globalSettingEntities;
+    }
+
+    private void initDefaultUser() {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setEmail("admin@gmail.com");
+        userEntity.setPassword("$2a$10$aMz/HmSCNl2DMbUhTy0DbeAJ5Us7SBY5G1S4yQtfCn1o1SpKbKfRW");
+        userEntity.setIsAdmin(true);
+        userEntity.setVersion(0L);
+        userEntity.setAge(11);
+        List<UserEntity> userEntityList = this.userRepository.findAll();
+        if (userEntityList.isEmpty()) {
+            System.out.println("initilizing initial user into the database....");
+            this.userRepository.save(userEntity);
+        }
+
     }
 
 

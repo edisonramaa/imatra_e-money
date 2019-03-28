@@ -27,10 +27,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("*").allowedMethods("*");
     }
 
-//    @Bean
-//    public AuthenticationHandlerInterceptor handlerInterceptor() {
-//        return new AuthenticationHandlerInterceptor();
-//    }
+    @Bean
+    public AuthenticationHandlerInterceptor handlerInterceptor() {
+        return new AuthenticationHandlerInterceptor();
+    }
 
     @Bean
     public ModelMapper modelMapper() {
