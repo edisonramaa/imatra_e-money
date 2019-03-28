@@ -20,7 +20,7 @@
             <mat-icon class="decline-btn-icon">highlight_off</mat-icon>
             <p class="decline-btn-text">Decline</p>
           </button>
-          <button  mat-icon-button (click)="createJob()">
+            <button mat-icon-button>
             <mat-icon class="accept-btn-icon">check_circle_outline</mat-icon>
             <p class="accept-btn-text">Accept</p>
           </button>
@@ -70,6 +70,6 @@
   </mat-expansion-panel>
 </mat-accordion>
 
-<button mat-mini-fab>
+<button mat-mini-fab (click)="createJob()">
     +
 </button>

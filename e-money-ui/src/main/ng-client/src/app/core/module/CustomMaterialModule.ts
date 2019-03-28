@@ -3,10 +3,13 @@ import {
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDividerModule,
     MatExpansionModule,
+    MatFormFieldModule,
     MatIconModule,
     MatListModule,
+    MatNativeDateModule,
     MatSidenavModule,
     MatTabsModule,
     MatToolbarModule
@@ -34,7 +37,10 @@ import {BarRatingModule} from "ngx-bar-rating";
     ZXingScannerModule,
     MatInputModule,
     MatCardModule,
-    BarRatingModule
+      BarRatingModule,
+      MatFormFieldModule,
+      MatDatepickerModule,
+      MatNativeDateModule
   ],
   exports: [
     MatButtonModule,
@@ -51,7 +57,10 @@ import {BarRatingModule} from "ngx-bar-rating";
     ZXingScannerModule,
     MatInputModule,
     MatCardModule,
-    BarRatingModule
+      BarRatingModule,
+      MatFormFieldModule,
+      MatDatepickerModule,
+      MatNativeDateModule
   ],
 })
 export class CustomMaterialModule {

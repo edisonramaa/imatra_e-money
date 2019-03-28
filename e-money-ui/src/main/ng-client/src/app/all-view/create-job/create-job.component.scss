@@ -1,0 +1,25 @@
+mat-form-field {
+  width: 100%;
+}
+
+form {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+/deep/ .mat-form-field.mat-focused .mat-form-field-label {
+  color: #ED6C41;
+}
+
+/deep/ .mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #ED6C41;
+}
+
+button {
+  border: 2px solid #ED6C41;
+  color: #ED6C41;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 100%;
+  font-weight: bold;
+}
