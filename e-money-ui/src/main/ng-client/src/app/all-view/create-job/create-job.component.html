@@ -12,9 +12,14 @@
     </mat-form-field>
 
     <mat-form-field>
-        <input [matDatepicker]="picker" matInput placeholder="Choose a date">
-        <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #picker touchUi></mat-datepicker>
+        <input [matDatepicker]="myDatepicker" matInput placeholder="Choose date">
+        <mat-datepicker-toggle [for]="myDatepicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input [ngxTimepicker]="picker" matInput placeholder="Choose time">
+        <ngx-material-timepicker #picker></ngx-material-timepicker>
     </mat-form-field>
 
     <mat-form-field>

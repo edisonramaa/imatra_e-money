@@ -23,3 +23,17 @@ button {
   width: 100%;
   font-weight: bold;
 }
+
+/deep/ .timepicker__header, /deep/ .clock-face__clock-hand {
+  background-color: #ED6C41 !important;
+}
+
+/deep/ .clock-face__number {
+  --button-color: #ED6C41;
+  --dial-background-color: #ED6C41;
+  --clock-hand-color: #ED6C41;
+}
+
+/deep/ .timepicker-button {
+  color: #ED6C41 !important;
+}

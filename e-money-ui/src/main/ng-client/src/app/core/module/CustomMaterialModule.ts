@@ -19,6 +19,7 @@ import {CountDownModule} from 'ng6-countdown/dist/ng6-countdown-lib';
 import {CountdownTimerModule} from "angular-countdown-timer";
 import {ZXingScannerModule} from "@zxing/ngx-scanner";
 import {BarRatingModule} from "ngx-bar-rating";
+import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import {BarRatingModule} from "ngx-bar-rating";
       BarRatingModule,
       MatFormFieldModule,
       MatDatepickerModule,
-      MatNativeDateModule
+      MatNativeDateModule,
+      NgxMaterialTimepickerModule
   ],
   exports: [
     MatButtonModule,
@@ -60,7 +62,8 @@ import {BarRatingModule} from "ngx-bar-rating";
       BarRatingModule,
       MatFormFieldModule,
       MatDatepickerModule,
-      MatNativeDateModule
+      MatNativeDateModule,
+      NgxMaterialTimepickerModule
   ],
 })
 export class CustomMaterialModule {
