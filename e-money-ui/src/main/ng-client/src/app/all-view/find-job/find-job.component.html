@@ -1,6 +1,18 @@
-<mat-tab-group animationDuration="0ms">
-  <mat-tab label="Map View">Map</mat-tab>
-  <mat-tab label="List View">
+<mat-tab-group #matTabGroup animationDuration="0ms">
+  <mat-tab id="map" label="Map View">
+    <div class="center" id="test">
+      <agm-map [zoom]="11" [latitude]="lat" [longitude]="lng">
+        <agm-marker [latitude]="61.163819" [longitude]="28.665576" (markerClick)="markerClick()"></agm-marker>
+        <agm-marker [latitude]="61.172849" [longitude]="28.866576" (markerClick)="markerClick()"></agm-marker>
+        <agm-marker [latitude]="61.153519" [longitude]="28.765575" (markerClick)="markerClick()"></agm-marker>
+        <agm-marker [latitude]="61.173816" [longitude]="28.795586" (markerClick)="markerClick()"></agm-marker>
+        <agm-marker [latitude]="61.143836" [longitude]="28.797786" (markerClick)="markerClick()"></agm-marker>
+        <agm-marker [latitude]="61.213816" [longitude]="28.795586" (markerClick)="markerClick()"></agm-marker>
+      </agm-map>
+
+    </div>
+  </mat-tab>
+  <mat-tab id="list" label="List View">
     <mat-accordion>
       <mat-expansion-panel *ngFor="let job of jobList;">
         <mat-expansion-panel-header>

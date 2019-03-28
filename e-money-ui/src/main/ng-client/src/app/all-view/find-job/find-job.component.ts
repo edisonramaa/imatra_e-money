@@ -1,7 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {JobService} from "../services/job.service";
 import {JobModel} from "../models/job.model";
 import {ResponseModel} from "../../core/lib/model/response.model";
+import { AgmCoreModule } from '@agm/core';
+import {ICREDIT_URL, SERVICE_URL, FIND_JOB_URL} from "../../core/utility/navigation-url";
+import {Router} from "@angular/router";
+import {MatTabGroup} from "@angular/material";
+
 
 @Component({
   selector: 'app-find-job',
@@ -9,6 +14,10 @@ import {ResponseModel} from "../../core/lib/model/response.model";
   styleUrls: ['./find-job.component.scss']
 })
 export class FindJobComponent implements OnInit {
+  @ViewChild("matTabGroup")
+    matTabGroup: MatTabGroup
+  lat: number = 61.1695977;
+  lng: number = 28.7645463;
   jobList: JobModel[];
 
   finishDate = 'April 1, 2019 00:33';
@@ -37,7 +46,7 @@ export class FindJobComponent implements OnInit {
     job.seconds  =  seconds;
   }
 
-  constructor(private _jobService: JobService) {
+  constructor(private _jobService: JobService, private _router:Router) {
   }
 
   ngOnInit() {
@@ -49,6 +58,12 @@ export class FindJobComponent implements OnInit {
         this.jobList = [];
       }
     });
+  }
+  markerClick() {
+
+    // let finalUrl = "/"+ICREDIT_URL+  "/" + FIND_JOB_URL;
+    // this._router.navigateByUrl(finalUrl);
+    this.matTabGroup.selectedIndex = 1;
   }
 
 }

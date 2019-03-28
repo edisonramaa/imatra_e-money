@@ -44,6 +44,12 @@
   margin-left: 2px;
 }
 
+agm-map {
+  height: 800px;
+}
+.agm-map-container-inner .sebm-google-map-container-inner{
+  overflow: visible;
+}
 
 
 /deep/ .mat-expansion-indicator {
