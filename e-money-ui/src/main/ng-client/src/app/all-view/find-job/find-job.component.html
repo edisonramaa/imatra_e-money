@@ -19,12 +19,10 @@
           <mat-panel-title>
             Help the elderly
           </mat-panel-title>
-          <mat-panel-description style="float: right">40</mat-panel-description>
-          <mat-icon>
-            <img style="float: right" width="20" height="20" src="../../../assets/images/coins.png"/>
-          </mat-icon>
+          <span class="credit-amount">30</span>
+          <mat-icon class="temp-credit-icon">copyright</mat-icon>
         </mat-expansion-panel-header>
-        <p style="margin-top: 9px; font-style: italic;">Description:</p>
+        <p class="desc-st">Description:</p>
         <p style="color: #7c7070">Greetings, I need to go shopping and I need someone to help me with groceries. </p>
         <!--<lib-countdown  date="April 1, 2019 00:33"></lib-countdown>-->
         <lib-countdown
@@ -36,13 +34,13 @@
           (secondsChanged)="onSecondsChanged($event)">
           <div  class="row">
             <div  class="col s12">
-                <div style="display: inline"  style="float: left" >
+                <div class="class-left" >
                   <table>
                     <tr>
-                      <td style="text-align: center; margin-right: 2px; color: #ED6C41">{{days}}d</td>
-                      <td style="text-align: center; margin-right: 2px; color: #ED6C41">{{hours}}h</td>
-                      <td style="text-align: center; margin-right: 2px; color: #ED6C41">{{minutes}}m</td>
-                      <td style="text-align: center; margin-right: 2px; color: #ED6C41">{{seconds}}s</td>
+                      <td class="countdown-date">{{days}}d</td>
+                      <td class="countdown-date">{{hours}}h</td>
+                      <td class="countdown-date">{{minutes}}m</td>
+                      <td class="countdown-date">{{seconds}}s</td>
                     </tr>
                   </table>
                 </div>
@@ -62,9 +60,8 @@
           <mat-panel-title>
             Clean the park
           </mat-panel-title>
-          <mat-icon>
-            <img style="float: right" width="20" height="20" src="../../../assets/images/coins.png"/>
-          </mat-icon>
+          <span class="credit-amount">20</span>
+          <mat-icon class="temp-credit-icon">copyright</mat-icon>
         </mat-expansion-panel-header>
         <p>Applicant information</p>
       </mat-expansion-panel>
@@ -73,9 +70,8 @@
           <mat-panel-title>
             Clean the garden
           </mat-panel-title>
-          <mat-icon>
-            <img style="float: right" width="20" height="20" src="../../../assets/images/coins.png"/>
-          </mat-icon>
+          <span class="credit-amount">20</span>
+          <mat-icon class="temp-credit-icon">copyright</mat-icon>
         </mat-expansion-panel-header>
         <p>Applicant information</p>
       </mat-expansion-panel>
@@ -84,9 +80,8 @@
           <mat-panel-title>
             Cut the grass
           </mat-panel-title>
-          <mat-icon>
-            <img style="float: right" width="20" height="20" src="../../../assets/images/coins.png"/>
-          </mat-icon>
+          <span class="credit-amount">20</span>
+          <mat-icon class="temp-credit-icon">copyright</mat-icon>
         </mat-expansion-panel-header>
         <p>Applicant information</p>
       </mat-expansion-panel>
@@ -95,9 +90,8 @@
           <mat-panel-title>
             Chop the wood
           </mat-panel-title>
-          <mat-icon>
-            <img style="float: right" width="20" height="20" src="../../../assets/images/coins.png"/>
-          </mat-icon>
+          <span class="credit-amount">20</span>
+          <mat-icon class="temp-credit-icon">copyright</mat-icon>
         </mat-expansion-panel-header>
         <p>Applicant information</p>
       </mat-expansion-panel>
