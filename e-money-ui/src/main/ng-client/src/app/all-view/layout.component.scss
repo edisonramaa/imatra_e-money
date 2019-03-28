@@ -9,10 +9,27 @@
 }
 
 .navbar-width {
-  width: 20%;
+  width: 80%;
 }
 
+.user-avatar-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+  border: 1px solid #ED6C41;
+}
 
+/deep/ .mat-card-header-text {
+  margin-right: 0px !important;
+}
+
+/deep/ .mat-card {
+  background: #ED6C41;
+  border-radius: 0px !important;
+}
+
+/deep/ .mat-card-title, /deep/ .mat-card-subtitle {
+  color: white;
+}
 
 /*
  * Make the component injected by <router-outlet> full height:
