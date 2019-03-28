@@ -1,5 +1,6 @@
 .footer{
   bottom:0;
+  border-top: 1px solid #ED6C41;
 }
 
 .mat-icon-button {
@@ -26,4 +27,12 @@
 
 .mat-toolbar{
   padding: 0px;
+}
+
+.footer-button-container.selected {
+  background-color: white;
+}
+
+/deep/ .footer-button-container.selected > button > span > mat-icon, .footer-button-container.selected > p {
+  color: #ED6C41;
 }
