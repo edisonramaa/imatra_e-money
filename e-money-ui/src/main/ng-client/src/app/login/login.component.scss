@@ -27,3 +27,8 @@ mat-card-content {
   padding-right: 50px;
   padding-left: 50px;
 }
+
+/deep/ mat-hint {
+  color: red !important;
+  font-size: small !important;
+}

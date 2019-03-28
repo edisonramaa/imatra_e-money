@@ -8,4 +8,7 @@ import com.emoney.web.model.UserEntity;
  * Created by Anil Kumal on 02/02/2019.
  */
 public interface IUserService extends ICrudService<UserEntity, Long> {
+    UserEntity authenticate(UserEntity userEntity);
+
+    Boolean changePassword(String oldPassword, String newPassword, Long userId);
 }

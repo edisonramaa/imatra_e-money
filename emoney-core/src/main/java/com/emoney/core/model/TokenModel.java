@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class TokenModel extends ModelBase {
 
-    private String userId;
+    private Long userId;
 
     private String email;
 
