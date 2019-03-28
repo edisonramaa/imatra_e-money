@@ -12,4 +12,7 @@ import java.util.List;
 public interface IJobService extends ICrudService<JobEntity, Long> {
     List<JobEntity> getActiveJobs();
     List<JobEntity> getExpiredJobs();
+
+    List<JobEntity> getMyJobs(Long id);
+
 }

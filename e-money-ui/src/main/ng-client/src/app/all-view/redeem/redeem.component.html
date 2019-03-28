@@ -1,57 +1,12 @@
 <mat-list>
-  <mat-list-item  (click)="openService()">
-      <h2 matLine style="color: #47525E;"><strong>Indoor Swimming</strong></h2>
-    <span class="credit-amount">30</span>
+  <mat-list-item (click)="openService()" *ngFor="let service of benefitList;">
+    <h2 matLine style="color: #47525E;"><strong>{{service.name}}</strong></h2>
+    <span class="credit-amount">{{service.credits}}</span>
+
     <mat-icon class="temp-credit-icon">copyright</mat-icon>
     <div matLine >
-    <p matLine style="color: grey" class='ellipsis'>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur<p></div>
-  </mat-list-item>
-  <mat-divider style="margin-bottom: 10px;"></mat-divider>
-  <mat-list-item>
-      <h2 matLine style="color: #47525E;"><strong>Sports House</strong></h2>
-      <span class="credit-amount">30</span>
-      <mat-icon class="temp-credit-icon">copyright</mat-icon>
-    <div matLine >
-    <p matLine style="color: grey" class='ellipsis'>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur<p></div>
-  </mat-list-item>
-  <mat-divider style="margin-bottom: 10px;"></mat-divider>
-  <mat-list-item>
-      <h2 matLine style="color: #47525E;"><strong>Indoor Swimming</strong></h2>
-      <span class="credit-amount">20</span>
-      <mat-icon class="temp-credit-icon">copyright</mat-icon>
-    <div matLine >
-    <p matLine style="color: grey" class='ellipsis'>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur<p></div>
-  </mat-list-item>
-  <mat-divider style="margin-bottom: 10px;"></mat-divider>
-  <mat-list-item>
-      <h2 matLine style="color: #47525E;"><strong>Sports House</strong></h2>
-      <span class="credit-amount">30</span>
-      <mat-icon class="temp-credit-icon">copyright</mat-icon>
-      <div matLine >
-      <p matLine style="color: grey" class='ellipsis'>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur<p></div>
-  </mat-list-item>
-  <mat-divider style="margin-bottom: 10px;"></mat-divider>
-  <mat-list-item>
-      <h2 matLine style="color: #47525E;"><strong>Ice Hall</strong></h2>
-      <span class="credit-amount">40</span>
-      <mat-icon class="temp-credit-icon">copyright</mat-icon>
-    <div matLine >
-    <p matLine style="color: grey" class='ellipsis'>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur<p></div>
+      <p class='ellipsis' matLine style="color: grey">{{service.description}}
+      <p></div>
   </mat-list-item>
   <mat-divider style="margin-bottom: 10px;"></mat-divider>
 </mat-list>

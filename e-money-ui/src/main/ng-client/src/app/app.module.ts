@@ -8,7 +8,6 @@ import {environment} from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RequestInterceptor} from "./core/lib/interceptor/request.interceptor";
-import {HttpService} from "./core/lib/services/http.service";
 import {SessionStorageService} from "./core/lib/services/session-storage.service";
 import {AuthGuard} from "./core/lib/services/auth-guard.service";
 
@@ -28,7 +27,7 @@ import {AuthGuard} from "./core/lib/services/auth-guard.service";
     useClass: RequestInterceptor,
     multi: true
   },
-    HttpService,
+    // HttpService,
     SessionStorageService,
     AuthGuard
   ],

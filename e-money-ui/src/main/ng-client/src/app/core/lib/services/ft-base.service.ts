@@ -15,8 +15,11 @@ export class FTBaseService {
 
   protected serviceApi: string;
 
+  protected baseApi: string;
+
   constructor(protected httpService: HttpService) {
     this.buttonRole = "addButton";
+
   }
 
   getList() {

@@ -2,8 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {JobService} from "../services/job.service";
 import {JobModel} from "../models/job.model";
 import {ResponseModel} from "../../core/lib/model/response.model";
-import { AgmCoreModule } from '@agm/core';
-import {ICREDIT_URL, SERVICE_URL, FIND_JOB_URL} from "../../core/utility/navigation-url";
 import {Router} from "@angular/router";
 import {MatTabGroup} from "@angular/material";
 
@@ -30,20 +28,20 @@ export class FindJobComponent implements OnInit {
   textColor = 'black';
   date = new Date('2019-04-26T00:00:00');
 
-  onDaysChanged(days) {
-    this.days  =  days;
+  onDaysChanged(days, job: JobModel) {
+    job.days = days;
   }
 
-  onHoursChanged(hours) {
-    this.hours  =  hours;
+  onHoursChanged(hours, job: JobModel) {
+    job.hours = hours;
   }
 
-  onMinutesChanged(minutes) {
-    this.minutes  =  minutes;
+  onMinutesChanged(minutes, job: JobModel) {
+    job.minutes = minutes;
   }
 
-  onSecondsChanged(seconds) {
-    this.seconds  =  seconds;
+  onSecondsChanged(seconds, job: JobModel) {
+    job.seconds = seconds;
   }
 
   constructor(private _jobService: JobService, private _router:Router) {

@@ -47,17 +47,21 @@ public class WebResourceConstant {
 
     }
 
+    public enum Status {PENGING, ACCEPTED, DENIED}
     public interface EMONEY {
         String EMONEY_BASE = BASE_API + "/emoney";
         String EMONEY_ADMIN = EMONEY_BASE + "/admin";
         String USER = EMONEY_BASE + "/user";
+        String USER_RATING = EMONEY_BASE + "/user-rating";
         String JOB = EMONEY_BASE + "/job";
         String GET_ACTIVE_JOB = "/active-job";
         String GET_EXPIRED_JOB = "/expired-job";
+        String GET_MY_JOBS = "/my-jobs";
+        String GET_PERSONAL_RATINGS = "/my-ratings";
+        String GET_WORKER_RATINGS = "/worker-ratings";
         String BENEFIT = EMONEY_ADMIN + "/benefit";
 
 
     }
-
 
 }

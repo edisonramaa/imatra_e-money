@@ -35,6 +35,7 @@
     "ngx-bar-rating": "^1.1.0",
     "ngx-bootstrap": "^3.2.0",
     "ngx-countdown": "^3.2.0",
+    "node-sass": "^4.11.0",
     "ngx-material-timepicker": "^3.0.2",
     "raleway-webfont": "^3.0.1",
     "rxjs": "~6.4.0",

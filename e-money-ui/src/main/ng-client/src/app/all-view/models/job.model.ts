@@ -15,5 +15,9 @@ export class JobModel extends BaseFtModel {
   address2: string;
   postCode: string;
   phoneNumber: string;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
 
 }

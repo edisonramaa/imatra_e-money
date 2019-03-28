@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SCANNER_FORMAT} from "../../core/utility/emoney-constant";
 import {ZXingScannerComponent} from "@zxing/ngx-scanner";
-import {FIND_JOB_URL, ICREDIT_URL, PAY_URL} from "../../core/utility/navigation-url";
+import {ICREDIT_URL, PAY_URL} from "../../core/utility/navigation-url";
 import {Router} from "@angular/router";
 
 @Component({
@@ -76,6 +76,7 @@ export class ScannerComponent implements OnInit {
   }
 
   closeScanner() {
+    this.currentlySelectedDevice = null;
     let finalUrl = "/"+ICREDIT_URL+  "/" + PAY_URL;
     this._router.navigateByUrl(finalUrl);
   }

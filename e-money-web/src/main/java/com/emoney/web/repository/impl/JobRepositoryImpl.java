@@ -32,6 +32,18 @@ public class JobRepositoryImpl extends CrudRepositoryImpl<JobEntity, Long> imple
     }
 
     @Override
+    public List<JobEntity> getMyJobs(Long id) {
+        QJobEntity qJobEntity = QJobEntity.jobEntity;
+        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
+        List<JobEntity> jobEntityList = jpaQueryFactory
+                .selectFrom(qJobEntity)
+                .where(qJobEntity.jobPoster.id.eq(id))
+                .orderBy(qJobEntity.dueDate.desc())
+                .fetch();
+        return jobEntityList;
+    }
+
+    @Override
     public List<JobEntity> getExpiredJobs() {
         QJobEntity qJobEntity = QJobEntity.jobEntity;
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);

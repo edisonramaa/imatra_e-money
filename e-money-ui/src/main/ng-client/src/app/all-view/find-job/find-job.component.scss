@@ -36,6 +36,15 @@
   flex-grow: 0;
   color: #13dc13;
 }
+
+.temp-credit-icon, .credit-amount {
+  color: green;
+}
+
+.temp-credit-icon {
+  margin-left: 2px;
+}
+
 agm-map {
   height: 800px;
 }
@@ -81,8 +90,33 @@ agm-map {
   color: #ED6C41;
 }
 
+.mat-expansion-panel-header-title {
+  margin-left: 1em;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+
+/deep/ .mat-expansion-indicator {
+  position: absolute;
+  left: 15px;
+}
+
+/deep/ .mat-expansion-indicator:after {
+  color: #ED6C41;
+}
 .mat-expansion-panel-header-title{
   margin-left: 1em;
   margin-top: 5px;
   font-weight: 600;
+}
+
+.find-view-text-color {
+  color: #7c7070;
+}
+
+.lib-countdown-td {
+  text-align: center;
+  margin-right: 2px;
+  color: #ED6C41;
 }

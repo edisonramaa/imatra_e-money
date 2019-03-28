@@ -39,6 +39,11 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
     }
 
     @Override
+    public List<JobEntity> getMyJobs(Long id) {
+        return jobRepository.getMyJobs(id);
+    }
+
+    @Override
     public JobEntity save(JobEntity jobEntity) {
         String qrUniqueCode = SecurityUtils.generateRandomString(10, 10);
         String fileName = SecurityUtils.generateRandomString(6, 6);
