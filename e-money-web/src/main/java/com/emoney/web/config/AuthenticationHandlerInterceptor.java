@@ -1,8 +1,6 @@
 package com.emoney.web.config;
 
-import com.emoney.core.constant.WebResourceConstant;
 import com.emoney.core.utils.StringUtils;
-import com.emoney.core.utils.TokenUtils;
 import com.emoney.web.util.IEmoneyToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -38,32 +36,32 @@ public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter 
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-
-        if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
-            return true;
-        }
-        String uri = request.getRequestURI();
-//        System.out.println("uri = " + uri);
-        String accessToken;
-        String origin = request.getHeader("Origin");
-        response.setHeader("Access-Control-Allow-Origin", origin);
-        response.setHeader("Access-Control-Allow-Methods", "*");
-        response.setHeader("Access-Control-Allow-Headers", "*");
-        System.out.println("request Uri = " + uri);
-        if (isAuthFreeUri(uri) && !uri.contains("/product/create")) {
-            System.out.println("isAuthFreeUri() = returing true from authfree ");
-            return true;
-        }
-        accessToken = request.getHeader(WebResourceConstant.AUTHORIZATION_HEADER);
-
-        if (StringUtils.isNull(accessToken) && !isAuthFreeUri(uri)) {
-            throw new Exception("Unauthorized access!!");
-        }
-
-        if (StringUtils.isNotNull(accessToken)) {
-            TokenUtils.setTokenModel(emoneyToken.parseToken(accessToken));
-            System.out.println("TokenUtils.getTokenModel() = " + TokenUtils.getTokenModel().toString());
-        }
+//Do not delete the code
+//        if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
+//            return true;
+//        }
+//        String uri = request.getRequestURI();
+////        System.out.println("uri = " + uri);
+//        String accessToken;
+//        String origin = request.getHeader("Origin");
+//        response.setHeader("Access-Control-Allow-Origin", origin);
+//        response.setHeader("Access-Control-Allow-Methods", "*");
+//        response.setHeader("Access-Control-Allow-Headers", "*");
+//        System.out.println("request Uri = " + uri);
+//        if (isAuthFreeUri(uri) && !uri.contains("/product/create")) {
+//            System.out.println("isAuthFreeUri() = returing true from authfree ");
+//            return true;
+//        }
+//        accessToken = request.getHeader(WebResourceConstant.AUTHORIZATION_HEADER);
+//
+//        if (StringUtils.isNull(accessToken) && !isAuthFreeUri(uri)) {
+//            throw new Exception("Unauthorized access!!");
+//        }
+//
+//        if (StringUtils.isNotNull(accessToken)) {
+//            TokenUtils.setTokenModel(emoneyToken.parseToken(accessToken));
+//            System.out.println("TokenUtils.getTokenModel() = " + TokenUtils.getTokenModel().toString());
+//        }
 
 
         return true;
