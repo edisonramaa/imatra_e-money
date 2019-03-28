@@ -8,29 +8,30 @@ import {ApiConstant} from "../../utility/api.constant";
  */
 @Injectable()
 export class HttpService {
+  baseApi: string = ApiConstant.BASE_API;
   constructor(private _http: HttpClient) {
   }
 
   getRequest(data) {
-    return this._http.get(ApiConstant.BASE_API + data).toPromise()
+    return this._http.get(this.baseApi + data).toPromise()
     // .map((response: HttpResponse) => response))
       .catch(this.catchError);
   }
 
   postRequest(apiEndPoint, data) {
-    return this._http.post(ApiConstant.BASE_API + apiEndPoint, data)
+    return this._http.post(this.baseApi + apiEndPoint, data)
       .toPromise()
       .catch(this.catchError);
   }
 
   deleteRequest(data) {
-    return this._http.delete(ApiConstant.BASE_API + data).toPromise()
+    return this._http.delete(this.baseApi + data).toPromise()
     // .map((response: HttpResponse) => response.json())
       .catch(this.catchError);
   }
 
   putRequest(apiEndPoint, data) {
-    return this._http.put(ApiConstant.BASE_API + apiEndPoint, data).toPromise()
+    return this._http.put(this.baseApi + apiEndPoint, data).toPromise()
     // .map((response: HttpResponse) => response.json())
       .catch(this.catchError);
 
@@ -40,6 +41,5 @@ export class HttpService {
     console.log(error);
     return Observable.throw(JSON.stringify(error)).toPromise();
   }
-
 
 }

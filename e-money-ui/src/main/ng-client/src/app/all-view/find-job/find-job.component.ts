@@ -21,20 +21,20 @@ export class FindJobComponent implements OnInit {
   textColor = 'black';
   date = new Date('2019-04-26T00:00:00');
 
-  onDaysChanged(days) {
-    this.days  =  days;
+  onDaysChanged(days, job: JobModel) {
+    job.days  =  days;
   }
 
-  onHoursChanged(hours) {
-    this.hours  =  hours;
+  onHoursChanged(hours, job: JobModel) {
+    job.hours  =  hours;
   }
 
-  onMinutesChanged(minutes) {
-    this.minutes  =  minutes;
+  onMinutesChanged(minutes, job: JobModel) {
+    job.minutes  =  minutes;
   }
 
-  onSecondsChanged(seconds) {
-    this.seconds  =  seconds;
+  onSecondsChanged(seconds, job: JobModel) {
+    job.seconds  =  seconds;
   }
 
   constructor(private _jobService: JobService) {

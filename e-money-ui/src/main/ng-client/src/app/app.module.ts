@@ -28,7 +28,7 @@ import {AuthGuard} from "./core/lib/services/auth-guard.service";
     useClass: RequestInterceptor,
     multi: true
   },
-    HttpService,
+    // HttpService,
     SessionStorageService,
     AuthGuard
   ],

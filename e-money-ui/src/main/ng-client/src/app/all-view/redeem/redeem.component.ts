@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {SERVICE_URL, ICREDIT_URL} from "../../core/utility/navigation-url";
 import {Router} from "@angular/router";
+import {ResponseModel} from "../../core/lib/model/response.model";
+import {BenefitService} from "../services/benefit.service";
+import {BenefitModel} from "../models/benefit.model";
 
 @Component({
   selector: 'app-redeem',
@@ -9,9 +12,19 @@ import {Router} from "@angular/router";
 })
 export class RedeemComponent implements OnInit {
 
-  constructor(private _router:Router) { }
+  benefitList: BenefitModel[];
+
+  constructor(private _router:Router, private _benefitService: BenefitService) { }
 
   ngOnInit() {
+    this._benefitService.getList().then((res: ResponseModel) => {
+      if (res.responseStatus) {
+        this.benefitList = res.result;
+        console.log("Benefit List: ", JSON.stringify(this.benefitList));
+      } else {
+        this.benefitList = [];
+      }
+    });
   }
 
   openService() {
