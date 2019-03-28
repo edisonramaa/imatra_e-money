@@ -51,4 +51,13 @@ public class JobController extends ControllerBase {
         }
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
     }
+
+    @GetMapping(WebResourceConstant.EMONEY.GET_MY_JOBS)
+    public ResponseEntity<ResponseObj> getMyJobs() {
+        List<JobEntity> entities = jobService.getMyJobs(2l);
+        if (entities.size() == 0) {
+            throw new EmoneyException("Sorry!! No Records Found");
+        }
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
+    }
 }

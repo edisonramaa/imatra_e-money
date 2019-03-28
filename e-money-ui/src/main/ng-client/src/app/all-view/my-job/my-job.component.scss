@@ -38,6 +38,9 @@
 
 .expanded-panel-container{
   background: lightgrey;
+  box-shadow: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .mat-card-title{
@@ -165,4 +168,12 @@
   position: absolute;
   bottom: 20px;
   right: 20px;
+}
+
+.sub-header-jobs {
+  text-align: center;
+  color: white;
+  background: grey;
+  padding:2px;
+  margin-top: 0;
 }

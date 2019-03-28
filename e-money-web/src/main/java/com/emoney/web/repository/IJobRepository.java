@@ -12,4 +12,5 @@ import java.util.List;
 public interface IJobRepository extends ICrudRepository<JobEntity, Long> {
     List<JobEntity> getActiveJobs();
     List<JobEntity> getExpiredJobs();
+    List<JobEntity> getMyJobs(Long id);
 }
