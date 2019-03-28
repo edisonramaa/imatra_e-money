@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {
-  FIND_JOB_URL,
-  ICREDIT_URL,
-  MY_JOB_URL,
-  PAY_URL,
-  REDEEM_URL,
-  WALLET_URL
+    FIND_JOB_URL,
+    ICREDIT_URL,
+    MY_JOB_URL,
+    PAY_URL,
+    REDEEM_URL,
+    WALLET_URL
 } from "../../../core/utility/navigation-url";
+import {EventService} from "../../services/event.service";
 
 @Component({
   selector: 'app-footer',
@@ -16,12 +17,15 @@ import {
 })
 export class FooterComponent implements OnInit {
 
-  constructor(private _router:Router) { }
+    constructor(private _router: Router, private _eventService: EventService) {
+    }
 
   ngOnInit() {
   }
 
 openFindJob() {
+    this._eventService.setHeader("Find Job");
+
   if (document.querySelectorAll(".footer-button-container.selected").length > 0) {
     document.querySelector(".footer-button-container.selected").classList.remove("selected");
   }
@@ -31,6 +35,8 @@ openFindJob() {
     this._router.navigateByUrl(finalUrl);
 }
   openMyjob(){
+      this._eventService.setHeader("My Jobs");
+
     if (document.querySelectorAll(".footer-button-container.selected").length > 0) {
       document.querySelector(".footer-button-container.selected").classList.remove("selected");
     }
@@ -40,6 +46,8 @@ openFindJob() {
     this._router.navigateByUrl(finalUrl);
   }
   openRedeem(){
+      this._eventService.setHeader("Redeem");
+
     if (document.querySelectorAll(".footer-button-container.selected").length > 0) {
       document.querySelector(".footer-button-container.selected").classList.remove("selected");
     }
@@ -49,6 +57,8 @@ openFindJob() {
     this._router.navigateByUrl(finalUrl);
   }
   openWallet() {
+      this._eventService.setHeader("Wallet");
+
     if (document.querySelectorAll(".footer-button-container.selected").length > 0) {
       document.querySelector(".footer-button-container.selected").classList.remove("selected");
     }
@@ -58,6 +68,8 @@ openFindJob() {
     this._router.navigateByUrl(finalUrl);
   }
   openPayment(){
+      this._eventService.setHeader("Pay");
+
     if (document.querySelectorAll(".footer-button-container.selected").length > 0) {
       document.querySelector(".footer-button-container.selected").classList.remove("selected");
     }

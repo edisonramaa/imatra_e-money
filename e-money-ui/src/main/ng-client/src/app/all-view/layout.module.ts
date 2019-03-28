@@ -4,6 +4,7 @@ import {LayoutRoutingModule} from "./layout-routing.module";
 import {LayoutComponent} from "./layout.component";
 import {CustomMaterialModule} from "../core/module/CustomMaterialModule";
 import {LayoutStructureModule} from "./layout-structure/layout-structure.module";
+import {EventService} from "./services/event.service";
 
 
 @NgModule({
@@ -14,8 +15,7 @@ import {LayoutStructureModule} from "./layout-structure/layout-structure.module"
         LayoutStructureModule
     ],
     declarations: [LayoutComponent],
-    providers: [
-    ]
+    providers: [EventService]
 })
 export class LayoutModule {
 }
