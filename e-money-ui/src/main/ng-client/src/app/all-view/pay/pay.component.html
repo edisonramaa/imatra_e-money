@@ -1,57 +1,7 @@
-<div *ngIf="startScan===false">
-  <h4>Scan Code To Make Payment</h4>
-  <img src="../../../assets/images/qr-code.png"/>
-  <button (click)="setScanStatus(true)" mat-flat-button color="primary">Scan Code</button>
-</div>
-
-<div *ngIf="startScan===true">
-  <div *ngIf="availableDeviceList">
-    <select (change)="onDeviceSelectChange($event.target.value)">
-      <option value="" [selected]="!currentlySelectedDevice">No Device</option>
-      <option *ngFor="let device of availableDeviceList" [value]="device.deviceId"
-              [selected]="currentlySelectedDevice && device.deviceId === currentlySelectedDevice.deviceId">{{
-        device.label }}
-      </option>
-    </select>
-  </div>
-
-
-  <div *ngIf="!hasCameras && hasPermission === true">
-
-    <h1>Looks like your actual device does not has cameras, or I could no find'em. </h1>
-
-  </div>
-
-  <div *ngIf="hasPermission === undefined">
-
-    <h1>Waiting for permissions.</h1>
-
-    <blockquote>
-      <h2>If your device does not has cameras, no permissions will be asked.</h2>
-    </blockquote>
-
-  </div>
-
-  <div *ngIf="hasPermission === false">
-
-    <h1>You denied the camera permissions, we can't scan anything without it. 😪</h1>
-
-  </div>
-  <div>
-    <button (click)="setScanStatus(false)" mat-flat-button color="primary">Close</button>
+<div class="vertical-center">
+  <h4 class="text-center">Scan Code To Make Payment</h4>
+  <img class="center" src="../../../assets/images/qr-code.png"/>
+  <div class="table-center" style="margin-top: 60px;">
+    <button style="z-index: 100000" (click)="openScanner()"  class="mat-stroked-button mat-warn button-padding"><strong>Scan Code</strong></button>
   </div>
 </div>
-<div [hidden]="!hasCameras">
-
-  <zxing-scanner #scanner [formats]="allowedFormats" class="test-class" start="true" [device]="currentlySelectedDevice"
-                 (scanSuccess)="onScanSuccess($event)"></zxing-scanner>
-
-  <h2 *ngIf="!this.currentlySelectedDevice">No camera selected.</h2>
-
-  <p>
-    Result:
-    <strong>{{ qrResultString }}</strong>
-  </p>
-
-</div>
-

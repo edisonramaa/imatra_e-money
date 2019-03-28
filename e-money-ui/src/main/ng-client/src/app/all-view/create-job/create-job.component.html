@@ -1,3 +1,47 @@
-<p>
-  create-job works!
-</p>
+<form>
+    <mat-form-field>
+        <input matInput placeholder="Job title" type="text">
+    </mat-form-field>
+
+    <mat-form-field>
+        <textarea matInput placeholder="Job description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="No. of people needed for the job" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input [matDatepicker]="myDatepicker" matInput placeholder="Choose date">
+        <mat-datepicker-toggle [for]="myDatepicker" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input [ngxTimepicker]="picker" matInput placeholder="Choose time">
+        <ngx-material-timepicker #picker></ngx-material-timepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Job credits" type="number">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Address Line 1">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Address Line 2">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Post code">
+    </mat-form-field>
+
+    <mat-form-field>
+        <span matPrefix>+358 &nbsp;</span>
+        <input matInput placeholder="Phone number" type="tel">
+    </mat-form-field>
+
+    <button mat-button>Post Job</button>
+</form>

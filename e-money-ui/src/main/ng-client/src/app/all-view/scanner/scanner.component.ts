@@ -1,15 +1,15 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {SCANNER_FORMAT} from "../../core/utility/emoney-constant";
 import {ZXingScannerComponent} from "@zxing/ngx-scanner";
-import {FIND_JOB_URL, ICREDIT_URL, SCAN_CODE} from "../../core/utility/navigation-url";
+import {FIND_JOB_URL, ICREDIT_URL, PAY_URL} from "../../core/utility/navigation-url";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-pay',
-  templateUrl: './pay.component.html',
-  styleUrls: ['./pay.component.scss']
+  selector: 'app-scanner',
+  templateUrl: './scanner.component.html',
+  styleUrls: ['./scanner.component.scss']
 })
-export class PayComponent implements OnInit {
+export class ScannerComponent implements OnInit {
   allowedFormats = SCANNER_FORMAT;
   @ViewChild('scanner')
   scanner: ZXingScannerComponent;
@@ -37,7 +37,7 @@ export class PayComponent implements OnInit {
 
       //selects the devices's back camera by default
       for (const device of devices) {
-        if (/back|rear|environment/gi.test(device.label)) {
+        if (/back|rear|webcam|environment/gi.test(device.label)) {
           this.scanner.changeDevice(device);
           this.currentlySelectedDevice = device;
           break;
@@ -75,8 +75,8 @@ export class PayComponent implements OnInit {
     }
   }
 
-  openScanner() {
-    let finalUrl = "/"+ICREDIT_URL+  "/" + SCAN_CODE;
+  closeScanner() {
+    let finalUrl = "/"+ICREDIT_URL+  "/" + PAY_URL;
     this._router.navigateByUrl(finalUrl);
   }
 }
