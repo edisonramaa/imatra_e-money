@@ -21,5 +21,11 @@ export class JobService extends FTBaseService {
     return this.httpService.getRequest(this.getMyJobsApi);
   }
 
+  add(data) {
+    return this.httpService.postRequest(this.serviceApi + '/save-job', data);
+  }
+
+
+
 
 }

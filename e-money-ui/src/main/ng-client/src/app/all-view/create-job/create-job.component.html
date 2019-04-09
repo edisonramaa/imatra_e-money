@@ -1,47 +1,90 @@
-<form>
+<form [formGroup]="jobFormGroup" method="post">
     <mat-form-field>
-        <input matInput placeholder="Job title" type="text">
+      <input matInput placeholder="Job title" name="jobTitle" formControlName="jobTitle" type="text">
+      <mat-error
+        *ngIf="jobFormGroup.controls['jobTitle'].hasError('required')">
+        Job Title is required.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-        <textarea matInput placeholder="Job description"></textarea>
+      <textarea matInput placeholder="Job description" name="description" formControlName="description"></textarea>
+      <mat-error
+        *ngIf="jobFormGroup.controls['description'].hasError('required')">
+        Job Description is required.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="No. of people needed for the job" type="number">
+      <input matInput name="noOfPeople" placeholder="No. of people needed for the job" formControlName="noOfPeople"
+             type="number">
+      <mat-error
+        *ngIf="jobFormGroup.controls['noOfPeople'].hasError('required')">
+        Minimum number of people should be at least 1.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-        <input [matDatepicker]="myDatepicker" matInput placeholder="Choose date">
+      <input [matDatepicker]="myDatepicker" matInput name="dueDate" placeholder="Choose due date"
+             formControlName="dueDate">
         <mat-datepicker-toggle [for]="myDatepicker" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #myDatepicker></mat-datepicker>
+      <mat-datepicker touchUi #myDatepicker></mat-datepicker>
+      <mat-error
+        *ngIf="jobFormGroup.controls['dueDate'].hasError('required')">
+        Due date is required.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-        <input [ngxTimepicker]="picker" matInput placeholder="Choose time">
+      <input [ngxTimepicker]="picker" matInput name="endTime" placeholder="Choose due time" formControlName="endTime">
         <ngx-material-timepicker #picker></ngx-material-timepicker>
+      <mat-error
+        *ngIf="jobFormGroup.controls['endTime'].hasError('required')">
+        Due Time is required.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Job credits" type="number">
+      <input matInput name="credits" placeholder="Job credits" type="number" formControlName="credits">
+      <mat-error
+        *ngIf="jobFormGroup.controls['credits'].hasError('required')">
+        Credit is required.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Address Line 1">
+      <input matInput name="address1" placeholder="Address Line 1" formControlName="address1">
+      <mat-error
+        *ngIf="jobFormGroup.controls['address1'].hasError('required')">
+        Credit is required.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Address Line 2">
+      <input matInput name="address2" placeholder="Address Line 2" formControlName="address2">
+      <mat-error
+        *ngIf="jobFormGroup.controls['address2'].hasError('required')">
+        Credit is required.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Post code">
+      <input matInput name="postCode" placeholder="Post code" formControlName="postCode">
+      <mat-error
+        *ngIf="jobFormGroup.controls['postCode'].hasError('required')">
+        Credit is required.
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
         <span matPrefix>+358 &nbsp;</span>
-        <input matInput placeholder="Phone number" type="tel">
+      <input matInput name="phoneNumber" placeholder="Phone number" type="tel" formControlName="phoneNumber">
+      <mat-error
+        *ngIf="jobFormGroup.controls['phoneNumber'].hasError('required')">
+        Phone Number is required.
+      </mat-error>
     </mat-form-field>
 
-    <button mat-button>Post Job</button>
+  <button mat-button type="submit" [disabled]="jobFormGroup.invalid|| disableSubmitBtn" (click)="onSubmit()">Post Job
+  </button>
 </form>

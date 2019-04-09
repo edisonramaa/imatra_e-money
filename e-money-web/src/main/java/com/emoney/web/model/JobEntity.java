@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 
 @Getter
@@ -23,6 +24,8 @@ public class JobEntity extends EntityBase {
     private Integer noOfPeople;
     @Column(name = "due_date")
     private Date dueDate;
+    @Column(name = "due_time")
+    private Time dueTime;
     @Column(name="posted_date")
     private Date postedDate;
     @Column(name = "credits")
@@ -39,5 +42,6 @@ public class JobEntity extends EntityBase {
     private String qrFileName;
     @Column(name = "qr_unique_code")
     private String qr_unique_code;
+
 
 }

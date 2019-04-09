@@ -75,7 +75,7 @@ public class DateUtils {
     }
 
     public static Time convertStringTimeIntoSqlTime(String time) {
-        DateFormat formatter = new SimpleDateFormat("hh:mm:ss a");
+        DateFormat formatter = new SimpleDateFormat("hh:mm a");
         try {
             return new Time(formatter.parse(time).getTime());
         } catch (ParseException e) {
@@ -182,6 +182,16 @@ public class DateUtils {
 
     public static DayOfWeek getDayOfWeek(Integer day) {
         return DayOfWeek.of(day);
+    }
+
+    public static Date convertStringToDate(String date) {
+        try {
+            Date parsedDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+            return parsedDate;
+        } catch (ParseException px) {
+            px.printStackTrace();
+        }
+        return null;
     }
 
 }

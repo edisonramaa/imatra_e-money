@@ -11,6 +11,7 @@ import com.emoney.web.service.IJobService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,10 +48,11 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
     public JobEntity save(JobEntity jobEntity) {
         String qrUniqueCode = SecurityUtils.generateRandomString(10, 10);
         String fileName = SecurityUtils.generateRandomString(6, 6);
-        String folderLocation = GlobalSettingUtils.QR_JOB_LOCATION;
+        String folderLocation = GlobalSettingUtils.getGlobalSettingByKey(GlobalSettingUtils.QR_JOB_LOCATION);
         QRCodeUtil.generateQRCodeImage(qrUniqueCode, fileName, folderLocation);
         jobEntity.setQr_unique_code(qrUniqueCode);
         jobEntity.setQrFileName(fileName.concat(".png"));
+        jobEntity.setPostedDate(new Date());
         return super.save(jobEntity);
     }
 

@@ -5,6 +5,7 @@ import com.emoney.core.constant.WebResourceConstant;
 import com.emoney.core.controller.ControllerBase;
 import com.emoney.core.exception.EmoneyException;
 import com.emoney.core.model.ResponseObj;
+import com.emoney.core.utils.DateUtils;
 import com.emoney.core.utils.impl.BeanMapperImpl;
 import com.emoney.web.dto.requestDto.JobRequestDto;
 import com.emoney.web.dto.responseDto.JobResponseDto;
@@ -13,10 +14,9 @@ import com.emoney.web.service.IJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -60,4 +60,15 @@ public class JobController extends ControllerBase {
         }
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
     }
+
+    @PostMapping(WebResourceConstant.EMONEY.SAVE_JOB)
+    public ResponseEntity<ResponseObj> saveJobs(@RequestBody @Valid JobRequestDto dto) {
+        JobEntity entity = (JobEntity) reqBeanMapper.mapToEntity(dto);
+        entity.setDueTime(DateUtils.convertStringTimeIntoSqlTime(dto.getEndTime()));
+        iCrudService.save(entity);
+        // setCreateEntityProperties(entity);
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("Record has been created.").build(), HttpStatus.OK);
+    }
+
+
 }

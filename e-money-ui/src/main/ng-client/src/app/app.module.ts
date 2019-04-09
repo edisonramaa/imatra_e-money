@@ -10,6 +10,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RequestInterceptor} from "./core/lib/interceptor/request.interceptor";
 import {SessionStorageService} from "./core/lib/services/session-storage.service";
 import {AuthGuard} from "./core/lib/services/auth-guard.service";
+import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {AuthGuard} from "./core/lib/services/auth-guard.service";
     useClass: RequestInterceptor,
     multi: true
   },
+    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
     // HttpService,
     SessionStorageService,
     AuthGuard

@@ -8,16 +8,18 @@ export class JobModel extends BaseFtModel {
   jobTitle: string;
   description: string;
   noOfPeople: number;
-  dueDate: Date;
+  dueDate: string;
   postedDate: Date;
+  endTime: string;
+  dueTime: string;
   credits: number;
   address1: string;
   address2: string;
   postCode: string;
   phoneNumber: string;
+  qrFileName: string;
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
-
 }
