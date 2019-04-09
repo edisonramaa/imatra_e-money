@@ -138,3 +138,26 @@ agm-map {
   margin-right: 2px;
   color: #ED6C41;
 }
+
+.ng-star.inserted {
+  height: 100% !important;
+}
+
+mat-tab-group#find-job {
+  height: 100% !important;
+}
+
+#find-job /deep/ agm-map {
+  height: -webkit-fill-available !important;
+}
+
+#find-job /deep/ .agm-map-container-inner > div {
+}
+
+#find-job /deep/ .agm-map-container-inner > div {
+  height: -webkit-fill-available !important;
+}
+
+#find-job /deep/ .gm-style {
+  height: -webkit-fill-available !important;
+}
