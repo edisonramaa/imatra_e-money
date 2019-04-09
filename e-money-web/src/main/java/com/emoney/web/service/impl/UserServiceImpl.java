@@ -27,6 +27,17 @@ public class UserServiceImpl extends CrudServiceImpl<UserEntity, Long> implement
     }
 
     @Override
+    public UserEntity save(UserEntity entity) {
+        String encodedPassword = imatraEncoder.encrypt(entity.getPassword());
+        entity.setPassword(encodedPassword);
+        if(entity.getIsAdmin() == null) {
+            entity.setIsAdmin(false);
+        }
+
+        return super.save(entity);
+    }
+
+    @Override
     public UserEntity authenticate(UserEntity userEntity) {
         System.out.println("encoded password: " + imatraEncoder.encrypt("admin"));
         UserEntity userToAuthenticate = this.userRepository.findByEmail(userEntity.getEmail());

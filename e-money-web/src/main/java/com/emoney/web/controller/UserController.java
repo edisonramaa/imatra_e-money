@@ -81,4 +81,11 @@ public class UserController extends ControllerBase {
         UserEntity userEntity = this.userService.findOne(tokenModel.getUserId());
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(userEntity)).message("Success").build(), HttpStatus.OK);
     }
+
+    @PostMapping(WebResourceConstant.UserManagement.SIGN_UP)
+    public ResponseEntity<ResponseObj> changePassword(@RequestBody @Valid UserRequestDto userRequestDto) {
+        UserEntity userEntity = (UserEntity) reqBeanMapper.mapToEntity(userRequestDto);
+        userService.save(userEntity);
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("Your account has been created. Please go to login page to sign in.").build(), HttpStatus.OK);
+    }
 }

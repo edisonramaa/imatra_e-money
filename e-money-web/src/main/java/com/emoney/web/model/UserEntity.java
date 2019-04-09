@@ -24,6 +24,6 @@ public class UserEntity extends EntityBase {
     @Column(name = "Skill")
     private String skill;
     @Column(name = "isAdmin")
-    private Boolean isAdmin;
+    private Boolean isAdmin = false;
 
 }

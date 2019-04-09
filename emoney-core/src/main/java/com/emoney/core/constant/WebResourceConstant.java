@@ -43,6 +43,7 @@ public class WebResourceConstant {
         String UM_AUTHENTICATE = "/auth";
         String CHANGE_PASSWORD = "/chhangepassword";
         String GET_PROFILE_DETAIL = "/profile";
+        String SIGN_UP = "/sign-up";
 
 
     }
