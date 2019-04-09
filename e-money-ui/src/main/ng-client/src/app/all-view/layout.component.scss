@@ -1,33 +1,33 @@
-.all-wrap {
+#layout .all-wrap {
   min-height: 100vh; // same height as browser window height
 }
 
-.page-wrap {
+#layout .page-wrap {
   display: flex;
   flex-direction: column;
   min-height: 100vh; // same height as browser window height
 }
 
-.navbar-width {
+#layout .navbar-width {
   width: 80%;
 }
 
-.user-avatar-image {
+#layout .user-avatar-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
   border: 1px solid #ED6C41;
 }
 
-/deep/ .mat-card-header-text {
+#layout /deep/ .mat-card-header-text {
   margin-right: 0px !important;
 }
 
-/deep/ .mat-card {
+#layout /deep/ .mat-card {
   background: #ED6C41;
   border-radius: 0px !important;
 }
 
-/deep/ .mat-card-title, /deep/ .mat-card-subtitle {
+#layout /deep/ .mat-card-title, #layout /deep/ .mat-card-subtitle {
   color: white;
 }
 
@@ -52,9 +52,8 @@ main {
 }
 
 .content{
-  top:65px;
+  top: 56px;
   bottom:65px;
   overflow:auto;
   flex: 1;
-
 }

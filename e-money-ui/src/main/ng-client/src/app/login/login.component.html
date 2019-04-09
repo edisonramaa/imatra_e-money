@@ -1,31 +1,35 @@
-<mat-card>
-    <img height="150" src="../../../../assets/logo/login-logo.jpg"/>
-    <mat-card-header>
-        <mat-card-title>Sign In</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
+<div id="login">
+    <mat-card>
+        <img height="150" src="../../../../assets/logo/login-logo.jpg"/>
+        <mat-card-header>
+            <mat-card-title>Sign In</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
 
-      <mat-hint *ngIf="showErrMsg">{{showErrMsg}}</mat-hint>
-      <form [formGroup]="loginFormGroup" method="post">
-            <mat-form-field class="full-width">
-                <mat-label>Email</mat-label>
-              <input matInput name="email" formControlName="email" placeholder="Email">
-              <mat-hint
-                *ngIf="loginFormGroup.controls['email'].hasError('required')&& loginFormGroup.controls['email'].dirty">
-                Email is required.
-              </mat-hint>
-            </mat-form-field>
-            <mat-form-field class="full-width">
-                <mat-label>Password</mat-label>
-              <input matInput type="password" formControlName="password" name="password" placeholder="Password">
-              <mat-hint
-                *ngIf="loginFormGroup.controls['password'].hasError('required')&& loginFormGroup.controls['password'].dirty">
-                Password is required
-              </mat-hint>
-            </mat-form-field>
-        <button color="primary" mat-raised-button type="submit" [disabled]="loginFormGroup.invalid || disableLoginBtn"
-                (click)="onLogin()">Sign in
-        </button>
-        </form>
-    </mat-card-content>
-</mat-card>
+            <mat-hint *ngIf="showErrMsg">{{showErrMsg}}</mat-hint>
+            <form [formGroup]="loginFormGroup" method="post">
+                <mat-form-field class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input formControlName="email" matInput name="email" placeholder="Email">
+                    <mat-hint
+                            *ngIf="loginFormGroup.controls['email'].hasError('required')&& loginFormGroup.controls['email'].dirty">
+                        Email is required.
+                    </mat-hint>
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input formControlName="password" matInput name="password" placeholder="Password" type="password">
+                    <mat-hint
+                            *ngIf="loginFormGroup.controls['password'].hasError('required')&& loginFormGroup.controls['password'].dirty">
+                        Password is required
+                    </mat-hint>
+                </mat-form-field>
+                <button (click)="onLogin()" [disabled]="loginFormGroup.invalid || disableLoginBtn" color="primary"
+                        mat-raised-button
+                        type="submit">Sign in
+                </button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+

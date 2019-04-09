@@ -1,16 +1,18 @@
-.ellipsis {
+#redeem .ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-p.block {
+#redeem p.block {
   width: 300px;
 }
-.temp-credit-icon, .credit-amount{
+
+#redeem .temp-credit-icon, #redeem .credit-amount {
   color: green;
   margin-top: -43px;
 }
-.temp-credit-icon{
+
+#redeem .temp-credit-icon {
   margin-left: 2px;
 }

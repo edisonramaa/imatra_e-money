@@ -1,4 +1,4 @@
-<mat-accordion>
+<mat-accordion id="my-job">
   <mat-expansion-panel *ngFor="let job of myJobsList;">
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -41,6 +41,6 @@
   </mat-expansion-panel>
 </mat-accordion>
 
-<button mat-mini-fab (click)="createJob()">
+<button mat-mini-fab (click)="createJob()" id="add-job-btn">
     +
 </button>

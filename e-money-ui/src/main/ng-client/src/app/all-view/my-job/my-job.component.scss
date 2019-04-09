@@ -1,165 +1,165 @@
-.mat-expansion-panel-spacing{
+#my-job .mat-expansion-panel-spacing {
   margin: 0px;
 }
 
-/deep/ .mat-expansion-panel-body{
+#my-job /deep/ .mat-expansion-panel-body {
   background: lightgrey;
   padding: 0px !important;
 }
 
-/deep/ .mat-expansion-indicator {
+#my-job /deep/ .mat-expansion-indicator {
   position: absolute;
   left: 15px;
 }
 
-/deep/ .mat-expansion-indicator:after{
+#my-job /deep/ .mat-expansion-indicator:after {
   color: #ED6C41;
 }
 
-.mat-expansion-panel-header-title{
+#my-job .mat-expansion-panel-header-title {
   margin-left: 1em;
   margin-top: 5px;
   font-weight: 600;
 }
 
-.temp-credit-icon, .credit-amount{
+#my-job .temp-credit-icon, #my-job .credit-amount {
   color: green;
 }
 
-.temp-credit-icon{
+#my-job .temp-credit-icon {
   margin-left: 2px;
 }
 
-.user-avatar-image{
+#my-job .user-avatar-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
   border: 1px solid #ED6C41;
 }
 
-.expanded-panel-container{
+#my-job .expanded-panel-container {
   background: lightgrey;
   box-shadow: none;
   padding-top: 5px;
   padding-bottom: 5px;
 }
 
-.mat-card-title{
+#my-job .mat-card-title {
   font-size: 15px;
 }
 
-/deep/ .br-unit:nth-of-type(1){
+#my-job /deep/ .br-unit:nth-of-type(1) {
   background-color: #ff000069;
 }
 
-/deep/ .br-unit:nth-of-type(2){
+#my-job /deep/ .br-unit:nth-of-type(2) {
   background-color: #ff5b0069;
 }
 
-/deep/ .br-unit:nth-of-type(3){
+#my-job /deep/ .br-unit:nth-of-type(3) {
   background-color: #ff8a0069;
 }
 
-/deep/ .br-unit:nth-of-type(4){
+#my-job /deep/ .br-unit:nth-of-type(4) {
   background-color: #ffb90069;
 }
 
-/deep/ .br-unit:nth-of-type(5){
+#my-job /deep/ .br-unit:nth-of-type(5) {
   background-color: #ffd10069;
 }
 
-/deep/ .br-unit:nth-of-type(6){
+#my-job /deep/ .br-unit:nth-of-type(6) {
   background-color: #fff40069;
 }
 
-/deep/ .br-unit:nth-of-type(7){
+#my-job /deep/ .br-unit:nth-of-type(7) {
   background-color: #cfff0069;
 }
 
-/deep/ .br-unit:nth-of-type(8){
+#my-job /deep/ .br-unit:nth-of-type(8) {
   background-color: #b7ff0069;
 }
 
-/deep/ .br-unit:nth-of-type(9){
+#my-job /deep/ .br-unit:nth-of-type(9) {
   background-color: #88ff0069;
 }
 
-/deep/ .br-unit:nth-of-type(10){
+#my-job /deep/ .br-unit:nth-of-type(10) {
   background-color: #00ff0569;
 }
 
-/deep/ .br-unit:nth-of-type(1).br-selected{
+#my-job /deep/ .br-unit:nth-of-type(1).br-selected {
   background-color: red;
 }
 
-/deep/ .br-unit:nth-of-type(2).br-selected{
+#my-job /deep/ .br-unit:nth-of-type(2).br-selected {
   background-color: #ff5b00;
 }
 
-/deep/ .br-unit:nth-of-type(3).br-selected{
+#my-job /deep/ .br-unit:nth-of-type(3).br-selected {
   background-color: #ff8a00;
 }
 
-/deep/ .br-unit:nth-of-type(4).br-selected{
+#my-job /deep/ .br-unit:nth-of-type(4).br-selected {
   background-color: #ffb900;
 }
 
-/deep/ .br-unit:nth-of-type(5).br-selected{
+#my-job /deep/ .br-unit:nth-of-type(5).br-selected {
   background-color: #ffd100;
 }
 
-/deep/ .br-unit:nth-of-type(6).br-selected{
+#my-job /deep/ .br-unit:nth-of-type(6).br-selected {
   background-color: #fff400;
 }
 
-/deep/ .br-unit:nth-of-type(7).br-selected{
+#my-job /deep/ .br-unit:nth-of-type(7).br-selected {
   background-color: #cfff00;
 }
 
-/deep/ .br-unit:nth-of-type(8).br-selected{
+#my-job /deep/ .br-unit:nth-of-type(8).br-selected {
   background-color: #b7ff00;
 }
 
-/deep/ .br-unit:nth-of-type(9).br-selected{
+#my-job /deep/ .br-unit:nth-of-type(9).br-selected {
   background-color: #88ff00;
 }
 
-/deep/ .br-unit:nth-of-type(10).br-selected{
+#my-job /deep/ .br-unit:nth-of-type(10).br-selected {
   background-color: #00ff05;
 }
 
-/deep/ .br.br-horizontal > .br-units > .br-unit{
+#my-job /deep/ .br.br-horizontal > .br-units > .br-unit {
   width: 10px;
   height: 5px;
 }
 
-.accept-btn-text, .decline-btn-text{
+#my-job .accept-btn-text, #my-job .decline-btn-text {
   margin: 0px;
   font-size: 10px;
   line-height: 5px;
 }
 
-.accept-btn-icon, .accept-btn-text{
+#my-job .accept-btn-icon, #my-job .accept-btn-text {
   color: green;
 }
 
-.decline-btn-icon, .decline-btn-text{
+#my-job .decline-btn-icon, #my-job .decline-btn-text {
   color: red;
 }
 
-.accept-decline-buttons-container{
+#my-job .accept-decline-buttons-container {
   width: 100%;
   margin-top: -10px;
 }
 
-.accept-decline-buttons-container > button{
+#my-job .accept-decline-buttons-container > button {
   float: right;
 }
 
-.accept-decline-buttons-container > button:nth-of-type(1){
+#my-job .accept-decline-buttons-container > button:nth-of-type(1) {
   margin-left: 3px;
 }
 
-.mat-mini-fab.mat-accent{
+#add-job-btn.mat-mini-fab.mat-accent {
   background: #ED6C41;
   font-size: 50px;
   color: white;
@@ -170,7 +170,7 @@
   right: 20px;
 }
 
-.sub-header-jobs {
+#my-job .sub-header-jobs {
   text-align: center;
   color: white;
   background: grey;

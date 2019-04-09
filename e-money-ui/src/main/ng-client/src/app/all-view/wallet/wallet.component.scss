@@ -1,40 +1,46 @@
-/deep/.mat-tab-label, /deep/.mat-tab-label-active{
+#wallet /deep/ .mat-tab-label, #wallet /deep/ .mat-tab-label-active {
   min-width: 50% !important;
   width: 50% !important;
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
 }
-/deep/.content[_ngcontent-c1] {
+
+/deep/ .content {
   top: 56px;
 }
-.mat-expansion-panel-spacing{
+
+#wallet .mat-expansion-panel-spacing {
   margin: 0px;
 }
 
-/deep/ .mat-expansion-panel-body{
+#wallet /deep/ .mat-expansion-panel-body {
   background: #e2e2e2;
 }
-/deep/ .center {
+
+#wallet /deep/ .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 15px;
 }
-.balance{
+
+#wallet .balance {
   color: #47525E;
   text-align: center;
   size: 20px;
   font-weight: 700;
   margin-top: 8px;
 }
-.recent-trans{
+
+#wallet .recent-trans {
   color: #47525E;
   text-align: center;
   size: 20px;
   font-weight: 700;
   margin-top: 15px;
 }
-.table-center{
+
+#wallet .table-center {
   color: #8190A5;
   display: flex;
   align-items: center;
@@ -42,26 +48,31 @@
   -webkit-border-horizontal-spacing: 37px;
   -webkit-border-vertical-spacing: 17px;
 }
-.table-center-2{
+
+#wallet .table-center-2 {
   color: #8190A5;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 11px;
 }
-.example-right-align {
+
+#wallet .example-right-align {
   text-align: right;
 }
-.amount-value{
+
+#wallet .amount-value {
   width: 80%;
   margin-left: 6px;
 }
-.amount{
+
+#wallet .amount {
   font-weight: bold;
   margin-right:10px;
   color: #47525E
 }
-/deep/ hr {
+
+#wallet /deep/ hr {
   border: none;
   height: 1px;
   color: #bebebe; /* old IE */
@@ -69,26 +80,33 @@
   margin-left: 10%;
   margin-right: 10%;
 }
-/deep/
+
+#wallet /deep/
 .mat-stroked-button {
   border-color: #e78666!important;
 }
-.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn {
+
+#wallet .mat-button.mat-warn, #wallet .mat-icon-button.mat-warn, #wallet .mat-stroked-button.mat-warn {
     color: #e78666;
 }
-.mat-stroked-button:active {
+
+#wallet .mat-stroked-button:active {
       background-color: #e78666;
 }
-.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn:active {
+
+#wallet .mat-button.mat-warn, #wallet .mat-icon-button.mat-warn, #wallet .mat-stroked-button.mat-warn:active {
        color: #ffffff;
 }
-.mat-stroked-button:hover {
+
+#wallet .mat-stroked-button:hover {
   background-color: #e78666;
 }
-.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn:hover {
+
+#wallet .mat-button.mat-warn, #wallet .mat-icon-button.mat-warn, #wallet .mat-stroked-button.mat-warn:hover {
     color: #ffffff;
 }
-.button-padding{
+
+#wallet .button-padding {
   padding-left: 30px;
   padding-right: 30px;
 }

@@ -1,9 +1,10 @@
-.service-title{
+#service-detail .service-title {
   text-align: center;
   color: #47525E;
   margin-top: 4px;
 }
-.text-center{
+
+#service-detail .text-center {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +13,8 @@
   margin-right: 15px;
   margin-left: 15px;
 }
-.text-center-2{
+
+#service-detail .text-center-2 {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,41 +22,52 @@
   -webkit-border-horizontal-spacing: 37px;
   -webkit-border-vertical-spacing: 17px;
 }
-/deep/
+
+#service-detail /deep/
 .mat-stroked-button {
   border-color: #e78666!important;
 }
-.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn {
+
+#service-detail .mat-button.mat-warn, #service-detail .mat-icon-button.mat-warn, #service-detail .mat-stroked-button.mat-warn {
   color: #e78666;
 }
-.mat-stroked-button:active {
+
+#service-detail .mat-stroked-button:active {
   background-color: #e78666;
 }
-.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn:active {
+
+#service-detail .mat-button.mat-warn, #service-detail .mat-icon-button.mat-warn, #service-detail .mat-stroked-button.mat-warn:active {
   color: #ffffff;
 }
-.mat-stroked-button:hover {
+
+#service-detail .mat-stroked-button:hover {
   background-color: #e78666;
 }
-.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn:hover {
+
+#service-detail .mat-button.mat-warn, #service-detail .mat-icon-button.mat-warn, #service-detail .mat-stroked-button.mat-warn:hover {
   color: #ffffff;
 }
-.button-padding{
+
+#service-detail .button-padding {
   padding: 6px 30px 6px 30px;
   font-size: larger;
 }
-.button-center-b{
+
+#service-detail .button-center-b {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-agm-map {
+
+#service-detail agm-map {
   height: 300px;
 }
-.temp-credit-icon, .credit-amount{
+
+#service-detail .temp-credit-icon, #service-detail .credit-amount {
   color: green;
   margin-top: -1px;
 }
-.temp-credit-icon{
+
+#service-detail .temp-credit-icon {
   margin-left: 2px;
 }

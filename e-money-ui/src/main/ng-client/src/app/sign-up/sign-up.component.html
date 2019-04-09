@@ -1,39 +1,43 @@
-<mat-card>
-  <img height="150" src="../../../../assets/logo/login-logo.jpg"/>
-  <mat-card-header>
-    <mat-card-title>Sign Up</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div id="sign-up">
+  <mat-card>
+    <img height="150" src="../../../../assets/logo/login-logo.jpg"/>
+    <mat-card-header>
+      <mat-card-title>Sign Up</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
 
-    <mat-hint *ngIf="showErrMsg">{{showErrMsg}}</mat-hint>
-    <form [formGroup]="signUpFormGroup" method="post">
-      <mat-form-field class="full-width">
-        <mat-label>Full name</mat-label>
-        <input matInput name="fullName" formControlName="fullName" placeholder="Full Name">
-        <mat-hint
-          *ngIf="signUpFormGroup.controls['fullName'].hasError('required')&& signUpFormGroup.controls['fullName'].dirty">
-          Full name is required.
-        </mat-hint>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <mat-label>Email</mat-label>
-        <input matInput name="email" formControlName="email" placeholder="Email">
-        <mat-hint
-          *ngIf="signUpFormGroup.controls['email'].hasError('required')&& signUpFormGroup.controls['email'].dirty">
-          Email is required.
-        </mat-hint>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" name="password" placeholder="Password">
-        <mat-hint
-          *ngIf="signUpFormGroup.controls['password'].hasError('required')&& signUpFormGroup.controls['password'].dirty">
-          Password is required
-        </mat-hint>
-      </mat-form-field>
-      <button color="primary" mat-raised-button type="submit" [disabled]="signUpFormGroup.invalid || disableSignUpBtn"
-              (click)="onSignUp()">Sign up
-      </button>
-    </form>
-  </mat-card-content>
-</mat-card>
+      <mat-hint *ngIf="showErrMsg">{{showErrMsg}}</mat-hint>
+      <form [formGroup]="signUpFormGroup" method="post">
+        <mat-form-field class="full-width">
+          <mat-label>Full name</mat-label>
+          <input formControlName="fullName" matInput name="fullName" placeholder="Full Name">
+          <mat-hint
+                  *ngIf="signUpFormGroup.controls['fullName'].hasError('required')&& signUpFormGroup.controls['fullName'].dirty">
+            Full name is required.
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input formControlName="email" matInput name="email" placeholder="Email">
+          <mat-hint
+                  *ngIf="signUpFormGroup.controls['email'].hasError('required')&& signUpFormGroup.controls['email'].dirty">
+            Email is required.
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Password</mat-label>
+          <input formControlName="password" matInput name="password" placeholder="Password" type="password">
+          <mat-hint
+                  *ngIf="signUpFormGroup.controls['password'].hasError('required')&& signUpFormGroup.controls['password'].dirty">
+            Password is required
+          </mat-hint>
+        </mat-form-field>
+        <button (click)="onSignUp()" [disabled]="signUpFormGroup.invalid || disableSignUpBtn" color="primary"
+                mat-raised-button
+                type="submit">Sign up
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+

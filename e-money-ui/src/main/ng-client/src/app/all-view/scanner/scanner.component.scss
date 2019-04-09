@@ -1,4 +1,4 @@
-.text-center {
+#scanner .text-center {
   margin-top: 30px;
   display: flex;
   align-items: center;
@@ -6,13 +6,15 @@
   color: #47525E;
   font-size: 18px;
 }
-/deep/ .center {
+
+#scanner /deep/ .center {
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 63px;
 }
-.table-center{
+
+#scanner .table-center {
   color: #8190A5;
   display: flex;
   align-items: center;
@@ -21,29 +23,36 @@
   -webkit-border-vertical-spacing: 17px;
 }
 
-.mat-stroked-button {
+#scanner .mat-stroked-button {
   border-color: #e78666;
 }
-.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn {
+
+#scanner .mat-button.mat-warn, #scanner .mat-icon-button.mat-warn, #scanner .mat-stroked-button.mat-warn {
   color: #e78666;
 }
-.mat-stroked-button:active {
+
+#scanner .mat-stroked-button:active {
   background-color: #e78666;
 }
-.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn:active {
+
+#scanner .mat-button.mat-warn, #scanner .mat-icon-button.mat-warn, #scanner .mat-stroked-button.mat-warn:active {
   color: #ffffff;
 }
-.mat-stroked-button:hover {
+
+#scanner .mat-stroked-button:hover {
   background-color: #e78666;
 }
-.mat-button.mat-warn, .mat-icon-button.mat-warn, .mat-stroked-button.mat-warn:hover {
+
+#scanner .mat-button.mat-warn, #scanner .mat-icon-button.mat-warn, #scanner .mat-stroked-button.mat-warn:hover {
   color: #ffffff;
 }
-.button-padding{
+
+#scanner .button-padding {
   padding-left: 30px;
   padding-right: 30px;
 }
-.vertical-center {
+
+#scanner .vertical-center {
   //margin: 0;
   position: relative;
   top: 50%;
@@ -52,7 +61,4 @@
 }
 .test-class{
   z-index: 1;
-}
-main{
-  background: black;
 }

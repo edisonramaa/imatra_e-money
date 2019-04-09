@@ -1,18 +1,21 @@
-<h2 class="service-title">Indoor Swimming</h2>
-<p class="text-center">Swimming Pools for Kids and Family Fun. <br>
-  Use your credit to pay for the service. Thank you!
-</p>
-<p style="color: #47525E; align-items: center; justify-content: center;" >
-  <span style="margin-left: 31px;"><b>Service Duration: 1 day</b></span>
-  <span style="float: right; margin-right: 31px;margin-left: 5px;"><mat-icon class="temp-credit-icon">copyright</mat-icon>
-</span>
-  <span style="float: right;"><b>Cost: 30</b></span>
-</p>
-<div class="button-center-b" style="margin-top: 30px;margin-bottom: 10px;">
-  <button class="mat-stroked-button mat-warn button-padding"><strong>Purchase</strong></button>
-</div>
-<div class="center" id="test">
-  <agm-map [zoom]="12" [latitude]="lat" [longitude]="lng">
-    <agm-marker [latitude]="61.173819" [longitude]="28.765576"></agm-marker>
-  </agm-map>
+<div id="service-detail">
+    <h2 class="service-title">Indoor Swimming</h2>
+    <p class="text-center">Swimming Pools for Kids and Family Fun. <br>
+        Use your credit to pay for the service. Thank you!
+    </p>
+    <p style="color: #47525E; align-items: center; justify-content: center;">
+        <span style="margin-left: 31px;"><b>Service Duration: 1 day</b></span>
+        <span style="float: right; margin-right: 31px;margin-left: 5px;"><mat-icon
+                class="temp-credit-icon">copyright</mat-icon>
+  </span>
+        <span style="float: right;"><b>Cost: 30</b></span>
+    </p>
+    <div class="button-center-b" style="margin-top: 30px;margin-bottom: 10px;">
+        <button class="mat-stroked-button mat-warn button-padding"><strong>Purchase</strong></button>
+    </div>
+    <div class="center" id="test">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
+            <agm-marker [latitude]="61.173819" [longitude]="28.765576"></agm-marker>
+        </agm-map>
+    </div>
 </div>

@@ -1,28 +1,31 @@
-<mat-sidenav-container class="all-wrap">
-  <mat-sidenav #sidenav class="navbar-width">
+<div id="layout">
+    <mat-sidenav-container class="all-wrap">
+        <mat-sidenav #sidenav class="navbar-width">
 
-    <mat-card (click)="openUserProfile()" class="expanded-panel-container">
-          <mat-card-header>
-              <div class="user-avatar-image" mat-card-avatar></div>
-              <mat-card-title>Captain America</mat-card-title>
-              <mat-card-subtitle>My Profile</mat-card-subtitle>
-          </mat-card-header>
-      </mat-card>
+            <mat-card (click)="openUserProfile()" class="expanded-panel-container">
+                <mat-card-header>
+                    <div class="user-avatar-image" mat-card-avatar></div>
+                    <mat-card-title>Captain America</mat-card-title>
+                    <mat-card-subtitle>My Profile</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
 
-      <mat-list>
-      <mat-list-item> Menu 1</mat-list-item>
-      <mat-list-item> Menu 2</mat-list-item>
-      <mat-list-item> Menu 3</mat-list-item>
-      <mat-list-item> Menu 4</mat-list-item>
-    </mat-list>
-  </mat-sidenav>
+            <mat-list>
+                <mat-list-item> Menu 1</mat-list-item>
+                <mat-list-item> Menu 2</mat-list-item>
+                <mat-list-item> Menu 3</mat-list-item>
+                <mat-list-item> Menu 4</mat-list-item>
+            </mat-list>
+        </mat-sidenav>
 
-  <div class="page-wrap">
-    <app-header [sideNavBar]="sidenav"></app-header>
-    <main class="content">
-      <router-outlet></router-outlet>
-    </main>
-    <app-footer></app-footer>
+        <div class="page-wrap">
+            <app-header [sideNavBar]="sidenav"></app-header>
+            <main class="content">
+                <router-outlet></router-outlet>
+            </main>
+            <app-footer></app-footer>
 
-  </div>
-</mat-sidenav-container>
+        </div>
+    </mat-sidenav-container>
+
+</div>
