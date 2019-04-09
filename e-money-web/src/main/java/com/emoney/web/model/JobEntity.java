@@ -42,6 +42,10 @@ public class JobEntity extends EntityBase {
     private String qrFileName;
     @Column(name = "qr_unique_code")
     private String qr_unique_code;
+    @Column(name = "lat")
+    private String lat;
+    @Column(name = "lng")
+    private String lng;
 
 
 }

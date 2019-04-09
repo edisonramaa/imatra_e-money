@@ -20,5 +20,7 @@ public class JobRequestDto extends RequestDtoBase {
     private String address2;
     private String postCode;
     private String phoneNumber;
+    private String lat;
+    private String lng;
 
 }
