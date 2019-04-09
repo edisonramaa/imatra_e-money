@@ -88,4 +88,13 @@ public class UserController extends ControllerBase {
         userService.save(userEntity);
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("Your account has been created. Please go to login page to sign in.").build(), HttpStatus.OK);
     }
+
+    @GetMapping(WebResourceConstant.UserManagement.GET_PROFILE)
+    public ResponseEntity<ResponseObj> getProfile() {
+        UserEntity entities = userService.getProfile(7L);
+        if (entities != null) {
+            throw new EmoneyException("Sorry!! No Records Found");
+        }
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
+    }
 }
