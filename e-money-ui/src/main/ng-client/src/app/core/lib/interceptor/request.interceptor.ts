@@ -15,21 +15,14 @@ export class RequestInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     /** DO NOT REMOE THIS **/
-    // let authToken = this._sessionStorageService.getToken();
-    // console.log("Auth Token: ", authToken);
-    // let userLocation: UserLocationModel = this._sessionStorageService.getClientLocation();
-    // if (req.url !== HttpService.GEOAPI_URL) {
-    //     req = req.clone({
-    //         setHeaders: {
-    //             authorization: authToken !== null ? authToken : "",
-    //             ip: userLocation.ip !== null ? userLocation.ip : "",
-    //             country: userLocation.country !== null ? userLocation.country : "",
-    //             lat: userLocation.lat !== null ? userLocation.lat : "",
-    //             lon: userLocation.lon !== null ? userLocation.lon : "",
-    //         }
-    //     });
-    // }
+    let authToken = this._sessionStorageService.getToken();
+    console.log("Auth Token: ", authToken);
+    req = req.clone({
+      setHeaders: {
+        authorization: authToken !== null ? authToken : "",
 
+      }
+    });
 
     console.log("Request URL", req.url);
 

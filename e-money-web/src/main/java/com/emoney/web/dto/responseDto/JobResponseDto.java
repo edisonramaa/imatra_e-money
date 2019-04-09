@@ -22,6 +22,9 @@ public class JobResponseDto extends ResponseDtoBase {
     private String postCode;
     private String phoneNumber;
     private String qrFileName;
+    private Long jobPosterId;
+    private String jobPosterName;
+    private Integer totalSelected;
     private String lat;
     private String lng;
 

@@ -22,4 +22,8 @@ export class JobModel extends BaseFtModel {
   hours: number;
   minutes: number;
   seconds: number;
+  jobPosterId: number;
+  jobPosterName: string;
+  jobStatus: string;
+  totalSelected: number = 0;
 }

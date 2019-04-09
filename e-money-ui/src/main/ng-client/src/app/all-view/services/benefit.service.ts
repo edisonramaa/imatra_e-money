@@ -9,14 +9,14 @@ import {ApiConstant} from "../../core/utility/api.constant";
 export class BenefitService extends FTBaseService {
   dataModel: BenefitModel = new BenefitModel();
 
-  serviceApi: string = '/emoney/admin/benefit';
+  serviceApi: string = '/emoney/benefit';
   baseApi: string = ApiConstant.API_ADMIN_ROOT_URL;
 
   constructor(httpService: HttpService) {
     super(httpService);
-    if (this.baseApi) {
-      this.httpService.baseApi = this.baseApi;
-    }
+    // if (this.baseApi) {
+    //   this.httpService.baseApi = this.baseApi;
+    // }
 
   }
 }

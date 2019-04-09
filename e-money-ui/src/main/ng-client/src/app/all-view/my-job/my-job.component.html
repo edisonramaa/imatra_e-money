@@ -1,46 +1,51 @@
-<mat-accordion id="my-job">
-  <mat-expansion-panel *ngFor="let job of myJobsList;">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{ job.jobTitle }}
-      </mat-panel-title>
-      <span class="credit-amount">{{ job.credits }}</span>
-      <mat-icon class="temp-credit-icon">copyright</mat-icon>
-    </mat-expansion-panel-header>
-    <p class="sub-header-jobs">Pending</p>
-    <mat-card class="expanded-panel-container">
-      <mat-card-header>
-        <div mat-card-avatar class="user-avatar-image"></div>
-        <mat-card-title>Captain America</mat-card-title>
-        <mat-card-subtitle>
-          <bar-rating [max]="10" [theme]="'horizontal'"></bar-rating>
-        </mat-card-subtitle>
+<div id="my-job">
+  <mat-toolbar *ngIf="myJobsList.length===0" style="text-align: center">
+    <span>Currently, You have not posted any job.</span>
+  </mat-toolbar>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let job of myJobsList;">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ job.jobTitle }}
+        </mat-panel-title>
+        <span class="credit-amount">{{ job.credits }}</span>
+        <mat-icon class="temp-credit-icon">copyright</mat-icon>
+      </mat-expansion-panel-header>
+      <p class="sub-header-jobs">Pending</p>
+      <mat-card class="expanded-panel-container">
+        <mat-card-header>
+          <div mat-card-avatar class="user-avatar-image"></div>
+          <mat-card-title>Captain America</mat-card-title>
+          <mat-card-subtitle>
+            <bar-rating [max]="10" [theme]="'horizontal'"></bar-rating>
+          </mat-card-subtitle>
 
-        <div class="accept-decline-buttons-container">
-          <button  mat-icon-button>
-            <mat-icon class="decline-btn-icon">highlight_off</mat-icon>
-            <p class="decline-btn-text">Decline</p>
-          </button>
+          <div class="accept-decline-buttons-container">
             <button mat-icon-button>
-            <mat-icon class="accept-btn-icon">check_circle_outline</mat-icon>
-            <p class="accept-btn-text">Accept</p>
-          </button>
-        </div>
-      </mat-card-header>
-    </mat-card>
-    <p class="sub-header-jobs">Accepted</p>
-    <mat-card class="expanded-panel-container">
-      <mat-card-header>
-        <div class="user-avatar-image" mat-card-avatar></div>
-        <mat-card-title>Captain America</mat-card-title>
-        <mat-card-subtitle>
-          <bar-rating [max]="10" [theme]="'horizontal'"></bar-rating>
-        </mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-  </mat-expansion-panel>
-</mat-accordion>
+              <mat-icon class="decline-btn-icon">highlight_off</mat-icon>
+              <p class="decline-btn-text">Decline</p>
+            </button>
+            <button mat-icon-button>
+              <mat-icon class="accept-btn-icon">check_circle_outline</mat-icon>
+              <p class="accept-btn-text">Accept</p>
+            </button>
+          </div>
+        </mat-card-header>
+      </mat-card>
+      <p class="sub-header-jobs">Accepted</p>
+      <mat-card class="expanded-panel-container">
+        <mat-card-header>
+          <div class="user-avatar-image" mat-card-avatar></div>
+          <mat-card-title>Captain America</mat-card-title>
+          <mat-card-subtitle>
+            <bar-rating [max]="10" [theme]="'horizontal'"></bar-rating>
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </mat-expansion-panel>
+  </mat-accordion>
 
-<button mat-mini-fab (click)="createJob()" id="add-job-btn">
+  <button mat-mini-fab (click)="createJob()" id="add-job-btn">
     +
-</button>
+  </button>
+</div>

@@ -14,6 +14,7 @@ export class MyJobComponent implements OnInit {
   myJobsList: JobModel[];
 
   constructor(private _router: Router, private _jobService: JobService) {
+    this.myJobsList = [];
   }
 
   ngOnInit() {

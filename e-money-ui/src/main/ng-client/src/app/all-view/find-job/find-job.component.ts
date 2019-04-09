@@ -3,7 +3,9 @@ import {JobService} from "../services/job.service";
 import {JobModel} from "../models/job.model";
 import {ResponseModel} from "../../core/lib/model/response.model";
 import {Router} from "@angular/router";
-import {MatTabGroup} from "@angular/material";
+import {MatDialog, MatSnackBar, MatTabGroup} from "@angular/material";
+import {ConfirmDialogComponent} from "../../core/lib/components/confirm-dialog/confirm-dialog.component";
+import {JobTransactionModel} from "../models/job-transaction.model";
 
 
 @Component({
@@ -44,14 +46,18 @@ export class FindJobComponent implements OnInit {
     job.seconds = seconds;
   }
 
-  constructor(private _jobService: JobService, private _router:Router) {
+  constructor(private _jobService: JobService,
+              private _router: Router,
+              private _dialog: MatDialog,
+              private _snackBar: MatSnackBar
+  ) {
+    this.jobList = [];
   }
 
   ngOnInit() {
-    this._jobService.getList().then((res: ResponseModel) => {
+    this._jobService.getActiveJobList().then((res: ResponseModel) => {
       if (res.responseStatus) {
         this.jobList = res.result;
-        console.log("Job List: ", JSON.stringify(this.jobList));
       } else {
         this.jobList = [];
       }
@@ -63,5 +69,46 @@ export class FindJobComponent implements OnInit {
     // this._router.navigateByUrl(finalUrl);
     this.matTabGroup.selectedIndex = 1;
   }
+
+  confirmApply(job: JobModel) {
+    this.openDialog(job);
+  }
+
+  openDialog(job: JobModel): void {
+    const dialogRef = this._dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {title: "Confirm", content: "Do you want to apply for this Job?"}
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      console.log("Result: ", result);
+      if (result) {
+        this.applyJob(job);
+        //console.log("Dialog was closed....");
+      }
+
+    });
+  }
+
+  applyJob(job: JobModel) {
+    let jobTransactionModel: JobTransactionModel = new JobTransactionModel();
+    jobTransactionModel.jobId = job.id;
+    this._jobService.apply(jobTransactionModel).then((res: ResponseModel) => {
+      if (res.responseStatus) {
+        job.jobStatus = "APPLIED";
+      }
+      this._snackBar.open(res.message, "OK", {
+        duration: 4000,
+      });
+    });
+  }
+
+  onPanelOpen(job: JobModel) {
+    this._jobService.verifyAppliedJob(job.id).then((res: ResponseModel) => {
+      job.jobStatus = res.responseStatus ? res.result['status'] : "";
+    });
+  }
+
+
 
 }

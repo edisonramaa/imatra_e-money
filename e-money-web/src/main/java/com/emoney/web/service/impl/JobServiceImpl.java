@@ -5,7 +5,9 @@ import com.emoney.core.service.impl.CrudServiceImpl;
 import com.emoney.core.utils.GlobalSettingUtils;
 import com.emoney.core.utils.QRCodeUtil;
 import com.emoney.core.utils.SecurityUtils;
+import com.emoney.core.utils.TokenUtils;
 import com.emoney.web.model.JobEntity;
+import com.emoney.web.model.UserEntity;
 import com.emoney.web.repository.IJobRepository;
 import com.emoney.web.service.IJobService;
 import org.springframework.stereotype.Service;
@@ -53,6 +55,7 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
         jobEntity.setQr_unique_code(qrUniqueCode);
         jobEntity.setQrFileName(fileName.concat(".png"));
         jobEntity.setPostedDate(new Date());
+        jobEntity.setJobPoster(this.getPosterIdentity());
         return super.save(jobEntity);
     }
 
@@ -62,5 +65,11 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
         entity.setQrFileName(existingJobEntity.getQrFileName());
         entity.setQr_unique_code(existingJobEntity.getQr_unique_code());
         return super.update(entity);
+    }
+
+    private UserEntity getPosterIdentity() {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(TokenUtils.getTokenModel().getUserId());
+        return userEntity;
     }
 }

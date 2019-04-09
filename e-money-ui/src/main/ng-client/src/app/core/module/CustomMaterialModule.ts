@@ -4,6 +4,7 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatDatepickerModule,
+  MatDialogModule,
   MatDividerModule,
   MatExpansionModule,
   MatFormFieldModule,
@@ -47,7 +48,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     NgxMaterialTimepickerModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   exports: [
     MatButtonModule,
@@ -71,7 +73,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     NgxMaterialTimepickerModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
 })
 export class CustomMaterialModule {
