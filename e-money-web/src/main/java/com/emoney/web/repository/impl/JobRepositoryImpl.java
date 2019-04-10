@@ -25,7 +25,7 @@ public class JobRepositoryImpl extends CrudRepositoryImpl<JobEntity, Long> imple
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
         List<JobEntity> jobEntityList = jpaQueryFactory
                 .selectFrom(qJobEntity)
-                .where(qJobEntity.dueDate.before(new Date()))
+                .where(qJobEntity.dueDate.after(new Date()))
                 .orderBy(qJobEntity.dueDate.desc())
                 .fetch();
         return jobEntityList;
@@ -49,7 +49,7 @@ public class JobRepositoryImpl extends CrudRepositoryImpl<JobEntity, Long> imple
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
         List<JobEntity> jobEntityList = jpaQueryFactory
                 .selectFrom(qJobEntity)
-                .where(qJobEntity.dueDate.after(new Date()))
+                .where(qJobEntity.dueDate.before(new Date()))
                 .orderBy(qJobEntity.dueDate.desc())
                 .fetch();
         return jobEntityList;

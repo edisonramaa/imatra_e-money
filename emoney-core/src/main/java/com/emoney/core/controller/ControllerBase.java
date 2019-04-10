@@ -47,13 +47,13 @@ public abstract class ControllerBase<Entity, Dto> {
     }
 
     @DeleteMapping(WebResourceConstant.DELETE)
-    public ResponseEntity<ResponseObj> delete(@PathVariable String id) {
+    public ResponseEntity<ResponseObj> delete(@PathVariable Long id) {
         iCrudService.delete(id);
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(id).message("Record with id: " + id + " deleted.").build(), HttpStatus.OK);
     }
 
     @GetMapping(WebResourceConstant.GET)
-    public ResponseEntity<ResponseObj> get(@PathVariable String id) {
+    public ResponseEntity<ResponseObj> get(@PathVariable Long id) {
         Entity entity = (Entity) iCrudService.findOne(id);
         if (entity == null) {
             throw new EmoneyException("Sorry!! No Records Found");

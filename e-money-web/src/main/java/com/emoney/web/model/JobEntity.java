@@ -42,6 +42,8 @@ public class JobEntity extends EntityBase {
     private String qrFileName;
     @Column(name = "qr_unique_code")
     private String qr_unique_code;
+    @Column(name = "total_selected")
+    private Integer totalSelected;
     @Column(name = "lat")
     private String lat;
     @Column(name = "lng")

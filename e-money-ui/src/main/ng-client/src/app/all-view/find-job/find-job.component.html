@@ -8,7 +8,10 @@
   </mat-tab>
   <mat-tab id="list" label="List View">
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let job of jobList;">
+      <mat-toolbar *ngIf="jobList.length===0">
+        <span>Currently, there are no jobs posted.</span>
+      </mat-toolbar>
+      <mat-expansion-panel *ngFor="let job of jobList;" (opened)="onPanelOpen(job)">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{job.jobTitle}}
@@ -19,7 +22,8 @@
         <p class="desc-st">Description:</p>
         <p class="find-view-text-color">{{job.description}} </p>
 
-        <p class="find-view-text-color">0/{{job.noOfPeople}} people needed already selected. </p>
+        <p class="find-view-text-color">{{job.totalSelected?job.totalSelected:0}}/{{job.noOfPeople}} people already
+          selected. </p>
 
         <p *ngIf="job.phoneNumber != null && job.phoneNumber != ''" class="find-view-text-color">Phone
           number: {{job.phoneNumber}}</p>
@@ -46,7 +50,9 @@
                 </div>
 
               <div style="float: right">
-                  <button class="mat-stroked-button mat-warn">Apply</button>
+                <button *ngIf="!job.jobStatus" class="mat-stroked-button mat-warn" (click)="confirmApply(job)">Apply
+                </button>
+                <span class="job-status" *ngIf="job.jobStatus"><b>{{job.jobStatus}}</b></span>
                 </div>
             </div>
           </div>

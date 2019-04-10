@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SignUpModel} from "../all-view/models/sign-up.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {SessionStorageService} from "../core/lib/services/session-storage.service";
 import {Router} from "@angular/router";
 import {ResponseModel} from "../core/lib/model/response.model";
-import {FIND_JOB_URL, ICREDIT_URL} from "../core/utility/navigation-url";
-import {SignUpService} from "../all-view/services/sign-up.service";
+import {SignUpService} from "../all-view/app-services/sign-up.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -36,7 +34,7 @@ export class SignUpComponent implements OnInit {
   initForm() {
     this.signUpFormGroup = new FormGroup({});
     this.signUpFormGroup = this._formBuilder.group({
-      fullName: [this.signUpModel.fullName, [Validators.required]],
+      name: [this.signUpModel.name, [Validators.required]],
       email: [this.signUpModel.email, [Validators.required]],
       password: [this.signUpModel.password, [Validators.required]],
     });

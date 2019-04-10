@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {JobModel} from "../models/job.model";
 import {ResponseModel} from "../../core/lib/model/response.model";
-import {JobService} from "../services/job.service";
+import {JobService} from "../app-services/job.service";
 import {MatSnackBar} from "@angular/material";
 import {DatePipe} from "@angular/common";
 

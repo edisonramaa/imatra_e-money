@@ -1,5 +1,5 @@
 <mat-list id="redeem">
-  <mat-list-item (click)="openService()" *ngFor="let service of benefitList;">
+  <mat-list-item (click)="openService(service)" *ngFor="let service of benefitList;">
     <h2 matLine style="color: #47525E;"><strong>{{service.name}}</strong></h2>
     <span class="credit-amount">{{service.credits}}</span>
 

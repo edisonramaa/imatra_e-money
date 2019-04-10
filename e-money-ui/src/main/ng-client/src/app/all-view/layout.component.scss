@@ -57,3 +57,7 @@ main {
   overflow:auto;
   flex: 1;
 }
+
+/deep/ app-find-job.ng-star-inserted {
+  height: 100%;
+}

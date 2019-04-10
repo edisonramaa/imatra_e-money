@@ -6,7 +6,7 @@ import {CustomMaterialModule} from "../core/module/CustomMaterialModule";
 import {HttpClientModule} from "@angular/common/http";
 import {SessionStorageService} from "../core/lib/services/session-storage.service";
 import {HttpService} from "../core/lib/services/http.service";
-import {LoginService} from "../all-view/services/login.service";
+import {LoginService} from "../all-view/app-services/login.service";
 
 @NgModule({
     imports: [
