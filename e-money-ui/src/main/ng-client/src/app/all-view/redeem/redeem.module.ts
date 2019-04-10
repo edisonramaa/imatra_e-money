@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {RedeemComponent} from './redeem.component';
 import {RedeemRoutingModule} from "./redeem-routing.module";
 import {CustomMaterialModule} from "../../core/module/CustomMaterialModule";
-import {BenefitService} from "../app-services/benefit.service";
 
 @NgModule({
   imports: [
@@ -15,7 +14,7 @@ import {BenefitService} from "../app-services/benefit.service";
   declarations: [RedeemComponent],
   providers: [
     //HttpService,
-    BenefitService
+    //BenefitService
   ]
 })
 export class RedeemModule { }

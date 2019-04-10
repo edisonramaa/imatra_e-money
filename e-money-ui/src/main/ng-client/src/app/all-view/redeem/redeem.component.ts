@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ICREDIT_URL, SERVICE_URL} from "../../core/utility/navigation-url";
+import {ICREDIT_URL, REDEEM_URL} from "../../core/utility/navigation-url";
 import {Router} from "@angular/router";
 import {ResponseModel} from "../../core/lib/model/response.model";
 import {BenefitService} from "../app-services/benefit.service";
@@ -28,8 +28,9 @@ export class RedeemComponent implements OnInit {
     });
   }
 
-  openService() {
-    let finalUrl = "/"+ICREDIT_URL+  "/" + SERVICE_URL;
+  openService(service: BenefitModel) {
+    let finalUrl = "/" + ICREDIT_URL + "/" + REDEEM_URL + "/" + service.id;
+    this._benefitService.dataModel = service;
     this._router.navigateByUrl(finalUrl);
   }
 
