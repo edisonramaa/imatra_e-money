@@ -38,12 +38,12 @@
       <mat-card class="expanded-panel-container">
         <div *ngFor="let applicant of job.appliedJobsList">
           <mat-card-header *ngIf="applicant.status==='APPROVED'">
-          <div class="user-avatar-image" mat-card-avatar></div>
+            <div class="user-avatar-image" mat-card-avatar></div>
             <mat-card-title>{{applicant.applicantName}}</mat-card-title>
-          <mat-card-subtitle>
-            <bar-rating [max]="10" [theme]="'horizontal'"></bar-rating>
-          </mat-card-subtitle>
-        </mat-card-header>
+            <mat-card-subtitle>
+              <bar-rating [max]="10" [theme]="'horizontal'"></bar-rating>
+            </mat-card-subtitle>
+          </mat-card-header>
         </div>
       </mat-card>
     </mat-expansion-panel>
