@@ -112,8 +112,18 @@ public class JobController extends ControllerBase {
 
     @PostMapping(WebResourceConstant.EMONEY.REJECT_JOB)
     public ResponseEntity<ResponseObj> rejectJob(@RequestBody @Valid JobApplyRequestDto dto) {
-        JobTransactionEntity jobTransactionEntity = jobTransactionService.acceptApplicant(dto.getJobId(), dto.getApplicantId());
+        JobTransactionEntity jobTransactionEntity = jobTransactionService.rejectApplicant(dto.getJobId(), dto.getApplicantId());
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message(jobTransactionEntity.getApplicant().getName() + " Has been rejected for the Job.").build(), HttpStatus.OK);
+    }
+
+    @GetMapping(WebResourceConstant.EMONEY.GET_ALL_APPLIED_JOB)
+    public ResponseEntity<ResponseObj> getALAppliedJob(@PathVariable Long jobId) {
+        List<JobTransactionEntity> jobTransactionEntityList = jobTransactionService.getAllAppliedJob(jobId);
+        IBeanMapper iBeanMapper = new BeanMapperImpl(JobTransactionEntity.class, JobTransactionResponseDto.class);
+        if (jobTransactionEntityList.isEmpty()) {
+            throw new EmoneyException("Sorry!! No Records Found");
+        }
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(iBeanMapper.mapToDTO(jobTransactionEntityList)).message("Success").build(), HttpStatus.OK);
     }
 
 

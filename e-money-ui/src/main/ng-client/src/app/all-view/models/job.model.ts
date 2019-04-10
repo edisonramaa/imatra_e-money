@@ -2,6 +2,7 @@
  * Created by Anil Kumal on 02/02/2019.
  */
 import {BaseFtModel} from "../../core/lib/model/base-ft.model";
+import {JobTransactionModel} from "./job-transaction.model";
 
 
 export class JobModel extends BaseFtModel {
@@ -26,4 +27,6 @@ export class JobModel extends BaseFtModel {
   jobPosterName: string;
   jobStatus: string;
   totalSelected: number = 0;
+  appliedJobsList: JobTransactionModel[];
+
 }

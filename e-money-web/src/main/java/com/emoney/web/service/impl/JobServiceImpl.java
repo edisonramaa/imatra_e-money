@@ -56,6 +56,7 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
         jobEntity.setQrFileName(fileName.concat(".png"));
         jobEntity.setPostedDate(new Date());
         jobEntity.setJobPoster(this.getPosterIdentity());
+        jobEntity.setTotalSelected(0);
         return super.save(jobEntity);
     }
 

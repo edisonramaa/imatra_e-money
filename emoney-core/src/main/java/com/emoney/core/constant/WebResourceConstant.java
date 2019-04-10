@@ -65,6 +65,7 @@ public class WebResourceConstant {
         String APPLY_JOB = "/apply-job";
         String ACCEPT_JOB = "/accept-applicant";
         String REJECT_JOB = "/reject-applicant";
+        String GET_ALL_APPLIED_JOB = "/get-all-applied-job/{jobId}";
         String GET_APPLIED_JOB = "/get-applied-job/{jobId}";
 
 

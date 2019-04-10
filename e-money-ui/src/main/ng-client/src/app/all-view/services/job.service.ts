@@ -38,6 +38,22 @@ export class JobService extends FTBaseService {
     return this.httpService.getRequest(this.serviceApi + '/active-job')
   }
 
+  getAllApplicant(jobId: number) {
+    return this.httpService.getRequest(this.serviceApi + `/get-all-applied-job/${jobId}`);
+  }
+
+  acceptApplicant(jobId: number, applicantId: number) {
+    let data = {jobId: jobId, applicantId: applicantId};
+    return this.httpService.postRequest(this.serviceApi + '/accept-applicant', data);
+  }
+
+  declineApplicant(jobId: number, applicantId: number) {
+    let data = {jobId: jobId, applicantId: applicantId};
+    return this.httpService.postRequest(this.serviceApi + '/reject-applicant', data);
+  }
+
+
+
 
 
 

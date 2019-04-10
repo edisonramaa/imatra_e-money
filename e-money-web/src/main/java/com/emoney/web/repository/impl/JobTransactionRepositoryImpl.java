@@ -7,6 +7,8 @@ import com.emoney.web.repository.IJobTransactionRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by Edison Rama on 13/03/2019.
  */
@@ -26,5 +28,16 @@ public class JobTransactionRepositoryImpl extends CrudRepositoryImpl<JobTransact
                 .where(qJobTransactionEntity.job.id.eq(jobId), qJobTransactionEntity.applicant.id.eq(applicantId))
                 .fetchOne();
         return jobTransactionEntity;
+    }
+
+    @Override
+    public List<JobTransactionEntity> getAllAppliedJob(Long jobId) {
+        QJobTransactionEntity qJobTransactionEntity = QJobTransactionEntity.jobTransactionEntity;
+        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
+        List<JobTransactionEntity> jobTransactionEntityList = jpaQueryFactory
+                .selectFrom(qJobTransactionEntity)
+                .where(qJobTransactionEntity.job.id.eq(jobId))
+                .fetch();
+        return jobTransactionEntityList;
     }
 }

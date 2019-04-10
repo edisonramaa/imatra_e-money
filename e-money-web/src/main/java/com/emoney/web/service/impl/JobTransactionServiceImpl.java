@@ -11,6 +11,8 @@ import com.emoney.web.service.IJobTransactionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by Edison Rama on 13/03/2019.
  */
@@ -64,6 +66,11 @@ public class JobTransactionServiceImpl extends CrudServiceImpl<JobTransactionEnt
         JobTransactionEntity jobTransactionEntity = this.jobTransactionRepository.findByJobIdAndApplicantId(jobId, applicantId);
         jobTransactionEntity.setStatus(JobApplyStatus.REJECTED.getJobApplyStatus());
         return super.update(jobTransactionEntity);
+    }
+
+    @Override
+    public List<JobTransactionEntity> getAllAppliedJob(Long jobId) {
+        return this.jobTransactionRepository.getAllAppliedJob(jobId);
     }
 
 

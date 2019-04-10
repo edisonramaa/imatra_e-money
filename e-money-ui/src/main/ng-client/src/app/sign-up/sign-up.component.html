@@ -10,9 +10,9 @@
       <form [formGroup]="signUpFormGroup" method="post">
         <mat-form-field class="full-width">
           <mat-label>Full name</mat-label>
-          <input formControlName="fullName" matInput name="fullName" placeholder="Full Name">
+          <input formControlName="fullName" matInput name="name" placeholder="Full Name">
           <mat-hint
-                  *ngIf="signUpFormGroup.controls['fullName'].hasError('required')&& signUpFormGroup.controls['fullName'].dirty">
+            *ngIf="signUpFormGroup.controls['name'].hasError('required')&& signUpFormGroup.controls['name'].dirty">
             Full name is required.
           </mat-hint>
         </mat-form-field>
