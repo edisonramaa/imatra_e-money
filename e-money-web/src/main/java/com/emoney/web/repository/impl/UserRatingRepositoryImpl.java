@@ -2,6 +2,7 @@ package com.emoney.web.repository.impl;
 
 
 import com.emoney.core.repository.impl.CrudRepositoryImpl;
+import com.emoney.web.model.QUserRatingEntity;
 import com.emoney.web.model.UserRatingEntity;
 import com.emoney.web.repository.IUserRatingRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
