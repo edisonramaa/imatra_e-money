@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ICREDIT_URL, SERVICE_URL} from "../../core/utility/navigation-url";
 import {Router} from "@angular/router";
 import {ResponseModel} from "../../core/lib/model/response.model";
-import {BenefitService} from "../services/benefit.service";
+import {BenefitService} from "../app-services/benefit.service";
 import {BenefitModel} from "../models/benefit.model";
 
 @Component({

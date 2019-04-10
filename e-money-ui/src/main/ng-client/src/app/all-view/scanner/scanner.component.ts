@@ -37,7 +37,7 @@ export class ScannerComponent implements OnInit {
 
       //selects the devices's back camera by default
       for (const device of devices) {
-        if (/back|rear|webcam|environment/gi.test(device.label)) {
+        if (/back|rear|usb|webcam|environment/gi.test(device.label)) {
           this.scanner.changeDevice(device);
           this.currentlySelectedDevice = device;
           break;

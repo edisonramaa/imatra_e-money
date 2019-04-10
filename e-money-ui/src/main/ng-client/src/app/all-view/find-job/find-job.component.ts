@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {JobService} from "../services/job.service";
+import {JobService} from "../app-services/job.service";
 import {JobModel} from "../models/job.model";
 import {ResponseModel} from "../../core/lib/model/response.model";
 import {Router} from "@angular/router";

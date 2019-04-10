@@ -3,7 +3,7 @@ import {SignUpModel} from "../all-view/models/sign-up.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ResponseModel} from "../core/lib/model/response.model";
-import {SignUpService} from "../all-view/services/sign-up.service";
+import {SignUpService} from "../all-view/app-services/sign-up.service";
 
 @Component({
   selector: 'app-sign-up',

@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {
-    FIND_JOB_URL,
-    ICREDIT_URL,
-    MY_JOB_URL,
-    PAY_URL,
-    REDEEM_URL,
-    WALLET_URL
+  FIND_JOB_URL,
+  ICREDIT_URL,
+  MY_JOB_URL,
+  PAY_URL,
+  REDEEM_URL,
+  WALLET_URL
 } from "../../../core/utility/navigation-url";
-import {EventService} from "../../services/event.service";
+import {EventService} from "../../app-services/event.service";
 
 @Component({
   selector: 'app-footer',

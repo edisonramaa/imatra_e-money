@@ -5,7 +5,7 @@ import {MyJobRoutingModule} from "./my-job-routing.module";
 import {CustomMaterialModule} from "../../core/module/CustomMaterialModule";
 import {MatCardModule} from "@angular/material";
 import {BarRatingModule} from "ngx-bar-rating";
-import {JobService} from "../services/job.service";
+import {JobService} from "../app-services/job.service";
 
 @NgModule({
   imports: [

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {CREATE_JOB_URL, ICREDIT_URL} from "../../core/utility/navigation-url";
 import {ResponseModel} from "../../core/lib/model/response.model";
-import {JobService} from "../services/job.service";
+import {JobService} from "../app-services/job.service";
 import {JobModel} from "../models/job.model";
 import {JobTransactionModel} from "../models/job-transaction.model";
 import {MatSnackBar} from "@angular/material";
