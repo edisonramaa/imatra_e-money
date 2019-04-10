@@ -1,0 +1,28 @@
+<div id="admin-layout">
+  <mat-sidenav-container class="all-wrap">
+    <mat-sidenav #sidenav class="navbar-width">
+
+      <mat-card (click)="openUserProfile()" class="expanded-panel-container">
+        <mat-card-header>
+          <div class="user-avatar-image" mat-card-avatar></div>
+          <mat-card-title>Captain America</mat-card-title>
+          <mat-card-subtitle>My Profile</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+
+      <mat-list>
+        <mat-list-item> Logout</mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+
+    <div class="page-wrap">
+      <app-header [sideNavBar]="sidenav" [headerTitle]="headerTitle"></app-header>
+      <main class="content">
+        <router-outlet></router-outlet>
+      </main>
+      <!--<app-footer></app-footer>-->
+
+    </div>
+  </mat-sidenav-container>
+
+</div>

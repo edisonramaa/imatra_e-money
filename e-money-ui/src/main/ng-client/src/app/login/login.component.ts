@@ -5,7 +5,7 @@ import {LoginService} from "../all-view/services/login.service";
 import {SessionStorageService} from "../core/lib/services/session-storage.service";
 import {ResponseModel} from "../core/lib/model/response.model";
 import {Router} from "@angular/router";
-import {FIND_JOB_URL, ICREDIT_URL} from "../core/utility/navigation-url";
+import {ADMIN_URL, FIND_JOB_URL, ICREDIT_URL, MAIN_URL} from "../core/utility/navigation-url";
 
 @Component({
     selector: 'app-login',
@@ -53,7 +53,12 @@ export class LoginComponent implements OnInit {
           this.disableLoginBtn = false;
           this._sessionStograge.setIsAdmin(res.result.isAdmin);
           this._sessionStograge.setToken(res.result.token);
-          let finalUrl = "/" + ICREDIT_URL + "/" + FIND_JOB_URL;
+          let finalUrl = null;
+          if (res.result.isAdmin) {
+            finalUrl = "/" + ADMIN_URL + "/" + MAIN_URL;
+          } else {
+            finalUrl = "/" + ICREDIT_URL + "/" + FIND_JOB_URL;
+          }
           this._router.navigateByUrl(finalUrl);
           this.disableLoginBtn = false;
         } else {

@@ -10,6 +10,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Input("sideNavBar")
   sideNavbar;
   subscribeEvent: any;
+  @Input("headerTitle")
   headerTitle: string = "Find Job";
 
   constructor(private _eventService: EventService) {

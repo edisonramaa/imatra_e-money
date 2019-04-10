@@ -9,3 +9,4 @@ export const SERVICE_URL: string = 'service';
 export const CREATE_JOB_URL: string = 'create-job';
 export const SCAN_CODE: string = 'scan-code';
 export const PROFILE_URL: string = 'profile';
+export const ADMIN_URL: string = 'admin';
