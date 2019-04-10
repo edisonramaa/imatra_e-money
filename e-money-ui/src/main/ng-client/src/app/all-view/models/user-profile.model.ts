@@ -10,5 +10,5 @@ export class UserProfileModel extends BaseFtModel {
   skill: string;
   isAdmin: string;
   rating: number;
-  jobs: any[];
+  jobTransactionEntities: any[];
 }

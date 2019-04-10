@@ -5,12 +5,16 @@ import com.emoney.core.exception.EmoneyException;
 import com.emoney.core.security.ImatraEncoder;
 import com.emoney.core.service.impl.CrudServiceImpl;
 import com.emoney.web.model.JobEntity;
+import com.emoney.web.model.JobTransactionEntity;
 import com.emoney.web.model.UserEntity;
 import com.emoney.web.repository.IUserRepository;
+import com.emoney.web.service.IJobTransactionService;
 import com.emoney.web.service.IUserService;
 import com.emoney.web.service.IJobService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by Anil Kumal on 02/02/2019.
@@ -21,13 +25,13 @@ public class UserServiceImpl extends CrudServiceImpl<UserEntity, Long> implement
 
     private IUserRepository userRepository;
     private ImatraEncoder imatraEncoder;
-    private IJobService jobService;
+    private IJobTransactionService jobTransactionService;
 
-    public UserServiceImpl(IUserRepository userRepository, ImatraEncoder imatraEncoder, IJobService jobService) {
+    public UserServiceImpl(IUserRepository userRepository, ImatraEncoder imatraEncoder, IJobTransactionService jobTransactionService) {
         super(userRepository);
         this.userRepository = userRepository;
         this.imatraEncoder = imatraEncoder;
-        this.jobService = jobService;
+        this.jobTransactionService = jobTransactionService;
     }
 
     @Override
@@ -70,6 +74,8 @@ public class UserServiceImpl extends CrudServiceImpl<UserEntity, Long> implement
 
         UserEntity umUserEntity = userRepository.findOne(userId);
        if (umUserEntity != null){
+           List<JobTransactionEntity> jobTransactionEntities = this.jobTransactionService.getMyCompletedJobs(userId);
+           umUserEntity.setJobTransactionEntities(jobTransactionEntities);
            return umUserEntity;
        }
         throw new EmoneyException("Internal server error! User data not available");

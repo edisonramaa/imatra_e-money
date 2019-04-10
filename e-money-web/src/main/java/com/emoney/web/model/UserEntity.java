@@ -7,6 +7,8 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,5 +27,8 @@ public class UserEntity extends EntityBase {
     private String skill;
     @Column(name = "isAdmin")
     private Boolean isAdmin = false;
+
+    @Transient
+    List<JobTransactionEntity> jobTransactionEntities;
 
 }

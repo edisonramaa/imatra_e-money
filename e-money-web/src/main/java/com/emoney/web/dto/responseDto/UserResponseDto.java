@@ -4,6 +4,8 @@ import com.emoney.core.model.ResponseDtoBase;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -13,5 +15,6 @@ public class UserResponseDto extends ResponseDtoBase {
     private Integer age;
     private String skill;
     private Boolean isAdmin;
+    private List<CompletedJob> jobTransactionEntities;
 
 }

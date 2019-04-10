@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {UserProfileModel} from "../../all-view/models/user-profile.model.ts";
+import {UserProfileModel} from "../../all-view/models/user-profile.model";
 import {UserProfileService} from "../services/user-profile.service";
 import {Router} from "@angular/router";
 import {ResponseModel} from "../../core/lib/model/response.model";
+import {JobModel} from "../models/job.model";
 
 @Component({
   selector: 'app-user-profile',
@@ -14,6 +15,7 @@ export class UserProfileComponent implements OnInit {
   userProfileModel: UserProfileModel;
 
   constructor(private _router: Router, private _userProfile: UserProfileService) {
+    this.userProfileModel = new UserProfileModel();
   }
 
   ngOnInit() {
@@ -24,12 +26,8 @@ export class UserProfileComponent implements OnInit {
   initForm() {
     this._userProfile.getMyProfile().then((res: ResponseModel) => {
       if (res.responseStatus) {
-        console.log(1);
         this.userProfileModel = res.result;
         console.log("My Profile: ", JSON.stringify(this.userProfileModel));
-      } else {
-        console.log(2);
-        this.userProfileModel = [];
       }
     });
   }
