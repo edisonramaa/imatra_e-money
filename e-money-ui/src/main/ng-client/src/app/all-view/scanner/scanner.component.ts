@@ -3,6 +3,10 @@ import {SCANNER_FORMAT} from "../../core/utility/emoney-constant";
 import {ZXingScannerComponent} from "@zxing/ngx-scanner";
 import {ICREDIT_URL, PAY_URL} from "../../core/utility/navigation-url";
 import {Router} from "@angular/router";
+import {PaymentService} from "../app-services/payment.service";
+import {MatDialog, MatSnackBar} from "@angular/material";
+import {ResponseModel} from "../../core/lib/model/response.model";
+import {ConfirmDialogComponent} from "../../core/lib/components/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-scanner',
@@ -17,10 +21,18 @@ export class ScannerComponent implements OnInit {
   hasCameras = false;
   hasPermission: boolean;
   qrResultString: string;
+  scanned: boolean = false;
 
   availableDeviceList: MediaDeviceInfo[];
   currentlySelectedDevice: MediaDeviceInfo;
-  constructor(private _router:Router) { }
+
+  constructor(
+    private _router: Router,
+    private _paymentService: PaymentService,
+    private _snackBar: MatSnackBar,
+    private _dialog: MatDialog
+  ) {
+  }
 
   ngOnInit(): void {
 
@@ -61,11 +73,37 @@ export class ScannerComponent implements OnInit {
   onScanSuccess(resultString: string) {
     //console.log('Result: ', resultString);
     this.qrResultString = resultString;
+    if (!this.scanned) {
+      this.scanned = true;
+      this._paymentService.getPaymentDetals(resultString).then((res: ResponseModel) => {
+        if (res.responseStatus) {
+          this.openDialog(res.result, resultString)
+        } else {
+          this.showMsg(res.message);
+        }
+      });
+    }
+
+  }
+
+  pay(resultString) {
+    this._paymentService.pay(resultString).then((res: ResponseModel) => {
+      this.showMsg(res.message);
+    })
+  }
+
+  showMsg(message: string) {
+    this.scanned = false;
+    this._snackBar.open(message, "OK", {
+      duration: 6000,
+      verticalPosition: 'top'
+    });
   }
 
   onDeviceSelectChange(selectedValue: string) {
     //console.log('Selection changed: ', selectedValue);
     this.currentlySelectedDevice = this.scanner.getDeviceById(selectedValue);
+
   }
 
   setScanStatus(status: boolean) {
@@ -79,5 +117,27 @@ export class ScannerComponent implements OnInit {
     this.currentlySelectedDevice = null;
     let finalUrl = "/"+ICREDIT_URL+  "/" + PAY_URL;
     this._router.navigateByUrl(finalUrl);
+
+
+  }
+
+  openDialog(result, qrCode): void {
+    const dialogRef = this._dialog.open(ConfirmDialogComponent, {
+      width: '450px',
+      data: {
+        title: "Confirm",
+        content: "Please confirm payment for '" + result['name'] + "' with credits " + result['credtis']
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      console.log("Result: ", result);
+      if (result) {
+        this.pay(qrCode);
+      } else {
+        this.scanned = false;
+      }
+
+    });
   }
 }

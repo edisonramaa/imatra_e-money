@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {UserProfileService} from "../services/user-profile.service";
 import {JobService} from "../app-services/job.service";
 import {CustomMaterialModule} from "../../core/module/CustomMaterialModule";
 import {UserProfileRoutingModule} from "./user-profile-routing.module";
@@ -12,7 +13,7 @@ import {UserProfileComponent} from "./user-profile.component";
     CustomMaterialModule
   ],
   declarations: [UserProfileComponent],
-  providers: [JobService]
+  providers: [UserProfileService, JobService]
 })
 export class UserProfileModule {
 }

@@ -14,4 +14,6 @@ public interface IJobRepository extends ICrudRepository<JobEntity, Long> {
     List<JobEntity> getExpiredJobs();
 
     List<JobEntity> getMyJobs(Long id);
+
+    JobEntity getJobByQrCode(String qrCode);
 }

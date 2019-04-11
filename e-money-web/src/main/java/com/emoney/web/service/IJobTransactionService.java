@@ -15,6 +15,7 @@ public interface IJobTransactionService extends ICrudService<JobTransactionEntit
     JobTransactionEntity rejectApplicant(Long jobId, Long applicantId);
 
     List<JobTransactionEntity> getAllAppliedJob(Long jobId);
+    List<JobTransactionEntity> getMyCompletedJobs(Long userId);
 }
 
 
