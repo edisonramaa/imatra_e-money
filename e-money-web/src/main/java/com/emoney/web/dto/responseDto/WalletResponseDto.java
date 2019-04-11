@@ -9,14 +9,10 @@ import java.util.List;
 
 @Getter
 @Setter
-public class UserResponseDto extends ResponseDtoBase {
-    private String name;
-    private String email;
-    private Integer age;
-    private String skill;
-    private Boolean isAdmin;
-    private List<CompletedJob> jobTransactionEntities;
+public class WalletResponseDto extends ResponseDtoBase {
     private String walletId;
     private Integer balanceCredits;
+    private List<CreditTransactionResponseDto> walletDetails;
+
 
 }

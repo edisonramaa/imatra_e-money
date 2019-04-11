@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {BenefitService} from "../app-services/benefit.service";
 import {BenefitModel} from "../models/benefit.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ResponseModel} from "../../core/lib/model/response.model";
+import {ICREDIT_URL, SCAN_CODE} from "../../core/utility/navigation-url";
 
 @Component({
   selector: 'app-services',
@@ -18,7 +19,8 @@ export class ServiceComponent implements OnInit {
 
   constructor(
     private _benefitService: BenefitService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _router: Router
   ) {
   }
 
@@ -31,7 +33,6 @@ export class ServiceComponent implements OnInit {
     let eventEndTime = new Date(endDate);
     let duration = eventEndTime.valueOf() - eventStartTime.valueOf();
     return Math.ceil(duration / (1000 * 3600 * 24));
-    ;
   }
 
   getBenefitById() {
@@ -46,6 +47,11 @@ export class ServiceComponent implements OnInit {
         });
       }
     });
+  }
+
+  onPurchase() {
+    let finalUrl = "/" + ICREDIT_URL + "/" + SCAN_CODE;
+    this._router.navigateByUrl(finalUrl);
   }
 
 }

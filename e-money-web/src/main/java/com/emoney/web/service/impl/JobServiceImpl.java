@@ -9,6 +9,7 @@ import com.emoney.core.utils.TokenUtils;
 import com.emoney.web.model.JobEntity;
 import com.emoney.web.model.UserEntity;
 import com.emoney.web.repository.IJobRepository;
+import com.emoney.web.repository.IUserRepository;
 import com.emoney.web.service.IJobService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,10 +25,12 @@ import java.util.List;
 public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements IJobService {
 
     private IJobRepository jobRepository;
+    private IUserRepository userRepository;
 
-    public JobServiceImpl(IJobRepository jobRepository) {
+    public JobServiceImpl(IJobRepository jobRepository, IUserRepository userRepository) {
         super(jobRepository);
         this.jobRepository = jobRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -47,8 +50,13 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
     }
 
     @Override
+    public JobEntity getJobByQrCode(String qrCode) {
+        return this.jobRepository.getJobByQrCode(qrCode);
+    }
+
+    @Override
     public JobEntity save(JobEntity jobEntity) {
-        String qrUniqueCode = SecurityUtils.generateRandomString(10, 10);
+        String qrUniqueCode = "JB".concat(SecurityUtils.generateRandomString(10, 10));
         String fileName = SecurityUtils.generateRandomString(6, 6);
         String folderLocation = GlobalSettingUtils.getGlobalSettingByKey(GlobalSettingUtils.QR_JOB_LOCATION);
         QRCodeUtil.generateQRCodeImage(qrUniqueCode, fileName, folderLocation);
@@ -57,7 +65,12 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
         jobEntity.setPostedDate(new Date());
         jobEntity.setJobPoster(this.getPosterIdentity());
         jobEntity.setTotalSelected(0);
-        return super.save(jobEntity);
+        super.save(jobEntity);
+        UserEntity userEntity = this.userRepository.findOne(TokenUtils.getTokenModel().getUserId());
+        userEntity.setReserveCredits(userEntity.getReserveCredits() + jobEntity.getCredits());
+        userEntity.setBalanceCredits(userEntity.getBalanceCredits() - jobEntity.getCredits());
+        this.userRepository.update(userEntity);
+        return jobEntity;
     }
 
     @Override

@@ -9,6 +9,9 @@
     </mat-card>
     <div class="up-container">
         <p>Recent jobs:</p>
+      <div *ngIf="userProfileModel.jobTransactionEntities<=0">
+        <p>You Have not Completed any jobs.</p>
+      </div>
         <mat-list role="list" *ngFor="let job of userProfileModel.jobTransactionEntities;" >
             <mat-divider style="margin-bottom: 5px;"></mat-divider>
             <mat-list-item role="listitem"><p>{{job['jobJobTitle']}}</p><span class="credit-amount">{{job['jobCredits']}}</span>

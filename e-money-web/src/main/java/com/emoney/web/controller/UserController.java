@@ -89,4 +89,15 @@ public class UserController extends ControllerBase {
         UserEntity entities = userService.getProfile(tokenModel.getUserId());
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
     }
+
+    @GetMapping(WebResourceConstant.UserManagement.MY_DATA)
+    public ResponseEntity<ResponseObj> myData() {
+        TokenModel tokenModel = TokenUtils.getTokenModel();
+
+        if (tokenModel == null) {
+            throw new EmoneyException("Your session has been expired. Please sign in and try again");
+        }
+        UserEntity entities = userService.findOne(tokenModel.getUserId());
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
+    }
 }

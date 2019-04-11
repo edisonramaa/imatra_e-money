@@ -15,6 +15,7 @@ export class RedeemComponent implements OnInit {
   benefitList: BenefitModel[];
 
   constructor(private _router: Router, private _benefitService: BenefitService) {
+    this.benefitList = [];
   }
 
   ngOnInit() {

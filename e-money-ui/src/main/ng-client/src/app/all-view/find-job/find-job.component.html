@@ -8,9 +8,9 @@
   </mat-tab>
   <mat-tab id="list" label="List View">
     <mat-accordion>
-      <mat-toolbar *ngIf="jobList.length===0">
-        <span>Currently, there are no jobs posted.</span>
-      </mat-toolbar>
+      <div *ngIf="jobList.length===0">
+        <p style="text-align: center">Currently, there are no jobs posted.</p>
+      </div>
       <mat-expansion-panel *ngFor="let job of jobList;" (opened)="onPanelOpen(job)">
         <mat-expansion-panel-header>
           <mat-panel-title>

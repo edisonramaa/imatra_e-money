@@ -1,26 +1,26 @@
 <div id="wallet">
     <mat-tab-group animationDuration="0ms">
         <mat-tab label="Wallet">
+          <p class="balance">Wallet ID: {{walletId}}</p>
             <img class="center" height="100" src="../../../assets/images/coins.png" width="100"/>
-            <p class="balance">Balance: $$$</p>
+          <p class="balance">Balance: {{balanceCredits}}</p>
             <hr size="10">
             <p class="recent-trans">Recent Transactions</p>
-            <table class="table-center">
-                <tr>
-                    <td>Transaction 1</td>
-                    <td>+200</td>
-                </tr>
-                <tr>
-                    <td>Transaction 1</td>
-                    <td>+200</td>
-                </tr>
-                <tr>
-                    <td>Transaction 1</td>
-                    <td>+200</td>
-                </tr>
-                <tr>
-                    <td>Transaction 1</td>
-                    <td>+200</td>
+          <div *ngIf="walletDetails.length<=0">
+            <p style="text-align: center">You don't have any transaction yet.</p>
+          </div>
+          <table class="table-center" *ngIf="walletDetails && walletDetails.length>0">
+            <tr>
+              <td>Transaction</td>
+              <td>Type</td>
+              <td>Date</td>
+              <td>Credits</td>
+            </tr>
+            <tr *ngFor="let wallet of walletDetails">
+              <td>{{wallet.jobEntityJobTitle? wallet.jobEntityJobTitle : wallet.benefitEntityName}}</td>
+              <td>{{wallet.transactionType}}</td>
+              <td>{{wallet.transactionDate | date}}</td>
+              <td>{{wallet.credits}}</td>
                 </tr>
             </table>
         </mat-tab>
