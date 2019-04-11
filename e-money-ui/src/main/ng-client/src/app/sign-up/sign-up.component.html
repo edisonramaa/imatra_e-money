@@ -7,6 +7,7 @@
     <mat-card-content>
 
       <mat-hint *ngIf="showErrMsg">{{showErrMsg}}</mat-hint>
+      <mat-hint class="success" *ngIf="showSuccessMsg">{{showSuccessMsg}}</mat-hint>
       <form [formGroup]="signUpFormGroup" method="post">
         <mat-form-field class="full-width">
           <mat-label>Full name</mat-label>
@@ -37,6 +38,7 @@
                 type="submit">Sign up
         </button>
       </form>
+      <p>Already a user? <a style="text-decoration:none; cursor:pointer;" href="/login">Login</a> here!</p>
     </mat-card-content>
   </mat-card>
 </div>

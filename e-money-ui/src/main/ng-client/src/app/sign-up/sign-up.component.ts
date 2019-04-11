@@ -16,6 +16,7 @@ export class SignUpComponent implements OnInit {
   signUpFormGroup: FormGroup;
   disableSignUpBtn: boolean;
   showErrMsg: string;
+  showSuccessMsg: string;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -42,6 +43,7 @@ export class SignUpComponent implements OnInit {
 
   onSignUp() {
     this.showErrMsg = "";
+    this.showSuccessMsg = "";
     if (this.signUpFormGroup.valid) {
       this.disableSignUpBtn = true;
       this.signUpModel = this.signUpFormGroup.value;
@@ -51,7 +53,8 @@ export class SignUpComponent implements OnInit {
           this.disableSignUpBtn = false;
           // let finalUrl = "/" + ICREDIT_URL + "/" + FIND_JOB_URL;
           // this._router.navigateByUrl(finalUrl);
-          this.showErrMsg = res.message;
+          this.showSuccessMsg = res.message;
+          this.showErrMsg = "";
           this.disableSignUpBtn = false;
         } else {
           this.showErrMsg = res.message;

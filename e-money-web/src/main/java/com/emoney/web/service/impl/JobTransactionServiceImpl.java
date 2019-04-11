@@ -73,5 +73,10 @@ public class JobTransactionServiceImpl extends CrudServiceImpl<JobTransactionEnt
         return this.jobTransactionRepository.getAllAppliedJob(jobId);
     }
 
+    @Override
+    public List<JobTransactionEntity> getMyCompletedJobs(Long userId) {
+        return this.jobTransactionRepository.getMyCompletedJobs(userId);
+    }
+
 
 }

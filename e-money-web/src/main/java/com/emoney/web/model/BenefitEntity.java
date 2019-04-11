@@ -32,6 +32,8 @@ public class BenefitEntity extends EntityBase {
     private int credits;
     @Column(name = "qr_code")
     private String qrCode;
+    @Column(name = "qr_code_file")
+    private String qrCodeFileName;
 
 
 }

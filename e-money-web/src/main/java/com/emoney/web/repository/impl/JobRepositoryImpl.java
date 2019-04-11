@@ -44,6 +44,17 @@ public class JobRepositoryImpl extends CrudRepositoryImpl<JobEntity, Long> imple
     }
 
     @Override
+    public JobEntity getJobByQrCode(String qrCode) {
+        QJobEntity qJobEntity = QJobEntity.jobEntity;
+        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
+        JobEntity jobEntity = jpaQueryFactory
+                .selectFrom(qJobEntity)
+                .where(qJobEntity.qr_unique_code.eq(qrCode))
+                .fetchOne();
+        return jobEntity;
+    }
+
+    @Override
     public List<JobEntity> getExpiredJobs() {
         QJobEntity qJobEntity = QJobEntity.jobEntity;
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);

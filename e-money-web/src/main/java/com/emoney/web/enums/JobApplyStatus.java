@@ -9,8 +9,9 @@ import lombok.Getter;
 public enum JobApplyStatus {
     APPLIED("APPLIED"),
     APPROVED("APPROVED"),
-    REJECTED("REJECTED");
-
+    REJECTED("REJECTED"),
+    STARTED("STARTED"),
+    COMPLETED("COMPLETED");
 
     private String jobApplyStatus;
 

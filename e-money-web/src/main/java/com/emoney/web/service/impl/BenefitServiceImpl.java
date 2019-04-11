@@ -1,6 +1,9 @@
 package com.emoney.web.service.impl;
 
 import com.emoney.core.service.impl.CrudServiceImpl;
+import com.emoney.core.utils.GlobalSettingUtils;
+import com.emoney.core.utils.QRCodeUtil;
+import com.emoney.core.utils.SecurityUtils;
 import com.emoney.web.model.BenefitEntity;
 import com.emoney.web.repository.IBenefitRepository;
 import com.emoney.web.service.IBenefitService;
@@ -21,4 +24,20 @@ public class BenefitServiceImpl extends CrudServiceImpl<BenefitEntity, Long> imp
         this.benefitRepository = benefitRepository;
     }
 
+
+    @Override
+    public BenefitEntity getBenefitByQrCode(String qrCode) {
+        return this.benefitRepository.getBenefitByQrCode(qrCode);
+    }
+
+    @Override
+    public BenefitEntity save(BenefitEntity entity) {
+        String qrUniqueCode = "SR".concat(SecurityUtils.generateRandomString(10, 10));
+        String fileName = SecurityUtils.generateRandomString(6, 6);
+        String folderLocation = GlobalSettingUtils.getGlobalSettingByKey(GlobalSettingUtils.QR_SERVICE);
+        QRCodeUtil.generateQRCodeImage(qrUniqueCode, fileName, folderLocation);
+        entity.setQrCode(qrUniqueCode);
+        entity.setQrCodeFileName(fileName.concat(".png"));
+        return super.save(entity);
+    }
 }

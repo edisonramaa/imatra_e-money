@@ -1,4 +1,7 @@
 <mat-list id="redeem">
+  <div *ngIf="benefitList.length<=0">
+    <p style="text-align: center">No Service availabe to redeem.</p>
+  </div>
   <mat-list-item (click)="openService(service)" *ngFor="let service of benefitList;">
     <h2 matLine style="color: #47525E;"><strong>{{service.name}}</strong></h2>
     <span class="credit-amount">{{service.credits}}</span>

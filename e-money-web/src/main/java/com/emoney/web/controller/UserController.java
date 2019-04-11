@@ -72,20 +72,32 @@ public class UserController extends ControllerBase {
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(responseMap).build(), HttpStatus.OK);
     }
 
-    @GetMapping(WebResourceConstant.UserManagement.GET_PROFILE_DETAIL)
-    public ResponseEntity<ResponseObj> authenticateUser() {
-        TokenModel tokenModel = TokenUtils.getTokenModel();
-        if (tokenModel == null) {
-            throw new EmoneyException("Your session has been expired. Please sign in and try again");
-        }
-        UserEntity userEntity = this.userService.findOne(tokenModel.getUserId());
-        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(userEntity)).message("Success").build(), HttpStatus.OK);
-    }
-
     @PostMapping(WebResourceConstant.UserManagement.SIGN_UP)
     public ResponseEntity<ResponseObj> changePassword(@RequestBody @Valid UserRequestDto userRequestDto) {
         UserEntity userEntity = (UserEntity) reqBeanMapper.mapToEntity(userRequestDto);
         userService.save(userEntity);
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("Your account has been created. Please go to login page to sign in.").build(), HttpStatus.OK);
+    }
+
+    @GetMapping(WebResourceConstant.UserManagement.GET_PROFILE)
+    public ResponseEntity<ResponseObj> getProfile() {
+        TokenModel tokenModel = TokenUtils.getTokenModel();
+
+        if (tokenModel == null) {
+            throw new EmoneyException("Your session has been expired. Please sign in and try again");
+        }
+        UserEntity entities = userService.getProfile(tokenModel.getUserId());
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
+    }
+
+    @GetMapping(WebResourceConstant.UserManagement.MY_DATA)
+    public ResponseEntity<ResponseObj> myData() {
+        TokenModel tokenModel = TokenUtils.getTokenModel();
+
+        if (tokenModel == null) {
+            throw new EmoneyException("Your session has been expired. Please sign in and try again");
+        }
+        UserEntity entities = userService.findOne(tokenModel.getUserId());
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
     }
 }
