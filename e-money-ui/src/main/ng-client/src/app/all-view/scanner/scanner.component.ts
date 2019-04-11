@@ -96,6 +96,7 @@ export class ScannerComponent implements OnInit {
     this.scanned = false;
     this._snackBar.open(message, "OK", {
       duration: 6000,
+      verticalPosition: 'top'
     });
   }
 

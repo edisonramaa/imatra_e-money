@@ -45,6 +45,7 @@ public class WebResourceConstant {
         String GET_PROFILE_DETAIL = "/profile";
         String SIGN_UP = "/sign-up";
         String GET_PROFILE = "/profile";
+        String MY_DATA = "/my-data";
 
 
     }
@@ -71,6 +72,7 @@ public class WebResourceConstant {
         String GET_APPLIED_JOB = "/get-applied-job/{jobId}";
         String PAY = "/pay";
         String PAY_DETAILS = "/payment-detail";
+        String MY_WALLET = "/my-wallet";
 
 
     }

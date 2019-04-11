@@ -2,9 +2,12 @@ package com.emoney.web.config;
 
 import com.emoney.core.model.GlobalSettingEntity;
 import com.emoney.core.repository.IGlobalSettingRepository;
+import com.emoney.core.utils.DateUtils;
 import com.emoney.core.utils.GlobalSettingUtils;
+import com.emoney.web.model.BenefitEntity;
 import com.emoney.web.model.UserEntity;
 import com.emoney.web.repository.IUserRepository;
+import com.emoney.web.service.IBenefitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -28,11 +31,15 @@ public class DataSourceInitializer implements CommandLineRunner {
     @Autowired
     private IUserRepository userRepository;
 
+    @Autowired
+    private IBenefitService benefitService;
+
     @Override
     public void run(String... args) throws Exception {
         //initializing default values in global_setting table
         this.initGlobalSettingInDB();
         this.initDefaultUser();
+        //this.initBenefitData();
     }
 
     private void initGlobalSettingInDB() {
@@ -73,6 +80,22 @@ public class DataSourceInitializer implements CommandLineRunner {
         if (userEntityList.isEmpty()) {
             System.out.println("initilizing initial user into the database....");
             this.userRepository.save(userEntity);
+        }
+
+    }
+
+    private void initBenefitData() {
+        BenefitEntity benefitEntity = new BenefitEntity();
+        benefitEntity.setCredits(40);
+        benefitEntity.setDescription("Swim to you heart");
+        benefitEntity.setName("Indoor Swimming");
+        benefitEntity.setStreetAddress("Kotipolku 2");
+        benefitEntity.setStartDateTime(DateUtils.convertStringToDate("2019-04-12"));
+        benefitEntity.setEndDateTime(DateUtils.convertStringToDate("2019-04-21"));
+        List<BenefitEntity> benefitEntities = this.benefitService.findAll();
+        if (benefitEntities.isEmpty()) {
+            System.out.println("initilizing initial Services into the database....");
+            this.benefitService.save(benefitEntity);
         }
 
     }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Anil Kumal on 13/03/2019.
@@ -50,6 +51,11 @@ public class CreditTransactionServiceImpl extends CrudServiceImpl<CreditTransact
         } else {
             throw new EmoneyException("Invalid QR Code");
         }
+    }
+
+    @Override
+    public List<CreditTransactionEntity> getCreditTransactionsByUserId(Long userId) {
+        return this.creditTransactionRepository.getCreditTransactionsByUserId(userId);
     }
 
     private Boolean makePaymentForJob(String qrCode) {

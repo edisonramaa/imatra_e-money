@@ -50,7 +50,7 @@ export class ServiceComponent implements OnInit {
   }
 
   onPurchase() {
-    let finalUrl = "/" + ICREDIT_URL + "/" + SCAN_CODE
+    let finalUrl = "/" + ICREDIT_URL + "/" + SCAN_CODE;
     this._router.navigateByUrl(finalUrl);
   }
 
