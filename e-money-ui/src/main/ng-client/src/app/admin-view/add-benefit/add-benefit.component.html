@@ -19,9 +19,19 @@
   </mat-form-field>
 
   <mat-form-field>
+    <input [ngxTimepicker]="picker" matInput name="validFromTime" placeholder="Valid from (time)">
+    <ngx-material-timepicker #picker></ngx-material-timepicker>
+  </mat-form-field>
+
+  <mat-form-field>
     <input [matDatepicker]="myDatepickerValidTo" matInput name="validTo" placeholder="Valid to (date)">
     <mat-datepicker-toggle [for]="myDatepickerValidTo" matSuffix></mat-datepicker-toggle>
     <mat-datepicker #myDatepickerValidTo touchUi></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input [ngxTimepicker]="pickerTo" matInput name="validToTime" placeholder="Valid to (time)">
+    <ngx-material-timepicker #pickerTo></ngx-material-timepicker>
   </mat-form-field>
 
   <mat-form-field>

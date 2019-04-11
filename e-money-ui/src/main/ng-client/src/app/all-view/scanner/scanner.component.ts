@@ -126,7 +126,7 @@ export class ScannerComponent implements OnInit {
       width: '450px',
       data: {
         title: "Confirm",
-        content: "Please confirm payment for '" + result['name'] + "' with credits " + result['credtis']
+        content: "Please confirm the payment with '" + result['credtis']  + "' credits for  '" + result['name']+ "'."
       }
     });
 

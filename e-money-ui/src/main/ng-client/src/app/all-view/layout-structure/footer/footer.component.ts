@@ -68,7 +68,7 @@ openFindJob() {
     this._router.navigateByUrl(finalUrl);
   }
   openPayment(){
-      this._eventService.setHeader("Pay");
+      this._eventService.setHeader("Payments");
 
     if (document.querySelectorAll(".footer-button-container.selected").length > 0) {
       document.querySelector(".footer-button-container.selected").classList.remove("selected");
