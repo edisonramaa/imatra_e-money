@@ -4,7 +4,7 @@
             <div class="user-avatar-image-up" mat-card-avatar></div>
             <mat-card-title class="user-profile-head-title">{{userProfileModel.name}}</mat-card-title>
             <mat-card-subtitle class="user-profile-head-subtitle">Completed jobs: {{userProfileModel.jobTransactionEntities? userProfileModel.jobTransactionEntities.length:0 }}</mat-card-subtitle>
-            <bar-rating [max]="10" [theme]="'horizontal'"></bar-rating>
+            <bar-rating [rate]="5" [readOnly]="true" [max]="10" [theme]="'horizontal'"></bar-rating>
         </mat-card-header>
     </mat-card>
     <div class="up-container">

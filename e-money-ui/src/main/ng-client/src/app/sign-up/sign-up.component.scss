@@ -32,3 +32,8 @@
   color: red !important;
   font-size: small !important;
 }
+
+#sign-up /deep/ mat-hint.success {
+  color: darkgreen !important;
+  font-size: small !important;
+}
