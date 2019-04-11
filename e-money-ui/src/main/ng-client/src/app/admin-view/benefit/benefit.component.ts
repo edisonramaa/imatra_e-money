@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ADD_BENEFIT_URL, ADMIN_URL} from "../../core/utility/navigation-url";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-benefit',
@@ -7,10 +9,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class BenefitComponent implements OnInit {
 
-  constructor() {
+  constructor(private _router: Router) {
   }
 
   ngOnInit() {
   }
 
+  createBenefit() {
+    let finalUrl = "/" + ADMIN_URL + "/" + ADD_BENEFIT_URL;
+    this._router.navigateByUrl(finalUrl);
+  }
 }

@@ -1,0 +1,39 @@
+<form>
+  <mat-form-field>
+    <input matInput name="benefitName" placeholder="Benefit name" type="text">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput name="benefitDescription" placeholder="Benefit description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput name="location" placeholder="Location" type="text">
+    <mat-icon matSuffix>room</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input [matDatepicker]="myDatepickerValidFrom" matInput name="validFrom" placeholder="Valid from (date)">
+    <mat-datepicker-toggle [for]="myDatepickerValidFrom" matSuffix></mat-datepicker-toggle>
+    <mat-datepicker #myDatepickerValidFrom touchUi></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input [matDatepicker]="myDatepickerValidTo" matInput name="validTo" placeholder="Valid to (date)">
+    <mat-datepicker-toggle [for]="myDatepickerValidTo" matSuffix></mat-datepicker-toggle>
+    <mat-datepicker #myDatepickerValidTo touchUi></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput name="credits" placeholder="Credits" type="number">
+  </mat-form-field>
+
+  <div id="qr-wrapper">
+    <img height="150"
+         src="https://store-images.s-microsoft.com/image/apps.33967.13510798887182917.246b0a3d-c3cc-46fc-9cea-021069d15c09.392bf5f5-ade4-4b36-aa63-bb15d5c3817a"
+         width="150">
+  </div>
+
+  <button mat-button type="submit">Create Benefit
+  </button>
+</form>
