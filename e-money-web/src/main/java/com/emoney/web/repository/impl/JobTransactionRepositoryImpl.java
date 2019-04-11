@@ -48,7 +48,7 @@ public class JobTransactionRepositoryImpl extends CrudRepositoryImpl<JobTransact
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
         List<JobTransactionEntity> jobTransactionEntityList = jpaQueryFactory
                 .selectFrom(qJobTransactionEntity)
-                .where(qJobTransactionEntity.applicant.id.eq(userId), qJobTransactionEntity.status.eq(JobApplyStatus.COMPLEDTED.getJobApplyStatus()))
+                .where(qJobTransactionEntity.applicant.id.eq(userId), qJobTransactionEntity.status.eq(JobApplyStatus.COMPLETED.getJobApplyStatus()))
                 .fetch();
         return jobTransactionEntityList;
     }

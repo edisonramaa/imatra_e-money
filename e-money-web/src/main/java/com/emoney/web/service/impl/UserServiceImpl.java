@@ -4,13 +4,12 @@ package com.emoney.web.service.impl;
 import com.emoney.core.exception.EmoneyException;
 import com.emoney.core.security.ImatraEncoder;
 import com.emoney.core.service.impl.CrudServiceImpl;
-import com.emoney.web.model.JobEntity;
+import com.emoney.core.utils.SecurityUtils;
 import com.emoney.web.model.JobTransactionEntity;
 import com.emoney.web.model.UserEntity;
 import com.emoney.web.repository.IUserRepository;
 import com.emoney.web.service.IJobTransactionService;
 import com.emoney.web.service.IUserService;
-import com.emoney.web.service.IJobService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +40,9 @@ public class UserServiceImpl extends CrudServiceImpl<UserEntity, Long> implement
         if(entity.getIsAdmin() == null) {
             entity.setIsAdmin(false);
         }
-
+        entity.setBalanceCredits(1000);
+        entity.setReserveCredits(0);
+        entity.setWalletId(SecurityUtils.generateRandomString(4, 8).toUpperCase());
         return super.save(entity);
     }
 

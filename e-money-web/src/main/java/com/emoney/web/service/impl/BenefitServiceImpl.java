@@ -21,4 +21,8 @@ public class BenefitServiceImpl extends CrudServiceImpl<BenefitEntity, Long> imp
         this.benefitRepository = benefitRepository;
     }
 
+    @Override
+    public BenefitEntity getBenefitByQrCode(String qrCode) {
+        return this.benefitRepository.getBenefitByQrCode(qrCode);
+    }
 }

@@ -66,6 +66,9 @@ public class DataSourceInitializer implements CommandLineRunner {
         userEntity.setIsAdmin(true);
         userEntity.setVersion(0L);
         userEntity.setAge(11);
+        userEntity.setWalletId("ADM1234567890");
+        userEntity.setBalanceCredits(10000000);
+        userEntity.setReserveCredits(0);
         List<UserEntity> userEntityList = this.userRepository.findAll();
         if (userEntityList.isEmpty()) {
             System.out.println("initilizing initial user into the database....");

@@ -62,12 +62,15 @@ public class WebResourceConstant {
         String GET_PERSONAL_RATINGS = "/my-ratings";
         String GET_WORKER_RATINGS = "/worker-ratings";
         String BENEFIT = EMONEY_BASE + "/benefit";
+        String CREDITS = EMONEY_BASE + "/credits";
         String SAVE_JOB = "/save-job";
         String APPLY_JOB = "/apply-job";
         String ACCEPT_JOB = "/accept-applicant";
         String REJECT_JOB = "/reject-applicant";
         String GET_ALL_APPLIED_JOB = "/get-all-applied-job/{jobId}";
         String GET_APPLIED_JOB = "/get-applied-job/{jobId}";
+        String PAY = "/pay";
+        String PAY_DETAILS = "/payment-detail";
 
 
     }
