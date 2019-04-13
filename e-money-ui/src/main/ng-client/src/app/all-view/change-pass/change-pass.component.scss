@@ -1,0 +1,45 @@
+#change-pass .mat-card {
+  box-shadow: none;
+  text-align: center;
+  padding: 70px 0;
+  background-color: white;
+}
+
+#change-pass /deep/ .mat-card-header-text {
+  margin: 0 auto !important;
+}
+
+#change-pass .mat-raised-button {
+  background-color: #ED6C41;
+  color: white;
+  width: 100%;
+  margin-top: 10px;
+}
+
+#change-pass img {
+  margin-bottom: 30px;
+}
+
+#change-pass /deep/ .mat-form-field {
+  display: block !important;
+}
+
+#change-pass mat-card-content {
+  padding-right: 50px;
+  padding-left: 50px;
+}
+#change-pass mat-card-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #212136;
+}
+
+#change-pass /deep/ mat-hint {
+  color: red !important;
+  font-size: small !important;
+}
+
+#change-pass /deep/ mat-hint.success {
+  color: darkgreen !important;
+  font-size: small !important;
+}

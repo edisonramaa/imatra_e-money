@@ -10,7 +10,8 @@ import {
   REDEEM_URL,
   SCAN_CODE,
   SERVICE_URL,
-  WALLET_URL
+  WALLET_URL,
+  CHANGE_PASS
 } from "../core/utility/navigation-url";
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
             {path: SERVICE_URL, loadChildren: './services/service.module#ServiceModule'},
             {path: CREATE_JOB_URL, loadChildren: './create-job/create-job.module#CreateJobModule'},
             {path: SCAN_CODE, loadChildren: './scanner/scanner.module#ScannerModule'},
-          {path: PROFILE_URL, loadChildren: './user-profile/user-profile.module#UserProfileModule'},
+            {path: PROFILE_URL, loadChildren: './user-profile/user-profile.module#UserProfileModule'},
+            {path: CHANGE_PASS, loadChildren: './change-pass/change-pass.module#ChangePassModule'},
 
             // {path: 'sign-in', loadChildren: './register/register.module#RegisterModule'},
 

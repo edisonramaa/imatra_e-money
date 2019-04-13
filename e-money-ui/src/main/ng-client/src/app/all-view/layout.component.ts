@@ -1,10 +1,11 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
-import {ICREDIT_URL, PROFILE_URL} from "../core/utility/navigation-url";
+import {CHANGE_PASS, ICREDIT_URL, PROFILE_URL} from "../core/utility/navigation-url";
 import {Router} from "@angular/router";
 import {MatSidenav} from "@angular/material";
 import {UserProfileModel} from "../all-view/models/user-profile.model";
 import {UserProfileService} from "../all-view/services/user-profile.service";
 import {ResponseModel} from "../core/lib/model/response.model";
+import {LoginService} from "./app-services/login.service";
 
 @Component({
     selector: 'app-layout',
@@ -16,7 +17,7 @@ export class LayoutComponent implements OnInit {
   sideNav: MatSidenav;
   userProfileModel: UserProfileModel;
 
-  constructor(private _router: Router, private _userProfile: UserProfileService) {
+  constructor(private _router: Router, private _userProfile: UserProfileService, private _loginService:LoginService) {
     this.userProfileModel = new UserProfileModel();
   }
 
@@ -38,8 +39,13 @@ export class LayoutComponent implements OnInit {
     this._router.navigateByUrl(finalUrl);
 
   }
+  changePwd(){
+    let finalUrl = "/" + ICREDIT_URL + "/" + CHANGE_PASS;
+    this.sideNav.toggle();
+    this.sideNav.autoFocus = false;
+    this._router.navigateByUrl(finalUrl);
+  }
   logout() {
-    sessionStorage.clear();
-    this._router.navigate(['/login'])
+    this._loginService.logout();
   }
 }

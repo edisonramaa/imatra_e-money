@@ -9,6 +9,7 @@ import {BenefitService} from "./app-services/benefit.service";
 //import {UserProfileRoutingModule} from "./user-profile/user-profile-routing.module";
 //import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {UserProfileService} from "./services/user-profile.service";
+import {LoginService} from "./app-services/login.service";
 //import { ChangePassComponent } from './change-pass/change-pass/change-pass.component';
 
 @NgModule({
@@ -19,7 +20,7 @@ import {UserProfileService} from "./services/user-profile.service";
         LayoutStructureModule
     ],
     declarations: [LayoutComponent],
-    providers: [EventService, BenefitService, UserProfileService]
+    providers: [EventService, BenefitService, UserProfileService, LoginService]
 })
 export class LayoutModule {
 }

@@ -1,3 +1,42 @@
-<p>
-  change-pass works!
-</p>
+<div id="change-pass">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Change Password</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-hint *ngIf="showErrMsg">{{showErrMsg}}</mat-hint>
+      <mat-hint class="success" *ngIf="showSuccessMsg">{{showSuccessMsg}}</mat-hint>
+      <form [formGroup]="changePassFormGroup" method="post">
+        <mat-form-field class="full-width">
+          <mat-label>Old Password</mat-label>
+          <input formControlName="oldPassword" type="password" matInput name="oldPassword" placeholder="Old Password">
+          <mat-hint
+            *ngIf="changePassFormGroup.controls['oldPassword'].hasError('required')&& changePassFormGroup.controls['oldPassword'].dirty">
+            Old password is required.
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>New Password</mat-label>
+          <input (keyup)="verifyPwd()" formControlName="newPassword" type="password" matInput name="newPassword" placeholder="New Password">
+          <mat-hint
+            *ngIf="changePassFormGroup.controls['newPassword'].hasError('required')&& changePassFormGroup.controls['newPassword'].dirty">
+            New password is required.
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Verify Password</mat-label>
+          <input (keyup)="verifyPwd()" formControlName="confirmPassword" matInput name="confirmPassword" placeholder="Verify Password" type="password">
+          <mat-hint
+            *ngIf="!confirmPwd && changePassFormGroup.controls['confirmPassword'].dirty">
+            Passwords must match.
+          </mat-hint>
+        </mat-form-field>
+        <button (click)="onChange()" [disabled]="changePassFormGroup.invalid || disableChangePassBtn" color="primary"
+                mat-raised-button
+                type="submit">Change Password
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+

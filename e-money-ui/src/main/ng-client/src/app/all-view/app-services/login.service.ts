@@ -31,7 +31,6 @@ export class LoginService extends FTBaseService {
     this._sessionStorageService.clearSession();
     let baseHref = window.location.origin;
     let finalUrl = baseHref + "/" + ICREDIT_URL + "/" + MAIN_URL;
-    ;
     window.location.href = finalUrl;
   }
 
@@ -42,6 +41,5 @@ export class LoginService extends FTBaseService {
   myData() {
     return this.httpService.getRequest(this.serviceApi + this.profileUrl);
   }
-
 
 }
