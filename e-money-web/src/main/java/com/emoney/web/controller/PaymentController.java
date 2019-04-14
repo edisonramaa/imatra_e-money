@@ -75,8 +75,8 @@ public class PaymentController extends ControllerBase {
         } else if ("JB".equalsIgnoreCase(transactionType)) {
             JobEntity jobEntity = this.jobService.getJobByQrCode(qrCode);
             JobTransactionEntity jobTransactionEntity = this.jobTransactionService.findByJobIdAndApplicantId(jobEntity.getId(), TokenUtils.getTokenModel().getUserId());
-            if (jobEntity == null && jobTransactionEntity == null) {
-                throw new EmoneyException("Invalid QR Code");
+            if (jobEntity == null || jobTransactionEntity == null) {
+                throw new EmoneyException("Invalid QR Code or You have not applied for this job.");
             }
             paymentDetailsResponseDto.setName(jobEntity.getJobTitle());
             paymentDetailsResponseDto.setCredtis(jobEntity.getCredits());
