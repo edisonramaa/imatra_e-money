@@ -15,7 +15,7 @@ public class JobRequestDto extends RequestDtoBase {
     private Date dueDate;
     private String endTime;
     private String postedDate;
-    private Integer credits;
+    private Double credits;
     private String address1;
     private String address2;
     private String postCode;

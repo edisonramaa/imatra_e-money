@@ -113,7 +113,7 @@ public class CreditTransactionServiceImpl extends CrudServiceImpl<CreditTransact
         return true;
     }
 
-    private CreditTransactionEntity getNewTransaction(Long transactionOfId, Long transactionToId, Integer credits, String paymentSourceType, CreditTransactionType transactionType, Long paymentSourceId) {
+    private CreditTransactionEntity getNewTransaction(Long transactionOfId, Long transactionToId, Double credits, String paymentSourceType, CreditTransactionType transactionType, Long paymentSourceId) {
         CreditTransactionEntity creditTransactionEntity = new CreditTransactionEntity();
         UserEntity transactionOf = new UserEntity();
         transactionOf.setId(transactionOfId);

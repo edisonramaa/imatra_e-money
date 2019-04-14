@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 public class PaymentDetailsResponseDto extends ResponseDtoBase {
     private String name;
-    private Integer credtis;
+    private Double credtis;
 
 }

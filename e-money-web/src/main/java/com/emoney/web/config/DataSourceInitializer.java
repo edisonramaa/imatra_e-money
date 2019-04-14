@@ -74,8 +74,8 @@ public class DataSourceInitializer implements CommandLineRunner {
         userEntity.setVersion(0L);
         userEntity.setAge(11);
         userEntity.setWalletId("ADM1234567890");
-        userEntity.setBalanceCredits(10000000);
-        userEntity.setReserveCredits(0);
+        userEntity.setBalanceCredits(10000000.00);
+        userEntity.setReserveCredits(0.00);
         List<UserEntity> userEntityList = this.userRepository.findAll();
         if (userEntityList.isEmpty()) {
             System.out.println("initilizing initial user into the database....");
@@ -86,7 +86,7 @@ public class DataSourceInitializer implements CommandLineRunner {
 
     private void initBenefitData() {
         BenefitEntity benefitEntity = new BenefitEntity();
-        benefitEntity.setCredits(40);
+        benefitEntity.setCredits(40.00);
         benefitEntity.setDescription("Swim to you heart");
         benefitEntity.setName("Indoor Swimming");
         benefitEntity.setStreetAddress("Kotipolku 2");

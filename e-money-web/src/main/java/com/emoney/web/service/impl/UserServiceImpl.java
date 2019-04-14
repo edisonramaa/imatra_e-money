@@ -40,8 +40,8 @@ public class UserServiceImpl extends CrudServiceImpl<UserEntity, Long> implement
         if(entity.getIsAdmin() == null) {
             entity.setIsAdmin(false);
         }
-        entity.setBalanceCredits(1000);
-        entity.setReserveCredits(0);
+        entity.setBalanceCredits(1000.00);
+        entity.setReserveCredits(0.00);
         entity.setWalletId(SecurityUtils.generateRandomString(4, 8).toUpperCase());
         return super.save(entity);
     }

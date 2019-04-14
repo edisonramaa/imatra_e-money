@@ -16,7 +16,7 @@ public class JobResponseDto extends ResponseDtoBase {
     private Date dueDate;
     private Time dueTime;
     private Date postedDate;
-    private Integer credits;
+    private Double credits;
     private String address1;
     private String address2;
     private String postCode;

@@ -14,7 +14,7 @@ public class CreditTransactionResponseDto extends ResponseDtoBase {
     private String jobEntityJobTitle;
     private Long benefitEntityId;
     private String benefitEntityName;
-    private Integer credits;
+    private Double credits;
     private Date transactionDate;
     private String transactionType;
 

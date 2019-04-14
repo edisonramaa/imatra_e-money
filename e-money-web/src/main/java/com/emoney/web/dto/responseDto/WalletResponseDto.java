@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 public class WalletResponseDto extends ResponseDtoBase {
     private String walletId;
-    private Integer balanceCredits;
+    private Double balanceCredits;
     private List<CreditTransactionResponseDto> walletDetails;
 
 

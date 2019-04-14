@@ -30,9 +30,9 @@ public class UserEntity extends EntityBase {
     @Column(name = "walletId")
     private String walletId;
     @Column(name = "balance_credits")
-    private Integer balanceCredits;
+    private Double balanceCredits;
     @Column(name = "reserve_credits")
-    private Integer reserveCredits;
+    private Double reserveCredits;
 
     @Transient
     List<JobTransactionEntity> jobTransactionEntities;

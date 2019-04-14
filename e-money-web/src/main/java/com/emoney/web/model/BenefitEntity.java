@@ -21,15 +21,15 @@ public class BenefitEntity extends EntityBase {
     @Column(name = "street_address")
     private String streetAddress;
     @Column(name = "latitude")
-    private float latitude;
+    private Float latitude;
     @Column(name = "longitude")
-    private float longitude;
+    private Float longitude;
     @Column(name = "start_date_time")
     private Date startDateTime;
     @Column(name = "end_date_time")
     private Date endDateTime;
     @Column(name = "credits")
-    private int credits;
+    private Double credits;
     @Column(name = "qr_code")
     private String qrCode;
     @Column(name = "qr_code_file")

@@ -14,8 +14,8 @@ public class BenefitRequestDto extends RequestDtoBase {
     private String streetAddress;
     private Date startDateTime;
     private Date endDateTime;
-    private long latitude;
-    private long longitude;
-    private int credits;
+    private Float latitude;
+    private Float longitude;
+    private Double credits;
     private String qrCode;
 }

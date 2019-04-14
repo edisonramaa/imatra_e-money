@@ -27,7 +27,7 @@ public class CreditTransactionEntity extends EntityBase {
     @Column(name = "transaction_type")
     private String transactionType;
     @Column(name = "credits")
-    private Integer credits;
+    private Double credits;
 
     @Column(name = "transaction_date")
     private Date transactionDate;

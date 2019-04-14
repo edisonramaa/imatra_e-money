@@ -29,7 +29,7 @@ public class JobEntity extends EntityBase {
     @Column(name="posted_date")
     private Date postedDate;
     @Column(name = "credits")
-    private Integer credits;
+    private Double credits;
     @Column(name = "address1")
     private String address1;
     @Column(name = "address2")

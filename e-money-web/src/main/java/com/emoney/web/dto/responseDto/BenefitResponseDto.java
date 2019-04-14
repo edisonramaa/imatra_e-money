@@ -15,6 +15,6 @@ public class BenefitResponseDto extends ResponseDtoBase {
     private String streetAddress;
     private Date startDateTime;
     private Date endDateTime;
-    private int credits;
+    private Double credits;
     private String qrCode;
 }
