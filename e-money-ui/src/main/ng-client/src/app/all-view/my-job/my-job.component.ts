@@ -40,8 +40,17 @@ export class MyJobComponent implements OnInit {
 
   getAllApplicantsByJob(job: JobModel) {
     this._jobService.getAllApplicant(job.id).then((res: ResponseModel) => {
+      job.approvedStatus = true;
+      job.pendingStatus = true;
       if (res.responseStatus) {
         job.appliedJobsList = res.result;
+        job.appliedJobsList.forEach(function(applicant) {
+          if (applicant.status === "APPROVED") {
+            job.approvedStatus = false;
+          } else if (applicant.status === "APPLIED") {
+            job.pendingStatus = false;
+          }
+        });
       }
     });
   }

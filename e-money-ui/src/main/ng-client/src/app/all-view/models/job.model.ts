@@ -30,5 +30,7 @@ export class JobModel extends BaseFtModel {
   appliedJobsList: JobTransactionModel[];
   lat: number;
   lng: number;
+  approvedStatus: boolean;
+  pendingStatus: boolean;
 
 }

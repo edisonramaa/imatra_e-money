@@ -63,11 +63,11 @@ export class FindJobComponent implements OnInit {
       }
     });
   }
-  markerClick() {
+  markerClick(e, job: JobModel) {
 
-    // let finalUrl = "/"+ICREDIT_URL+  "/" + FIND_JOB_URL;
-    // this._router.navigateByUrl(finalUrl);
+    e.preventDefault();
     this.matTabGroup.selectedIndex = 1;
+    job.checked=true;
   }
 
   confirmApply(job: JobModel) {
@@ -108,6 +108,10 @@ export class FindJobComponent implements OnInit {
     this._jobService.verifyAppliedJob(job.id).then((res: ResponseModel) => {
       job.jobStatus = res.responseStatus ? res.result['status'] : "";
     });
+  }
+
+  onClosed(job: JobModel){
+    job.checked = false;
   }
 
 

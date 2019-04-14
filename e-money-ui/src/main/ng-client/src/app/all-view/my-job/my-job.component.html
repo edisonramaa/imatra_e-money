@@ -12,6 +12,7 @@
         <mat-icon class="temp-credit-icon">copyright</mat-icon>
       </mat-expansion-panel-header>
       <p class="sub-header-jobs">Pending</p>
+      <p *ngIf="job.pendingStatus" style="text-align: center; margin: 0;">No pending jobs yet</p>
       <mat-card class="expanded-panel-container">
         <div *ngFor="let applicant of job.appliedJobsList">
           <mat-card-header *ngIf="applicant.status==='APPLIED'">
@@ -35,6 +36,7 @@
         </div>
       </mat-card>
       <p class="sub-header-jobs">Accepted</p>
+      <p *ngIf="job.approvedStatus" style="text-align: center; margin: 0;">No accepted jobs yet</p>
       <mat-card class="expanded-panel-container">
         <div *ngFor="let applicant of job.appliedJobsList">
           <mat-card-header *ngIf="applicant.status==='APPROVED'">
@@ -47,6 +49,7 @@
         </div>
       </mat-card>
     </mat-expansion-panel>
+
   </mat-accordion>
 
   <button mat-mini-fab (click)="createJob()" id="add-job-btn">

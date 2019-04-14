@@ -2,7 +2,20 @@
   <mat-tab id="map" label="Map View">
     <div class="center" id="test">
       <agm-map [zoom]="11" [latitude]="lat" [longitude]="lng">
-        <agm-marker *ngFor="let job of jobList;" [latitude]="job.lat" [longitude]="job.lng" (markerClick)="markerClick()"></agm-marker>
+        <agm-marker *ngFor="let job of jobList;" [latitude]="job.lat" [longitude]="job.lng" >
+          <agm-info-window [disableAutoPan]="false" #infoWindow>
+
+            <div style="width: 150px;">
+              <p>{{job.jobTitle}} </p>
+              <p>{{ job.description.substring(0, 20)+"..."}}</p>
+              <p>{{ "Credits: " + job.credits}}</p>
+            </div>
+            <div>
+              <a href="" style="float: right;" class="mat-stroked-button mat-warn" (click)="markerClick($event, job);"><span>Details</span></a>
+            </div>
+
+          </agm-info-window>
+        </agm-marker>
       </agm-map>
     </div>
   </mat-tab>
@@ -11,7 +24,7 @@
       <div *ngIf="jobList.length===0">
         <p style="text-align: center">Currently, there are no jobs posted.</p>
       </div>
-      <mat-expansion-panel *ngFor="let job of jobList;" (opened)="onPanelOpen(job)">
+      <mat-expansion-panel *ngFor="let job of jobList;"  (closed)="onClosed(job)"(opened)="onPanelOpen(job)" [expanded]="job.checked">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{job.jobTitle}}
