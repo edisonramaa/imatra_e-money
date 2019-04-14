@@ -90,8 +90,8 @@ public class DataSourceInitializer implements CommandLineRunner {
         benefitEntity.setDescription("Swim to you heart");
         benefitEntity.setName("Indoor Swimming");
         benefitEntity.setStreetAddress("Kotipolku 2");
-        benefitEntity.setStartDateTime(DateUtils.convertStringToDate("2019-04-12"));
-        benefitEntity.setEndDateTime(DateUtils.convertStringToDate("2019-04-21"));
+        benefitEntity.setStartDate(DateUtils.convertStringToDate("2019-04-12"));
+        benefitEntity.setEndDate(DateUtils.convertStringToDate("2019-04-21"));
         List<BenefitEntity> benefitEntities = this.benefitService.findAll();
         if (benefitEntities.isEmpty()) {
             System.out.println("initilizing initial Services into the database....");

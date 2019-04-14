@@ -13,8 +13,10 @@ public class BenefitResponseDto extends ResponseDtoBase {
     private String name;
     private String description;
     private String streetAddress;
-    private Date startDateTime;
-    private Date endDateTime;
+    private Date startDate;
+    private String  startTime;
+    private Date endDate;
+    private String endTime;
     private Double credits;
     private String qrCode;
 }

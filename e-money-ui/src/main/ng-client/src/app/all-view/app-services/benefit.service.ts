@@ -14,9 +14,8 @@ export class BenefitService extends FTBaseService {
 
   constructor(httpService: HttpService) {
     super(httpService);
-    // if (this.baseApi) {
-    //   this.httpService.baseApi = this.baseApi;
-    // }
-
+  }
+  add(data) {
+    return this.httpService.postRequest(this.serviceApi + '/save-benefit', data);
   }
 }

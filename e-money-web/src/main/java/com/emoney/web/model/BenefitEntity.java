@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.sql.Time;
 import java.util.Date;
 
 @Getter
@@ -24,10 +25,14 @@ public class BenefitEntity extends EntityBase {
     private Float latitude;
     @Column(name = "longitude")
     private Float longitude;
-    @Column(name = "start_date_time")
-    private Date startDateTime;
-    @Column(name = "end_date_time")
-    private Date endDateTime;
+    @Column(name = "start_date")
+    private Date startDate;
+    @Column(name = "start_time")
+    private Time startTime;
+    @Column(name = "end_date")
+    private Date endDate;
+    @Column(name = "end_time")
+    private Time endTime;
     @Column(name = "credits")
     private Double credits;
     @Column(name = "qr_code")

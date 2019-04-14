@@ -8,8 +8,12 @@ export class BenefitModel extends BaseFtModel {
   name: string;
   description: string;
   streetAddress: string;
-  startDateTime: Date;
-  endDateTime: Date;
+  startDate: string;
+  startTime: string;
+  beginReqTime: string;
+  endDate: string;
+  endTime: string;
+  dueReqTime: string;
   latitude: number;
   longitude: number;
   credits: number;

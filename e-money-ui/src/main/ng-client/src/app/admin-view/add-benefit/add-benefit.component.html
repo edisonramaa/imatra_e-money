@@ -1,41 +1,73 @@
-<form>
+<form [formGroup]="benefitFormGroup">
   <mat-form-field>
-    <input matInput name="benefitName" placeholder="Benefit name" type="text">
+    <input matInput name="name" formControlName="name" placeholder="Benefit name" type="text">
+  <mat-error
+        *ngIf="benefitFormGroup.controls['name'].hasError('required')">
+        Benefit Name is required.
+      </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <textarea matInput name="benefitDescription" placeholder="Benefit description"></textarea>
+    <textarea matInput name="description" formControlName="description" placeholder="Benefit description"></textarea>
+  <mat-error
+        *ngIf="benefitFormGroup.controls['description'].hasError('required')">
+        Benefit Description is required.
+      </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput name="location" placeholder="Location" type="text">
+    <input matInput name="streetAddress" formControlName="streetAddress" placeholder="Location" type="text">
     <mat-icon matSuffix>room</mat-icon>
+  <mat-error
+        *ngIf="benefitFormGroup.controls['streetAddress'].hasError('required')">
+        Benefit Location is required.
+      </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input [matDatepicker]="myDatepickerValidFrom" matInput name="validFrom" placeholder="Valid from (date)">
+    <input [matDatepicker]="myDatepickerValidFrom" matInput formControlName="startDate" name="startDate" placeholder="Valid from (date)">
     <mat-datepicker-toggle [for]="myDatepickerValidFrom" matSuffix></mat-datepicker-toggle>
     <mat-datepicker #myDatepickerValidFrom touchUi></mat-datepicker>
+    <mat-error
+      *ngIf="benefitFormGroup.controls['startDate'].hasError('required')">
+      Benefit Start Date is required.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input [ngxTimepicker]="picker" matInput name="validFromTime" placeholder="Valid from (time)">
+    <input [ngxTimepicker]="picker" matInput name="beginReqTime" formControlName="beginReqTime" placeholder="Valid from (time)">
     <ngx-material-timepicker #picker></ngx-material-timepicker>
+  <mat-error
+        *ngIf="benefitFormGroup.controls['beginReqTime'].hasError('required')">
+        Benefit Start Time is required.
+      </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input [matDatepicker]="myDatepickerValidTo" matInput name="validTo" placeholder="Valid to (date)">
+    <input [matDatepicker]="myDatepickerValidTo" matInput name="endDate" formControlName="endDate" placeholder="Valid to (date)">
     <mat-datepicker-toggle [for]="myDatepickerValidTo" matSuffix></mat-datepicker-toggle>
     <mat-datepicker #myDatepickerValidTo touchUi></mat-datepicker>
+  <mat-error
+        *ngIf="benefitFormGroup.controls['endDate'].hasError('required')">
+        Benefit End Date is required.
+      </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input [ngxTimepicker]="pickerTo" matInput name="validToTime" placeholder="Valid to (time)">
+    <input [ngxTimepicker]="pickerTo" matInput name="dueReqTime" formControlName="dueReqTime" placeholder="Valid to (time)">
     <ngx-material-timepicker #pickerTo></ngx-material-timepicker>
+  <mat-error
+        *ngIf="benefitFormGroup.controls['dueReqTime'].hasError('required')">
+        Benefit End Date is required.
+      </mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput name="credits" placeholder="Credits" type="number">
+    <input matInput name="credits" formControlName="credits" placeholder="Credits" type="number">
+  <mat-error
+        *ngIf="benefitFormGroup.controls['credits'].hasError('required')">
+        Benefit Credits is required.
+      </mat-error>
   </mat-form-field>
 
   <div id="qr-wrapper">
@@ -44,6 +76,6 @@
          width="150">
   </div>
 
-  <button mat-button type="submit">Create Benefit
+  <button mat-button type="submit" [disabled]="benefitFormGroup.invalid || disableSubmitBtn" (click)="onSubmit()">Create Benefit
   </button>
 </form>

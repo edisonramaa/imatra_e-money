@@ -42,7 +42,7 @@ export class ServiceComponent implements OnInit {
         this._benefitService.getByID(serviceId).then((res: ResponseModel) => {
           if (res.responseStatus) {
             this.benefitModel = res.result;
-            this.serviceDuration = this.calculateDateDiff(this.benefitModel.startDateTime, this.benefitModel.endDateTime);
+            this.serviceDuration = this.calculateDateDiff(this.benefitModel.startDate, this.benefitModel.endDate);
           }
         });
       }
