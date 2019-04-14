@@ -43,7 +43,6 @@ public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter 
             return true;
         }
         String uri = request.getRequestURI();
-//        System.out.println("uri = " + uri);
         String accessToken;
         String origin = request.getHeader("Origin");
         response.setHeader("Access-Control-Allow-Origin", origin);
@@ -51,7 +50,6 @@ public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter 
         response.setHeader("Access-Control-Allow-Headers", "*");
         System.out.println("request Uri = " + uri);
         if (isAuthFreeUri(uri)) {
-            System.out.println("isAuthFreeUri() = returing true from authfree ");
             return true;
         }
         accessToken = request.getHeader(WebResourceConstant.AUTHORIZATION_HEADER);
@@ -72,10 +70,7 @@ public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter 
     private boolean isAuthFreeUri(String uri) {
         if (StringUtils.isNull(uri)) return false;
         for (String authFreeUri : authorizationFreeuriList) {
-            System.out.println("each-authFreeUri = " + authFreeUri);
             if (uri.contains(authFreeUri)) {
-                System.out.println("check-authFreeUri = uri " + uri);
-                System.out.println("check-authFreeUri = authFreeUri " + authFreeUri);
                 return true;
             }
         }

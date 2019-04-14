@@ -22,7 +22,6 @@ export class RedeemComponent implements OnInit {
     this._benefitService.getList().then((res: ResponseModel) => {
       if (res.responseStatus) {
         this.benefitList = res.result;
-        console.log("Benefit List: ", JSON.stringify(this.benefitList));
       } else {
         this.benefitList = [];
       }

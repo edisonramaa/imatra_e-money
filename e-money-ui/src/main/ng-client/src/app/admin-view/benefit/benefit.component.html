@@ -1,39 +1,43 @@
 <mat-list id="benefits">
-  <mat-list-item>
-    <h2 matLine style="color: #47525E;"><strong>Swimming Pool</strong></h2>
+  <div class="msg" *ngIf="benefitList.length==0"><span>No Benefits to show.</span></div>
+  <div *ngFor="let benefit of benefitList">
+    <mat-list-item>
+      <h2 matLine style="color: #47525E;"><strong>{{benefit.name}}</strong></h2>
 
-    <div matLine>
-      <p class='ellipsis' matLine style="color: grey">Lorem ipsum dolor sit amet
-      <p></div>
+      <div matLine>
+        <p class='ellipsis' matLine style="color: grey">{{benefit.description}}
+        <p></div>
+      <button class="edit" color="primary" (click)="getQRCode(benefit)" mat-flat-button>QR Code</button>
+      <button class="edit" color="primary" mat-flat-button>Edit</button>
+      <button class="delete" color="warn" mat-flat-button>Delete</button>
 
-    <button class="edit" color="primary" mat-flat-button>Edit</button>
-    <button class="delete" color="warn" mat-flat-button>Delete</button>
-  </mat-list-item>
-  <mat-divider style="margin-bottom: 10px;"></mat-divider>
+    </mat-list-item>
+    <mat-divider style="margin-bottom: 10px;"></mat-divider>
+  </div>
 
-  <mat-list-item>
-    <h2 matLine style="color: #47525E;"><strong>Theatre</strong></h2>
+  <!--<mat-list-item>-->
+  <!--<h2 matLine style="color: #47525E;"><strong>Theatre</strong></h2>-->
 
-    <div matLine>
-      <p class='ellipsis' matLine style="color: grey">Lorem ipsum dolor sit amet
-      <p></div>
+  <!--<div matLine>-->
+  <!--<p class='ellipsis' matLine style="color: grey">Lorem ipsum dolor sit amet-->
+  <!--<p></div>-->
 
-    <button class="edit" color="primary" mat-flat-button>Edit</button>
-    <button class="delete" color="warn" mat-flat-button>Delete</button>
-  </mat-list-item>
-  <mat-divider style="margin-bottom: 10px;"></mat-divider>
+  <!--<button class="edit" color="primary" mat-flat-button>Edit</button>-->
+  <!--<button class="delete" color="warn" mat-flat-button>Delete</button>-->
+  <!--</mat-list-item>-->
+  <!--<mat-divider style="margin-bottom: 10px;"></mat-divider>-->
 
-  <mat-list-item>
-    <h2 matLine style="color: #47525E;"><strong>Ice Skating</strong></h2>
+  <!--<mat-list-item>-->
+  <!--<h2 matLine style="color: #47525E;"><strong>Ice Skating</strong></h2>-->
 
-    <div matLine>
-      <p class='ellipsis' matLine style="color: grey">Lorem ipsum dolor sit amet
-      <p></div>
+  <!--<div matLine>-->
+  <!--<p class='ellipsis' matLine style="color: grey">Lorem ipsum dolor sit amet-->
+  <!--<p></div>-->
 
-    <button class="edit" color="primary" mat-flat-button>Edit</button>
-    <button class="delete" color="warn" mat-flat-button>Delete</button>
-  </mat-list-item>
-  <mat-divider style="margin-bottom: 10px;"></mat-divider>
+  <!--<button class="edit" color="primary" mat-flat-button>Edit</button>-->
+  <!--<button class="delete" color="warn" mat-flat-button>Delete</button>-->
+  <!--</mat-list-item>-->
+  <!--<mat-divider style="margin-bottom: 10px;"></mat-divider>-->
 </mat-list>
 
 <button mat-mini-fab (click)="createBenefit()" id="add-benefit-btn">

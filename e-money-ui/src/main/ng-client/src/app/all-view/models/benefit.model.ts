@@ -18,5 +18,6 @@ export class BenefitModel extends BaseFtModel {
   longitude: number;
   credits: number;
   qrCode: string;
+  qrCodeFileName: string;
 
 }

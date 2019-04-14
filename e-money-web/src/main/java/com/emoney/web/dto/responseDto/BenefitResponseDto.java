@@ -19,4 +19,5 @@ public class BenefitResponseDto extends ResponseDtoBase {
     private String endTime;
     private Double credits;
     private String qrCode;
+    private String qrCodeFileName;
 }
