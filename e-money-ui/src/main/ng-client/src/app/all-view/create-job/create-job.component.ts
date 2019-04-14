@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {JobModel} from "../models/job.model";
 import {ResponseModel} from "../../core/lib/model/response.model";
 import {JobService} from "../app-services/job.service";
 import {MatSnackBar} from "@angular/material";
 import {DatePipe} from "@angular/common";
+import {GooglePlaceDirective} from "ngx-google-places-autocomplete";
+import {MapsAPILoader} from "@agm/core";
+import {Address} from "ngx-google-places-autocomplete/objects/address";
 
 @Component({
   selector: 'app-create-job',
@@ -16,11 +19,16 @@ export class CreateJobComponent implements OnInit {
   jobModel: JobModel;
   disableSubmitBtn: boolean;
   showErrMsg: string;
+  lat: number;
+  lng: number;
+  @ViewChild('placesRef') places: GooglePlaceDirective;
 
   constructor(private _formBuilder: FormBuilder,
               private _jobService: JobService,
               private _snackBar: MatSnackBar,
-              private _datePipe: DatePipe
+              private _datePipe: DatePipe,
+              private mapsAPILoader: MapsAPILoader,
+              private ngZone: NgZone
   ) {
     this.jobModel = new JobModel();
     this.disableSubmitBtn = false;
@@ -52,6 +60,8 @@ export class CreateJobComponent implements OnInit {
       this.jobModel = this.jobFormGroup.value;
       this.jobModel.dueDate = this._datePipe.transform(this.jobModel.dueDate, 'yyyy-MM-dd');
       // this.jobModel.dueTime = this._datePipe.transform(this.jobModel.dueTime, 'HH:mm:ss');
+      this.jobModel.lat = this.lat;
+      this.jobModel.lng = this.lng;
       this._jobService.add(this.jobModel).then((res: ResponseModel) => {
         if (res.responseStatus) {
           this.jobFormGroup.reset();
@@ -66,6 +76,11 @@ export class CreateJobComponent implements OnInit {
       });
     }
 
+  }
+
+  public handleAddressChange(address: Address) {
+    this.lat = address.geometry.location.lat();
+    this.lng = address.geometry.location.lng();
   }
 
 }

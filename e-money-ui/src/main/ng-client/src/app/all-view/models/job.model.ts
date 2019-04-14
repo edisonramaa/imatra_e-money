@@ -28,5 +28,7 @@ export class JobModel extends BaseFtModel {
   jobStatus: string;
   totalSelected: number = 0;
   appliedJobsList: JobTransactionModel[];
+  lat: number;
+  lng: number;
 
 }

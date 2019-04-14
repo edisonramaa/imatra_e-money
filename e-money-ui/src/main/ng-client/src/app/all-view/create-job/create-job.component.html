@@ -53,26 +53,26 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput name="address1" placeholder="Address Line 1" formControlName="address1">
+      <input matInput
+             ngx-google-places-autocomplete #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"
+             name="address1"
+             placeholder="Address Line 1"
+             formControlName="address1">
       <mat-error
         *ngIf="jobFormGroup.controls['address1'].hasError('required')">
-        Credit is required.
+        Address 1 is required.
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput name="address2" placeholder="Address Line 2" formControlName="address2">
-      <mat-error
-        *ngIf="jobFormGroup.controls['address2'].hasError('required')">
-        Credit is required.
-      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput name="postCode" placeholder="Post code" formControlName="postCode">
       <mat-error
         *ngIf="jobFormGroup.controls['postCode'].hasError('required')">
-        Credit is required.
+        Post Code is required.
       </mat-error>
     </mat-form-field>
 

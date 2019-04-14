@@ -15,7 +15,8 @@ import {ConfirmDialogComponent} from "../../core/lib/components/confirm-dialog/c
     CustomMaterialModule,
     ConfirmDialogModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAKCaFt6BdyqUm95rDCrAWD0yG0940OrZs'
+      apiKey: 'AIzaSyAKCaFt6BdyqUm95rDCrAWD0yG0940OrZs',
+      libraries: ["places"]
     }),
   ],
   declarations: [FindJobComponent],
