@@ -16,12 +16,15 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput name="streetAddress" formControlName="streetAddress" placeholder="Location" type="text">
-    <mat-icon matSuffix>room</mat-icon>
-  <mat-error
-        *ngIf="benefitFormGroup.controls['streetAddress'].hasError('required')">
-        Benefit Location is required.
-      </mat-error>
+    <input matInput
+           ngx-google-places-autocomplete #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"
+           name="streetAddress"
+           placeholder="Location"
+           formControlName="streetAddress">
+    <mat-error
+      *ngIf="benefitFormGroup.controls['streetAddress'].hasError('required')">
+      Location is required.
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>

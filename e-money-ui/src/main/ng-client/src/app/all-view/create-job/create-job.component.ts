@@ -21,6 +21,7 @@ export class CreateJobComponent implements OnInit {
   showErrMsg: string;
   lat: number;
   lng: number;
+  address: string;
   @ViewChild('placesRef') places: GooglePlaceDirective;
 
   constructor(private _formBuilder: FormBuilder,
@@ -62,6 +63,7 @@ export class CreateJobComponent implements OnInit {
       // this.jobModel.dueTime = this._datePipe.transform(this.jobModel.dueTime, 'HH:mm:ss');
       this.jobModel.lat = this.lat;
       this.jobModel.lng = this.lng;
+      this.jobModel.address1 = this.address;
       this._jobService.add(this.jobModel).then((res: ResponseModel) => {
         if (res.responseStatus) {
           this.jobFormGroup.reset();
@@ -81,6 +83,7 @@ export class CreateJobComponent implements OnInit {
   public handleAddressChange(address: Address) {
     this.lat = address.geometry.location.lat();
     this.lng = address.geometry.location.lng();
+    this.address = address.formatted_address;
   }
 
 }

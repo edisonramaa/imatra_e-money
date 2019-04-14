@@ -5,6 +5,8 @@ import {DatePipe} from "@angular/common";
 import {ResponseModel} from "../../core/lib/model/response.model";
 import {BenefitModel} from "../../all-view/models/benefit.model";
 import {BenefitService} from "../../all-view/app-services/benefit.service";
+import {Address} from "ngx-google-places-autocomplete/objects/address";
+import {add} from "ngx-bootstrap/chronos";
 
 
 @Component({
@@ -17,6 +19,9 @@ export class AddBenefitComponent implements OnInit {
   benefitModel: BenefitModel;
   disableSubmitBtn: boolean;
   showErrMsg: string;
+  lat: number;
+  lng: number;
+  address: string;
 
   constructor(private _formBuilder: FormBuilder,
               private _benefitService: BenefitService,
@@ -39,8 +44,6 @@ export class AddBenefitComponent implements OnInit {
       endDate: [this.benefitModel.endDate, [Validators.required]],
       dueReqTime: [this.benefitModel.endTime, [Validators.required]],
       credits: [this.benefitModel.credits, [Validators.required]],
-      // latitude: [this.benefitModel.latitude, [Validators.required]],
-      // longitude: [this.benefitModel.longitude, [Validators.required]],
     });
 
   }
@@ -52,6 +55,9 @@ export class AddBenefitComponent implements OnInit {
       this.benefitModel = this.benefitFormGroup.value;
       this.benefitModel.startDate = this._datePipe.transform(this.benefitModel.startDate, 'yyyy-MM-dd');
       this.benefitModel.endDate = this._datePipe.transform(this.benefitModel.startDate, 'yyyy-MM-dd');
+      this.benefitModel.latitude = this.lat;
+      this.benefitModel.longitude = this.lng;
+      this.benefitModel.streetAddress = this.address;
       this._benefitService.add(this.benefitModel).then((res: ResponseModel) => {
           if (res.responseStatus) {
             this.benefitFormGroup.reset();
@@ -65,5 +71,11 @@ export class AddBenefitComponent implements OnInit {
         });
       });
     }
+  }
+
+  public handleAddressChange(address: Address) {
+    this.lat = address.geometry.location.lat();
+    this.lng = address.geometry.location.lng();
+    this.address = address.formatted_address;
   }
 }
