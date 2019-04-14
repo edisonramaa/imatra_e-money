@@ -29,7 +29,6 @@ export class ServiceComponent implements OnInit {
   }
 
   calculateDateDiff(startDate, endDate) {
-    debugger;
     let eventStartTime = new Date(startDate);
     let eventEndTime = new Date(endDate);
     let duration = eventEndTime.valueOf() - eventStartTime.valueOf();
