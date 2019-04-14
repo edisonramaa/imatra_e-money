@@ -59,6 +59,7 @@ public class CreditTransactionServiceImpl extends CrudServiceImpl<CreditTransact
     }
 
     private Boolean makePaymentForJob(String qrCode) {
+        Double deductionAmt;
         JobEntity jobEntity = this.jobService.getJobByQrCode(qrCode);
         if (jobEntity == null) {
             throw new EmoneyException("Invalid QR Code");
@@ -67,23 +68,27 @@ public class CreditTransactionServiceImpl extends CrudServiceImpl<CreditTransact
         if (jobTransactionEntity == null) {
             throw new EmoneyException("Invalid QR Code or You've not applied for this job, ever.");
         }
-        if (!JobApplyStatus.APPROVED.getJobApplyStatus().equalsIgnoreCase(jobTransactionEntity.getStatus())
-                && !JobApplyStatus.STARTED.getJobApplyStatus().equalsIgnoreCase(jobTransactionEntity.getStatus())
-        ) {
-            throw new EmoneyException("You are not authorized person to receive the payment");
+        if (JobApplyStatus.APPROVED.getJobApplyStatus().equalsIgnoreCase(jobTransactionEntity.getStatus())) {
+            deductionAmt = this.calculateTransactionAmt(jobEntity.getCredits(), 30.00);
+            jobTransactionEntity.setStatus(JobApplyStatus.STARTED.getJobApplyStatus());
+        } else if (JobApplyStatus.STARTED.getJobApplyStatus().equalsIgnoreCase(jobTransactionEntity.getStatus())) {
+            deductionAmt = this.calculateTransactionAmt(jobEntity.getCredits(), 70.00);
+            jobTransactionEntity.setStatus(JobApplyStatus.COMPLETED.getJobApplyStatus());
+        } else {
+            throw new EmoneyException("Invalid QR Code or You are not authorized person to receive the payment.");
         }
         UserEntity jobPoster = this.userService.findOne(jobEntity.getJobPoster().getId());
         UserEntity applicant = this.userService.findOne(jobTransactionEntity.getApplicant().getId());
         //Deducting job amount from reserve of poster
-        jobPoster.setReserveCredits(jobPoster.getReserveCredits() - jobEntity.getCredits());
+        jobPoster.setReserveCredits(jobPoster.getReserveCredits() - deductionAmt);
         //adding job credit to applicant
-        applicant.setBalanceCredits(applicant.getBalanceCredits() + jobEntity.getCredits());
+        applicant.setBalanceCredits(applicant.getBalanceCredits() + deductionAmt);
 
         //transaction from sender point of view
-        CreditTransactionEntity senderTransaction = this.getNewTransaction(jobPoster.getId(), applicant.getId(), jobEntity.getCredits(), JOB, CreditTransactionType.PAID, jobEntity.getId());
+        CreditTransactionEntity senderTransaction = this.getNewTransaction(jobPoster.getId(), applicant.getId(), deductionAmt, JOB, CreditTransactionType.PAID, jobEntity.getId());
         this.creditTransactionRepository.save(senderTransaction);
-
-        CreditTransactionEntity receiverTransaction = this.getNewTransaction(applicant.getId(), jobPoster.getId(), jobEntity.getCredits(), JOB, CreditTransactionType.RECEIVED, jobEntity.getId());
+        //transaction from receiver point of view
+        CreditTransactionEntity receiverTransaction = this.getNewTransaction(applicant.getId(), jobPoster.getId(), deductionAmt, JOB, CreditTransactionType.RECEIVED, jobEntity.getId());
         this.creditTransactionRepository.save(receiverTransaction);
 
         //updating user
@@ -91,10 +96,16 @@ public class CreditTransactionServiceImpl extends CrudServiceImpl<CreditTransact
         this.userService.update(applicant);
 
         //updating transaction status
-        jobTransactionEntity.setStatus(JobApplyStatus.COMPLETED.getJobApplyStatus());
+        //jobTransactionEntity.setStatus(JobApplyStatus.COMPLETED.getJobApplyStatus());
         this.jobTransactionService.update(jobTransactionEntity);
 
         return true;
+    }
+
+    private Double calculateTransactionAmt(Double totalJobCredit, Double deductionPercentage) {
+        Double det = (deductionPercentage / 100);
+        Double deductionAmt = ((deductionPercentage / 100) * totalJobCredit);
+        return deductionAmt;
     }
 
     private Boolean makePaymentForService(String qrCode) {

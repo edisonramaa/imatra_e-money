@@ -164,7 +164,7 @@ public class MultiPartFileUtils {
     public static byte[] readFile(FileInfoModel fileInfoModel) {
         byte[] bytes = new byte[0];
         if (fileInfoModel.getImage() != null) {
-            String file = fileInfoModel.getRootLocation() + fileInfoModel.getFolderName() + File.separator + fileInfoModel.getImage();
+            String file = fileInfoModel.getRootLocation() + File.separator + fileInfoModel.getImage();
             InputStream inputStream = null;
             try {
                 File checkFile = new File(file);

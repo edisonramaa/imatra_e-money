@@ -8,7 +8,8 @@ export class ApiConstant {
   public static API_ADMIN_ROOT_URL: string = 'http://localhost:8090/api';
 
   public static BASE_API: string = ApiConstant.API_ROOT_URL + '/api';
-  public static IMAGE_DISPLAY: string = ApiConstant.BASE_API + "/display/";
+  public static EMONEY: string = '/emoney';
+  public static IMAGE_DISPLAY: string = ApiConstant.BASE_API + ApiConstant.EMONEY + "/display/";
 
 
 }

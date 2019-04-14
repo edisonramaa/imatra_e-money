@@ -20,7 +20,7 @@ public class WebResourceConstant {
     //For file
     public static final String FILE = "/file";
 
-    public static final String DISPLAY_FILE = "/display/{fileName}";
+    public static final String DISPLAY_FILE = "/display/{type}/{fileName}";
     public static final String FILE_DOWNLOAD = "/download";
     public static final String SEARCH = "/search/{currentPage}/{pageSize}";
     public static final String UPLOAD = "/upload";

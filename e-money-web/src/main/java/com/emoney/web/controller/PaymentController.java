@@ -12,14 +12,8 @@ import com.emoney.web.dto.requestDto.PaymentRequestDto;
 import com.emoney.web.dto.responseDto.CreditTransactionResponseDto;
 import com.emoney.web.dto.responseDto.PaymentDetailsResponseDto;
 import com.emoney.web.dto.responseDto.WalletResponseDto;
-import com.emoney.web.model.BenefitEntity;
-import com.emoney.web.model.CreditTransactionEntity;
-import com.emoney.web.model.JobEntity;
-import com.emoney.web.model.UserEntity;
-import com.emoney.web.service.IBenefitService;
-import com.emoney.web.service.ICreditTransactionService;
-import com.emoney.web.service.IJobService;
-import com.emoney.web.service.IUserService;
+import com.emoney.web.model.*;
+import com.emoney.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,18 +33,21 @@ public class PaymentController extends ControllerBase {
     private IJobService jobService;
     private IBenefitService benefitService;
     private IUserService userService;
+    private IJobTransactionService jobTransactionService;
 
     @Autowired
     public PaymentController(ICreditTransactionService creditTransactionService,
                              IJobService jobService,
                              IBenefitService benefitService,
-                             IUserService userService
+                             IUserService userService,
+                             IJobTransactionService jobTransactionService
     ) {
         super(creditTransactionService, new BeanMapperImpl(CreditTransactionEntity.class, CreditTransactionRequestDto.class), new BeanMapperImpl(CreditTransactionEntity.class, CreditTransactionResponseDto.class));
         this.creditTransactionService = creditTransactionService;
         this.jobService = jobService;
         this.benefitService = benefitService;
         this.userService = userService;
+        this.jobTransactionService = jobTransactionService;
     }
 
     @PostMapping(WebResourceConstant.EMONEY.PAY)
@@ -77,11 +74,13 @@ public class PaymentController extends ControllerBase {
             paymentDetailsResponseDto.setCredtis(benefitEntity.getCredits());
         } else if ("JB".equalsIgnoreCase(transactionType)) {
             JobEntity jobEntity = this.jobService.getJobByQrCode(qrCode);
-            if (jobEntity == null) {
+            JobTransactionEntity jobTransactionEntity = this.jobTransactionService.findByJobIdAndApplicantId(jobEntity.getId(), TokenUtils.getTokenModel().getUserId());
+            if (jobEntity == null && jobTransactionEntity == null) {
                 throw new EmoneyException("Invalid QR Code");
             }
             paymentDetailsResponseDto.setName(jobEntity.getJobTitle());
             paymentDetailsResponseDto.setCredtis(jobEntity.getCredits());
+            paymentDetailsResponseDto.setStatus(jobTransactionEntity.getStatus());
         } else {
             throw new EmoneyException("Invalid QR Code");
         }

@@ -11,6 +11,12 @@
         <span class="credit-amount">{{ job.credits }}</span>
         <mat-icon class="temp-credit-icon">copyright</mat-icon>
       </mat-expansion-panel-header>
+      <p class="sub-header-jobs">View QR Code</p>
+      <mat-card class="expanded-panel-container">
+        <div>
+          <a style="cursor: pointer" (click)="getQRCode(job)">Click Here To get QR Code</a>
+        </div>
+      </mat-card>
       <p class="sub-header-jobs">Pending</p>
       <p *ngIf="job.pendingStatus" style="text-align: center; margin: 0;">No pending jobs yet</p>
       <mat-card class="expanded-panel-container">
@@ -19,7 +25,7 @@
             <div mat-card-avatar class="user-avatar-image"></div>
             <mat-card-title>{{applicant.applicantName}}</mat-card-title>
             <mat-card-subtitle>
-              <bar-rating [max]="10" [rate]="2" [readOnly]="true"  [theme]="'horizontal'"></bar-rating>
+              <bar-rating [max]="10" [rate]="2" [readOnly]="true" [theme]="'horizontal'"></bar-rating>
             </mat-card-subtitle>
 
             <div class="accept-decline-buttons-container">

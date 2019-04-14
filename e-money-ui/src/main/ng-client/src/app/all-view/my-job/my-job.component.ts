@@ -5,7 +5,9 @@ import {ResponseModel} from "../../core/lib/model/response.model";
 import {JobService} from "../app-services/job.service";
 import {JobModel} from "../models/job.model";
 import {JobTransactionModel} from "../models/job-transaction.model";
-import {MatSnackBar} from "@angular/material";
+import {MatDialog, MatSnackBar} from "@angular/material";
+import {PictureDialogComponent} from "../../core/lib/components/picture-dialog/picture-dialog.component";
+import {ApiConstant} from "../../core/utility/api.constant";
 
 @Component({
   selector: 'app-my-job',
@@ -17,7 +19,8 @@ export class MyJobComponent implements OnInit {
 
   constructor(private _router: Router,
               private _jobService: JobService,
-              private _snackBar: MatSnackBar
+              private _snackBar: MatSnackBar,
+              private _dialog: MatDialog
   ) {
     this.myJobsList = [];
   }
@@ -37,7 +40,6 @@ export class MyJobComponent implements OnInit {
     let finalUrl = "/"+ICREDIT_URL+  "/" + CREATE_JOB_URL;
     this._router.navigateByUrl(finalUrl);
   }
-
   getAllApplicantsByJob(job: JobModel) {
     this._jobService.getAllApplicant(job.id).then((res: ResponseModel) => {
       job.approvedStatus = true;
@@ -78,5 +80,22 @@ export class MyJobComponent implements OnInit {
       });
     });
   }
+
+  getQRCode(job: JobModel) {
+    this.openDialog(job);
+  }
+
+  openDialog(job): void {
+    let finalApi = ApiConstant.IMAGE_DISPLAY + 'JOB/' + `${job.qrFileName}`;
+    const dialogRef = this._dialog.open(PictureDialogComponent, {
+      width: '350px',
+      data: {title: "QR CODE: " + job.jobTitle, content: finalApi}
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      console.log("Result: ", result);
+    });
+  }
+
 
 }

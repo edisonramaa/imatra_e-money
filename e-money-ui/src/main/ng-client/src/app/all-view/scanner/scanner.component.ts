@@ -122,11 +122,20 @@ export class ScannerComponent implements OnInit {
   }
 
   openDialog(result, qrCode): void {
+    let content: string = "";
+    if (result['status']) {
+      let status = result['status'];
+      if (status === 'APPROVED') {
+        content = "Please confirm the initial payment (30% of '" + result['credtis'] + "' credits) for  '" + result['name'] + "' job.";
+      } else if (status === 'STARTED') {
+        content = "Please confirm the final payment (70% of '" + result['credtis'] + "' credits) for  '" + result['name'] + "' job.";
+      }
+    }
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {
       width: '450px',
       data: {
         title: "Confirm",
-        content: "Please confirm the payment with '" + result['credtis']  + "' credits for  '" + result['name']+ "'."
+        content: content ? content : "Please confirm the payment with '" + result['credtis'] + "' credits for  '" + result['name'] + "'."
       }
     });
 
