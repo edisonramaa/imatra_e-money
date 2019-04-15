@@ -1,7 +1,8 @@
-<h1 mat-dialog-title>{{data.title}}</h1>
+<h1 id="qr-modal-title" mat-dialog-title>{{data.title}}</h1>
+<div id="qr-modal-divider"></div>
 <div mat-dialog-content id="qr-image-container">
   <img [src]="data.content"/>
 </div>
-<div mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+<div id="qr-ok-btn-container" mat-dialog-actions>
+  <button id="qr-ok-btn" mat-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
 </div>

@@ -47,6 +47,7 @@ export class BenefitComponent implements OnInit {
     let finalApi = ApiConstant.IMAGE_DISPLAY + 'SERVICE/' + `${benefit.qrCodeFileName}`;
     const dialogRef = this._dialog.open(PictureDialogComponent, {
       width: '350px',
+      maxWidth: '85vw',
       data: {title: "QR CODE: " + benefit.name, content: finalApi}
     });
 
