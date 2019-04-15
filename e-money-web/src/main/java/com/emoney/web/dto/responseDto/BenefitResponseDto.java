@@ -20,4 +20,6 @@ public class BenefitResponseDto extends ResponseDtoBase {
     private Double credits;
     private String qrCode;
     private String qrCodeFileName;
+    private Float latitude;
+    private Float longitude;
 }
