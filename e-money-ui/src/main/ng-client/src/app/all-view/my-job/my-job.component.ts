@@ -89,6 +89,7 @@ export class MyJobComponent implements OnInit {
     let finalApi = ApiConstant.IMAGE_DISPLAY + 'JOB/' + `${job.qrFileName}`;
     const dialogRef = this._dialog.open(PictureDialogComponent, {
       width: '350px',
+      maxWidth: '85vw',
       data: {title: "QR CODE: " + job.jobTitle, content: finalApi}
     });
 

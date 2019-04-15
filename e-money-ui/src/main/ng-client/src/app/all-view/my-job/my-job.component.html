@@ -11,12 +11,13 @@
         <span class="credit-amount">{{ job.credits }}</span>
         <mat-icon class="temp-credit-icon">copyright</mat-icon>
       </mat-expansion-panel-header>
-      <p class="sub-header-jobs">View QR Code</p>
+      <!--<p class="sub-header-jobs">View QR Code</p>
       <mat-card class="expanded-panel-container">
         <div>
           <a style="cursor: pointer" (click)="getQRCode(job)">Click Here To get QR Code</a>
         </div>
-      </mat-card>
+      </mat-card>-->
+      <button (click)="getQRCode(job)" id="qr-code-btn">Click here for QR code</button>
       <p class="sub-header-jobs">Pending</p>
       <p *ngIf="job.pendingStatus" style="text-align: center; margin: 0;">No pending jobs yet</p>
       <mat-card class="expanded-panel-container">
