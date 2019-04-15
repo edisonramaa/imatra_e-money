@@ -8,7 +8,8 @@ button.edit, button.delete {
   min-width: 70px;
   line-height: 25px;
   padding: 0 10px;
-  margin-top: 15px;
+  margin-top: 10px;
+  margin-right: 0px;
 }
 
 #add-benefit-btn.mat-mini-fab.mat-accent {
@@ -24,4 +25,26 @@ button.edit, button.delete {
 
 #benefits.msg {
   text-align: center;
+}
+
+#buttons-wrapper {
+  margin-top: -20px;
+  text-align: right;
+}
+
+#qr-code-btn-container {
+  font-size: 10px;
+  width: 80px !important;
+  text-align: center;
+  margin-top: -8px;
+}
+
+#qr-code-btn {
+  margin: auto;
+  background-image: url("https://raw.githubusercontent.com/zpao/qrcode.react/HEAD/qrcode.png") !important;
+  border: 3px solid #ED6C41 !important;
+}
+
+#qr-code-text {
+  margin-top: 5px;
 }

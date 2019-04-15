@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 @Component({
   selector: 'app-picture-dialog',
   templateUrl: 'picture-dialog.html',
+  styleUrls: ['picture-dialog.scss']
 })
 export class PictureDialogComponent {
 

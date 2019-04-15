@@ -7,9 +7,15 @@
       <div matLine>
         <p class='ellipsis' matLine style="color: grey">{{benefit.description}}
         <p></div>
-      <button class="edit" color="primary" (click)="getQRCode(benefit)" mat-flat-button>QR Code</button>
-      <button class="edit" color="primary" mat-flat-button>Edit</button>
-      <button class="delete" color="warn" mat-flat-button>Delete</button>
+      <div (click)="getQRCode(benefit)" id="qr-code-btn-container">
+        <div _ngcontent-c1="" class="user-avatar-image mat-card-avatar" id="qr-code-btn" mat-card-avatar=""></div>
+        <div id="qr-code-text">QR Code</div>
+      </div>
+
+      <div id="buttons-wrapper">
+        <button class="edit" color="primary" mat-flat-button>Edit</button>
+        <button class="delete" color="warn" mat-flat-button>Delete</button>
+      </div>
 
     </mat-list-item>
     <mat-divider style="margin-bottom: 10px;"></mat-divider>
