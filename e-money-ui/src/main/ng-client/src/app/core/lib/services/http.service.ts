@@ -37,6 +37,13 @@ export class HttpService {
 
   }
 
+  downloadFile(downloadUrl: string) {
+    return this._http
+      .get(downloadUrl, {
+        responseType: 'blob',
+      });
+  }
+
   catchError(error: HttpErrorResponse) {
     console.log(error);
     return Observable.throw(JSON.stringify(error)).toPromise();

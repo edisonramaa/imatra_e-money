@@ -9,7 +9,7 @@ import {PictureDialogComponent} from "./picture-dialog.component";
     MatDialogModule,
     MatButtonModule
   ],
-  declarations: [PictureDialogComponent],
+  declarations: [PictureDialogComponent]
 })
 export class PictureDialogModule {
 }
