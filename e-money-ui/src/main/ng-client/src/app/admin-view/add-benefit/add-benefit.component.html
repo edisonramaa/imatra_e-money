@@ -5,6 +5,10 @@
         *ngIf="benefitFormGroup.controls['name'].hasError('required')">
         Benefit Name is required.
       </mat-error>
+    <mat-error
+      *ngIf="benefitFormGroup.controls['name'].hasError('pattern')">
+      Please Enter Valid name starting with a Letter (Special Characters are not allowed).
+    </mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -13,6 +17,7 @@
         *ngIf="benefitFormGroup.controls['description'].hasError('required')">
         Benefit Description is required.
       </mat-error>
+
   </mat-form-field>
 
   <mat-form-field>

@@ -8,6 +8,7 @@ import {DatePipe} from "@angular/common";
 import {GooglePlaceDirective} from "ngx-google-places-autocomplete";
 import {MapsAPILoader} from "@agm/core";
 import {Address} from "ngx-google-places-autocomplete/objects/address";
+import {ALPHA_NUMERIC} from "../../core/lib/services/custom-validator.service";
 
 @Component({
   selector: 'app-create-job',
@@ -39,7 +40,7 @@ export class CreateJobComponent implements OnInit {
     this.jobFormGroup = new FormGroup({});
     this.jobFormGroup = this._formBuilder.group({
       id: this.jobModel.id,
-      jobTitle: [this.jobModel.jobTitle, [Validators.required]],
+      jobTitle: [this.jobModel.jobTitle, [Validators.required, Validators.pattern(ALPHA_NUMERIC)]],
       description: [this.jobModel.description, [Validators.required]],
       noOfPeople: [this.jobModel.noOfPeople, [Validators.required]],
       dueDate: [this.jobModel.dueDate, [Validators.required]],

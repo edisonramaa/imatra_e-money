@@ -9,6 +9,7 @@ import com.emoney.core.model.TokenModel;
 import com.emoney.core.utils.TokenUtils;
 import com.emoney.core.utils.impl.BeanMapperImpl;
 import com.emoney.web.dto.requestDto.ChangePasswordRequestDto;
+import com.emoney.web.dto.requestDto.UserEmailRequestDto;
 import com.emoney.web.dto.requestDto.UserLoginRequestDto;
 import com.emoney.web.dto.requestDto.UserRequestDto;
 import com.emoney.web.dto.responseDto.UserResponseDto;
@@ -99,5 +100,12 @@ public class UserController extends ControllerBase {
         }
         UserEntity entities = userService.findOne(tokenModel.getUserId());
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
+    }
+
+    @PostMapping(WebResourceConstant.UserManagement.EMAIL)
+    public ResponseEntity<ResponseObj> verifyUserByEmail(@RequestBody @Valid UserEmailRequestDto userEmailRequestDto) {
+        UserEntity userEntity = this.userService.findByEmail(userEmailRequestDto.getEmail());
+
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(userEntity != null).build(), HttpStatus.OK);
     }
 }

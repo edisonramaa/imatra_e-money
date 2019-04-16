@@ -42,6 +42,7 @@ public class WebResourceConstant {
     public interface UserManagement {
         String UM_AUTHENTICATE = "/auth";
         String CHANGE_PASSWORD = "/chhangepassword";
+        String EMAIL = "/email";
         String GET_PROFILE_DETAIL = "/profile";
         String SIGN_UP = "/sign-up";
         String GET_PROFILE = "/profile";

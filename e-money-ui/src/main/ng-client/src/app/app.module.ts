@@ -12,6 +12,7 @@ import {SessionStorageService} from "./core/lib/services/session-storage.service
 import {AuthGuard} from "./core/lib/services/auth-guard.service";
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from "@angular/material";
 import {HttpService} from "./core/lib/services/http.service";
+import {CustomValidator} from "./core/lib/services/custom-validator.service";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {HttpService} from "./core/lib/services/http.service";
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher},
     HttpService,
     SessionStorageService,
+    CustomValidator,
     AuthGuard
   ],
   bootstrap: [AppComponent]

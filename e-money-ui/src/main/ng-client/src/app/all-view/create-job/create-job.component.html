@@ -5,6 +5,12 @@
         *ngIf="jobFormGroup.controls['jobTitle'].hasError('required')">
         Job Title is required.
       </mat-error>
+      <mat-error
+        *ngIf="jobFormGroup.controls['jobTitle'].hasError('pattern')">
+        Please Enter Valid Job Title starting with a Letter (Special Characters are not allowed).
+      </mat-error>
+
+
     </mat-form-field>
 
     <mat-form-field>

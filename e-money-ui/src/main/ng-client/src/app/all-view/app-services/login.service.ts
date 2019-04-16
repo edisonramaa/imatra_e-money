@@ -48,4 +48,5 @@ export class LoginService extends FTBaseService {
     return this.httpService.getRequest(this.serviceApi + this.profileUrl);
   }
 
+
 }

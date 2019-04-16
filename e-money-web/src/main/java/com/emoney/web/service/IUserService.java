@@ -15,4 +15,6 @@ public interface IUserService extends ICrudService<UserEntity, Long> {
     UserEntity getProfile(Long UserId);
 
     UserEntity findByWalletId(String walletId);
+
+    UserEntity findByEmail(String email);
 }

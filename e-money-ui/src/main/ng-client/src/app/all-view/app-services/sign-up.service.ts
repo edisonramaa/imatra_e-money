@@ -19,4 +19,9 @@ export class SignUpService extends FTBaseService {
     return this.httpService.postRequest(this.serviceApi + this.signUpUrl, data);
   }
 
+  findByEmail(email: string) {
+    return this.httpService.postRequest(this.serviceApi + "/email", {email: email});
+  }
+
+
 }

@@ -87,5 +87,10 @@ public class UserServiceImpl extends CrudServiceImpl<UserEntity, Long> implement
         return this.userRepository.findByWalletId(walletId);
     }
 
+    @Override
+    public UserEntity findByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
+
 
 }

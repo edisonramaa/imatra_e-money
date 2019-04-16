@@ -30,6 +30,7 @@ public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter 
         authorizationFreeuriList.add("/user/create");
         authorizationFreeuriList.add("/upload");
         authorizationFreeuriList.add("/display");
+        authorizationFreeuriList.add(WebResourceConstant.UserManagement.EMAIL);
 
     }
 

@@ -6,6 +6,7 @@ import {ResponseModel} from "../../core/lib/model/response.model";
 import {BenefitModel} from "../../all-view/models/benefit.model";
 import {BenefitService} from "../../all-view/app-services/benefit.service";
 import {Address} from "ngx-google-places-autocomplete/objects/address";
+import {ALPHA_NUMERIC} from "../../core/lib/services/custom-validator.service";
 
 
 @Component({
@@ -35,7 +36,7 @@ export class AddBenefitComponent implements OnInit {
     this.benefitFormGroup = new FormGroup({});
     this.benefitFormGroup = this._formBuilder.group({
       id: this.benefitModel.id,
-      name: [this.benefitModel.name, [Validators.required]],
+      name: [this.benefitModel.name, [Validators.required, Validators.pattern(ALPHA_NUMERIC)]],
       description: [this.benefitModel.description, [Validators.required]],
       streetAddress: [this.benefitModel.streetAddress, [Validators.required]],
       startDate: [this.benefitModel.startDate, [Validators.required]],

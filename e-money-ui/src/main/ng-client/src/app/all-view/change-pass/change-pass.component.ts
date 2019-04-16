@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ResponseModel} from "../../core/lib/model/response.model";
@@ -45,7 +45,7 @@ export class ChangePassComponent implements OnInit {
     this.changePassFormGroup = new FormGroup({});
     this.changePassFormGroup = this._formBuilder.group({
       oldPassword: [this.changePassModel.oldPassword, [Validators.required]],
-      newPassword: [this.changePassModel.newPassword, [Validators.required]],
+      newPassword: [this.changePassModel.newPassword, [Validators.required, Validators.minLength(6)]],
       confirmPassword: [this.changePassModel.confirmPassword, [Validators.required]],
     });
   }

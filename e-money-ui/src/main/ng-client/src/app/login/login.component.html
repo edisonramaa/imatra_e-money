@@ -15,6 +15,10 @@
                             *ngIf="loginFormGroup.controls['email'].hasError('required')&& loginFormGroup.controls['email'].dirty">
                         Email is required.
                     </mat-hint>
+                  <mat-hint
+                    *ngIf="loginFormGroup.controls['email'].hasError('pattern')&& loginFormGroup.controls['email'].dirty">
+                    Please enter valid email address.
+                  </mat-hint>
                 </mat-form-field>
                 <mat-form-field class="full-width">
                     <mat-label>Password</mat-label>

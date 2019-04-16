@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {SignUpModel} from "../all-view/models/sign-up.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ResponseModel} from "../core/lib/model/response.model";
 import {SignUpService} from "../all-view/app-services/sign-up.service";
+import {Observable} from "rxjs";
+import {CustomValidator, EMAIL_REGEX, PERSON_NAME} from "../core/lib/services/custom-validator.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -21,6 +23,7 @@ export class SignUpComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _signUpService: SignUpService,
+    private _customValidator: CustomValidator,
     private _router: Router
   ){
     this.signUpModel = new SignUpModel();
@@ -33,11 +36,35 @@ export class SignUpComponent implements OnInit {
   }
 
   initForm() {
-    this.signUpFormGroup = new FormGroup({});
-    this.signUpFormGroup = this._formBuilder.group({
-      name: [this.signUpModel.name, [Validators.required]],
-      email: [this.signUpModel.email, [Validators.required]],
-      password: [this.signUpModel.password, [Validators.required]],
+    this.signUpFormGroup = new FormGroup({
+      email: new FormControl(this.signUpModel.email, {
+        validators: [Validators.required, Validators.pattern(EMAIL_REGEX)],
+        asyncValidators: [this.checkInUseEmail.bind(this)],
+        updateOn: 'blur'
+      }),
+      name: new FormControl(this.signUpModel.name, {
+        validators: [Validators.required, Validators.pattern(PERSON_NAME)],
+        updateOn: 'blur'
+      }),
+      password: new FormControl(this.signUpModel.password, {
+        validators: [Validators.required, Validators.minLength(6)],
+        updateOn: 'blur'
+      }),
+    });
+
+  }
+
+  checkInUseEmail(control) {
+    let controlValue = control.value;
+
+    return new Observable(observer => {
+      this._signUpService.findByEmail(controlValue).then((res: ResponseModel) => {
+        if (res.responseStatus) {
+          let observerResult = res.result ? {'alreadyInUse': true} : null;
+          observer.next(observerResult);
+          observer.complete();
+        }
+      });
     });
   }
 
@@ -51,8 +78,6 @@ export class SignUpComponent implements OnInit {
         if (res.responseStatus) {
           this.signUpFormGroup.reset();
           this.disableSignUpBtn = false;
-          // let finalUrl = "/" + ICREDIT_URL + "/" + FIND_JOB_URL;
-          // this._router.navigateByUrl(finalUrl);
           this.showSuccessMsg = res.message;
           this.showErrMsg = "";
           this.disableSignUpBtn = false;

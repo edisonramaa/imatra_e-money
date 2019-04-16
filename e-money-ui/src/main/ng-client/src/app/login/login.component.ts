@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginModel} from "../all-view/models/login.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "../all-view/app-services/login.service";
 import {SessionStorageService} from "../core/lib/services/session-storage.service";
 import {ResponseModel} from "../core/lib/model/response.model";
 import {Router} from "@angular/router";
 import {ADMIN_URL, FIND_JOB_URL, ICREDIT_URL, MAIN_URL} from "../core/utility/navigation-url";
+import {EMAIL_REGEX} from "../core/lib/services/custom-validator.service";
 
 @Component({
     selector: 'app-login',
@@ -20,7 +21,6 @@ export class LoginComponent implements OnInit {
   showErrMsg: string;
 
   constructor(
-    private _formBuilder: FormBuilder,
     private _loginService: LoginService,
     private _sessionStograge: SessionStorageService,
     private _router: Router
@@ -36,9 +36,14 @@ export class LoginComponent implements OnInit {
 
   initForm() {
     this.loginFormGroup = new FormGroup({});
-    this.loginFormGroup = this._formBuilder.group({
-      email: [this.loginModel.email, [Validators.required]],
-      password: [this.loginModel.password, [Validators.required]],
+    this.loginFormGroup = new FormGroup({
+      email: new FormControl(this.loginModel.email, {
+        validators: [Validators.required, Validators.pattern(EMAIL_REGEX)],
+        updateOn: 'blur'
+      }),
+      password: new FormControl(this.loginModel.password, {
+        validators: [Validators.required]
+      }),
     });
   }
 
