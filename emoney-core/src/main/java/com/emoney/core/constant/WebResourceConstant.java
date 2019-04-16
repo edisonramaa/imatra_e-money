@@ -72,6 +72,7 @@ public class WebResourceConstant {
         String GET_ALL_APPLIED_JOB = "/get-all-applied-job/{jobId}";
         String GET_APPLIED_JOB = "/get-applied-job/{jobId}";
         String PAY = "/pay";
+        String TRANSFER = "/transfer";
         String PAY_DETAILS = "/payment-detail";
         String MY_WALLET = "/my-wallet";
 

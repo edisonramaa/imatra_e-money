@@ -17,6 +17,8 @@ public class CreditTransactionResponseDto extends ResponseDtoBase {
     private Double credits;
     private Date transactionDate;
     private String transactionType;
+    private Long tranctionToId;
+    private String tranctionToName;
 
 
 }

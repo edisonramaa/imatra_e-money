@@ -11,6 +11,8 @@ import java.util.List;
 public interface ICreditTransactionService extends ICrudService<CreditTransactionEntity, Long> {
     Boolean handlePayment(String qrCode);
 
-    public List<CreditTransactionEntity> getCreditTransactionsByUserId(Long userId);
+    List<CreditTransactionEntity> getCreditTransactionsByUserId(Long userId);
+
+    Boolean makeTransfer(Double amount, String fromWalletId, String toWalletId);
 
 }

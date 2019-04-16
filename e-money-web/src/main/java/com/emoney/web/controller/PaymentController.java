@@ -9,6 +9,7 @@ import com.emoney.core.utils.TokenUtils;
 import com.emoney.core.utils.impl.BeanMapperImpl;
 import com.emoney.web.dto.requestDto.CreditTransactionRequestDto;
 import com.emoney.web.dto.requestDto.PaymentRequestDto;
+import com.emoney.web.dto.requestDto.TransferRequestDto;
 import com.emoney.web.dto.responseDto.CreditTransactionResponseDto;
 import com.emoney.web.dto.responseDto.PaymentDetailsResponseDto;
 import com.emoney.web.dto.responseDto.WalletResponseDto;
@@ -103,6 +104,13 @@ public class PaymentController extends ControllerBase {
         walletResponseDto.setWalletDetails(walletDetails);
 
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(walletResponseDto).message("Success").build(), HttpStatus.OK);
+    }
+
+    @PostMapping(WebResourceConstant.EMONEY.TRANSFER)
+    public ResponseEntity<ResponseObj> pay(@RequestBody @Valid TransferRequestDto transferRequestDto) {
+        UserEntity userEntity = this.userService.findOne(TokenUtils.getTokenModel().getUserId());
+        this.creditTransactionService.makeTransfer(transferRequestDto.getTransferAmount(), userEntity.getWalletId(), transferRequestDto.getReceiverWalletId());
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("Credit transfer has been carried out successfully").build(), HttpStatus.OK);
     }
 
 

@@ -22,6 +22,7 @@ import java.util.List;
 public class CreditTransactionServiceImpl extends CrudServiceImpl<CreditTransactionEntity, Long> implements ICreditTransactionService {
     private static String JOB = "JOB";
     private static String SERVICE = "SERVICE";
+    private static String TRANSFER = "TRANSFER";
     private ICreditTransactionRepository creditTransactionRepository;
     private IBenefitService benefitService;
     private IJobService jobService;
@@ -56,6 +57,39 @@ public class CreditTransactionServiceImpl extends CrudServiceImpl<CreditTransact
     @Override
     public List<CreditTransactionEntity> getCreditTransactionsByUserId(Long userId) {
         return this.creditTransactionRepository.getCreditTransactionsByUserId(userId);
+    }
+
+    @Override
+    public Boolean makeTransfer(Double transferAmount, String senderWalletId, String receiverWalletId) {
+        if (senderWalletId.equalsIgnoreCase(receiverWalletId)) {
+            throw new EmoneyException("You cannot make transfer to yourself");
+        }
+        UserEntity sender = this.userService.findByWalletId(senderWalletId);
+        UserEntity receiver = this.userService.findByWalletId(receiverWalletId);
+        if (sender == null || receiver == null) {
+            throw new EmoneyException("Either Sender or Receiver wallet Id is invalid.");
+        }
+        if (sender.getBalanceCredits() < transferAmount) {
+            throw new EmoneyException("You don't have enough credits to make transfer.");
+        }
+
+        //Deducting job amount from reserve of poster
+        sender.setBalanceCredits(sender.getBalanceCredits() - transferAmount);
+        //adding job credit to applicant
+        receiver.setBalanceCredits(receiver.getBalanceCredits() + transferAmount);
+
+        //transaction from sender point of view
+        CreditTransactionEntity senderTransaction = this.getNewTransaction(sender.getId(), receiver.getId(), transferAmount, TRANSFER, CreditTransactionType.PAID, null);
+        this.creditTransactionRepository.save(senderTransaction);
+        //transaction from receiver point of view
+        CreditTransactionEntity receiverTransaction = this.getNewTransaction(receiver.getId(), sender.getId(), transferAmount, TRANSFER, CreditTransactionType.RECEIVED, null);
+        this.creditTransactionRepository.save(receiverTransaction);
+
+        //updating user balance credits
+        this.userService.update(sender);
+        this.userService.update(receiver);
+
+        return true;
     }
 
     private Boolean makePaymentForJob(String qrCode) {
@@ -96,7 +130,7 @@ public class CreditTransactionServiceImpl extends CrudServiceImpl<CreditTransact
         this.userService.update(applicant);
 
         //updating transaction status
-        //jobTransactionEntity.setStatus(JobApplyStatus.COMPLETED.getJobApplyStatus());
+        //jobTransactionEntity.setStatus(JobApplyStatus.COMPLETED.getTransactionType());
         this.jobTransactionService.update(jobTransactionEntity);
 
         return true;
@@ -128,25 +162,27 @@ public class CreditTransactionServiceImpl extends CrudServiceImpl<CreditTransact
         CreditTransactionEntity creditTransactionEntity = new CreditTransactionEntity();
         UserEntity transactionOf = new UserEntity();
         transactionOf.setId(transactionOfId);
+        JobEntity jobEntity = new JobEntity();
+        BenefitEntity benefitEntity = new BenefitEntity();
         if (JOB.equalsIgnoreCase(paymentSourceType)) {
             UserEntity transactionTo = new UserEntity();
             transactionTo.setId(transactionToId);
             creditTransactionEntity.setTranctionTo(transactionTo);
-        }
-        JobEntity jobEntity = new JobEntity();
-        BenefitEntity benefitEntity = new BenefitEntity();
-        if (JOB.equalsIgnoreCase(paymentSourceType)) {
             jobEntity.setId(paymentSourceId);
             creditTransactionEntity.setJobEntity(jobEntity);
-        } else {
+        } else if (SERVICE.equalsIgnoreCase(paymentSourceType)) {
             benefitEntity.setId(paymentSourceId);
             creditTransactionEntity.setBenefitEntity(benefitEntity);
+        } else {
+            UserEntity transactionTo = new UserEntity();
+            transactionTo.setId(transactionToId);
+            creditTransactionEntity.setTranctionTo(transactionTo);
         }
 
         creditTransactionEntity.setTransactionOf(transactionOf);
 
         creditTransactionEntity.setCredits(credits);
-        creditTransactionEntity.setTransactionType(transactionType.getJobApplyStatus());
+        creditTransactionEntity.setTransactionType(transactionType.getTransactionType());
         creditTransactionEntity.setTransactionDate(new Date());
         return creditTransactionEntity;
     }

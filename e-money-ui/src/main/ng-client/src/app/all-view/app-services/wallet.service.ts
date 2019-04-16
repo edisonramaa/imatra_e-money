@@ -20,4 +20,9 @@ export class WalletService extends FTBaseService {
   getMyWalletDetails() {
     return this.httpService.getRequest(this.serviceApi + "/my-wallet");
   }
+
+  transfer(data) {
+    return this.httpService.postRequest(this.serviceApi + '/transfer', data);
+  }
+
 }

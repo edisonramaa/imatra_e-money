@@ -82,5 +82,10 @@ public class UserServiceImpl extends CrudServiceImpl<UserEntity, Long> implement
         throw new EmoneyException("Internal server error! User data not available");
     }
 
+    @Override
+    public UserEntity findByWalletId(String walletId) {
+        return this.userRepository.findByWalletId(walletId);
+    }
+
 
 }

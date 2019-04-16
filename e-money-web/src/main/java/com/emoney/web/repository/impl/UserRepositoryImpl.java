@@ -28,5 +28,16 @@ public class UserRepositoryImpl extends CrudRepositoryImpl<UserEntity, Long> imp
         return userEntity;
     }
 
+    @Override
+    public UserEntity findByWalletId(String walletId) {
+        QUserEntity qUserEntity = QUserEntity.userEntity;
+        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
+        UserEntity userEntity = jpaQueryFactory
+                .selectFrom(qUserEntity)
+                .where(qUserEntity.walletId.eq(walletId))
+                .fetchOne();
+        return userEntity;
+    }
+
 
 }

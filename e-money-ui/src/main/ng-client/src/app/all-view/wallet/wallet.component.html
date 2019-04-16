@@ -24,7 +24,9 @@
               <td>Credits</td>
             </tr>
             <tr *ngFor="let wallet of walletDetails">
-              <td>{{wallet.jobEntityJobTitle? wallet.jobEntityJobTitle : wallet.benefitEntityName}}</td>
+              <td>{{wallet.jobEntityJobTitle? wallet.jobEntityJobTitle : wallet.benefitEntityName?
+                wallet.benefitEntityName: wallet.tranctionToName}}
+              </td>
               <td>{{wallet.transactionType}}</td>
               <td>{{wallet.transactionDate | date}}</td>
               <td style="text-align: center;">{{wallet.credits}}</td>
@@ -32,40 +34,54 @@
             </table>
         </mat-tab>
         <mat-tab label="Transfer">
-          <img class="center" height="100"
-               src="https://d1hl0z0ja1o93t.cloudfront.net/wp-content/uploads/2017/11/09145753/digital-wallet1.png"
-               style="margin-top: 75px;" width="100"/>
-          <p class="balance">Balance: <span style="font-weight: 500; color: green;">00</span>
-            <mat-icon aria-hidden="true" class="temp-credit-icon mat-icon notranslate material-icons mat-icon-no-color"
-                      role="img" style="position: absolute; font-weight: 500; color: green;">copyright
-            </mat-icon>
-          </p>
+          <form [formGroup]="transferFormGroup" method="post">
+            <img class="center" height="100"
+                 src="https://d1hl0z0ja1o93t.cloudfront.net/wp-content/uploads/2017/11/09145753/digital-wallet1.png"
+                 style="margin-top: 75px;" width="100"/>
+            <p class="balance">Balance: <span style="font-weight: 500; color: green;">{{balanceCredits}}</span>
+              <mat-icon aria-hidden="true"
+                        class="temp-credit-icon mat-icon notranslate material-icons mat-icon-no-color"
+                        role="img" style="position: absolute; font-weight: 500; color: green;">copyright
+              </mat-icon>
+            </p>
             <hr size="10">
             <table class="table-center-2">
-                <tr>
-                    <td><span style="font-weight: bold; color: #47525E">Wallet ID</span></td>
-                    <td>
-                      <mat-form-field class="example-full-width" style="margin-left: 6px; display: block; width: 100%;">
-                            <input matInput>
-                        </mat-form-field>
-                    </td>
-                </tr>
-                <tr>
-                    <td><span class="amount">Amount</span></td>
-                    <td>
-                      <mat-form-field class="amount-value" style="display: block;">
-                            <input class="example-right-align" matInput type="number">
-                        <span matSuffix><mat-icon aria-hidden="true"
-                                                  class="temp-credit-icon mat-icon notranslate material-icons mat-icon-no-color"
-                                                  role="img"
-                                                  style="font-weight: 500; color: green;">copyright</mat-icon></span>
-                        </mat-form-field>
-                    </td>
-                </tr>
+              <tr>
+                <td><span style="font-weight: bold; color: #47525E">Wallet ID</span></td>
+                <td>
+                  <mat-form-field class="example-full-width" style="margin-left: 6px; display: block; width: 100%;">
+                    <input matInput type="text" placeholder="Receiver Wallet Id" name="receiverWalletId"
+                           formControlName="receiverWalletId">
+                    <mat-error
+                      *ngIf="transferFormGroup.controls['receiverWalletId'].dirty && transferFormGroup.controls['receiverWalletId'].hasError('required')">
+                      Wallet Id of receiver is required.
+                    </mat-error>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td><span class="amount">Amount</span></td>
+                <td>
+                  <mat-form-field class="amount-value" style="display: block;">
+                    <input class="example-right-align" matInput type="number" placeholder="Transfer credit"
+                           name="transferAmount" formControlName="transferAmount">
+                    <span matSuffix><mat-icon aria-hidden="true"
+                                              class="temp-credit-icon mat-icon notranslate material-icons mat-icon-no-color"
+                                              role="img"
+                                              style="font-weight: 500; color: green;">copyright</mat-icon></span>
+                    <mat-error
+                      *ngIf="transferFormGroup.controls['receiverWalletId'].dirty  && transferFormGroup.controls['transferAmount'].hasError('required')">
+                      Transfer Amount is required.
+                    </mat-error>
+                  </mat-form-field>
+                </td>
+              </tr>
             </table>
             <div class="table-center" style="margin-top: 50px;">
-                <button class="mat-stroked-button mat-warn button-padding"><strong>Transfer</strong></button>
+              <button (click)="onTransfer()" [disabled]="transferFormGroup.invalid|| disableSubmitBtn" type="submit"
+                      class="mat-stroked-button mat-warn button-padding"><strong>Transfer</strong></button>
             </div>
+          </form>
         </mat-tab>
     </mat-tab-group>
 </div>

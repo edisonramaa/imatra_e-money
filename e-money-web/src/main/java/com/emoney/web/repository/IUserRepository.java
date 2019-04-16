@@ -10,4 +10,6 @@ import com.emoney.web.model.UserEntity;
 public interface IUserRepository extends ICrudRepository<UserEntity, Long> {
     UserEntity findByEmail(String email);
 
+    UserEntity findByWalletId(String walletId);
+
 }

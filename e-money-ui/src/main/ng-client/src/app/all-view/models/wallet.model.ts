@@ -12,5 +12,7 @@ export class WalletModel extends BaseFtModel {
   credits: number;
   transactionDate: string;
   transactionType: string;
+  tranctionToId: number;
+  tranctionToName: string;
 
 }

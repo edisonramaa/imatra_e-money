@@ -39,8 +39,6 @@ export class FTBaseService {
   }
 
   add(data) {
-    console.log(this.serviceApi + '/create');
-    console.log(data);
     return this.httpService.postRequest(this.serviceApi + '/create', data);
   }
 

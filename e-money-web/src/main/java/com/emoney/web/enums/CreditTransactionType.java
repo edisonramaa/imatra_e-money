@@ -8,12 +8,13 @@ import lombok.Getter;
 @Getter
 public enum CreditTransactionType {
     PAID("PAID"),
-    RECEIVED("RECEIVED");
+    RECEIVED("RECEIVED"),
+    TRANSFER("TRANSFER");
 
-    private String jobApplyStatus;
+    private String transactionType;
 
-    CreditTransactionType(String jobApplyStatus) {
-        this.jobApplyStatus = jobApplyStatus;
+    CreditTransactionType(String transactionType) {
+        this.transactionType = transactionType;
     }
 
 

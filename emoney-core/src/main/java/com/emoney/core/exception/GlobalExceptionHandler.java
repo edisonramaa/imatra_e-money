@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseObj> handleGenericException(Exception e) {
         e.printStackTrace();
         ResponseObj responseObj = new ResponseObj.ResponseObjBuilder()
-                .message("cause: " + e.getCause() + ", message: " + e.getMessage())
+                .message(e.getMessage())
                 .responseStatus(false)
                 .build();
         return new ResponseEntity<>(responseObj, HttpStatus.OK);
@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseObj> handleExpiredJwtException(RuntimeException runtimeException) {
         runtimeException.printStackTrace();
         ResponseObj responseObj = new ResponseObj.ResponseObjBuilder()
-                .message("cause: " + runtimeException.getCause() + ", message: " + runtimeException.getMessage())
+                .message(runtimeException.getMessage())
                 .responseStatus(false)
                 .build();
         return new ResponseEntity<>(responseObj, HttpStatus.OK);
@@ -64,7 +64,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ResponseObj> methodArgumentNotValidException(Exception e) {
         e.printStackTrace();
         ResponseObj responseObj = new ResponseObj.ResponseObjBuilder()
-                .message("cause: " + e.getCause() + ", message: " + e.getMessage())
+                .message(e.getMessage())
                 .responseStatus(false)
                 .build();
         return new ResponseEntity<>(responseObj, HttpStatus.OK);
@@ -81,7 +81,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ResponseObj> constraintViolationException(Exception e) {
         ResponseObj responseObj = new ResponseObj.ResponseObjBuilder()
-                .message("cause: " + e.getCause() + ", message: " + e.getMessage())
+                .message(e.getMessage())
                 .responseStatus(false)
                 .build();
         return new ResponseEntity<>(responseObj, HttpStatus.OK);
@@ -97,7 +97,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidDataAccessApiUsageException.class)//TO DO
     public ResponseEntity<ResponseObj> transientPropertyValueException(Exception e) {
         ResponseObj responseObj = new ResponseObj.ResponseObjBuilder()
-                .message("cause: " + e.getCause() + ", message: " + e.getMessage())
+                .message(e.getMessage())
                 .responseStatus(false)
                 .build();
         return new ResponseEntity<>(responseObj, HttpStatus.OK);
@@ -113,7 +113,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ObjectOptimisticLockingFailureException.class)
     public ResponseEntity<ResponseObj> objectOptimisticLockingFailureException(Exception e) {
         ResponseObj responseObj = new ResponseObj.ResponseObjBuilder()
-                .message("cause: " + e.getCause() + ", message: " + e.getMessage())
+                .message(e.getMessage())
                 .responseStatus(false)
                 .build();
         return new ResponseEntity<>(responseObj, HttpStatus.OK);
@@ -128,7 +128,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SignatureException.class)
     public ResponseEntity<ResponseObj> signatureException(Exception e) {
         ResponseObj responseObj = new ResponseObj.ResponseObjBuilder()
-                .message("cause: " + e.getCause() + ", message: Sorry!! Someone has already updated the record")
+                .message("Sorry!! Someone has already updated the record")
                 .responseStatus(false)
                 .build();
         return new ResponseEntity<>(responseObj, HttpStatus.OK);
@@ -149,7 +149,7 @@ public class GlobalExceptionHandler {
             data = ((EmoneyException) e).getData();
         }
         ResponseObj responseObj = new ResponseObj.ResponseObjBuilder()
-                .message("cause: " + e.getCause() + ", message: " + e.getMessage())
+                .message(e.getMessage())
                 .responseStatus(false)
                 .result(data)
                 .build();
