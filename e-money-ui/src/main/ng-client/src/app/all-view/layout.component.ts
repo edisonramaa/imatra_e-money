@@ -29,6 +29,8 @@ export class LayoutComponent implements OnInit {
       if (res.responseStatus) {
         this.userProfileModel = res.result;
         console.log("My Profile: ", JSON.stringify(this.userProfileModel));
+      }else {
+        this.userProfileModel = new UserProfileModel();
       }
     });
   }
@@ -47,5 +49,8 @@ export class LayoutComponent implements OnInit {
   }
   logout() {
     this._loginService.logout();
+  }
+  login() {
+    this._loginService.login();
   }
 }

@@ -34,6 +34,12 @@ export class LoginService extends FTBaseService {
     window.location.href = finalUrl;
   }
 
+  login() {
+    let baseHref = window.location.origin;
+    let loginUrl = baseHref + "/login";
+    window.location.href = loginUrl;
+  }
+
   changePassword(data) {
     return this.httpService.postRequest(this.serviceApi + this.changePwdUrl, data);
   }

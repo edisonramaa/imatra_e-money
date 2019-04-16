@@ -2,17 +2,24 @@
     <mat-sidenav-container class="all-wrap">
         <mat-sidenav #sidenav class="navbar-width">
 
-            <mat-card (click)="openUserProfile()" class="expanded-panel-container">
-                <mat-card-header>
+            <mat-card  (click)="userProfileModel.name ? openUserProfile():''" class="expanded-panel-container">
+                <mat-card-header *ngIf="userProfileModel.name">
                     <div class="user-avatar-image" mat-card-avatar></div>
                     <mat-card-title>{{userProfileModel.name}}</mat-card-title>
                     <mat-card-subtitle>My Profile</mat-card-subtitle>
                 </mat-card-header>
+                <mat-card-header *ngIf="!userProfileModel.name">
+                    <div class="user-avatar-image" mat-card-avatar></div>
+                    <mat-card-title>Guest</mat-card-title>
+                </mat-card-header>
             </mat-card>
 
-            <mat-list>
+            <mat-list *ngIf="userProfileModel.name">
                 <mat-list-item (click)="logout()" style="cursor: pointer">Logout</mat-list-item>
                 <mat-list-item style="cursor: pointer" (click)="changePwd()">Change Password</mat-list-item>
+            </mat-list>
+            <mat-list *ngIf="!userProfileModel.name">
+                <mat-list-item (click)="login()" style="cursor: pointer">Login</mat-list-item>
             </mat-list>
         </mat-sidenav>
 
