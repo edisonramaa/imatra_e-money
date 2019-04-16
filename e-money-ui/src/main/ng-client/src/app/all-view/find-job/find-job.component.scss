@@ -163,3 +163,11 @@ mat-tab-group#find-job {
 #find-job /deep/ .gm-style {
   height: -webkit-fill-available !important;
 }
+
+#find-job #apply-btn {
+  background: white;
+}
+
+#find-job .desc-st {
+  font-weight: bold;
+}

@@ -1,16 +1,23 @@
 <div id="wallet">
     <mat-tab-group animationDuration="0ms">
         <mat-tab label="Wallet">
-          <p class="balance">Wallet ID: {{walletId}}</p>
-            <img class="center" height="100" src="../../../assets/images/coins.png" width="100"/>
-          <p class="balance">Balance: {{balanceCredits}}</p>
-            <hr size="10">
+          <p class="balance">Wallet ID: <span style="font-weight: 500;"> {{walletId}} </span></p>
+          <img class="center" height="100"
+               src="https://d1hl0z0ja1o93t.cloudfront.net/wp-content/uploads/2017/11/09145753/digital-wallet1.png"
+               width="100"/>
+          <p class="balance">Balance: <span style="font-weight: 500; color: green;">{{balanceCredits}} </span>
+            <mat-icon aria-hidden="true" class="temp-credit-icon mat-icon notranslate material-icons mat-icon-no-color"
+                      role="img" style="position: absolute; font-weight: 500; color: green;">copyright
+            </mat-icon>
+          </p>
+
+          <hr size="10">
             <p class="recent-trans">Recent Transactions</p>
           <div *ngIf="walletDetails.length<=0">
             <p style="text-align: center">You don't have any transaction yet.</p>
           </div>
           <table class="table-center" *ngIf="walletDetails && walletDetails.length>0">
-            <tr>
+            <tr style="font-weight: 700;">
               <td>Transaction</td>
               <td>Type</td>
               <td>Date</td>
@@ -25,14 +32,20 @@
             </table>
         </mat-tab>
         <mat-tab label="Transfer">
-            <img class="center" height="100" src="../../../assets/images/coins.png" width="100"/>
-            <p class="balance">Balance: $$$</p>
+          <img class="center" height="100"
+               src="https://d1hl0z0ja1o93t.cloudfront.net/wp-content/uploads/2017/11/09145753/digital-wallet1.png"
+               style="margin-top: 75px;" width="100"/>
+          <p class="balance">Balance: <span style="font-weight: 500; color: green;">00</span>
+            <mat-icon aria-hidden="true" class="temp-credit-icon mat-icon notranslate material-icons mat-icon-no-color"
+                      role="img" style="position: absolute; font-weight: 500; color: green;">copyright
+            </mat-icon>
+          </p>
             <hr size="10">
             <table class="table-center-2">
                 <tr>
                     <td><span style="font-weight: bold; color: #47525E">Wallet ID</span></td>
                     <td>
-                        <mat-form-field class="example-full-width" style="margin-left: 10px;">
+                      <mat-form-field class="example-full-width" style="margin-left: 6px; display: block; width: 100%;">
                             <input matInput>
                         </mat-form-field>
                     </td>
@@ -40,11 +53,12 @@
                 <tr>
                     <td><span class="amount">Amount</span></td>
                     <td>
-                        <mat-form-field class="amount-value">
+                      <mat-form-field class="amount-value" style="display: block;">
                             <input class="example-right-align" matInput type="number">
-                            <span matPrefix><img height="20" src="../../../assets/images/coins.png" style="float: right"
-                                                 width="20"/>&nbsp;</span>
-                            <span matSuffix>.00</span>
+                        <span matSuffix><mat-icon aria-hidden="true"
+                                                  class="temp-credit-icon mat-icon notranslate material-icons mat-icon-no-color"
+                                                  role="img"
+                                                  style="font-weight: 500; color: green;">copyright</mat-icon></span>
                         </mat-form-field>
                     </td>
                 </tr>

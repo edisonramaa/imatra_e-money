@@ -1,5 +1,5 @@
 <div id="service-detail" *ngIf="benefitModel">
-  <h2 class="service-title">{{benefitModel.name}}</h2>
+  <h2 class="service-title" style="margin: 20px;">{{benefitModel.name}}</h2>
   <p class="text-center">{{benefitModel.description}} <br>
         Use your credit to pay for the service. Thank you!
     </p>
@@ -13,7 +13,7 @@
   </span>
       <span style="float: right;"><b>Cost: {{benefitModel.credits}}</b></span>
     </p>
-    <div class="button-center-b" style="margin-top: 30px;margin-bottom: 10px;">
+  <div class="button-center-b" style="margin-top: 30px;margin-bottom: 30px;">
       <button class="mat-stroked-button mat-warn button-padding" (click)="onPurchase()"><strong>Purchase</strong>
       </button>
     </div>
