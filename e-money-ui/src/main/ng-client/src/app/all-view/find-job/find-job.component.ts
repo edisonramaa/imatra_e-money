@@ -81,10 +81,8 @@ export class FindJobComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
-      console.log("Result: ", result);
       if (result) {
         this.applyJob(job);
-        //console.log("Dialog was closed....");
       }
 
     });

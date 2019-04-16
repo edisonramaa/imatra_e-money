@@ -29,7 +29,6 @@ export class MyJobComponent implements OnInit {
     this._jobService.getMyJobs().then((res: ResponseModel) => {
       if (res.responseStatus) {
         this.myJobsList = res.result;
-        console.log("Job List: ", JSON.stringify(this.myJobsList));
       } else {
         this.myJobsList = [];
       }
@@ -94,7 +93,7 @@ export class MyJobComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
-      console.log("Result: ", result);
+      return;
     });
   }
 

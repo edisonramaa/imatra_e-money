@@ -16,15 +16,12 @@ export class RequestInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     /** DO NOT REMOE THIS **/
     let authToken = this._sessionStorageService.getToken();
-    console.log("Auth Token: ", authToken);
     req = req.clone({
       setHeaders: {
         authorization: authToken !== null ? authToken : "",
 
       }
     });
-
-    console.log("Request URL", req.url);
 
     return next.handle(req);
   }

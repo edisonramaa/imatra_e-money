@@ -28,7 +28,6 @@ export class LayoutComponent implements OnInit {
     this._userProfile.getMyProfile().then((res: ResponseModel) => {
       if (res.responseStatus) {
         this.userProfileModel = res.result;
-        console.log("My Profile: ", JSON.stringify(this.userProfileModel));
       }else {
         this.userProfileModel = new UserProfileModel();
       }
