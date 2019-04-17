@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {MatDialog, MatSnackBar, MatTabGroup} from "@angular/material";
 import {ConfirmDialogComponent} from "../../core/lib/components/confirm-dialog/confirm-dialog.component";
 import {JobTransactionModel} from "../models/job-transaction.model";
+import {SessionStorageService} from "../../core/lib/services/session-storage.service";
 
 
 @Component({
@@ -19,9 +20,9 @@ export class FindJobComponent implements OnInit {
   lat: number = 61.1695977;
   lng: number = 28.7645463;
   jobList: JobModel[];
-
   finishDate = 'April 1, 2019 00:33';
   isCustomTemplate = true;
+  token: string;
   days;
   hours;
   minutes;
@@ -49,7 +50,8 @@ export class FindJobComponent implements OnInit {
   constructor(private _jobService: JobService,
               private _router: Router,
               private _dialog: MatDialog,
-              private _snackBar: MatSnackBar
+              private _snackBar: MatSnackBar,
+              private _sessionStorageService: SessionStorageService
   ) {
     this.jobList = [];
   }
@@ -62,6 +64,7 @@ export class FindJobComponent implements OnInit {
         this.jobList = [];
       }
     });
+    this.token = this._sessionStorageService.getToken();
   }
   markerClick(e, job: JobModel) {
 
