@@ -11,4 +11,6 @@ export const SCAN_CODE: string = 'scan-code';
 export const PROFILE_URL: string = 'profile';
 export const ADMIN_URL: string = 'admin';
 export const ADD_BENEFIT_URL: string = 'add-benefit';
+export const EDIT_BENEFIT_URL: string = 'edit/:benefitId';
+export const EDIT_BENEFIT: string = 'edit';
 export const CHANGE_PASS: string = 'change-password';

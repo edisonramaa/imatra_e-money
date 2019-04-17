@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {ADD_BENEFIT_URL, MAIN_URL,} from "../core/utility/navigation-url";
+import {ADD_BENEFIT_URL, EDIT_BENEFIT_URL, MAIN_URL,} from "../core/utility/navigation-url";
 import {AdminLayoutComponent} from "./admin-layout.component";
 
 const routes: Routes = [
@@ -11,6 +11,7 @@ const routes: Routes = [
       {path: '', redirectTo: MAIN_URL},
       {path: MAIN_URL, loadChildren: './benefit/benefit.module#BenefitModule'},
       {path: ADD_BENEFIT_URL, loadChildren: './add-benefit/add-benefit.module#AddBenefitModule'},
+      {path: EDIT_BENEFIT_URL, loadChildren: './edit-benefit/edit-benefit.module#EditBenefitModule'},
 
       // {path: 'sign-in', loadChildren: './register/register.module#RegisterModule'},
 

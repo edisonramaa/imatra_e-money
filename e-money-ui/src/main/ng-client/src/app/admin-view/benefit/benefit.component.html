@@ -13,8 +13,8 @@
       </div>
 
       <div id="buttons-wrapper">
-        <button class="edit" color="primary" mat-flat-button>Edit</button>
-        <button class="delete" color="warn" mat-flat-button>Delete</button>
+        <button class="edit" color="primary" mat-flat-button (click)="editBenefit(benefit)">Edit</button>
+        <button class="delete" color="warn" mat-flat-button (click)="confirmDelete(benefit)" >Delete</button>
       </div>
 
     </mat-list-item>

@@ -6,17 +6,20 @@ import {BenefitRoutingModule} from "./benefit-routing.module";
 import {BenefitService} from "../../all-view/app-services/benefit.service";
 import {PictureDialogComponent} from "../../core/lib/components/picture-dialog/picture-dialog.component";
 import {PictureDialogModule} from "../../core/lib/components/picture-dialog/picture-dialog.module";
+import {ConfirmDialogComponent} from "../../core/lib/components/confirm-dialog/confirm-dialog.component";
+import {ConfirmDialogModule} from "../../core/lib/components/confirm-dialog/confirm-dialog.module";
 
 @NgModule({
   imports: [
     CommonModule,
     CustomMaterialModule,
     BenefitRoutingModule,
-    PictureDialogModule
+    PictureDialogModule,
+    ConfirmDialogModule
   ],
   declarations: [BenefitComponent],
   providers: [BenefitService],
-  entryComponents: [PictureDialogComponent]
+  entryComponents: [PictureDialogComponent, ConfirmDialogComponent]
 
 })
 export class BenefitModule {
