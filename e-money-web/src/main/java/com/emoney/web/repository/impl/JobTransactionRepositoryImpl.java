@@ -43,6 +43,17 @@ public class JobTransactionRepositoryImpl extends CrudRepositoryImpl<JobTransact
     }
 
     @Override
+    public List<JobTransactionEntity> approvedJobList(Long jobId) {
+        QJobTransactionEntity qJobTransactionEntity = QJobTransactionEntity.jobTransactionEntity;
+        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
+        List<JobTransactionEntity> jobTransactionEntityList = jpaQueryFactory
+                .selectFrom(qJobTransactionEntity)
+                .where(qJobTransactionEntity.job.id.eq(jobId), qJobTransactionEntity.status.eq(JobApplyStatus.APPROVED.getJobApplyStatus()))
+                .fetch();
+        return jobTransactionEntityList;
+    }
+
+    @Override
     public List<JobTransactionEntity> getMyCompletedJobs(Long userId) {
         QJobTransactionEntity qJobTransactionEntity = QJobTransactionEntity.jobTransactionEntity;
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);

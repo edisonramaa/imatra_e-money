@@ -1,6 +1,7 @@
 package com.emoney.web.service.impl;
 
 
+import com.emoney.core.exception.EmoneyException;
 import com.emoney.core.service.impl.CrudServiceImpl;
 import com.emoney.core.utils.GlobalSettingUtils;
 import com.emoney.core.utils.QRCodeUtil;
@@ -56,6 +57,11 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
 
     @Override
     public JobEntity save(JobEntity jobEntity) {
+        Double totalCredit = jobEntity.getCredits() * jobEntity.getNoOfPeople();
+        UserEntity userEntity = this.userRepository.findOne(TokenUtils.getTokenModel().getUserId());
+        if (userEntity.getBalanceCredits() < totalCredit) {
+            throw  new EmoneyException("You don't enough balance to create this job.");
+        }
         String qrUniqueCode = "JB".concat(SecurityUtils.generateRandomString(10, 10));
         String fileName = SecurityUtils.generateRandomString(6, 6);
         String folderLocation = GlobalSettingUtils.getGlobalSettingByKey(GlobalSettingUtils.QR_JOB_LOCATION);
@@ -66,9 +72,9 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
         jobEntity.setJobPoster(this.getPosterIdentity());
         jobEntity.setTotalSelected(0);
         super.save(jobEntity);
-        UserEntity userEntity = this.userRepository.findOne(TokenUtils.getTokenModel().getUserId());
-        userEntity.setReserveCredits(userEntity.getReserveCredits() + jobEntity.getCredits());
-        userEntity.setBalanceCredits(userEntity.getBalanceCredits() - jobEntity.getCredits());
+
+        userEntity.setReserveCredits(userEntity.getReserveCredits() + totalCredit);
+        userEntity.setBalanceCredits(userEntity.getBalanceCredits() - totalCredit);
         this.userRepository.update(userEntity);
         return jobEntity;
     }

@@ -35,6 +35,11 @@ export class EditBenefitComponent implements OnInit {
 
   ngOnInit() {
     this.getBenefitById();
+
+
+  }
+
+  initForm() {
     this.benefitFormGroup = new FormGroup({});
     this.benefitFormGroup = this._formBuilder.group({
       id: this.benefitModel.id,
@@ -46,8 +51,8 @@ export class EditBenefitComponent implements OnInit {
       endDate: [this.benefitModel.endDate, [Validators.required]],
       dueReqTime: [this.benefitModel.endTime, [Validators.required]],
       credits: [this.benefitModel.credits, [Validators.required]],
+      version: this.benefitModel.version
     });
-
   }
 
   getBenefitById() {
@@ -58,8 +63,11 @@ export class EditBenefitComponent implements OnInit {
         this._benefitService.getByID(benefitId).then((res: ResponseModel) => {
           if (res.responseStatus) {
               this.benefitModel =  res.result;
+            this.initForm();
           }
         });
+      } else {
+        this.initForm();
       }
 
     });

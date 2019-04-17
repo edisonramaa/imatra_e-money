@@ -7,6 +7,7 @@ import {LayoutStructureModule} from "./layout-structure/layout-structure.module"
 import {BenefitService} from "./app-services/benefit.service";
 import {UserProfileService} from "./services/user-profile.service";
 import {LoginService} from "./app-services/login.service";
+import {SessionStorageService} from "../core/lib/services/session-storage.service";
 
 @NgModule({
     imports: [
@@ -16,7 +17,7 @@ import {LoginService} from "./app-services/login.service";
         LayoutStructureModule
     ],
     declarations: [LayoutComponent],
-  providers: [BenefitService, UserProfileService, LoginService]
+  providers: [BenefitService, UserProfileService, LoginService, SessionStorageService]
 })
 export class LayoutModule {
 }

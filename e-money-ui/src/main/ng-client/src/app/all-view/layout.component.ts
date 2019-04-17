@@ -6,6 +6,7 @@ import {UserProfileModel} from "../all-view/models/user-profile.model";
 import {UserProfileService} from "../all-view/services/user-profile.service";
 import {ResponseModel} from "../core/lib/model/response.model";
 import {LoginService} from "./app-services/login.service";
+import {SessionStorageService} from "../core/lib/services/session-storage.service";
 
 @Component({
     selector: 'app-layout',
@@ -16,13 +17,15 @@ export class LayoutComponent implements OnInit {
   @ViewChild("sidenav")
   sideNav: MatSidenav;
   userProfileModel: UserProfileModel;
+  showLoggedInMenus: boolean  = false;
 
-  constructor(private _router: Router, private _userProfile: UserProfileService, private _loginService:LoginService) {
+  constructor(private _router: Router, private _userProfile: UserProfileService, private _loginService:LoginService, private _sessionStorageService: SessionStorageService) {
     this.userProfileModel = new UserProfileModel();
   }
 
     ngOnInit() {
       this.initForm();
+      this.showLoggedInMenus = !!this._sessionStorageService.getToken();
     }
   initForm() {
     this._userProfile.getMyProfile().then((res: ResponseModel) => {

@@ -9,6 +9,7 @@ public interface IJobTransactionRepository extends ICrudRepository<JobTransactio
     JobTransactionEntity findByJobIdAndApplicantId(Long jobId, Long applicantId);
 
     List<JobTransactionEntity> getAllAppliedJob(Long jobId);
+    List<JobTransactionEntity> approvedJobList(Long jobId);
 
     List<JobTransactionEntity> getMyCompletedJobs(Long userId);
 }

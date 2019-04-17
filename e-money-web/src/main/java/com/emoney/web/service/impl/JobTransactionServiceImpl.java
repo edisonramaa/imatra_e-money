@@ -35,7 +35,13 @@ public class JobTransactionServiceImpl extends CrudServiceImpl<JobTransactionEnt
         if (existingTransaction != null) {
             throw new EmoneyException("You have already applied for this job.");
         }
+        List<JobTransactionEntity> approvedList = this.jobTransactionRepository.approvedJobList(jobTransactionEntity.getJob().getId());
         JobEntity jobEntity = jobService.findOne(jobTransactionEntity.getJob().getId());
+        if(!approvedList.isEmpty()) {
+            if(approvedList.size()== jobEntity.getNoOfPeople()){
+                throw new EmoneyException("Quota Limit Reached.");
+            }
+        }
         if (jobTransactionEntity.getApplicant().getId().equals(jobEntity.getJobPoster().getId())) {
             throw new EmoneyException("You cannot apply for your own job post.");
         }
