@@ -1,4 +1,4 @@
-<form [formGroup]="benefitFormGroup">
+<form [formGroup]="benefitFormGroup" *ngIf="benefitModel">
   <mat-form-field>
     <input matInput name="name" formControlName="name" placeholder="Benefit name" type="text">
   <mat-error
@@ -80,10 +80,11 @@
 
   <div id="qr-wrapper">
     <img height="150"
-         src="https://store-images.s-microsoft.com/image/apps.33967.13510798887182917.246b0a3d-c3cc-46fc-9cea-021069d15c09.392bf5f5-ade4-4b36-aa63-bb15d5c3817a"
+         src="../../../assets/images/qr-benefit.png"
          width="150">
   </div>
-
-  <button mat-button type="submit" [disabled]="benefitFormGroup.invalid || disableSubmitBtn" (click)="onSubmit()">Create Benefit
+  <button mat-button type="submit" [disabled]="benefitFormGroup.invalid || disableSubmitBtn" (click)="onSubmit()">
+    {{isUpdateMode?'Update Benefit': 'Create Benefit'}}
   </button>
+
 </form>

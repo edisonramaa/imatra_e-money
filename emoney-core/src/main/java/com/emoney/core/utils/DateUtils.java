@@ -84,6 +84,16 @@ public class DateUtils {
         return null;
     }
 
+    public static Time convertToTime(String time) {
+        DateFormat formatter = new SimpleDateFormat("hh:mm:ss");
+        try {
+            return new Time(formatter.parse(time).getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static String convertSqlTimeIntoStringTime(Time time) {
         DateFormat formatter = new SimpleDateFormat("hh:mm:ss a");
         return formatter.format(time);

@@ -12,10 +12,7 @@ import com.emoney.web.service.IBenefitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -40,5 +37,26 @@ public class BenefitController extends ControllerBase {
         iCrudService.save(entity);
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("Record has been created.").build(), HttpStatus.OK);
     }
+
+    @PutMapping(WebResourceConstant.EMONEY.UPDATE_BENEFIT)
+    public ResponseEntity<ResponseObj> updateBenefit(@RequestBody @Valid BenefitRequestDto dto) {
+        BenefitEntity entity = (BenefitEntity) reqBeanMapper.mapToEntity(dto);
+        if (dto.getBeginReqTime().toLowerCase().contains("am") || dto.getBeginReqTime().toLowerCase().contains("pm")) {
+            entity.setStartTime(DateUtils.convertStringTimeIntoSqlTime(dto.getBeginReqTime()));
+        } else {
+            entity.setStartTime(DateUtils.convertToTime(dto.getBeginReqTime()));
+        }
+
+        if (dto.getDueReqTime().toLowerCase().contains("am") || dto.getDueReqTime().toLowerCase().contains("pm")) {
+            entity.setEndTime(DateUtils.convertStringTimeIntoSqlTime(dto.getDueReqTime()));
+        } else {
+            entity.setEndTime(DateUtils.convertToTime(dto.getDueReqTime()));
+        }
+
+        iCrudService.update(entity);
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("Record has been Updated.").build(), HttpStatus.OK);
+    }
+
+
 
 }
