@@ -56,10 +56,19 @@ export class MyJobComponent implements OnInit {
     });
   }
 
-  acceptApplicant(applicant: JobTransactionModel) {
+  acceptApplicant(applicant: JobTransactionModel, job: JobModel) {
     this._jobService.acceptApplicant(applicant.jobId, applicant.applicantId).then((res: ResponseModel) => {
       if (res.responseStatus) {
         applicant.status = 'APPROVED';
+        job.approvedStatus = true;
+        job.pendingStatus = true;
+        job.appliedJobsList.forEach(function (applicant) {
+          if (applicant.status === "APPROVED") {
+            job.approvedStatus = false;
+          } else if (applicant.status === "APPLIED") {
+            job.pendingStatus = false;
+          }
+        });
       }
       this._snackBar.open(res.message, "OK", {
         duration: 6000,
@@ -68,10 +77,19 @@ export class MyJobComponent implements OnInit {
     });
   }
 
-  declineApplicant(applicant: JobTransactionModel) {
+  declineApplicant(applicant: JobTransactionModel, job: JobModel) {
     this._jobService.declineApplicant(applicant.jobId, applicant.applicantId).then((res: ResponseModel) => {
       if (res.responseStatus) {
         applicant.status = 'REJECTED';
+        job.approvedStatus = true;
+        job.pendingStatus = true;
+        job.appliedJobsList.forEach(function (applicant) {
+          if (applicant.status === "APPROVED") {
+            job.approvedStatus = false;
+          } else if (applicant.status === "APPLIED") {
+            job.pendingStatus = false;
+          }
+        });
       }
       this._snackBar.open(res.message, "OK", {
         duration: 6000,

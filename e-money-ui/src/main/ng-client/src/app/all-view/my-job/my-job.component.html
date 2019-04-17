@@ -30,11 +30,11 @@
             </mat-card-subtitle>
 
             <div class="accept-decline-buttons-container">
-              <button mat-icon-button (click)="declineApplicant(applicant)">
+              <button mat-icon-button (click)="declineApplicant(applicant, job)">
                 <mat-icon class="decline-btn-icon">highlight_off</mat-icon>
                 <p class="decline-btn-text">Decline</p>
               </button>
-              <button mat-icon-button (click)="acceptApplicant(applicant)">
+              <button mat-icon-button (click)="acceptApplicant(applicant, job)">
                 <mat-icon class="accept-btn-icon">check_circle_outline</mat-icon>
                 <p class="accept-btn-text">Accept</p>
               </button>
