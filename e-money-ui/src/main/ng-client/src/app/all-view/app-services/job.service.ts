@@ -47,6 +47,11 @@ export class JobService extends FTBaseService {
     return this.httpService.postRequest(this.serviceApi + '/accept-applicant', data);
   }
 
+  cancelJob(jobId: number) {
+    let data = {jobId: jobId};
+    return this.httpService.postRequest(this.serviceApi + '/cancel', data);
+  }
+
   declineApplicant(jobId: number, applicantId: number) {
     let data = {jobId: jobId, applicantId: applicantId};
     return this.httpService.postRequest(this.serviceApi + '/reject-applicant', data);

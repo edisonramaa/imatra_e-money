@@ -1,4 +1,5 @@
 package com.emoney.web.repository.impl;
+import com.emoney.core.exception.EmoneyException;
 import com.emoney.core.repository.impl.CrudRepositoryImpl;
 import com.emoney.web.model.JobEntity;
 import com.emoney.web.model.QJobEntity;
@@ -17,6 +18,7 @@ public class JobRepositoryImpl extends CrudRepositoryImpl<JobEntity, Long> imple
     public JobRepositoryImpl() {
         super(JobEntity.class);
     }
+
 
 
     @Override
@@ -42,6 +44,7 @@ public class JobRepositoryImpl extends CrudRepositoryImpl<JobEntity, Long> imple
                 .fetch();
         return jobEntityList;
     }
+
 
     @Override
     public JobEntity getJobByQrCode(String qrCode) {

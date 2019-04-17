@@ -10,6 +10,7 @@ import com.emoney.core.utils.IBeanMapper;
 import com.emoney.core.utils.TokenUtils;
 import com.emoney.core.utils.impl.BeanMapperImpl;
 import com.emoney.web.dto.requestDto.JobApplyRequestDto;
+import com.emoney.web.dto.requestDto.JobCancelRequestDto;
 import com.emoney.web.dto.requestDto.JobRequestDto;
 import com.emoney.web.dto.responseDto.JobResponseDto;
 import com.emoney.web.dto.responseDto.JobTransactionResponseDto;
@@ -92,6 +93,15 @@ public class JobController extends ControllerBase {
         jobTransactionEntity.setStatus(JobApplyStatus.APPLIED.getJobApplyStatus());
         jobTransactionService.applyJob(jobTransactionEntity);
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("You have applied to job successfully.").build(), HttpStatus.OK);
+    }
+
+    @PostMapping(WebResourceConstant.EMONEY.CANCEL_JOB)
+    public ResponseEntity<ResponseObj> cancelJob(@RequestBody @Valid JobCancelRequestDto dto) {
+        Boolean cancelJob = jobService.cancelJob(dto.getJobId());
+        if (cancelJob) {
+            return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("You have cancelled the job successfully.").build(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("Job can't be cancelled now.").build(), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @GetMapping(WebResourceConstant.EMONEY.GET_APPLIED_JOB)

@@ -11,7 +11,8 @@ public enum JobApplyStatus {
     APPROVED("APPROVED"),
     REJECTED("REJECTED"),
     STARTED("STARTED"),
-    COMPLETED("COMPLETED");
+    COMPLETED("COMPLETED"),
+    CANCELLED("CANCELLED");
 
     private String jobApplyStatus;
 

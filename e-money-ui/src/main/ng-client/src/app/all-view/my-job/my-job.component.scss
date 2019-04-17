@@ -180,10 +180,22 @@
 
 #my-job #qr-code-btn {
   height: 45px;
-  background: #2d2d2d;
+  background: #ED6C41;;
   border: none;
   text-align: center;
-  width: 100%;
+  width: 50%;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+#cancel-job-btn {
+  height: 45px;
+  background: #ED6C41;
+  border: none;
+  text-align: center;
+  width: 50%;
   font-size: 15px;
   font-weight: bold;
   color: white;

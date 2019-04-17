@@ -7,9 +7,12 @@ import com.emoney.core.utils.GlobalSettingUtils;
 import com.emoney.core.utils.QRCodeUtil;
 import com.emoney.core.utils.SecurityUtils;
 import com.emoney.core.utils.TokenUtils;
+import com.emoney.web.enums.JobApplyStatus;
 import com.emoney.web.model.JobEntity;
+import com.emoney.web.model.JobTransactionEntity;
 import com.emoney.web.model.UserEntity;
 import com.emoney.web.repository.IJobRepository;
+import com.emoney.web.repository.IJobTransactionRepository;
 import com.emoney.web.repository.IUserRepository;
 import com.emoney.web.service.IJobService;
 import org.springframework.stereotype.Service;
@@ -27,11 +30,15 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
 
     private IJobRepository jobRepository;
     private IUserRepository userRepository;
+    private IJobTransactionRepository jobTransactionRepository;
+    public final static long SECOND_MILLIS = 1000;
+    public final static long MINUTE_MILLIS = SECOND_MILLIS*60;
 
-    public JobServiceImpl(IJobRepository jobRepository, IUserRepository userRepository) {
+    public JobServiceImpl(IJobRepository jobRepository, IUserRepository userRepository, IJobTransactionRepository jobTransactionRepository) {
         super(jobRepository);
         this.jobRepository = jobRepository;
         this.userRepository = userRepository;
+        this.jobTransactionRepository = jobTransactionRepository;
     }
 
 
@@ -77,6 +84,31 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
         userEntity.setBalanceCredits(userEntity.getBalanceCredits() - totalCredit);
         this.userRepository.update(userEntity);
         return jobEntity;
+    }
+
+    @Override
+    public Boolean cancelJob(Long id) {
+        JobEntity job = jobRepository.findOne(id);
+        Date nowDate = new Date();
+        int diffInMinutes =  (int)((nowDate.getTime()/MINUTE_MILLIS) - ( job.getPostedDate().getTime()/MINUTE_MILLIS));
+        if (diffInMinutes > 0 && diffInMinutes <= 15) {
+            List<JobTransactionEntity> listApplicantTransaction = jobTransactionRepository.getAllAppliedJob(id);
+            if (listApplicantTransaction != null && listApplicantTransaction.size() > 0) {
+                for(JobTransactionEntity jobTransaction : listApplicantTransaction) {
+                    jobTransaction.setStatus(JobApplyStatus.CANCELLED.getJobApplyStatus());
+                    jobTransactionRepository.update(jobTransaction);
+                }
+            }
+            Double totalReturnCredits = job.getCredits() * job.getNoOfPeople();
+            UserEntity userEntity = this.userRepository.findOne(TokenUtils.getTokenModel().getUserId());
+            Double updatedReservedCredits = userEntity.getReserveCredits() - totalReturnCredits;
+            userEntity.setReserveCredits(updatedReservedCredits);
+            userEntity.setBalanceCredits(userEntity.getBalanceCredits() + totalReturnCredits);
+            this.userRepository.update(userEntity);
+            return jobRepository.delete(id);
+        } else {
+            throw new EmoneyException("Job can't be cancelled at this point.");
+        }
     }
 
     @Override

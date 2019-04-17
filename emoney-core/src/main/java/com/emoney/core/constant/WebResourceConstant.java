@@ -68,6 +68,7 @@ public class WebResourceConstant {
         String CREDITS = EMONEY_BASE + "/credits";
         String SAVE_JOB = "/save-job";
         String APPLY_JOB = "/apply-job";
+        String CANCEL_JOB = "/cancel";
         String ACCEPT_JOB = "/accept-applicant";
         String REJECT_JOB = "/reject-applicant";
         String GET_ALL_APPLIED_JOB = "/get-all-applied-job/{jobId}";

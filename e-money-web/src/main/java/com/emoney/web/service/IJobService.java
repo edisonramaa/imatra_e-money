@@ -13,6 +13,7 @@ public interface IJobService extends ICrudService<JobEntity, Long> {
     List<JobEntity> getActiveJobs();
     List<JobEntity> getExpiredJobs();
     List<JobEntity> getMyJobs(Long id);
+    Boolean cancelJob(Long id);
 
     JobEntity getJobByQrCode(String qrCode);
 

@@ -17,7 +17,11 @@
           <a style="cursor: pointer" (click)="getQRCode(job)">Click Here To get QR Code</a>
         </div>
       </mat-card>-->
-      <button (click)="getQRCode(job)" id="qr-code-btn">Click here for QR code</button>
+      <div>
+        <button (click)="getQRCode(job)" id="qr-code-btn">Click here for QR code</button>
+        <button (click)="cancelJob(job)" id="cancel-job-btn">Cancel Job</button>
+      </div>
+
       <p class="sub-header-jobs">Pending</p>
       <p *ngIf="job.pendingStatus" style="text-align: center; margin: 0;">No pending jobs yet</p>
       <mat-card class="expanded-panel-container">
@@ -26,7 +30,7 @@
             <div mat-card-avatar class="user-avatar-image"></div>
             <mat-card-title>{{applicant.applicantName}}</mat-card-title>
             <mat-card-subtitle>
-              <bar-rating [max]="10" [rate]="2" [readOnly]="true" [theme]="'horizontal'"></bar-rating>
+              <bar-rating [max]="10" [rate]="5" [readOnly]="true" [theme]="'horizontal'"></bar-rating>
             </mat-card-subtitle>
 
             <div class="accept-decline-buttons-container">
@@ -50,7 +54,7 @@
             <div class="user-avatar-image" mat-card-avatar></div>
             <mat-card-title>{{applicant.applicantName}}</mat-card-title>
             <mat-card-subtitle>
-              <bar-rating [max]="10" [rate]="2" [readOnly]="true" [theme]="'horizontal'"></bar-rating>
+              <bar-rating [max]="10" [rate]="5" [readOnly]="true" [theme]="'horizontal'"></bar-rating>
             </mat-card-subtitle>
           </mat-card-header>
         </div>

@@ -7,6 +7,8 @@ import {MatCardModule} from "@angular/material";
 import {BarRatingModule} from "ngx-bar-rating";
 import {JobService} from "../app-services/job.service";
 import {PictureDialogModule} from "../../core/lib/components/picture-dialog/picture-dialog.module";
+import {ConfirmDialogModule} from "../../core/lib/components/confirm-dialog/confirm-dialog.module";
+import {ConfirmDialogComponent} from "../../core/lib/components/confirm-dialog/confirm-dialog.component";
 import {PictureDialogComponent} from "../../core/lib/components/picture-dialog/picture-dialog.component";
 
 @NgModule({
@@ -16,12 +18,13 @@ import {PictureDialogComponent} from "../../core/lib/components/picture-dialog/p
     CustomMaterialModule,
     MatCardModule,
     BarRatingModule,
-    PictureDialogModule
+    PictureDialogModule,
+    ConfirmDialogModule
   ],
   declarations: [MyJobComponent],
   providers: [
     JobService
   ],
-  entryComponents: [PictureDialogComponent]
+  entryComponents: [PictureDialogComponent, ConfirmDialogComponent]
 })
 export class MyJobModule { }

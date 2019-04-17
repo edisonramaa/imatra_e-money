@@ -8,6 +8,7 @@ import {JobTransactionModel} from "../models/job-transaction.model";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {PictureDialogComponent} from "../../core/lib/components/picture-dialog/picture-dialog.component";
 import {ApiConstant} from "../../core/utility/api.constant";
+import {ConfirmDialogComponent} from "../../core/lib/components/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-my-job',
@@ -100,6 +101,32 @@ export class MyJobComponent implements OnInit {
 
   getQRCode(job: JobModel) {
     this.openDialog(job);
+  }
+
+  cancelJob(job: JobModel) {
+    const dialogRef = this._dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {title: "Confirm", content: "Do you really want to cancel this job?"}
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.confirmCancelJob(job);
+      }
+
+    });
+  }
+
+  confirmCancelJob(job: JobModel) {
+    this._jobService.cancelJob(job.id).then((res: ResponseModel) => {
+      if (res.responseStatus) {
+        this.ngOnInit();
+      }
+      this._snackBar.open(res.message, "OK", {
+        duration: 6000,
+        verticalPosition: 'top'
+      });
+    });
   }
 
   openDialog(job): void {
