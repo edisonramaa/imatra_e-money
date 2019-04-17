@@ -63,7 +63,7 @@
                 </div>
 
               <div style="float: right">
-                <button (click)="confirmApply(job)" *ngIf="!job.jobStatus" class="mat-stroked-button mat-warn"
+                <button (click)="confirmApply(job)" *ngIf="!job.jobStatus && token" class="mat-stroked-button mat-warn"
                         id="apply-btn">Apply
                 </button>
                 <span class="job-status" *ngIf="job.jobStatus"><b>{{job.jobStatus}}</b></span>

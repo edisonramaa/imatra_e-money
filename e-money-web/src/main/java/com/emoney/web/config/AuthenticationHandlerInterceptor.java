@@ -30,6 +30,7 @@ public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter 
         authorizationFreeuriList.add("/user/create");
         authorizationFreeuriList.add("/upload");
         authorizationFreeuriList.add("/display");
+        authorizationFreeuriList.add("/benefit");
         authorizationFreeuriList.add(WebResourceConstant.UserManagement.EMAIL);
 
     }
@@ -55,7 +56,7 @@ public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter 
         }
         accessToken = request.getHeader(WebResourceConstant.AUTHORIZATION_HEADER);
 
-        if (StringUtils.isNull(accessToken) && !isAuthFreeUri(uri)) {
+        if (StringUtils.isNull(accessToken) && !isAuthFreeUri(uri) && uri.contains("/benefit/create")) {
             throw new Exception("Unauthorized access!!");
         }
 
