@@ -14,6 +14,7 @@ import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from "@angular/material
 import {HttpService} from "./core/lib/services/http.service";
 import {CustomValidator} from "./core/lib/services/custom-validator.service";
 import {EventService} from "./all-view/app-services/event.service";
+import {AdminAuthGuardService} from "./core/lib/services/admin-auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {EventService} from "./all-view/app-services/event.service";
     SessionStorageService,
     CustomValidator,
     AuthGuard,
-    EventService
+    EventService,
+    AdminAuthGuardService
   ],
   bootstrap: [AppComponent]
 })
