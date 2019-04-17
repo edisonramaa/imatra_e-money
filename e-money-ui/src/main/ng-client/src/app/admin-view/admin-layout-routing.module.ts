@@ -11,9 +11,7 @@ const routes: Routes = [
       {path: '', redirectTo: MAIN_URL},
       {path: MAIN_URL, loadChildren: './benefit/benefit.module#BenefitModule'},
       {path: ADD_BENEFIT_URL, loadChildren: './add-benefit/add-benefit.module#AddBenefitModule'},
-      {path: EDIT_BENEFIT_URL, loadChildren: './edit-benefit/edit-benefit.module#EditBenefitModule'},
-
-      // {path: 'sign-in', loadChildren: './register/register.module#RegisterModule'},
+      {path: EDIT_BENEFIT_URL, loadChildren: './add-benefit/add-benefit.module#AddBenefitModule'},
 
     ]
   }

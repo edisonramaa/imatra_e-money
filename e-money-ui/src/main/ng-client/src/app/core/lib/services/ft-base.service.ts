@@ -7,9 +7,6 @@ export class FTBaseService {
   dataModel = {};
   // roleModel:RoleModel = new RoleModel();
   buttonRole: string;
-  // status:boolean=false;
-  // message:string;
-  // show:boolean=false;
   /** example: '/role-module' */
     // protected serviceApi:string;
 
@@ -48,7 +45,6 @@ export class FTBaseService {
 
 
   update(data) {
-    console.log(data);
     return this.httpService.putRequest(this.serviceApi + '/update', data);
   }
 
