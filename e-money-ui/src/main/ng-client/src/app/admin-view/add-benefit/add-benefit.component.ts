@@ -25,7 +25,9 @@ export class AddBenefitComponent implements OnInit {
   lng: number;
   address: string;
   isUpdateMode: boolean = false;
-
+  isLocationUpdated: boolean = false;
+  latitude: number;
+  longitude: number;
   constructor(private _formBuilder: FormBuilder,
               private _benefitService: BenefitService,
               private _snackBar: MatSnackBar,
@@ -65,6 +67,8 @@ export class AddBenefitComponent implements OnInit {
         this._benefitService.getByID(benefitId).then((res: ResponseModel) => {
           if (res.responseStatus) {
             this.benefitModel = res.result;
+            this.latitude = res.result.latitude;
+            this.longitude = res.result.longitude;
             this.isUpdateMode = true;
             this.initForm();
           }
@@ -107,8 +111,13 @@ export class AddBenefitComponent implements OnInit {
     this.benefitModel = this.benefitFormGroup.value;
     this.benefitModel.startDate = this._datePipe.transform(this.benefitModel.startDate, 'yyyy-MM-dd');
     this.benefitModel.endDate = this._datePipe.transform(this.benefitModel.endDate, 'yyyy-MM-dd');
-    this.benefitModel.latitude = this.lat;
-    this.benefitModel.longitude = this.lng;
+    if (this.isLocationUpdated) {
+      this.benefitModel.latitude = this.lat;
+      this.benefitModel.longitude = this.lng;
+    }else{
+      this.benefitModel.latitude = this.latitude;
+      this.benefitModel.longitude = this.longitude;
+    }
     this.benefitModel.streetAddress = this.address ? this.address : this.benefitModel.streetAddress;
   }
 
@@ -146,5 +155,6 @@ export class AddBenefitComponent implements OnInit {
     this.lat = address.geometry.location.lat();
     this.lng = address.geometry.location.lng();
     this.address = address.formatted_address;
+    this.isLocationUpdated = true;
   }
 }
