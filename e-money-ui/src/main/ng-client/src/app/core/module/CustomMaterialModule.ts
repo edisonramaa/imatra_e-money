@@ -12,7 +12,7 @@ import {
   MatListModule,
   MatNativeDateModule,
   MatSidenavModule,
-  MatSnackBarModule,
+  MatSnackBarModule, MatTableModule,
   MatTabsModule,
   MatToolbarModule
 } from "@angular/material";
@@ -49,7 +49,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule
   ],
   exports: [
     MatButtonModule,
@@ -74,7 +75,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule
   ],
 })
 export class CustomMaterialModule {

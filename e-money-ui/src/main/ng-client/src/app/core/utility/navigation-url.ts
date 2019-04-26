@@ -1,4 +1,5 @@
 export const MAIN_URL: string = 'home';
+export const USER_MANAGEMENT_URL: string = "user-management";
 export const ICREDIT_URL: string = 'icredit';
 export const FIND_JOB_URL: string = 'home';
 export const MY_JOB_URL: string = 'myjob';

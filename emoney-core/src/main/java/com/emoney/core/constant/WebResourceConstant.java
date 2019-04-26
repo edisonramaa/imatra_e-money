@@ -47,6 +47,9 @@ public class WebResourceConstant {
         String SIGN_UP = "/sign-up";
         String GET_PROFILE = "/profile";
         String MY_DATA = "/my-data";
+        String CHANGE_STATUS = "/change-status/{userId}";
+        String ADD_CREDITS = "/add-credits";
+        String GET_APP_USERS = "/app-users";
 
 
     }

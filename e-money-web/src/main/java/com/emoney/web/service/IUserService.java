@@ -4,6 +4,8 @@ package com.emoney.web.service;
 import com.emoney.core.service.ICrudService;
 import com.emoney.web.model.UserEntity;
 
+import java.util.List;
+
 /**
  * Created by Anil Kumal on 02/02/2019.
  */
@@ -17,4 +19,10 @@ public interface IUserService extends ICrudService<UserEntity, Long> {
     UserEntity findByWalletId(String walletId);
 
     UserEntity findByEmail(String email);
+
+    Boolean changeStatus(Long UserId);
+
+    Boolean addCredits(Long UserId, Double credits);
+
+    List<UserEntity> getAppUsers();
 }

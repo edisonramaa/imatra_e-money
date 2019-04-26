@@ -33,6 +33,8 @@ public class UserEntity extends EntityBase {
     private Double balanceCredits;
     @Column(name = "reserve_credits")
     private Double reserveCredits;
+    @Column(name = "status")
+    private Boolean status;
 
     @Transient
     List<JobTransactionEntity> jobTransactionEntities;

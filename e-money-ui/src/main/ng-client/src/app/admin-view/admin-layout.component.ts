@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 import {Router} from "@angular/router";
 import {MatSidenav} from "@angular/material";
-import {ADMIN_URL, ICREDIT_URL, MAIN_URL, PROFILE_URL, REDEEM_URL} from "../core/utility/navigation-url";
+import {ADMIN_URL, ICREDIT_URL, MAIN_URL, PROFILE_URL, REDEEM_URL, USER_MANAGEMENT_URL} from "../core/utility/navigation-url";
 import {LoginService} from "../all-view/app-services/login.service";
 import {BenefitService} from "../all-view/app-services/benefit.service";
 
@@ -16,7 +16,7 @@ export class AdminLayoutComponent implements OnInit {
   sideNav: MatSidenav;
   headerTitle = "Benefit";
 
-  constructor(private _router: Router,  private _loginService:LoginService, private _benefitService:BenefitService) {
+  constructor(private _router: Router,  private _loginService:LoginService) {
   }
 
   ngOnInit(): void {
@@ -27,9 +27,17 @@ export class AdminLayoutComponent implements OnInit {
     let finalUrl = "/"+ADMIN_URL+  "/" + MAIN_URL;
     this._router.navigateByUrl(finalUrl);
   }
+
+  goToUserManagement() {
+    this.closeNavBar();
+    let finalUrl = "/"+ADMIN_URL+  "/" + USER_MANAGEMENT_URL;
+    this._router.navigateByUrl(finalUrl);
+  }
+
   logout() {
     this._loginService.logout();
   }
+
   openUserProfile() {
     let finalUrl = "/" + ADMIN_URL + "/" + PROFILE_URL;
     this.closeNavBar();

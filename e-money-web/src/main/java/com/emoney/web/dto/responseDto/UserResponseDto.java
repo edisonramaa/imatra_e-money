@@ -17,6 +17,7 @@ public class UserResponseDto extends ResponseDtoBase {
     private Boolean isAdmin;
     private List<CompletedJob> jobTransactionEntities;
     private String walletId;
+    private Boolean status;
     private Double balanceCredits;
 
 }
