@@ -42,26 +42,9 @@
           number: {{job.phoneNumber}}</p>
         <p *ngIf="job.address1 != null && job.address1 != ''" class="find-view-text-color">Address: {{job.address1}}
           <span *ngIf="job.address2 != null && job.address2 != ''">{{job.address2}}</span></p>
-        <lib-countdown
-          (daysChanged)="onDaysChanged($event, job)"
-          [isCustomTemplate]="isCustomTemplate"
-          (hoursChanged)="onHoursChanged($event, job)"
-          (minutesChanged)="onMinutesChanged($event, job)"
-          (secondsChanged)="onSecondsChanged($event, job)"
-          [date]="job.dueDate">
+        <p-time-counter [endDate]="job.dueDate"></p-time-counter>
           <div  class="row">
             <div  class="col s12">
-                <div class="class-left" >
-                  <table>
-                    <tr>
-                      <td class="lib-countdown-td">{{job.days}}d</td>
-                      <td class="lib-countdown-td">{{job.hours}}h</td>
-                      <td class="lib-countdown-td">{{job.minutes}}m</td>
-                      <td class="lib-countdown-td">{{job.seconds}}s</td>
-                    </tr>
-                  </table>
-                </div>
-
               <div style="float: right">
                 <button (click)="confirmApply(job)" *ngIf="!job.jobStatus && token" class="mat-stroked-button mat-warn"
                         id="apply-btn">Apply
@@ -70,7 +53,6 @@
                 </div>
             </div>
           </div>
-        </lib-countdown>
       </mat-expansion-panel>
     </mat-accordion>
   </mat-tab>

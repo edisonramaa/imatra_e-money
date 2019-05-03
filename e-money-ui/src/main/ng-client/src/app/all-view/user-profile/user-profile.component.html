@@ -9,7 +9,7 @@
     </mat-card>
     <div class="up-container">
         <p>Recent jobs:</p>
-      <div *ngIf="userProfileModel.jobTransactionEntities<=0">
+      <div *ngIf="userProfileModel.jobTransactionEntities.length<=0">
         <p>You Have not Completed any jobs.</p>
       </div>
         <mat-list role="list" *ngFor="let job of userProfileModel.jobTransactionEntities;" >
