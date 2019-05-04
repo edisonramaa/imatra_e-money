@@ -46,8 +46,8 @@ public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter 
         }
         String uri = request.getRequestURI();
         String accessToken;
-        String origin = request.getHeader("Origin");
-        response.setHeader("Access-Control-Allow-Origin", origin);
+        //String origin = request.getHeader("Origin");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "*");
         response.setHeader("Access-Control-Allow-Headers", "*");
         System.out.println("request Uri = " + uri);

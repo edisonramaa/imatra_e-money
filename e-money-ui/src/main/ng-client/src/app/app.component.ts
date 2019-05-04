@@ -43,7 +43,8 @@ export class AppComponent implements OnInit{
     });
 
     if (this.swUpdate.isEnabled) {
-      this.snackBar.open('Service Workers enabled', 'OK', {duration: 3000});
+      // this.snackBar.open('Service Workers enabled', 'OK', {duration: 3000});
+      console.log("Server Workers Enabled.");
     }
 
     //ask user to install pwa application
@@ -51,7 +52,7 @@ export class AppComponent implements OnInit{
       event.preventDefault();
 
       this.promptEvent = event;
-      const snackInstall = this.snackBar.open('Do you want to install the application to your device ?', 'Install', {duration: 3000});
+      const snackInstall = this.snackBar.open('Do you want to install the application to your device ?', 'Install', {duration: 6000});
 
       snackInstall.onAction().subscribe(() => {
         this.promptEvent.prompt();
