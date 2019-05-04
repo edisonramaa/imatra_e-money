@@ -1,9 +1,10 @@
 package com.emoney.web.config;
 
+import org.apache.tomcat.jdbc.pool.DataSource;
+import org.apache.tomcat.jdbc.pool.PoolProperties;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +15,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.PersistenceContext;
-import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,26 +42,26 @@ public class AppConfig {
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource getDataSource() {
 
-        DataSourceBuilder factory = DataSourceBuilder.create()
-                .driverClassName(this.driverClassName)
-                .username(this.userName)
-                .password(this.password)
-                .url(this.url);
-        return factory.build();
+//        DataSourceBuilder factory = DataSourceBuilder.create()
+//                .driverClassName(this.driverClassName)
+//                .username(this.userName)
+//                .password(this.password)
+//                .url(this.url);
+//        return factory.build();
 
 
-//        PoolProperties poolProperties = new PoolProperties();
-//        poolProperties.setUrl(this.url);
-//        poolProperties.setUsername(this.userName);
-//        poolProperties.setPassword(this.password);
-//        poolProperties.setDriverClassName(this.driverClassName);
-//
-//        //Configuration for auto re-connect
-//        poolProperties.setTestOnBorrow(true);
-//        poolProperties.setTestWhileIdle(true);
-//        poolProperties.setTimeBetweenEvictionRunsMillis(60000);
-//        poolProperties.setValidationQuery("SELECT 1");
-//        return new DataSource(poolProperties);
+        PoolProperties poolProperties = new PoolProperties();
+        poolProperties.setUrl(this.url);
+        poolProperties.setUsername(this.userName);
+        poolProperties.setPassword(this.password);
+        poolProperties.setDriverClassName(this.driverClassName);
+
+        //Configuration for auto re-connect
+        poolProperties.setTestOnBorrow(true);
+        poolProperties.setTestWhileIdle(true);
+        poolProperties.setTimeBetweenEvictionRunsMillis(60000);
+        poolProperties.setValidationQuery("SELECT 1");
+        return new DataSource(poolProperties);
     }
 
     @PersistenceContext
