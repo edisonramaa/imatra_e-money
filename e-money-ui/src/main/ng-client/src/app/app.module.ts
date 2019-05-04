@@ -10,7 +10,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {RequestInterceptor} from "./core/lib/interceptor/request.interceptor";
 import {SessionStorageService} from "./core/lib/services/session-storage.service";
 import {AuthGuard} from "./core/lib/services/auth-guard.service";
-import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from "@angular/material";
+import {ErrorStateMatcher, MatSnackBarModule, ShowOnDirtyErrorStateMatcher} from "@angular/material";
 import {HttpService} from "./core/lib/services/http.service";
 import {CustomValidator} from "./core/lib/services/custom-validator.service";
 import {EventService} from "./all-view/app-services/event.service";
@@ -25,6 +25,7 @@ import {AdminAuthGuardService} from "./core/lib/services/admin-auth-guard.servic
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
+    MatSnackBarModule,
     HttpClientModule
   ],
   providers: [{
