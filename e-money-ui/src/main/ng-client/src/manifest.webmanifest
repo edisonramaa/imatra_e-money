@@ -1,7 +1,7 @@
 {
   "name": "eKolikko",
   "short_name": "eKolikko",
-  "theme_color": "#1976d2",
+  "theme_color": "#ED6C41",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",

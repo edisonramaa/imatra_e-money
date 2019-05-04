@@ -1,6 +1,6 @@
 export const MAIN_URL: string = 'home';
 export const USER_MANAGEMENT_URL: string = "user-management";
-export const ICREDIT_URL: string = 'icredit';
+export const ICREDIT_URL: string = 'ekolikko';
 export const FIND_JOB_URL: string = 'home';
 export const MY_JOB_URL: string = 'myjob';
 export const PAY_URL: string = 'pay';
