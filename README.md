@@ -4,7 +4,7 @@ The application introduces an innovative way for the citizens of Imatra to do sm
 
 To give life to the idea, a software project has been implemented in the form of a progressive web application which is also suitable for mobile devices. Through the application, the people using it are able to post tasks, apply for tasks, get credits for the tasks done and give credits to people for doing the tasks, redeem different benefits with their credits, as well as transfer the credits to someone else using the application. 
 
-## Installation
+## How to run the Application
 
 The application has two parts: Front-end implemented with Angular 7, and the back-end done with Java Spring Boot. To have the application up and runningm you need to have the following pre-installed:
 
