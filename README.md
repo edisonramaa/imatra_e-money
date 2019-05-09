@@ -2,7 +2,7 @@
 
 The application introduces an innovative way for the citizens of Imatra to do small tasks for the community and for each other and in return to get paid in virtual credits for the tasks performed. Then, in turn, they could use those credits to pay for different services that the City of Imatra manages and provides.
 
-To give life to the idea, a software project has been implemented in the form of a progressive web application which is also suitable for mobile devices. Through the application, the people using it are able to post jobs, apply for jobs, get paid for jobs and pay people for doing the jobs, redeem different benefits with their credits, as well as transfer the credits to someone else using the application. 
+To give life to the idea, a software project has been implemented in the form of a progressive web application which is also suitable for mobile devices. Through the application, the people using it are able to post tasks, apply for tasks, get credits for the tasks done and give credits to people for doing the tasks, redeem different benefits with their credits, as well as transfer the credits to someone else using the application. 
 
 ## Installation
 
