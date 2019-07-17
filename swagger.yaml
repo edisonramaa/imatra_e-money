@@ -1,0 +1,637 @@
+---
+swagger: "2.0"
+info:
+  description: |
+    This is the API documentation of the Imatra ICT project **eKolikko**.
+    You may find additional information in the Introduction section as well as the RESTFUL API endpoints described above.
+    # Introduction
+    This API is documented in OpenAPI format and is based on the web application called eKolikko. The application introduces an innovative way for the citizens of Imatra to do small tasks for the community and for each other and in return to get paid in virtual credits for the tasks performed. Then, in turn, they could use those credits to pay for different services that the City of Imatra manages and provides.
+    This API documentation explains all the endpoints used to create the back-end of the eKolikko solution. You may find the code of eKolikko in the following link: [eKolikko source code](https://github.com/imatra/eKolikko).
+    # Cross-Origin Resource Sharing
+    This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with  [W3C spec](https://www.w3.org/TR/cors/).
+    And that allows cross-domain communication from the browser.
+    All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.
+    # Authentication
+    eKolikko offers an OAuth2 approach on authentication. It provides a secure way to authenticate and get the Token bearer to further use to communicate with the application.
+
+    OAuth2 - an open protocol to allow secure authorization in a simple
+    and standard method from web, mobile and desktop applications.
+    <!-- ReDoc-Inject: <security-definitions> -->
+  version: 1.0.0
+  title: eKolikko
+  license:
+    name: CC BY License
+    url: https://github.com/edisonramalut/imatra_e-money/blob/master/LICENSE
+  x-logo:
+    url: https://dtunlom52ggmx.cloudfront.net//sites/all/themes/custom/kada/logo.png
+    altText: Imatra logo
+host: etesti.imatra.fi
+basePath: /api/emoney/
+tags:
+- name: payment
+  description: Payment is responsible for anything related to credit management within the application.
+- name: user-rating
+  description: User Rating is responsible for anything related to user ratings within the application.
+- name: image
+  description: Image is responsible for anything related to Image uploads within the application.
+- name: user
+  description: User is responsible for anything related to managing user activities within the application.
+- name: benefit
+  description: Benefit is responsible for anything related to services that the City of Imatra has to provide for its citizens so they can use their credits.
+- name: job
+  description: Job is responsible for anything related to tasks that the users or the City of Imatra provides for other citizens.
+schemes:
+- https
+paths:
+  /benefit/save-benefit:
+    post:
+      tags:
+      - benefit
+      summary: Add a new benefit
+      description: Add new benefit from the admin for the citizens of Imatra. This allows them to use the benefits for their earned credits within the application.
+      operationId: createUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Benefit object that needs to be added to the appliction.
+        required: true
+        schema:
+          $ref: '#/definitions/Benefit'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseObj'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not found
+  /benefit/list:
+    get:
+      tags:
+      - benefit
+      summary: Get all Benefits
+      description: Returns the list of all benefits
+      operationId: getAllUsingGET
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseObj'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not found
+  /benefit/update-benefit:
+    put:
+      tags:
+      - benefit
+      summary: Update an existing benefit
+      description: Updates a benefit data using PUT request.
+      operationId: updateBenefitUsingPUT
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Benefit object that needs to be updated in the application
+        required: true
+        schema:
+          $ref: '#/definitions/Benefit'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseObj'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not found
+  /benefit/{id}:
+    get:
+      tags:
+      - benefit
+      summary: Find benefit by Id
+      description: Returns a single benefit
+      operationId: getUsingGET
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: ID of the benefit to return
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseObj'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not found
+  /benefit/delete:
+    delete:
+      tags:
+      - benefit
+      summary: Delete benefit
+      description: Delete a specific benefit
+      operationId: deleteUsingDELETE
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: ID of the benefit to delete
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseObj'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not found
+  /credits/my-wallet:
+    get:
+      tags:
+      - payment
+      summary: Get My wallet details
+      description: Get all details related to the authenticated user's waller.
+      operationId: myWalletUsingGET
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseObj'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not found
+  /credits/pay:
+    post:
+      tags:
+      - payment
+      summary: Perform a payment transaction
+      description: Perform a payment transaction for a job for a specific authenticated user.
+      operationId: payUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: QR code to determine which job is being used for the payment transaction.
+        required: true
+        schema:
+          $ref: '#/definitions/Payment'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseObj'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not found
+  /credits/payment-detail:
+    post:
+      tags:
+      - payment
+      summary: Get payment details
+      description: Get payment details for a specific QR-code that represents a specific job.
+      operationId: getPaymentDetailsUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: QR code to determine which job is being used for the payment transaction.
+        required: true
+        schema:
+          $ref: '#/definitions/Payment'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseObj'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not found
+  /credits/transfer:
+    post:
+      tags:
+      - payment
+      summary: Transfer credits
+      description: Transfer credits from one user (the authenticated user) to another.
+      operationId: payUsingPOST_1
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: QR code to determine which job is being used for the payment transaction.
+        required: true
+        schema:
+          $ref: '#/definitions/Transfer'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseObj'
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not found
+  /display/{type}/{fileName}:
+    get:
+      tags:
+      - image
+      summary: Get image
+      description: Get an image based on the file type and filename.
+      operationId: displayFileUsingGET
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: type
+        in: path
+        description: The type of the file
+        required: true
+        type: string
+      - name: fileName
+        in: path
+        description: The file name of the desired file
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              type: string
+              format: byte
+              pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not found
+  /upload:
+    post:
+      tags:
+      - image
+      summary: Upload a single image
+      description: The endpoint used to upload an image into the web application.
+      operationId: singleFileUploadUsingPOST
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      parameters:
+      - name: uploadFile
+        in: formData
+        description: The file uploaded to the system
+        required: true
+        type: file
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseObj'
+        201:
+          description: Created
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not found
+  /job/accept-applicant:
+    post:
+      tags:
+      - job
+      summary: Accept a job applicant
+      description: The endpoint used from an user to accept a job appicant for one of his/her jobs.
+      operationId: acceptJobUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: The JobApply object that contains applicantId and the jobId.
+        required: true
+        schema:
+          $ref: '#/definitions/JobApply'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ResponseObj'
+        201:
+          description: Created
+        401:
+          description: Unauthorized
+        403:
+          description: Forbidden
+        404:
+          description: Not found
+  /user/login:
+    get:
+      tags:
+      - user
+      summary: Logs user into the system
+      description: ""
+      operationId: loginUser
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - name: username
+        in: query
+        description: The user name for login
+        required: true
+        type: string
+      - name: password
+        in: query
+        description: The password for login in clear text
+        required: true
+        type: string
+      responses:
+        200:
+          description: successful operation
+          examples:
+            application/json: OK
+            application/xml: <message> OK </message>
+            text/plain: OK
+          headers:
+            X-Rate-Limit:
+              type: integer
+              format: int32
+              description: calls per hour allowed by the user
+            X-Expires-After:
+              type: string
+              format: date-time
+              description: date in UTC when toekn expires
+          schema:
+            type: string
+        400:
+          description: Invalid username/password supplied
+  /user/logout:
+    get:
+      tags:
+      - user
+      summary: Logs out current logged in user session
+      description: ""
+      operationId: logoutUser
+      produces:
+      - application/xml
+      - application/json
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+definitions:
+  ApiResponse:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      type:
+        type: string
+      message:
+        type: string
+  ResponseObj:
+    type: object
+    properties:
+      message:
+        type: string
+      page:
+        type: object
+        properties: {}
+      responseStatus:
+        type: boolean
+      result:
+        type: object
+        properties: {}
+  Id:
+    type: integer
+    format: int64
+  JobApply:
+    type: object
+    required:
+    - applicantId
+    - jobId
+    discriminator: jobApplyType
+    properties:
+      applicantId:
+        type: integer
+        format: int64
+        example: 5
+        description: The Applicant Id representing the user that applied for the job.
+      jobId:
+        type: integer
+        format: int64
+        example: 5
+        description: The Job id representing the job that the user has applied to.
+  Transfer:
+    type: object
+    required:
+    - receiverWalletId
+    - transferAmount
+    discriminator: transferType
+    properties:
+      receiverWalletId:
+        type: string
+        example: X53JJFS12
+        description: The Wallet ID representing the person who will receive the credits.
+      transferAmount:
+        type: number
+        format: double
+        example: 22.5
+        description: The amount of the credits that the authenticated user wants to transfer to the receiver.
+  Payment:
+    type: object
+    discriminator: paymentType
+    properties:
+      name:
+        type: string
+        example: qrcoderepresentingaservice
+        description: The QR code represented as a string after it has been parsed by the QR reader in the Front end.
+  Benefit:
+    type: object
+    required:
+    - beginReqTime
+    - credits
+    - description
+    - dueReqTime
+    - endDate
+    - latitude
+    - longitude
+    - name
+    - qrCode
+    - startDate
+    - streetAddress
+    discriminator: benefitType
+    properties:
+      name:
+        type: string
+        example: Swimming Pool
+        description: The name of the Benefit
+      description:
+        type: string
+        example: This is an example description for this benefit.
+        description: The description of the Benefit
+      streetAddress:
+        type: string
+        example: Punkkerikatu 2
+        description: The street address of the benefit.
+      startDate:
+        type: string
+        format: date
+        example: 2019-05-22T00:00:00.000Z
+        description: Start date of the benefit
+      beginReqTime:
+        type: string
+        example: "79200"
+        description: Start time of the benefit
+      endDate:
+        type: string
+        format: date
+        example: 2019-05-23T00:00:00.000Z
+        description: End date of the benefit
+      dueReqTime:
+        type: string
+        example: "79200"
+        description: End time of the benefit
+      latitude:
+        type: number
+        format: float
+        example: 22.55693
+        description: The latitude of the location of the benefit
+      longitude:
+        type: number
+        format: float
+        example: 60.55693
+        description: The longitude of the location of the benefit
+      credits:
+        type: number
+        format: double
+        example: 2.5
+        description: The credit value for this benefit
+      qrCode:
+        type: string
+        example: thisbenefitqrcode2019
+        description: The decoded QR-code string for this benefit after it has been read from the front-end.
+  User:
+    type: object
+    properties:
+      id:
+        description: User ID
+        $ref: '#/definitions/Id'
+      username:
+        type: string
+        example: John78
+        description: User supplied username
+        minLength: 4
+      firstName:
+        type: string
+        example: John
+        description: User first name
+        minLength: 1
+      lastName:
+        type: string
+        example: Smith
+        description: User last name
+        minLength: 1
+      email:
+        type: string
+        format: email
+        example: john.smith@example.com
+        description: User email address
+      password:
+        type: string
+        format: password
+        example: drowssaP123
+        description: User password, MUST contain a mix of upper and lower case letters, as well as digits
+        minLength: 8
+        pattern: (?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])
+      phone:
+        type: string
+        example: +1-202-555-0192
+        description: User phone number in international format
+        pattern: ^\+(?:[0-9]-?){6,14}[0-9]$
+        x-nullable: true
+      userStatus:
+        type: integer
+        format: int32
+        description: User status
+    xml:
+      name: User
+x-tagGroups:
+- name: Job management
+  tags:
+  - payment
+  - job
+- name: User Management
+  tags:
+  - user
+  - user-rating
+- name: Admin
+  tags:
+  - image
+  - benefit
+x-servers:
+- url: //etesti.imatra.fi/api/emoney
+  description: Development server
+- url: //eimatra.imatra.fi/api/emoney
+  description: Production server
