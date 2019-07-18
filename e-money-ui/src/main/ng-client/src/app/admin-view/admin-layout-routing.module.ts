@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
-import {ADD_BENEFIT_URL, EDIT_BENEFIT_URL, MAIN_URL,} from "../core/utility/navigation-url";
+import {ADD_BENEFIT_URL, EDIT_BENEFIT_URL, MAIN_URL, USER_MANAGEMENT_URL,} from "../core/utility/navigation-url";
 import {AdminLayoutComponent} from "./admin-layout.component";
 import {AdminAuthGuardService} from "../core/lib/services/admin-auth-guard.service";
 
@@ -19,6 +19,11 @@ const routes: Routes = [
       {
         path: EDIT_BENEFIT_URL,
         loadChildren: './add-benefit/add-benefit.module#AddBenefitModule',
+        canLoad: [AdminAuthGuardService]
+      },
+      {
+        path: USER_MANAGEMENT_URL,
+        loadChildren: './user-management/user-management.module#UserManagementModule',
         canLoad: [AdminAuthGuardService]
       },
 

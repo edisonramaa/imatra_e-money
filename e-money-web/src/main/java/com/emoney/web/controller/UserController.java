@@ -8,10 +8,7 @@ import com.emoney.core.model.ResponseObj;
 import com.emoney.core.model.TokenModel;
 import com.emoney.core.utils.TokenUtils;
 import com.emoney.core.utils.impl.BeanMapperImpl;
-import com.emoney.web.dto.requestDto.ChangePasswordRequestDto;
-import com.emoney.web.dto.requestDto.UserEmailRequestDto;
-import com.emoney.web.dto.requestDto.UserLoginRequestDto;
-import com.emoney.web.dto.requestDto.UserRequestDto;
+import com.emoney.web.dto.requestDto.*;
 import com.emoney.web.dto.responseDto.UserResponseDto;
 import com.emoney.web.model.UserEntity;
 import com.emoney.web.service.IUserService;
@@ -23,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -80,6 +78,18 @@ public class UserController extends ControllerBase {
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message("Your account has been created. Please go to login page to sign in.").build(), HttpStatus.OK);
     }
 
+    @PostMapping(WebResourceConstant.UserManagement.ADD_CREDITS)
+    public ResponseEntity<ResponseObj> addCredits(@RequestBody @Valid AddCreditsUserRequestDto userRequestDto) {
+        userService.addCredits(userRequestDto.getId(), userRequestDto.getCredits());
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message(userRequestDto.getCredits()+" credits have been added to the account.").build(), HttpStatus.OK);
+    }
+
+    @DeleteMapping(WebResourceConstant.UserManagement.CHANGE_STATUS)
+    public ResponseEntity<ResponseObj> changeStatus(@PathVariable Long userId) {
+        Boolean userStatus = userService.changeStatus(userId);
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(userId).message("User status changed to: "+ (userStatus ? "Active" : "Deactivated")).build(), HttpStatus.OK);
+    }
+
     @GetMapping(WebResourceConstant.UserManagement.GET_PROFILE)
     public ResponseEntity<ResponseObj> getProfile() {
         TokenModel tokenModel = TokenUtils.getTokenModel();
@@ -91,16 +101,15 @@ public class UserController extends ControllerBase {
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
     }
 
-    @GetMapping(WebResourceConstant.UserManagement.MY_DATA)
-    public ResponseEntity<ResponseObj> myData() {
-        TokenModel tokenModel = TokenUtils.getTokenModel();
-
-        if (tokenModel == null) {
-            throw new EmoneyException("Your session has been expired. Please sign in and try again");
+    @GetMapping(WebResourceConstant.UserManagement.GET_APP_USERS)
+    public ResponseEntity<ResponseObj> getAppUsers() {
+        List<UserEntity> appUsers = userService.getAppUsers();
+        if (appUsers.isEmpty()) {
+            throw new EmoneyException("App Users list is empty");
         }
-        UserEntity entities = userService.findOne(tokenModel.getUserId());
-        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entities)).message("Success").build(), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(appUsers)).message("Success").build(), HttpStatus.OK);
     }
+
 
     @PostMapping(WebResourceConstant.UserManagement.EMAIL)
     public ResponseEntity<ResponseObj> verifyUserByEmail(@RequestBody @Valid UserEmailRequestDto userEmailRequestDto) {

@@ -1,7 +1,7 @@
 {
-  "name": "ng-client",
-  "short_name": "ng-client",
-  "theme_color": "#1976d2",
+  "name": "eKolikko",
+  "short_name": "eKolikko",
+  "theme_color": "#ED6C41",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",

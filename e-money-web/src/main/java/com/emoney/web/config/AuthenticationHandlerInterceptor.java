@@ -1,10 +1,13 @@
 package com.emoney.web.config;
 
 import com.emoney.core.constant.WebResourceConstant;
+import com.emoney.core.model.ResponseObj;
 import com.emoney.core.utils.StringUtils;
 import com.emoney.core.utils.TokenUtils;
 import com.emoney.web.util.IEmoneyToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +28,6 @@ public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter 
         authorizationFreeuriList.add(WebResourceConstant.EMONEY.GET_ACTIVE_JOB);
         authorizationFreeuriList.add(WebResourceConstant.UserManagement.UM_AUTHENTICATE);
         authorizationFreeuriList.add(WebResourceConstant.UserManagement.SIGN_UP);
-        authorizationFreeuriList.add("/product");
-        authorizationFreeuriList.add("/category");
         authorizationFreeuriList.add("/user/create");
         authorizationFreeuriList.add("/upload");
         authorizationFreeuriList.add("/display");
@@ -46,8 +47,8 @@ public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter 
         }
         String uri = request.getRequestURI();
         String accessToken;
-        String origin = request.getHeader("Origin");
-        response.setHeader("Access-Control-Allow-Origin", origin);
+        //String origin = request.getHeader("Origin");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "*");
         response.setHeader("Access-Control-Allow-Headers", "*");
         System.out.println("request Uri = " + uri);
@@ -56,12 +57,21 @@ public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter 
         }
         accessToken = request.getHeader(WebResourceConstant.AUTHORIZATION_HEADER);
 
-        if (StringUtils.isNull(accessToken) && !isAuthFreeUri(uri) && uri.contains("/benefit/create")) {
+
+        if ((StringUtils.isNull(accessToken) && !isAuthFreeUri(uri)) || (StringUtils.isNull(accessToken) && (uri.contains("/benefit/create") || uri.contains("/benefit/save-benefit")))) {
             throw new Exception("Unauthorized access!!");
         }
 
         if (StringUtils.isNotNull(accessToken)) {
-            TokenUtils.setTokenModel(emoneyToken.parseToken(accessToken));
+            if (accessToken.contains("Bearer")) {
+                accessToken = accessToken.split("Bearer")[1];
+            }
+            try {
+                TokenUtils.setTokenModel(emoneyToken.parseToken(accessToken));
+            } catch(Exception e) {
+                throw new Exception("Unauthorized access!!");
+            }
+
             System.out.println("TokenUtils.getTokenModel() = " + TokenUtils.getTokenModel().toString());
         }
 

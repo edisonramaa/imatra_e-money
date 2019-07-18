@@ -12,7 +12,6 @@ export class LoginService extends FTBaseService {
   serviceApi: string = '/emoney/user';
   authUrl: string = '/auth';
   changePwdUrl: string = '/chhangepassword';
-  profileUrl: string = '/my-data';
 
   locationUrl = "http://ip-api.com/json";
 
@@ -44,9 +43,6 @@ export class LoginService extends FTBaseService {
     return this.httpService.postRequest(this.serviceApi + this.changePwdUrl, data);
   }
 
-  myData() {
-    return this.httpService.getRequest(this.serviceApi + this.profileUrl);
-  }
 
 
 }

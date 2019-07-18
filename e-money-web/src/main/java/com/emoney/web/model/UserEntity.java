@@ -3,6 +3,7 @@ package com.emoney.web.model;
 import com.emoney.core.model.EntityBase;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +34,9 @@ public class UserEntity extends EntityBase {
     private Double balanceCredits;
     @Column(name = "reserve_credits")
     private Double reserveCredits;
+    @Column(name = "status")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private Boolean status;
 
     @Transient
     List<JobTransactionEntity> jobTransactionEntities;

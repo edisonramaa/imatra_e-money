@@ -40,6 +40,7 @@ public class UserServiceImpl extends CrudServiceImpl<UserEntity, Long> implement
         if(entity.getIsAdmin() == null) {
             entity.setIsAdmin(false);
         }
+        entity.setStatus(true);
         entity.setBalanceCredits(1000.00);
         entity.setReserveCredits(0.00);
         entity.setWalletId(SecurityUtils.generateRandomString(4, 8).toUpperCase());
@@ -52,10 +53,30 @@ public class UserServiceImpl extends CrudServiceImpl<UserEntity, Long> implement
         UserEntity userToAuthenticate = this.userRepository.findByEmail(userEntity.getEmail());
         if (userToAuthenticate != null) {
             if (this.imatraEncoder.match(userEntity.getPassword(), userToAuthenticate.getPassword())) {
+                if (!userToAuthenticate.getStatus())
+                    throw new EmoneyException("User has been deactivated. Please contact your administrator.");
                 return userToAuthenticate;
             }
         }
         return null;
+    }
+
+    @Override
+    public Boolean changeStatus(Long id) {
+        return this.userRepository.changeStatus(id);
+    }
+
+    @Override
+    public Boolean addCredits(Long userId, Double credits) {
+        UserEntity user = this.userRepository.findOne(userId);
+        user.setBalanceCredits(user.getBalanceCredits()+credits);
+        super.update(user);
+        return true;
+    }
+
+    @Override
+    public List<UserEntity> getAppUsers() {
+       return this.userRepository.getAppUsers();
     }
 
     @Override

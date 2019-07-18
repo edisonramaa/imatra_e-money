@@ -13,16 +13,16 @@ import {
   MatNativeDateModule,
   MatSidenavModule,
   MatSnackBarModule,
+  MatTableModule,
   MatTabsModule,
   MatToolbarModule
 } from "@angular/material";
 import {MatInputModule} from '@angular/material/input';
-import {CountDownModule} from 'ng6-countdown/dist/ng6-countdown-lib';
-import {CountdownTimerModule} from "angular-countdown-timer";
 import {ZXingScannerModule} from "@zxing/ngx-scanner";
 import {BarRatingModule} from "ngx-bar-rating";
 import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {TimecounterModule} from "../lib/timecounter/timecounter";
 
 @NgModule({
   imports: [
@@ -36,8 +36,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatExpansionModule,
     MatDividerModule,
     ZXingScannerModule,
-    CountDownModule,
-    CountdownTimerModule,
     ZXingScannerModule,
     MatInputModule,
     MatCardModule,
@@ -49,7 +47,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    TimecounterModule
   ],
   exports: [
     MatButtonModule,
@@ -61,8 +61,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MatTabsModule,
     MatExpansionModule,
     MatDividerModule,
-    CountDownModule,
-    CountdownTimerModule,
     ZXingScannerModule,
     MatInputModule,
     MatCardModule,
@@ -74,7 +72,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    TimecounterModule
   ],
 })
 export class CustomMaterialModule {
