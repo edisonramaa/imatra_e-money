@@ -11,6 +11,7 @@ import lombok.Setter;
 public class DtoBase extends ModelBase {
 
     private Long version;
+    private Boolean deleted;
 
 
 }

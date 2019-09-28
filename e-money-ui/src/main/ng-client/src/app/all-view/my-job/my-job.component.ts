@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {CREATE_JOB_URL, ICREDIT_URL} from "../../core/utility/navigation-url";
+import {CREATE_JOB_URL, ICREDIT_URL, PROFILE_URL} from "../../core/utility/navigation-url";
 import {ResponseModel} from "../../core/lib/model/response.model";
 import {JobService} from "../app-services/job.service";
 import {JobModel} from "../models/job.model";
@@ -9,6 +9,7 @@ import {MatDialog, MatSnackBar} from "@angular/material";
 import {PictureDialogComponent} from "../../core/lib/components/picture-dialog/picture-dialog.component";
 import {ApiConstant} from "../../core/utility/api.constant";
 import {ConfirmDialogComponent} from "../../core/lib/components/confirm-dialog/confirm-dialog.component";
+import {SessionStorageService} from "../../core/lib/services/session-storage.service";
 
 @Component({
   selector: 'app-my-job',
@@ -17,23 +18,33 @@ import {ConfirmDialogComponent} from "../../core/lib/components/confirm-dialog/c
 })
 export class MyJobComponent implements OnInit {
   myJobsList: JobModel[];
+  hasAdminAccess: boolean = false;
 
   constructor(private _router: Router,
               private _jobService: JobService,
               private _snackBar: MatSnackBar,
-              private _dialog: MatDialog
+              private _dialog: MatDialog,
+              private _sessionStorageService: SessionStorageService
   ) {
     this.myJobsList = [];
+    this.hasAdminAccess = false;
   }
 
   ngOnInit() {
-    this._jobService.getMyJobs().then((res: ResponseModel) => {
-      if (res.responseStatus) {
-        this.myJobsList = res.result;
-      } else {
-        this.myJobsList = [];
-      }
-    });
+    //This part is only because in this current version, citizens can't post jobs. Can be changed in the future.
+    if (this._sessionStorageService.getToken() && this._sessionStorageService.getIsAdmin() === "true") {
+      this.hasAdminAccess = true;
+      this._jobService.getMyJobs().then((res: ResponseModel) => {
+          if (res.responseStatus) {
+            this.myJobsList = res.result;
+        } else {
+          this.myJobsList = [];
+        }
+      });
+    } else {
+      this.myJobsList = [];
+      this.hasAdminAccess = false;
+    }
   }
 
   createJob(){
@@ -46,7 +57,14 @@ export class MyJobComponent implements OnInit {
       job.pendingStatus = true;
       if (res.responseStatus) {
         job.appliedJobsList = res.result;
+
+
         job.appliedJobsList.forEach(function(applicant) {
+          if (applicant.applicantProfileImageUrl == null) {
+            applicant.applicantProfileImageUrl = ApiConstant.IMAGE_DISPLAY + 'PROFILE/default.png';
+          } else {
+            applicant.applicantProfileImageUrl = ApiConstant.IMAGE_DISPLAY + 'PROFILE/' + `${applicant.applicantProfileImageUrl}`;
+          }
           if (applicant.status === "APPROVED") {
             job.approvedStatus = false;
           } else if (applicant.status === "APPLIED") {
@@ -55,6 +73,11 @@ export class MyJobComponent implements OnInit {
         });
       }
     });
+  }
+
+  openUserProfile(applicantId) {
+    let finalUrl = "/" + ICREDIT_URL + "/" + PROFILE_URL+"/"+ applicantId;
+    this._router.navigateByUrl(finalUrl);
   }
 
   acceptApplicant(applicant: JobTransactionModel, job: JobModel) {
@@ -134,7 +157,7 @@ export class MyJobComponent implements OnInit {
     const dialogRef = this._dialog.open(PictureDialogComponent, {
       width: '350px',
       maxWidth: '85vw',
-      data: {title: "QR CODE: " + job.jobTitle, content: finalApi}
+      data: {title: "QR CODE: " + job.category.name, content: finalApi}
     });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {

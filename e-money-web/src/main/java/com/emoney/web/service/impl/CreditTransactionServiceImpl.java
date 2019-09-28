@@ -103,10 +103,10 @@ public class CreditTransactionServiceImpl extends CrudServiceImpl<CreditTransact
             throw new EmoneyException("Invalid QR Code or You've not applied for this job, ever.");
         }
         if (JobApplyStatus.APPROVED.getJobApplyStatus().equalsIgnoreCase(jobTransactionEntity.getStatus())) {
-            deductionAmt = this.calculateTransactionAmt(jobEntity.getCredits(), 30.00);
+            deductionAmt = this.calculateTransactionAmt(jobEntity.getCategory().getCredits(), 30.00);
             jobTransactionEntity.setStatus(JobApplyStatus.STARTED.getJobApplyStatus());
         } else if (JobApplyStatus.STARTED.getJobApplyStatus().equalsIgnoreCase(jobTransactionEntity.getStatus())) {
-            deductionAmt = this.calculateTransactionAmt(jobEntity.getCredits(), 70.00);
+            deductionAmt = this.calculateTransactionAmt(jobEntity.getCategory().getCredits(), 70.00);
             jobTransactionEntity.setStatus(JobApplyStatus.COMPLETED.getJobApplyStatus());
         } else {
             throw new EmoneyException("Invalid QR Code or You are not authorized person to receive the payment.");

@@ -41,7 +41,7 @@ public class WebResourceConstant {
      */
     public interface UserManagement {
         String UM_AUTHENTICATE = "/auth";
-        String CHANGE_PASSWORD = "/chhangepassword";
+        String CHANGE_PASSWORD = "/changepassword";
         String EMAIL = "/email";
         String GET_PROFILE_DETAIL = "/profile";
         String SIGN_UP = "/sign-up";
@@ -50,6 +50,7 @@ public class WebResourceConstant {
         String CHANGE_STATUS = "/change-status/{userId}";
         String ADD_CREDITS = "/add-credits";
         String GET_APP_USERS = "/app-users";
+        String CHANGE_PROFILE_PICTURE = "/change-photo";
 
 
     }
@@ -66,6 +67,9 @@ public class WebResourceConstant {
         String GET_MY_JOBS = "/my-jobs";
         String GET_PERSONAL_RATINGS = "/my-ratings";
         String GET_WORKER_RATINGS = "/worker-ratings";
+        String JOB_CATEGORY = EMONEY_BASE + "/job-category";
+        String SAVE_JOB_CATEGORY = JOB_CATEGORY + "/create";
+        String EDIT_JOB_CATEGORY = JOB_CATEGORY + "/edit/{jobCategoryId}";
         String BENEFIT = EMONEY_BASE + "/benefit";
         String SAVE_BENEFIT = "/save-benefit";
         String UPDATE_BENEFIT = "/update-benefit";

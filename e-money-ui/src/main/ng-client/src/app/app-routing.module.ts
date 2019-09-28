@@ -6,7 +6,7 @@ const routes: Routes = [
   {path: 'icredit', loadChildren: './all-view/layout.module#LayoutModule'},
   {path: 'admin', loadChildren: './admin-view/admin-layout.module#AdminLayoutModule'},
   {path: 'login', loadChildren: './login/login.module#LoginModule'},
-  {path: 'sign-up', loadChildren: './sign-up/sign-up.module#SignUpModule'}
+  {path: 'sign-up', loadChildren: './sign-up/sign-up.module#SignUpModule'},
   //{path: '**', redirectTo: 'login'}
 
 

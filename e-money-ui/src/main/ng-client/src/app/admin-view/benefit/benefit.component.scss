@@ -18,9 +18,10 @@ button.edit, button.delete {
   color: white;
   font-weight: lighter;
   z-index: 9999;
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 20px;
+
 }
 
 #benefits.msg {
@@ -47,4 +48,7 @@ button.edit, button.delete {
 
 #qr-code-text {
   margin-top: 5px;
+}
+.center {
+  text-align: center;
 }

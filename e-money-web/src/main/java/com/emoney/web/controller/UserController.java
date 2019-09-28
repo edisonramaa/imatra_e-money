@@ -4,8 +4,11 @@ package com.emoney.web.controller;
 import com.emoney.core.constant.WebResourceConstant;
 import com.emoney.core.controller.ControllerBase;
 import com.emoney.core.exception.EmoneyException;
+import com.emoney.core.model.FileInfoModel;
 import com.emoney.core.model.ResponseObj;
 import com.emoney.core.model.TokenModel;
+import com.emoney.core.utils.GlobalSettingUtils;
+import com.emoney.core.utils.MultiPartFileUtils;
 import com.emoney.core.utils.TokenUtils;
 import com.emoney.core.utils.impl.BeanMapperImpl;
 import com.emoney.web.dto.requestDto.*;
@@ -13,12 +16,18 @@ import com.emoney.web.dto.responseDto.UserResponseDto;
 import com.emoney.web.model.UserEntity;
 import com.emoney.web.service.IUserService;
 import com.emoney.web.util.IEmoneyToken;
+import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.*;
+import java.net.URLConnection;
+import java.sql.SQLException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,7 +93,7 @@ public class UserController extends ControllerBase {
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message(userRequestDto.getCredits()+" credits have been added to the account.").build(), HttpStatus.OK);
     }
 
-    @DeleteMapping(WebResourceConstant.UserManagement.CHANGE_STATUS)
+    @PostMapping(WebResourceConstant.UserManagement.CHANGE_STATUS)
     public ResponseEntity<ResponseObj> changeStatus(@PathVariable Long userId) {
         Boolean userStatus = userService.changeStatus(userId);
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(userId).message("User status changed to: "+ (userStatus ? "Active" : "Deactivated")).build(), HttpStatus.OK);
@@ -110,7 +119,16 @@ public class UserController extends ControllerBase {
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(appUsers)).message("Success").build(), HttpStatus.OK);
     }
 
-
+    @PostMapping(WebResourceConstant.UserManagement.CHANGE_PROFILE_PICTURE)
+    public ResponseEntity<ResponseObj> changeProfilePicture(@RequestBody @Valid UserProfileRequestDto userProfileRequestDto) {
+        try {
+            userService.updateProfilePicture(userProfileRequestDto.getImage());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(e.getMessage()).build(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result("Success").build(), HttpStatus.OK);
+    }
     @PostMapping(WebResourceConstant.UserManagement.EMAIL)
     public ResponseEntity<ResponseObj> verifyUserByEmail(@RequestBody @Valid UserEmailRequestDto userEmailRequestDto) {
         UserEntity userEntity = this.userService.findByEmail(userEmailRequestDto.getEmail());

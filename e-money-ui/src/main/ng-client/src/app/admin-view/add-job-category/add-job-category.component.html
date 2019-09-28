@@ -1,0 +1,35 @@
+<form style="padding-top: 15px;" [formGroup]="jobCategoryFormGroup" *ngIf="jobCategoryModel">
+  <mat-form-field>
+    <input matInput name="name" formControlName="name" placeholder="Job category name" type="text">
+  <mat-error
+        *ngIf="jobCategoryFormGroup.controls['name'].hasError('required')">
+        Job category name is required.
+      </mat-error>
+    <mat-error
+      *ngIf="jobCategoryFormGroup.controls['name'].hasError('pattern')">
+      Please enter valid name starting with a letter (Special Characters are not allowed).
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput name="description" formControlName="description" placeholder="Job category description"></textarea>
+  <mat-error
+        *ngIf="jobCategoryFormGroup.controls['description'].hasError('required')">
+        Job category description is required.
+      </mat-error>
+
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput name="credits" formControlName="credits" placeholder="Credits" type="number">
+  <mat-error
+        *ngIf="jobCategoryFormGroup.controls['credits'].hasError('required')">
+        Job category Credits is required.
+      </mat-error>
+  </mat-form-field>
+
+  <button mat-button type="submit" [disabled]="jobCategoryFormGroup.invalid || disableSubmitBtn" (click)="onSubmit()">
+    {{isUpdateMode?'Update job category': 'Create job category'}}
+  </button>
+
+</form>

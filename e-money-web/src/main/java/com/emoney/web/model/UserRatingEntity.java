@@ -3,12 +3,14 @@ package com.emoney.web.model;
 import com.emoney.core.model.EntityBase;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
+@Where(clause = "deleted = false")
 @Table(name = "user_rating")
 public class UserRatingEntity extends EntityBase {
     @ManyToOne(fetch = FetchType.LAZY)

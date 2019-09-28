@@ -2,6 +2,7 @@ package com.emoney.core.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -16,6 +17,9 @@ public class EntityBase extends ModelBase {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
+
+    @Column(name = "deleted", nullable = false, columnDefinition = "BOOLEAN default false")
+    private boolean deleted = false;
 
     @Version
     @Column(name = "version")

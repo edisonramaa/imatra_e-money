@@ -3,17 +3,16 @@
  */
 import {BaseFtModel} from "../../core/lib/model/base-ft.model";
 import {JobTransactionModel} from "./job-transaction.model";
+import {JobCategoryModel} from "./job-category.model";
 
 
 export class JobModel extends BaseFtModel {
-  jobTitle: string;
-  description: string;
+  category: JobCategoryModel;
   noOfPeople: number;
   dueDate: string;
   postedDate: Date;
   endTime: string;
   dueTime: string;
-  credits: number;
   address1: string;
   address2: string;
   postCode: string;

@@ -1,5 +1,5 @@
 <mat-list id="benefits">
-  <div class="msg" *ngIf="benefitList.length==0"><span>No Benefits to show.</span></div>
+  <div class="msg" *ngIf="benefitList.length==0" class="center"><span>No Benefits to show.</span></div>
   <div *ngFor="let benefit of benefitList">
     <mat-list-item>
       <h2 matLine style="color: #47525E;"><strong>{{benefit.name}}</strong></h2>

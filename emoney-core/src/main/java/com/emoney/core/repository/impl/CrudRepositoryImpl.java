@@ -35,6 +35,7 @@ public class CrudRepositoryImpl<T, ID extends Serializable> implements ICrudRepo
     @Override
     public <S extends T> S update(S entity) {
         entityManager.merge(entity);
+        entityManager.flush();
         return entity;
     }
 

@@ -8,6 +8,7 @@ export class JobTransactionModel extends BaseFtModel {
   applicantId: number;
   jobId: number;
   applicantName: string;
+  applicantProfileImageUrl: string;
   jobTitle: string;
   status: string;
 }

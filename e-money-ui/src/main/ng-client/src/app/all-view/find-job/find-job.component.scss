@@ -54,8 +54,8 @@
   margin-left: 2px;
 }
 
-agm-map {
-  height: 800px;
+#find-job agm-map {
+  height: 600px;
 }
 .agm-map-container-inner .sebm-google-map-container-inner{
   overflow: visible;
@@ -152,9 +152,6 @@ mat-tab-group#find-job {
   height: 100% !important;
 }
 
-#find-job /deep/ agm-map {
-  height: -webkit-fill-available !important;
-}
 
 #find-job /deep/ .agm-map-container-inner > div {
   height: -webkit-fill-available !important;

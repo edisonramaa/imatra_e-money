@@ -9,6 +9,7 @@ import lombok.Setter;
 public class JobTransactionResponseDto extends RequestDtoBase {
     private Long applicantId;
     private String applicantName;
+    private String applicantProfileImageUrl;
     private Long jobId;
     private String jobTitle;
     private String status;

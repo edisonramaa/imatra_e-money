@@ -1,0 +1,21 @@
+<form [formGroup]="myform" (submit)="submit()" fxFlex="100">
+<h1 id="qr-modal-title" mat-dialog-title>{{data.title}}</h1>
+<div class="qr-modal-divider"></div>
+<div mat-dialog-content id="qr-image-container">
+  <div *ngIf="myform.controls['BlobImage'].hasError('required')" id="imagePreview">
+    <img height="200px" width="200px" [src]="data.content"/>
+  </div>
+  <div>
+      <div fxFlex="500px" fxLayoutAlign="center center" fxLayout="column" fxFlexOffset="calc(50% - 250px)" fxFlex.xs="100" fxFlexOffset.xs="0"
+           style="padding: 10px;">
+        <app-custom-image-form-control *ngIf="data.isMyProfile" formControlName="BlobImage" [responseType]="'blob'"></app-custom-image-form-control>
+      </div>
+  </div>
+</div>
+<div class="qr-modal-divider"></div>
+<div id="qr-ok-btn-container" mat-dialog-actions>
+  <button id="download-qr-btn" mat-button [mat-dialog-close]="true" cdkFocusInitial>{{data.isMyProfile ? "Cancel" : "OK"}}</button>
+  <button class="qr-ok-btn" *ngIf="data.isMyProfile && myform.controls['BlobImage'].hasError('required')" type="button" fxFlex mat-button cdkFocusInitial><mat-icon>save</mat-icon> Save</button>
+  <button class="qr-ok-btn" *ngIf="data.isMyProfile && !myform.controls['BlobImage'].hasError('required')" type="submit" fxFlex mat-button cdkFocusInitial><mat-icon>save</mat-icon> Save</button>
+</div>
+</form>

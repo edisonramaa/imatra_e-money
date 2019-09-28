@@ -14,7 +14,7 @@ export class UserManagementService extends FTBaseService {
 
 
   changeStatus(id: number) {
-    return this.httpService.deleteRequest(this.serviceApi + '/change-status/'+id);
+    return this.httpService.postRequest(this.serviceApi + '/change-status/'+id, []);
   }
 
   addCredits(data) {

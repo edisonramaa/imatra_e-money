@@ -7,7 +7,7 @@ import {
   MAIN_URL,
   MY_JOB_URL,
   PAY_URL,
-  PROFILE_URL,
+  PROFILE_URL, PROFILE_URL_USER,
   REDEEM_URL,
   SCAN_CODE,
   SERVICE_URL,
@@ -31,6 +31,11 @@ const routes: Routes = [
           {path: SCAN_CODE, loadChildren: './scanner/scanner.module#ScannerModule', canLoad: [AuthGuard]},
           {
             path: PROFILE_URL,
+            loadChildren: './user-profile/user-profile.module#UserProfileModule',
+            canLoad: [AuthGuard]
+          },
+          {
+            path: PROFILE_URL_USER,
             loadChildren: './user-profile/user-profile.module#UserProfileModule',
             canLoad: [AuthGuard]
           },

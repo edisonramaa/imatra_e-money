@@ -2,9 +2,13 @@ package com.emoney.web.service.impl;
 
 
 import com.emoney.core.exception.EmoneyException;
+import com.emoney.core.model.TokenModel;
 import com.emoney.core.security.ImatraEncoder;
 import com.emoney.core.service.impl.CrudServiceImpl;
+import com.emoney.core.utils.GlobalSettingUtils;
+import com.emoney.core.utils.MultiPartFileUtils;
 import com.emoney.core.utils.SecurityUtils;
+import com.emoney.core.utils.TokenUtils;
 import com.emoney.web.model.JobTransactionEntity;
 import com.emoney.web.model.UserEntity;
 import com.emoney.web.repository.IUserRepository;
@@ -13,6 +17,8 @@ import com.emoney.web.service.IUserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -80,6 +86,20 @@ public class UserServiceImpl extends CrudServiceImpl<UserEntity, Long> implement
     }
 
     @Override
+    public void updateProfilePicture(String imageBytes) throws IOException {
+        TokenModel tokenModel = TokenUtils.getTokenModel();
+        Base64.Decoder decoder = Base64.getDecoder();
+        byte[] decodedByte = decoder.decode(imageBytes.split(",")[1]);
+        String newFilename = MultiPartFileUtils.getImageName(decodedByte);
+        String folderLocation = GlobalSettingUtils.getGlobalSettingByKey(GlobalSettingUtils.IMAGE_UPLOAD_LOCATION) + GlobalSettingUtils.getGlobalSettingByKey(GlobalSettingUtils.PROFILE_PICTURE);
+        MultiPartFileUtils.writeandRenameFile(GlobalSettingUtils.getGlobalSettingByKey(GlobalSettingUtils.ROOT_UPLOAD_LOCATION),folderLocation,decodedByte,newFilename);
+        UserEntity user = this.userRepository.findOne(tokenModel.getUserId());
+        
+        user.setProfileImageUrl(newFilename);
+        super.update(user);
+    }
+
+    @Override
     public Boolean changePassword(String oldPassword, String newPassword, Long userId) {
 
         UserEntity umUserEntity = userRepository.findOne(userId);
@@ -94,7 +114,7 @@ public class UserServiceImpl extends CrudServiceImpl<UserEntity, Long> implement
     @Override
     public UserEntity getProfile(Long userId){
 
-        UserEntity umUserEntity = userRepository.findOne(userId);
+       UserEntity umUserEntity = userRepository.findOne(userId);
        if (umUserEntity != null){
            List<JobTransactionEntity> jobTransactionEntities = this.jobTransactionService.getMyCompletedJobs(userId);
            umUserEntity.setJobTransactionEntities(jobTransactionEntities);

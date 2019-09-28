@@ -8,6 +8,9 @@ import {PictureDialogModule} from "../../core/lib/components/picture-dialog/pict
 import {ConfirmDialogComponent} from "../../core/lib/components/confirm-dialog/confirm-dialog.component";
 import {ConfirmDialogModule} from "../../core/lib/components/confirm-dialog/confirm-dialog.module";
 import {UserManagementService} from "../../all-view/app-services/user-management.service";
+import {InputDialogComponent} from "../../core/lib/components/input-dialog/input-dialog.component";
+import {InputDialogModule} from "../../core/lib/components/input-dialog/input-dialog.module";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -15,11 +18,13 @@ import {UserManagementService} from "../../all-view/app-services/user-management
     CustomMaterialModule,
     UserManagementRoutingModule,
     PictureDialogModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputDialogModule,
+    FormsModule
   ],
   declarations: [UserManagementComponent],
   providers: [UserManagementService],
-  entryComponents: [PictureDialogComponent, ConfirmDialogComponent]
+  entryComponents: [PictureDialogComponent, ConfirmDialogComponent, InputDialogComponent]
 
 })
 export class UserManagementModule {

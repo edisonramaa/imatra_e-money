@@ -4,6 +4,7 @@ package com.emoney.web.service;
 import com.emoney.core.service.ICrudService;
 import com.emoney.web.model.UserEntity;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -25,4 +26,6 @@ public interface IUserService extends ICrudService<UserEntity, Long> {
     Boolean addCredits(Long UserId, Double credits);
 
     List<UserEntity> getAppUsers();
+
+    void updateProfilePicture(String imageBytes) throws IOException;
 }

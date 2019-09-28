@@ -9,6 +9,7 @@ import {Address} from "ngx-google-places-autocomplete/objects/address";
 import {ALPHA_NUMERIC} from "../../core/lib/services/custom-validator.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ADMIN_URL, MAIN_URL} from "../../core/utility/navigation-url";
+import {EventService} from "../../all-view/app-services/event.service";
 
 
 @Component({
@@ -33,7 +34,8 @@ export class AddBenefitComponent implements OnInit {
               private _snackBar: MatSnackBar,
               private _datePipe: DatePipe,
               private _activatedRoute: ActivatedRoute,
-              private _router: Router
+              private _router: Router,
+              private _eventService : EventService
   ) {
     //this.benefitModel = new BenefitModel();
     this.disableSubmitBtn = false;
@@ -41,10 +43,16 @@ export class AddBenefitComponent implements OnInit {
 
   ngOnInit() {
     this.getBenefit();
-
   }
-
+  setHeader() {
+    if (this.isUpdateMode) {
+      this._eventService.setHeader("Update Benefit");
+    } else {
+      this._eventService.setHeader("Add Benefit");
+    }
+  }
   initForm() {
+    this.setHeader();
     this.benefitFormGroup = new FormGroup({});
     this.benefitFormGroup = this._formBuilder.group({
       id: this.benefitModel.id,

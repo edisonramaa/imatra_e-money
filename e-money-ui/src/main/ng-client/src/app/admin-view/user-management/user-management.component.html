@@ -1,36 +1,38 @@
-<table mat-table [dataSource]="userList" class="mat-elevation-z8">
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
+<table *ngIf="userList.length>0" mat-table [dataSource]="userList" class="mat-elevation-z8">
 
   <!-- Email Column -->
   <ng-container matColumnDef="email">
     <th mat-header-cell *matHeaderCellDef> Email </th>
-    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
   </ng-container>
 
-  <!-- Credits Column -->
-  <ng-container matColumnDef="credits">
-    <th mat-header-cell *matHeaderCellDef> Credits </th>
-    <td mat-cell *matCellDef="let element"> {{element.balanceCredits}} </td>
-  </ng-container>
 
   <!-- Status Column -->
-  <ng-container matColumnDef="status">
-    <th mat-header-cell *matHeaderCellDef> Status </th>
-    <td mat-cell *matCellDef="let element"> {{element.status ? "Active" : "Deactivated"}} </td>
-  </ng-container>
-  <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef> Action </th>
-    <td mat-cell *matCellDef="let element">
-      <button (click)="confirmStatusChange(element.id)" mat-button color="primary">{{element.status ? "Ban User" : "Un-Ban User"}}</button>
-      <button (click)="confirmStatusChange(element.id)" mat-button color="primary">Add Credits</button>
-    </td>
+  <ng-container matColumnDef="status" style="text-align: end;">
+    <th style="text-align: end;" mat-header-cell *matHeaderCellDef> Status </th>
+
   </ng-container>
 
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<p style="text-align: center" *ngIf="userList.length == 0">No users in the database yet.</p>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let user of userList;">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ user.email }}
+      </mat-panel-title>
+      <span class="credit-amount" style="margin-right: 10px;">{{ user.status ? "Active" : "Deactivated" }}</span>
+    </mat-expansion-panel-header>
+    <div>
+            <p>Name: {{user.name}}</p>
+            <p class="sub-header-jobs">Number of credits: {{user.balanceCredits}}</p>
+          </div>
+          <div id="buttons-wrappers">
+            <button  style="width: 33%;margin-right: 2px;float: left;background-color: #ED6C41;"  (click)="addCreditsDialog(user.id)" mat-flat-button color="warn" >Add Credits</button>
+
+            <button style="width: 33%;margin-right: 2px;float: left;background-color: #ED6C41;" (click)="goToUserProfile(user.id)" color="warn" mat-flat-button >Profile</button>
+            <button style="width: 32%;margin-right: 2px;float: left;" (click)="confirmStatusChange(user.id)" color="warn" mat-flat-button >{{user.status ? "Deactivate" : "Activate"}}</button>
+          </div>
+ </mat-expansion-panel>
+</mat-accordion>

@@ -34,7 +34,10 @@
             </table>
         </mat-tab>
         <mat-tab label="Transfer">
-          <form [formGroup]="transferFormGroup" method="post">
+          <div *ngIf="!hasAdminAccess">
+            <p style="text-align: center">Currently, only the City of Imatra can transfer credits.</p>
+          </div>
+          <form *ngIf="hasAdminAccess" [formGroup]="transferFormGroup" method="post">
             <img class="center" height="100"
                  src="../../../assets/images/digital-wallet1.png"
                  style="margin-top: 75px;" width="100"/>

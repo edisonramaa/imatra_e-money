@@ -7,6 +7,8 @@ import {ConfirmDialogComponent} from "../../core/lib/components/confirm-dialog/c
 import {UserManagementService} from "../../all-view/app-services/user-management.service";
 import {UserProfileModel} from "../../all-view/models/user-profile.model";
 import {EventService} from "../../all-view/app-services/event.service";
+import {InputDialogComponent} from "../../core/lib/components/input-dialog/input-dialog.component";
+import {ICREDIT_URL, PROFILE_URL} from "../../core/utility/navigation-url";
 
 @Component({
   selector: 'app-user-management',
@@ -15,7 +17,7 @@ import {EventService} from "../../all-view/app-services/event.service";
 })
 export class UserManagementComponent implements OnInit {
   userList: UserProfileModel[];
-  displayedColumns: string[] = ['name', 'email', 'credits', 'status','action'];
+  displayedColumns: string[] = ['email', 'status'];
 
   constructor(
     private _router: Router,
@@ -43,7 +45,7 @@ export class UserManagementComponent implements OnInit {
     });
   }
   setHeader() {
-    this._eventService.setHeader("User Management");
+    this._eventService.setHeader("Users");
   }
   openStatusChangeDialog(id: number) : void {
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {
@@ -56,6 +58,34 @@ export class UserManagementComponent implements OnInit {
         this.changeStatus(id);
       }
 
+    });
+  }
+  goToUserProfile(userId: number) : void {
+    let finalUrl = "/" + ICREDIT_URL + "/" + PROFILE_URL+"/"+ userId;
+    this._router.navigateByUrl(finalUrl);
+  }
+  addCreditsDialog(id: number) : void {
+   // new InputDialogComponent(this._dialog).openDialog();
+    const dialogRef = this._dialog.open(InputDialogComponent, {
+      width: '350px',
+      data: {title: "Add credits", content: "How many credits do you want to add?"}
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result > 1) {
+        this.addCreditsToUser(id, result);
+      } else {
+        this.showMsg("The amount needs to be above 0");
+      }
+    });
+  }
+
+  addCreditsToUser(id: number, result: number) : void {
+    this._userManagementService.addCredits({id:id,credits:result}).then((res: ResponseModel) => {
+      if(res.responseStatus) {
+        this.getAppUsers();
+      }
+      this.showMsg(res.message);
     });
   }
 

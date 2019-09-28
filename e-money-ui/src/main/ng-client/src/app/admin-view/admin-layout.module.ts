@@ -7,6 +7,7 @@ import {AdminLayoutRoutingModule} from "./admin-layout-routing.module";
 import {AdminLayoutComponent} from "./admin-layout.component";
 import {LoginService} from "../all-view/app-services/login.service";
 import {BenefitService} from "../all-view/app-services/benefit.service";
+import {UserProfileService} from "../core/lib/services/user-profile.service";
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import {BenefitService} from "../all-view/app-services/benefit.service";
     AdminLayoutRoutingModule
   ],
   declarations: [AdminLayoutComponent],
-  providers: [EventService, LoginService, BenefitService]
+  providers: [EventService, UserProfileService, LoginService, BenefitService]
 })
 export class AdminLayoutModule {
 }

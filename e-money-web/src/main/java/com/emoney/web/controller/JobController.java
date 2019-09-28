@@ -15,9 +15,11 @@ import com.emoney.web.dto.requestDto.JobRequestDto;
 import com.emoney.web.dto.responseDto.JobResponseDto;
 import com.emoney.web.dto.responseDto.JobTransactionResponseDto;
 import com.emoney.web.enums.JobApplyStatus;
+import com.emoney.web.model.JobCategoryEntity;
 import com.emoney.web.model.JobEntity;
 import com.emoney.web.model.JobTransactionEntity;
 import com.emoney.web.model.UserEntity;
+import com.emoney.web.service.IJobCategoryService;
 import com.emoney.web.service.IJobService;
 import com.emoney.web.service.IJobTransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +38,15 @@ import java.util.List;
 public class JobController extends ControllerBase {
     public static final String BASE_URL = WebResourceConstant.EMONEY.JOB;
     private IJobService jobService;
+    private IJobCategoryService jobCategoryService;
     private IJobTransactionService jobTransactionService;
 
     @Autowired
-    public JobController(IJobService jobService, IJobTransactionService jobTransactionService) {
+    public JobController(IJobService jobService, IJobTransactionService jobTransactionService, IJobCategoryService jobCategoryService) {
         super(jobService, new BeanMapperImpl(JobEntity.class, JobRequestDto.class), new BeanMapperImpl(JobEntity.class, JobResponseDto.class));
         this.jobService = jobService;
         this.jobTransactionService = jobTransactionService;
+        this.jobCategoryService = jobCategoryService;
     }
 
     @GetMapping(WebResourceConstant.EMONEY.GET_ACTIVE_JOB)
@@ -74,7 +78,9 @@ public class JobController extends ControllerBase {
 
     @PostMapping(WebResourceConstant.EMONEY.SAVE_JOB)
     public ResponseEntity<ResponseObj> saveJobs(@RequestBody @Valid JobRequestDto dto) {
+        JobCategoryEntity categoryEntity = jobCategoryService.findOne(dto.getCategory().getId());
         JobEntity entity = (JobEntity) reqBeanMapper.mapToEntity(dto);
+        entity.setCategory(categoryEntity);
         entity.setDueTime(DateUtils.convertStringTimeIntoSqlTime(dto.getEndTime()));
         iCrudService.save(entity);
         // setCreateEntityProperties(entity);

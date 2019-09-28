@@ -5,6 +5,7 @@ import {WalletModel} from "../models/wallet.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material";
 import {TransferAmountModel} from "../models/transfer-amount.model";
+import {SessionStorageService} from "../../core/lib/services/session-storage.service";
 
 @Component({
   selector: 'app-wallet',
@@ -17,18 +18,24 @@ export class WalletComponent implements OnInit {
   walletDetails: WalletModel[];
   transferFormGroup: FormGroup;
   disableSubmitBtn: boolean;
+  hasAdminAccess: boolean;
   transferModel: TransferAmountModel;
 
   constructor(
     private _walletService: WalletService,
     private _formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
+    private _sessionStorageService: SessionStorageService
   ) {
     this.walletDetails = [];
+    this.hasAdminAccess = false;
     this.transferModel = new TransferAmountModel();
   }
 
   ngOnInit() {
+    if (this._sessionStorageService.getToken() && this._sessionStorageService.getIsAdmin() === "true") {
+      this.hasAdminAccess = true;
+    }
     this.getWalletDetails();
     this.initForm();
   }

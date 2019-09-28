@@ -1,13 +1,10 @@
 package com.emoney.web.config;
 
 import com.emoney.core.constant.WebResourceConstant;
-import com.emoney.core.model.ResponseObj;
 import com.emoney.core.utils.StringUtils;
 import com.emoney.core.utils.TokenUtils;
 import com.emoney.web.util.IEmoneyToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +16,6 @@ import java.util.List;
  * Created by Anil Kumal on 01/12/2018.
  */
 public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter {
-
 
     private static List<String> authorizationFreeuriList = new ArrayList<>();
 
@@ -52,7 +48,7 @@ public class AuthenticationHandlerInterceptor extends HandlerInterceptorAdapter 
         response.setHeader("Access-Control-Allow-Methods", "*");
         response.setHeader("Access-Control-Allow-Headers", "*");
         System.out.println("request Uri = " + uri);
-        if (isAuthFreeUri(uri)) {
+        if (isAuthFreeUri(uri) && !(uri.contains("/benefit/create") || uri.contains("/benefit/save-benefit"))) {
             return true;
         }
         accessToken = request.getHeader(WebResourceConstant.AUTHORIZATION_HEADER);

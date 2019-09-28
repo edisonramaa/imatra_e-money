@@ -1,0 +1,2193 @@
+---
+swagger: "2.0"
+info:
+  description: |
+    This is the API documentation of the Imatra ICT project **eKolikko**.
+    You may find additional information in the Introduction section as well as the RESTFUL API endpoints described above.
+    # Introduction
+    This API is documented in OpenAPI format and is based on the web application called eKolikko. The application introduces an innovative way for the citizens of Imatra to do small tasks for the community and for each other and in return to get paid in virtual credits for the tasks performed. Then, in turn, they could use those credits to pay for different services that the City of Imatra manages and provides.
+    This API documentation explains all the endpoints used to create the back-end of the eKolikko solution. You may find the code of eKolikko in the following link: [eKolikko source code](https://github.com/imatra/eKolikko).
+    # Cross-Origin Resource Sharing
+    This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with  [W3C spec](https://www.w3.org/TR/cors/).
+    And that allows cross-domain communication from the browser.
+    All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.
+    # Authentication
+    eKolikko offers an OAuth2 approach on authentication. It provides a secure way to authenticate and get the Token bearer to further use to communicate with the application.
+
+    OAuth2 - an open protocol to allow secure authorization in a simple
+    and standard method from web, mobile and desktop applications.
+    <!-- ReDoc-Inject: <security-definitions> -->
+  version: 1.0.0
+  title: eKolikko API Documentation
+  license:
+    name: CC BY License
+    url: https://github.com/edisonramalut/imatra_e-money/blob/master/LICENSE
+  x-logo:
+    url: https://dtunlom52ggmx.cloudfront.net//sites/all/themes/custom/kada/logo.png
+    altText: Imatra logo
+host: etesti.imatra.fi
+basePath: /api/emoney/
+tags:
+- name: Payment
+  description: Payment endpoints are responsible for anything related to credit management within the application.
+- name: Image
+  description: Image endpoints are responsible for anything related to Image uploads within the application.
+- name: User
+  description: User endpoints are responsible for anything related to managing user activities within the application.
+- name: Benefit
+  description: Benefit endpoints are responsible for anything related to services that the City of Imatra has to provide for its citizens so they can use their credits.
+- name: Jobs
+  description: Jobs endpoints are responsible for anything related to tasks that the users or the City of Imatra provides for other citizens.
+schemes:
+- https
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\". This bearer token comes from the authentication of an user using the login endpoint."
+paths:
+  /benefit/save-benefit:
+    post:
+      tags:
+      - Benefit
+      summary: Add a new benefit
+      security:
+      - Bearer: []
+      description: Add new benefit from the admin for the citizens of Imatra. This allows them to use the benefits for their earned credits within the application.
+      operationId: addNewBenefit
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Benefit object that needs to be added to the appliction.
+        required: true
+        schema:
+          $ref: '#/definitions/Benefit'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/RecordCreated'
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /benefit/list:
+    get:
+      tags:
+      - Benefit
+      summary: Get all Benefits
+      description: Returns the list of all benefits
+      operationId: listAllBenefits
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/BenefitListResult'
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /benefit/update-benefit:
+    put:
+      tags:
+      - Benefit
+      summary: Update an existing benefit
+      description: Updates a benefit data using PUT request.
+      operationId: updateBenefit
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Benefit object that needs to be updated in the application
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateBenefit'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/RecordUpdated'
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /benefit/{id}:
+    get:
+      tags:
+      - Benefit
+      summary: Find benefit by Id
+      description: Returns a single benefit
+      operationId: getBenefitById
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: ID of the benefit to return
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/BenefitById'
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+    delete:
+      tags:
+      - Benefit
+      summary: Delete benefit
+      security:
+      - Bearer: []
+      description: Delete a specific benefit
+      operationId: deleteBenefit
+      produces:
+      - application/json
+      parameters:
+      - name: id
+        in: path
+        description: ID of the benefit to delete
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/DeleteBenefitResponse'
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+   
+  /credits/my-wallet:
+    get:
+      tags:
+      - Payment
+      summary: Get wallet details
+      security:
+      - Bearer: []
+      description: Get all details related to the authenticated user's waller.
+      operationId: getMyWalletInfo
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters: []
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/MyWalletResponse'
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /credits/pay:
+    post:
+      tags:
+      - Payment
+      summary: Perform a payment transaction
+      security:
+      - Bearer: []
+      description: Perform a payment transaction for a job for a specific authenticated user.
+      operationId: paymentTransaction
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: QR code to determine which job is being used for the payment transaction.
+        required: true
+        schema:
+          $ref: '#/definitions/Payment'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentResponse'
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /credits/payment-detail:
+    post:
+      tags:
+      - Payment
+      summary: Get payment details
+      security:
+      - Bearer: []
+      description: Get payment details for a specific QR-code that represents a specific job.
+      operationId: paymentDetails
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: QR code to determine which job is being used for the payment transaction.
+        required: true
+        schema:
+          $ref: '#/definitions/Payment'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentDetailResponse'
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /credits/transfer:
+    post:
+      tags:
+      - Payment
+      summary: Transfer credits
+      security:
+      - Bearer: []
+      description: Transfer credits from one user (the authenticated user) to another.
+      operationId: transferCredits
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: QR code to determine which job is being used for the payment transaction.
+        required: true
+        schema:
+          $ref: '#/definitions/Transfer'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/TransferResponse'
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /upload:
+    post:
+      tags:
+      - Image
+      summary: Upload a single image
+      description: The endpoint used to upload an image into the web application.
+      operationId: uploadFile
+      consumes:
+      - multipart/form-data
+      produces:
+      - application/json
+      parameters:
+      - name: uploadFile
+        in: formData
+        description: The file uploaded to the system
+        required: true
+        type: file
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/UploadResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /display/{type}/{fileName}:
+    get:
+      tags:
+      - Image
+      summary: Get image
+      description: Get an image based on the file type and filename.
+      operationId: displayFile
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: type
+        in: path
+        description: The type of the file
+        required: true
+        type: string
+      - name: fileName
+        in: path
+        description: The file name of the desired file
+        required: true
+        type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items:
+              type: string
+              format: byte
+              pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+              example: 74 65 73 74 74 65 73 74 20 68 65 72 65 20 74 65 73 74 20 61 73 64 20 61 73 64 20 61 73 64 20
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /job/save-job:
+    post:
+      tags:
+      - Jobs
+      summary: Create a job.
+      security:
+      - Bearer: []
+      description: The API endpoint that saves a new job for a specific user.
+      operationId: saveJob
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: The job data to be stored.
+        required: true
+        schema:
+          $ref: '#/definitions/Job' 
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/RecordCreated'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /job/accept-applicant:
+    post:
+      tags:
+      - Jobs
+      summary: Accept a job applicant
+      security:
+      - Bearer: []
+      description: The endpoint used from an user to accept a job appicant for one of his/her jobs.
+      operationId: acceptApplicant
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: The JobApply object that contains applicantId and the jobId.
+        required: true
+        schema:
+          $ref: '#/definitions/JobApply'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AcceptApplicantResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /job/reject-applicant:
+    post:
+      tags:
+      - Jobs
+      summary: Reject a job applicant
+      security:
+      - Bearer: []
+      description: Reject a specific applicant for a specific job.
+      operationId: rejectApplicant
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: The applicant id and the job id for the request.
+        required: true
+        schema:
+          $ref: '#/definitions/JobApply' 
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/RejectApplicantResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /job/active-job:
+    get:
+      tags:
+      - Jobs
+      summary: Get active jobs
+      description: The endpoint used from an user to get all current active jobs.
+      operationId: getActiveJobs
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/JobListResult'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /job/expired-job:
+    get:
+      tags:
+      - Jobs
+      summary: Get expired jobs
+      description: The endpoint used to get all expired jobs.
+      operationId: getExpiredJobs
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/JobListResult'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /job/apply-job:
+    post:
+      tags:
+      - Jobs
+      summary: Apply for a job
+      security:
+      - Bearer: []
+      description: The endpoint used from an user to apply for a specific job.
+      operationId: applyForAJob
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: The JobApply object that contains applicantId and the jobId.
+        required: true
+        schema:
+          $ref: '#/definitions/JobApply'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ApplyJobResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /job/cancel:
+    post:
+      tags:
+      - Jobs
+      summary: Cancel a job
+      security:
+      - Bearer: []
+      description: The endpoint used from an user cancel one of their posted jobs.
+      operationId: cancelAJob
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: The JobCancel object that contains the jobId.
+        required: true
+        schema:
+          $ref: '#/definitions/JobCancel'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/CancelJobResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  "/job/get-all-applied-job/{jobId}":
+    get:
+      tags:
+      - Jobs
+      summary: Get All Job transactions by Job Id
+      security:
+      - Bearer: []
+      description: The endpoint used to get all job transactions related to applicants for that job id such as if the applicant applied, if it has been accepted, if it has been rejected etc.
+      operationId: getApplicantTransactions
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: jobId
+        in: path
+        description: The job id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetAppliedJobsResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  "/job/get-applied-job/{jobId}":
+    get:
+      tags:
+      - Jobs
+      summary: Get Job transactions by Job Id for the authenticated user.
+      security:
+      - Bearer: []
+      description: The endpoint used to get all job transactions related to the authenticated user for that job id such as if the authenticated user applied, if it has been accepted, if it has been rejected etc.
+      operationId: getAuthenticatedUserTransactions
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: jobId
+        in: path
+        description: The job id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/GetSingleAppliedJobsResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /job/my-jobs:
+    get:
+      tags:
+      - Jobs
+      summary: Get all jobs for the authenticated user.
+      security:
+      - Bearer: []
+      description: The endpoint used to get all jobs for the authenticated user.
+      operationId: getMyJobs
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/JobListResult'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /user/auth:
+    post:
+      tags:
+      - User
+      summary: Authenticate User
+      description: The API endpoint that is used to authenticate an user.
+      operationId: authenticateUser
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: The user email and password.
+        required: true
+        schema:
+          $ref: '#/definitions/UserAuth' 
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AuthenticationResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+        400:
+          description: Invalid username/password supplied
+  /user/sign-up:
+    post:
+      tags:
+      - User
+      summary: Sign up
+      description: The API endpoint that is used to for sign up on new users.
+      operationId: userSignUp
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: The user information to be saved.
+        required: true
+        schema:
+          $ref: '#/definitions/UserRequest'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/SignUpResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /user/add-credits:
+    post:
+      tags:
+      - User
+      summary: Add credits to user
+      security:
+      - Bearer: []
+      description: The API endpoint that adds credits from admins to users that are registered to the application.
+      operationId: addCreditsToUser
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: The user id and credits to be added
+        required: true
+        schema:
+          $ref: '#/definitions/AddCreditsToUser' 
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/AddCreditsResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /user/app-users:
+    get:
+      tags:
+      - User
+      summary: Get all non-admin users
+      security:
+      - Bearer: []
+      description: The API endpoint that gets all users in the application that are not admins.
+      operationId: getNonAdminUsers
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/UserListResponse'
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  "/user/change-status/{userId}":
+    post:
+      tags:
+      - User
+      summary: Change user status
+      security:
+      - Bearer: []
+      description: The API endpoint that is used to change the status of an user.
+      operationId: changeUserStatus
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: userId
+        in: path
+        description: ID of the user that the status is changing for.
+        required: true
+        type: integer
+        format: int64
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ChangeStatusResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /user/changepassword:
+     post:
+      tags:
+      - User
+      summary: Change user password
+      security:
+      - Bearer: []
+      description: The API endpoint that is used to change the password of the authenticated user.
+      operationId: changePassword
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: The user old password and new password.
+        required: true
+        schema:
+          $ref: '#/definitions/ChangeUserPassword'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/ChangePasswordResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /user/email:
+     post:
+      tags:
+      - User
+      summary: Verify user by email
+      security:
+      - Bearer: []
+      description: The API endpoint that is used to verify user by email in the database.
+      operationId: verifyUserByEmail
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: The user email
+        required: true
+        schema:
+          $ref: '#/definitions/UserEmail'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/UserEmailResponse'
+        201:
+          description: Created
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found
+  /user/profile:
+     get:
+      tags:
+      - User
+      summary: Get user profile info
+      security:
+      - Bearer: []
+      description: The API endpoint gets the authenticated user profile information.
+      operationId: getUserProfileInfo
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/UserProfile'
+        401:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        403:
+          description: The unauthorized response
+          schema:
+            $ref: '#/definitions/Unauthorized'
+        404:
+          description: Not found     
+definitions:
+  RecordCreated:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Record has been created"
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: object
+        properties: {}
+        example: null
+  RecordUpdated:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Record has been updated"
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: object
+        properties: {}
+        example: null
+  Unauthorized:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Unauthorized access!!"
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: false
+      result:
+        type: object
+        properties: {}
+        example: null
+  DeleteBenefitResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Record with id: 50 deleted."
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: integer
+        format: int32
+        example: 50
+  PaymentResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Payment has been carried out successfully."
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: integer
+        format: int32
+        example: 50
+  PaymentDetailResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Payment has been carried out successfully."
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+         $ref: '#/definitions/PaymentDetailRes'
+  PaymentDetailRes:
+    type: object
+    properties:
+      version:
+        type: integer
+        example: 1
+      id:
+        type: integer
+        example: 2
+      name:
+        type: string
+        example: test
+      credits:
+        type: number
+        format: double
+        example: 12.0
+      status:
+        type: string
+        example: STARTED
+  TransferResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: Credit transfer has been carried out successfully
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: object
+        properties: {}
+        example: null
+  UploadResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: Success
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: string
+        example: f416767f-0498-4392-b44f-1c873aba877d
+  RejectApplicantResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "John Doe has been rejected for the Job."
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: string
+        example: null
+  AddCreditsResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "500 credits have been added to the account."
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: string
+        example: null
+  AcceptApplicantResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "John Doe has been selected for the Job."
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: string
+        example: null
+  ApplyJobResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "You have applied to job successfully."
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: string
+        example: null
+  CancelJobResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "You have cancelled the job successfully."
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: string
+        example: null
+  GetSingleAppliedJobsResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Success"
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+       $ref: '#/definitions/SingleAppliedJobsResult'
+  UserProfile:
+    type: object
+    properties:
+      version:
+        type: integer
+        example: 1
+      id:
+        type: integer
+        example: 5
+      name:
+        type: string
+        example: John Doe
+      email:
+        type: string
+        example: johndoe@gmail.com
+      age:
+        type: string
+        example: null
+      skill:
+        type: string
+        example: null
+      isAdmin:
+        type: boolean
+        example: false
+      jobTransactionEntities:
+        type: object
+        example: null
+      walletId: 
+        type: string
+        example: UGBA54552350
+      status:
+        type: boolean
+        example: true
+      balanceCredits:
+        type: number
+        format: double
+        example: 975.0
+  UserListResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Success"
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+       $ref: '#/definitions/UserListResult'
+  GetAppliedJobsResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Success"
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+       $ref: '#/definitions/AllAppliedJobsResult'
+  AuthenticationResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: null
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+       $ref: '#/definitions/AuthResult'
+  AuthResult:
+    type: object
+    properties:
+      isAdmin:
+        type: boolean
+        example: false
+      token:
+        type: string
+        example: eyJhbGciOiJIUzI1NiJ9.eyJzdWIittiJ0ZXN0QHRlc3QuY29tIiwidXNlcklkIjo4MSwiZW1haWwiOiJ0ZXN0QHRlc3QuY29tIiwiaWF0IjoxNTYzODQyMDM2LCJleHAiOjE1NjM4ODQwMzZ9.Hx9YbLFF3vOPUaae9cTfVUQs5wed9NAVbGf0axxCi0
+  UserEmailResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: null
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: boolean
+        example: true
+  SignUpResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Your account has been created. Please go to login page to sign in."
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: string
+        example: null
+  ChangePasswordResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Password has been changed successfully."
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: string
+        example: null
+  ChangeStatusResponse:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "User status has been changed to Active."
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        type: string
+        example: null
+  ResponseObj:
+    type: object
+    properties:
+      message:
+        type: string
+      page:
+        type: object
+        properties: {}
+      responseStatus:
+        type: boolean
+      result:
+        type: object
+        properties: {}
+  BenefitById:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Success"
+      page:
+        type: object
+        properties: {}
+        example: null
+      responseStatus:
+        type: boolean
+        example: true
+      result:
+        $ref: '#/definitions/BenefitByIdResult'
+  JobListResult:
+     type: object
+     properties:
+      result:
+        $ref: '#/definitions/JobResult'
+      message:
+        type: string
+        example: "Success"
+      responseStatus:
+        type: boolean
+        example: true
+      page:
+        type: object
+        example: null
+  BenefitListResult:
+     type: object
+     properties:
+      result:
+        $ref: '#/definitions/BenefitResult'
+      message:
+        type: string
+        example: "Success"
+      responseStatus:
+        type: boolean
+        example: true
+      page:
+        type: object
+        example: null
+  MyWalletResponse:
+    type: object
+    properties:
+      result:
+        $ref: '#/definitions/WalletResult'
+      message:
+        type: string
+        example: "Success"
+      responseStatus:
+        type: boolean
+        example: true
+      page:
+        type: object
+        example: null
+  BenefitByIdResult:
+    type: object
+    properties:
+      version:
+        type: integer
+        example: 1
+      id:
+        type: integer
+        example: 2
+      name:
+        type: string
+        example: Swimming Hall
+      description:
+        type: string
+        example: Imatra swimming hall offers great family space to have some fun and enjoy our pools.
+      streetAddress:
+        type: string
+        example: Imatrankoskentie 3, 55100 Imatra, Finland
+      startDate:
+        type: string
+        format: date-time
+        example: "2019-04-19T01:00:00.000+0000"
+      startTime:
+        type: string
+        example: "13:00:00"
+      endDate:
+        type: string
+        format: date-time
+        example: "2019-04-19T01:00:00.000+0000"
+      endTime:
+        type: string
+        example: "14:00:00"
+      credits:
+        type: number
+        format: double
+        example: 10.0
+      qrCode:
+        type: string
+        example: SRBiAfGbyGiA1153008602
+      qrCodeFileName:
+        type: string
+        example: DhBUFA138976.png
+      latitude:
+        type: number
+        format: double
+        example: 22.5569
+      longitude:
+        type: number
+        format: double
+        example: 60.5569
+  SingleAppliedJobsResult:
+    type: object
+    properties:
+      version:
+        type: integer
+        example: 1
+      id:
+        type: integer
+        example: 5
+      applicantId:
+        type: integer
+        example: 50
+      applicantName:
+        type: string
+        example: John Doe
+      jobId:
+        type: integer
+        example: 22
+      jobTitle:
+        type: string
+        example: test
+      status:
+        type: string
+        example: STARTED
+  UserListResult:
+    type: array
+    items:
+      type: object
+      properties:
+        version:
+          type: integer
+          example: 1
+        id:
+          type: integer
+          example: 5
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: johndoe@gmail.com
+        age:
+          type: string
+          example: null
+        skill:
+          type: string
+          example: null
+        isAdmin:
+          type: boolean
+          example: false
+        jobTransactionEntities:
+          type: object
+          example: null
+        walletId: 
+          type: string
+          example: UGBA54552350
+        status:
+          type: boolean
+          example: true
+        balanceCredits:
+          type: number
+          format: double
+          example: 975.0
+  AllAppliedJobsResult:
+    type: array
+    items:
+      type: object
+      properties:
+        version:
+          type: integer
+          example: 1
+        id:
+          type: integer
+          example: 5
+        applicantId:
+          type: integer
+          example: 50
+        applicantName:
+          type: string
+          example: John Doe
+        jobId:
+          type: integer
+          example: 22
+        jobTitle:
+          type: string
+          example: test
+        status:
+          type: string
+          example: STARTED
+  JobResult:
+    type: array
+    items:
+      type: object
+      properties:
+        version:
+          type: integer
+          example: 1
+        id:
+          type: integer
+          example: 82
+        jobTitle:
+          type: string
+          example: Clean my garden
+        description:
+          type: string
+          example: I need someone to clean my garden.
+        noOfPeople:
+          type: string
+          example: 3
+        dueDate:
+          type: string
+          format: date-time
+          example: "2019-07-24T00:00:00.000+0000"
+        dueTime: 
+          type: string
+          example: "03:19:00"
+        postedDate:
+          type: string
+          format: date-time
+          example: "2019-07-22T22:06:20.000+0000"
+        credits:
+          type: number
+          format: double
+          example: 12.0
+        address1: 
+          type: string
+          example: Punkkerikatu 2
+        address2:
+          type: string
+          example: null
+        postCode:
+          type: string
+          example: "53850"
+        phoneNumber:
+          type: string
+          example: 04171113110
+        qrFileName:
+          type: string
+          example: Fcymsg609997.png
+        jobPosterId:
+          type: integer
+          format: int32
+          example: 81
+        jobPosterName:
+          type: string
+          example: John Doe
+        totalSelected: 
+          type: integer
+          format: int32
+          example: 1
+        lat:
+          type: number
+          format: double
+          example: 21.922323
+        lng:
+          type: number
+          format: double
+          example: 55.123123
+  BenefitResult:
+    type: array
+    items:
+      type: object
+      properties:
+        version:
+          type: integer
+          example: 1
+        id:
+          type: integer
+          example: 2
+        name:
+          type: string
+          example: Swimming Hall
+        description:
+          type: string
+          example: Imatra swimming hall offers great family space to have some fun and enjoy our pools.
+        streetAddress:
+          type: string
+          example: Imatrankoskentie 3, 55100 Imatra, Finland
+        startDate:
+          type: string
+          format: date-time
+          example: "2019-04-19T01:00:00.000+0000"
+        startTime:
+          type: string
+          example: "13:00:00"
+        endDate:
+          type: string
+          format: date-time
+          example: "2019-04-19T01:00:00.000+0000"
+        endTime:
+          type: string
+          example: "14:00:00"
+        credits:
+          type: number
+          format: double
+          example: 10.0
+        qrCode:
+          type: string
+          example: SRBiAfGbyGiA1153008602
+        qrCodeFileName:
+          type: string
+          example: DhBUFA138976.png
+        latitude:
+          type: number
+          format: double
+          example: 22.5569
+        longitude:
+          type: number
+          format: double
+          example: 60.5569
+  WalletResult:
+    type: object
+    properties:
+      version:
+        type: object
+        example: null
+      id:
+        type: object
+        example: null
+      walletId:
+        type: string
+        example: EMEE99009148
+      balanceCredits:
+        type: number
+        format: double
+        example: 1000.0
+      walletDetails:
+        type: object
+        example: null
+  Id:
+    type: integer
+    format: int64
+  JobCancel:
+    type: object
+    required:
+    - jobId
+    properties:
+      jobId:
+        type: integer
+        format: int64
+        example: 2
+        description: The Job Id representing the job that the user wants to cancel
+  JobApply:
+    type: object
+    required:
+    - applicantId
+    - jobId
+    properties:
+      applicantId:
+        type: integer
+        format: int64
+        example: 5
+        description: The Applicant Id representing the user that applied for the job.
+      jobId:
+        type: integer
+        format: int64
+        example: 5
+        description: The Job id representing the job that the user has applied to.
+  AddCreditsToUser:
+    type: object
+    required:
+    - id
+    - credits
+    properties:
+      id:
+        description: User ID
+        $ref: '#/definitions/Id'
+        example: 1
+      credits:
+        description: The credits to be added to the user.
+        type: number
+        format: double
+        example: 55.5
+  UserRequest:
+    type: object
+    required:
+    - name
+    - email
+    - password
+    - isAdmin
+    properties:
+      name:
+        type: string
+        example: John Doe
+        description: The nme of the new user
+      email:
+        type: string
+        example: johndoe@gmail.com
+        description: The email of the new user.
+      password:
+        type: string
+        example: testpassword123
+        description: The password for the new user.
+      isAdmin:
+        type: boolean
+        example: false
+        description: The isAdmin trigger showing if this user will have admin access or not. true = Is Admin, false = Is a regular user.
+  UserEmail:
+    type: object
+    required:
+    - email
+    properties:
+      email:
+        type: string
+        description: The user email address.
+        example: johndoe@gmail.com
+  ChangeUserPassword:
+    type: object
+    required:
+    - oldPassword
+    - newPassword
+    - confirmPassword
+    properties:
+      oldPassword:
+        type: string
+        example: theoldpassword123
+        description: The old password in plain text.
+      newPassword:
+        type: string
+        example: newpassword123
+        description: The new password in plain text.
+      confirmPassword:
+        type: string
+        example: newpassword123
+        description: The new password confirmation in plain text.
+  UserAuth:
+    type: object
+    required:
+    - email
+    - password
+    properties:
+      email:
+        type: string
+        example: johndoe@gmail.com
+        description: The email of the user.
+      password:
+        type: string
+        example: testpassword123
+        description: The plain password of the user.
+  Job:
+    type: object
+    required:
+    - address1
+    - credits
+    - description
+    - dueDate
+    - endTime
+    - jobTitle
+    - lat
+    - lng
+    - noOfPeople
+    - phoneNumber
+    - postCode
+    - postedDate
+    properties:
+      address1:
+        type: string
+        example: Punkkerikatu 2
+        description: The address where the job takes place
+      address2:
+        type: string
+        example: A2
+        description: The optional address 2 where the job takes place
+      credits:
+        type: number
+        format: double
+        example: 25.5
+      description:
+        type: string
+        example: The job description example.
+        description: The job description
+      dueDate:
+        type: string
+        format: date-time
+        example: "2019-07-21 10:55:12"
+        description: The date that shows when the job will expire.
+      endTime:
+        type: string
+        example: "08:55 am"
+        description: The end time that shows at what time the job will expire.
+      jobTitle:
+        type: string
+        example: Clean my garden
+        description: The job title.
+      lat:
+        type: string
+        example: "60.500"
+        description: The latitude that together with longitude show the exact location for the job.
+      lng:
+        type: string
+        example: "20.2456"
+        description: The longitude that together with latitude show the exact location for the job.
+      noOfPeople:
+        type: integer
+        format: int32
+        example: 5
+        description: The number of people for the job.
+      phoneNumber:
+        type: string
+        example: 417177488
+        description: The phone number of the person who is posting the job.
+      postCode:
+        type: string
+        example: 53850
+        description: The post code for the address of the job.
+      postedDate:
+        type: string
+        format: date
+        example: "2019-07-01"
+  Transfer:
+    type: object
+    required:
+    - receiverWalletId
+    - transferAmount
+    properties:
+      receiverWalletId:
+        type: string
+        example: X53JJFS12
+        description: The Wallet ID representing the person who will receive the credits.
+      transferAmount:
+        type: number
+        format: double
+        example: 22.5
+        description: The amount of the credits that the authenticated user wants to transfer to the receiver.
+  Payment:
+    type: object
+    properties:
+      qrCode:
+        type: string
+        example: qrcoderepresentingaservice
+        description: The QR code represented as a string after it has been parsed by the QR reader in the Front end.
+  Benefit:
+    type: object
+    required:
+    - beginReqTime
+    - credits
+    - description
+    - dueReqTime
+    - endDate
+    - latitude
+    - longitude
+    - name
+    - qrCode
+    - startDate
+    - streetAddress
+    properties:
+      name:
+        type: string
+        example: Swimming Pool
+        description: The name of the Benefit
+      description:
+        type: string
+        example: This is an example description for this benefit.
+        description: The description of the Benefit
+      streetAddress:
+        type: string
+        example: Punkkerikatu 2
+        description: The street address of the benefit.
+      startDate:
+        type: string
+        format: date
+        example: "2019-07-17"
+        description: Start date of the benefit
+      beginReqTime:
+        type: string
+        example: "22:00 am"
+        description: Start time of the benefit
+      endDate:
+        type: string
+        format: date
+        example: "2019-07-17"
+        description: End date of the benefit
+      dueReqTime:
+        type: string
+        example: "22:00 am"
+        description: End time of the benefit
+      latitude:
+        type: number
+        format: float
+        example: 22.55693
+        description: The latitude of the location of the benefit
+      longitude:
+        type: number
+        format: float
+        example: 60.55693
+        description: The longitude of the location of the benefit
+      credits:
+        type: number
+        format: double
+        example: 2.5
+        description: The credit value for this benefit
+      qrCode:
+        type: string
+        example: thisbenefitqrcode2019
+        description: The decoded QR-code string for this benefit after it has been read from the front-end.
+  UpdateBenefit:
+    type: object
+    required:
+    - id
+    - version
+    - beginReqTime
+    - credits
+    - description
+    - dueReqTime
+    - endDate
+    - latitude
+    - longitude
+    - name
+    - qrCode
+    - startDate
+    - streetAddress
+    properties:
+      id: 
+        type: integer
+        format: int32
+        example: 1
+        description: The id of the updated benefit
+      version: 
+        type: integer
+        format: int32
+        example: 3
+        description: The current version of the record
+      name:
+        type: string
+        example: Swimming Pool
+        description: The name of the Benefit
+      description:
+        type: string
+        example: This is an example description for this benefit.
+        description: The description of the Benefit
+      streetAddress:
+        type: string
+        example: Punkkerikatu 2
+        description: The street address of the benefit.
+      startDate:
+        type: string
+        format: date
+        example: "2019-07-17"
+        description: Start date of the benefit
+      beginReqTime:
+        type: string
+        example: "22:00 am"
+        description: Start time of the benefit
+      endDate:
+        type: string
+        format: date
+        example: "2019-07-17"
+        description: End date of the benefit
+      dueReqTime:
+        type: string
+        example: "22:00 am"
+        description: End time of the benefit
+      latitude:
+        type: number
+        format: float
+        example: 22.55693
+        description: The latitude of the location of the benefit
+      longitude:
+        type: number
+        format: float
+        example: 60.55693
+        description: The longitude of the location of the benefit
+      credits:
+        type: number
+        format: double
+        example: 2.5
+        description: The credit value for this benefit
+      qrCode:
+        type: string
+        example: thisbenefitqrcode2019
+        description: The decoded QR-code string for this benefit after it has been read from the front-end.
+  User:
+    type: object
+    properties:
+      id:
+        description: User ID
+        $ref: '#/definitions/Id'
+      username:
+        type: string
+        example: John78
+        description: User supplied username
+        minLength: 4
+      firstName:
+        type: string
+        example: John
+        description: User first name
+        minLength: 1
+      lastName:
+        type: string
+        example: Smith
+        description: User last name
+        minLength: 1
+      email:
+        type: string
+        format: email
+        example: john.smith@example.com
+        description: User email address
+      password:
+        type: string
+        format: password
+        example: drowssaP123
+        description: User password, MUST contain a mix of upper and lower case letters, as well as digits
+        minLength: 8
+        pattern: (?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])
+      phone:
+        type: string
+        example: +1-202-555-0192
+        description: User phone number in international format
+        pattern: ^\+(?:[0-9]-?){6,14}[0-9]$
+        x-nullable: true
+      userStatus:
+        type: integer
+        format: int32
+        description: User status
+    xml:
+      name: User
+x-tagGroups:
+- name: User Management
+  tags:
+  - User
+- name: Job management
+  tags:
+  - Jobs
+  - Payment
+- name: Admin
+  tags:
+  - Image
+  - Benefit
+x-servers:
+- url: //etesti.imatra.fi/api/emoney
+  description: Development server
+- url: //eimatra.imatra.fi/api/emoney
+  description: Production server
