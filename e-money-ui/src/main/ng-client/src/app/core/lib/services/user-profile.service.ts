@@ -9,8 +9,10 @@ export class UserProfileService extends FTBaseService {
   dataModel: UserProfileModel = new UserProfileModel();
 
   serviceApi: string = '/emoney/user';
+  ratingApi: string = '/emoney/user-rating';
   mapApi: string = "http://your-api-url";
   getMyProfileApi: string = this.serviceApi + '/profile';
+  getUserRatingApi: string = this.ratingApi + '/worker-ratings';
   changeUserProfilePictureApi: string = this.serviceApi + '/change-photo';
 
   constructor(httpService: HttpService) {
@@ -22,6 +24,12 @@ export class UserProfileService extends FTBaseService {
   }
   changeUserProfilePicture(data) {
     return this.httpService.postRequest(this.changeUserProfilePictureApi, data)
+  }
+  getRating(applicantId: number) {
+    if (applicantId == -1) {
+      return this.httpService.getRequest(this.getUserRatingApi+"?workerIds=");
+    }
+    return this.httpService.getRequest(this.getUserRatingApi+"?workerIds="+applicantId);
   }
 
 }

@@ -8,7 +8,14 @@ import {UserManagementService} from "../../all-view/app-services/user-management
 import {UserProfileModel} from "../../all-view/models/user-profile.model";
 import {EventService} from "../../all-view/app-services/event.service";
 import {InputDialogComponent} from "../../core/lib/components/input-dialog/input-dialog.component";
-import {ICREDIT_URL, PROFILE_URL} from "../../core/utility/navigation-url";
+import {
+  ADMIN_URL,
+  ICREDIT_URL,
+  JOB_TRANSACTION_URL,
+  PROFILE_URL,
+  SHOW_JOB_TRANSACTIONS,
+  USER_URL
+} from "../../core/utility/navigation-url";
 
 @Component({
   selector: 'app-user-management',
@@ -64,6 +71,12 @@ export class UserManagementComponent implements OnInit {
     let finalUrl = "/" + ICREDIT_URL + "/" + PROFILE_URL+"/"+ userId;
     this._router.navigateByUrl(finalUrl);
   }
+
+  goToTransactionsPage(userId: number) : void {
+    let finalUrl = "/" + ADMIN_URL + "/" + USER_URL+"/"+ userId+ "/"+SHOW_JOB_TRANSACTIONS;
+    this._router.navigateByUrl(finalUrl);
+  }
+
   addCreditsDialog(id: number) : void {
    // new InputDialogComponent(this._dialog).openDialog();
     const dialogRef = this._dialog.open(InputDialogComponent, {

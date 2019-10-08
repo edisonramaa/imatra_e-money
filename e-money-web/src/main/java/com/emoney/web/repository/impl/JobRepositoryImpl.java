@@ -1,9 +1,7 @@
 package com.emoney.web.repository.impl;
 import com.emoney.core.exception.EmoneyException;
 import com.emoney.core.repository.impl.CrudRepositoryImpl;
-import com.emoney.web.model.JobEntity;
-import com.emoney.web.model.QJobCategoryEntity;
-import com.emoney.web.model.QJobEntity;
+import com.emoney.web.model.*;
 import com.emoney.web.repository.IJobRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
@@ -66,6 +64,7 @@ public class JobRepositoryImpl extends CrudRepositoryImpl<JobEntity, Long> imple
                 .fetchOne();
         return jobEntity;
     }
+
 
     @Override
     public List<JobEntity> getExpiredJobs() {

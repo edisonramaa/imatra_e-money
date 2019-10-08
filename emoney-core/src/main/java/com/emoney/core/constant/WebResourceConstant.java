@@ -51,6 +51,9 @@ public class WebResourceConstant {
         String ADD_CREDITS = "/add-credits";
         String GET_APP_USERS = "/app-users";
         String CHANGE_PROFILE_PICTURE = "/change-photo";
+        String GET_USER_TRANSACTIONS = "{userId}/transactions/list";
+        String GET_USER_CREDIT_TRANSACTIONS = "{userId}/credit_transactions/list";
+        String ADD_RATING = "/add";
 
 
     }

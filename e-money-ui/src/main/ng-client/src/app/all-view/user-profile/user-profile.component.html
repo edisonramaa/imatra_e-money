@@ -11,7 +11,7 @@
       <mat-card-title class="user-profile-head-title">{{userProfileModel.name}}</mat-card-title>
       <mat-card-subtitle class="user-profile-head-subtitle">{{userProfileModel.email}}</mat-card-subtitle>
       <mat-card-subtitle class="user-profile-head-subtitle">Completed jobs: {{userProfileModel.jobTransactionEntities != null && userProfileModel.jobTransactionEntities !== undefined? userProfileModel.jobTransactionEntities.length:0 }}</mat-card-subtitle>
-      <bar-rating [rate]="5" [readOnly]="true" [max]="10" [theme]="'horizontal'"></bar-rating>
+      <bar-rating [rate]="userProfileModel.rating" [readOnly]="true" [max]="10" [theme]="'horizontal'"></bar-rating>
 
     </mat-card>
     <div class="up-container">
@@ -22,7 +22,7 @@
       </div>
         <mat-list role="list" *ngFor="let job of userProfileModel.jobTransactionEntities;" >
             <mat-divider style="margin-bottom: 5px;"></mat-divider>
-            <mat-list-item role="listitem"><p>{{job['jobJobTitle']}}</p><span class="credit-amount">{{job['jobCredits']}}</span>
+            <mat-list-item role="listitem"><p>{{job['jobJobCategoryName']}}</p><span class="credit-amount">{{job['jobJobCategoryCredits']}}</span>
                 <mat-icon class="temp-credit-icon">copyright</mat-icon>
             </mat-list-item>
         </mat-list>

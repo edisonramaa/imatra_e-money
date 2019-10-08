@@ -45,4 +45,7 @@ public class UserEntity extends EntityBase {
     @Transient
     List<JobTransactionEntity> jobTransactionEntities;
 
+    @Transient
+    List<CreditTransactionEntity> creditTransactionEntities;
+
 }

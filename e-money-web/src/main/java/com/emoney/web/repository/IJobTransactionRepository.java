@@ -1,6 +1,7 @@
 package com.emoney.web.repository;
 
 import com.emoney.core.repository.ICrudRepository;
+import com.emoney.web.model.CreditTransactionEntity;
 import com.emoney.web.model.JobTransactionEntity;
 
 import java.util.List;
@@ -12,5 +13,6 @@ public interface IJobTransactionRepository extends ICrudRepository<JobTransactio
     List<JobTransactionEntity> approvedJobList(Long jobId);
 
     List<JobTransactionEntity> getMyCompletedJobs(Long userId);
+    List<JobTransactionEntity> getListOfTransactions(Long userId);
 }
 

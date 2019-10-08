@@ -24,7 +24,7 @@
               <td>Credits</td>
             </tr>
             <tr *ngFor="let wallet of walletDetails">
-              <td>{{wallet.jobEntityJobTitle? wallet.jobEntityJobTitle : wallet.benefitEntityName?
+              <td>{{wallet.jobEntityJobCategoryName? wallet.jobEntityJobCategoryName : wallet.benefitEntityName?
                 wallet.benefitEntityName: wallet.tranctionToName}}
               </td>
               <td>{{wallet.transactionType}}</td>

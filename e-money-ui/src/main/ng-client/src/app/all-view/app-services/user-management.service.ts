@@ -8,6 +8,7 @@ export class UserManagementService extends FTBaseService {
   dataModel: UserManagementModel = new UserManagementModel();
 
   serviceApi: string = '/emoney/user';
+  userRatingApi: string = '/emoney/user-rating';
   constructor(httpService: HttpService) {
     super(httpService);
   }
@@ -24,6 +25,20 @@ export class UserManagementService extends FTBaseService {
   getList() {
     return this.httpService.getRequest(this.serviceApi + '/app-users');
   }
+
+  getTransactions(id: number) {
+    return this.httpService.getRequest(this.serviceApi + "/" + id + "/transactions/list");
+  }
+
+  getCreditTransactions(id: number) {
+    return this.httpService.getRequest(this.serviceApi + "/" + id + "/credit_transactions/list");
+  }
+
+  addRating(data) {
+    console.log(data);
+    return this.httpService.postRequest(this.userRatingApi+"/add", data);
+  }
+
 
 
 }

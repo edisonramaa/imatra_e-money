@@ -12,6 +12,8 @@ export class JobService extends FTBaseService {
   mapApi: string = "http://your-api-url";
   getMyJobsApi: string = this.serviceApi + '/my-jobs';
   applyJobApi: string = this.serviceApi + '/apply-job';
+  ratingApi: string = '/emoney/user-rating';
+  getUserRatingApi: string = this.ratingApi + '/worker-ratings';
 
   constructor(httpService: HttpService) {
     super(httpService);
@@ -42,6 +44,9 @@ export class JobService extends FTBaseService {
     return this.httpService.getRequest(this.serviceApi + `/get-all-applied-job/${jobId}`);
   }
 
+  getUsersRating(usersId: any) {
+    return this.httpService.getRequest(this.getUserRatingApi+"?workerIds="+usersId);
+  }
   acceptApplicant(jobId: number, applicantId: number) {
     let data = {jobId: jobId, applicantId: applicantId};
     return this.httpService.postRequest(this.serviceApi + '/accept-applicant', data);

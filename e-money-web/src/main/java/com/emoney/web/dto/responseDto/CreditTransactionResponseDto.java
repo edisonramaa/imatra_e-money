@@ -4,6 +4,7 @@ import com.emoney.core.model.ResponseDtoBase;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -11,14 +12,14 @@ import java.util.Date;
 @Setter
 public class CreditTransactionResponseDto extends ResponseDtoBase {
     private Long jobEntityId;
-    private String jobEntityJobTitle;
+    private String jobEntityJobCategoryName;
     private Long benefitEntityId;
     private String benefitEntityName;
     private Double credits;
     private Date transactionDate;
     private String transactionType;
-    private Long tranctionToId;
-    private String tranctionToName;
+    private Long transactionOfId;
+    private String transactionOfName;
 
 
 }

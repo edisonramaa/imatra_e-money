@@ -3,6 +3,7 @@ package com.emoney.web.service;
 
 import com.emoney.core.service.ICrudService;
 import com.emoney.web.model.JobEntity;
+import com.emoney.web.model.JobTransactionEntity;
 
 import java.util.List;
 

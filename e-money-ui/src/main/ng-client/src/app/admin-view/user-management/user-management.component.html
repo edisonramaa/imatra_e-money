@@ -29,10 +29,15 @@
             <p class="sub-header-jobs">Number of credits: {{user.balanceCredits}}</p>
           </div>
           <div id="buttons-wrappers">
-            <button  style="width: 33%;margin-right: 2px;float: left;background-color: #ED6C41;"  (click)="addCreditsDialog(user.id)" mat-flat-button color="warn" >Add Credits</button>
+            <div class="button-wrap">
+              <button  style="width: 45%;margin-right: 2px;float: left;background-color: #ED6C41;"  (click)="addCreditsDialog(user.id)" mat-flat-button color="warn" >Add Credits</button>
+              <button style="width: 45%;margin-right: 2px;float: right;background-color: #ED6C41;" (click)="goToUserProfile(user.id)" color="warn" mat-flat-button >Profile</button>
+            </div>
+            <div class="button-wrap">
+              <button style="margin-top: 4%;width: 45%;margin-right: 2px;float: left;background-color: #ED6C41;" (click)="goToTransactionsPage(user.id)" color="warn" mat-flat-button >Job Transactions</button>
+              <button style="margin-top: 4%;width: 45%;margin-right: 2px;float: right;" (click)="confirmStatusChange(user.id)" color="warn" mat-flat-button >{{user.status ? "Deactivate" : "Activate"}}</button>
 
-            <button style="width: 33%;margin-right: 2px;float: left;background-color: #ED6C41;" (click)="goToUserProfile(user.id)" color="warn" mat-flat-button >Profile</button>
-            <button style="width: 32%;margin-right: 2px;float: left;" (click)="confirmStatusChange(user.id)" color="warn" mat-flat-button >{{user.status ? "Deactivate" : "Activate"}}</button>
-          </div>
+            </div>
+           </div>
  </mat-expansion-panel>
 </mat-accordion>

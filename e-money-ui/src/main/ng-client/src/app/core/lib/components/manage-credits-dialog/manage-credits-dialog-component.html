@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p>{{data.content}}</p>
+  <mat-form-field class="max-width">
+    <mat-label>Select one option</mat-label>
+    <mat-select required  [(ngModel)]="option">
+      <mat-option *ngFor="let option of credit_options;" [value]="option.id">{{option.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="option === 3" class="max-width">
+    <input required matInput [(ngModel)]="data.percentage" name="percentage" placeholder="% of credits to be awarded"
+           type="number">
+    <mat-error
+     >
+     This field is required.
+    </mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="{percentage: data.percentage, selected_option: option}" cdkFocusInitial>Save</button>
+</div>

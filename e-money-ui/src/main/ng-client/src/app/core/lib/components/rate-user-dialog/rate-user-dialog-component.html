@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p>{{data.content}}</p>
+  <mat-form-field style="width: 100%;">
+    <mat-label>Rate the user for the job</mat-label>
+    <mat-select required  [(ngModel)]="option">
+      <mat-option *ngFor="let option of rates;" [value]="option.id">{{option.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="width: 100%;">
+    <textarea rows="6" required matInput [(ngModel)]="data.comment" name="comment" placeholder="Comment for user's work"></textarea>
+    <mat-error
+     >
+     This field is required.
+    </mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="{comment: data.comment, selected_option: option}" cdkFocusInitial>Save</button>
+</div>

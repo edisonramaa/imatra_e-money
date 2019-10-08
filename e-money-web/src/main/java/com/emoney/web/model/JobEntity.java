@@ -8,6 +8,7 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -48,4 +49,6 @@ public class JobEntity extends EntityBase {
     @Column(name = "lng")
     private String lng;
 
+    @Transient
+    List<CreditTransactionEntity> creditTransactionEntities;
 }

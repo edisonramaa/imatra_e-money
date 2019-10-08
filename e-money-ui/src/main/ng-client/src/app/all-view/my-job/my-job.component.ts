@@ -58,8 +58,12 @@ export class MyJobComponent implements OnInit {
       if (res.responseStatus) {
         job.appliedJobsList = res.result;
 
-
+        var usersIds = [];
         job.appliedJobsList.forEach(function(applicant) {
+          if (!usersIds.includes(applicant.applicantId)) {
+            usersIds.push(applicant.applicantId);
+          }
+
           if (applicant.applicantProfileImageUrl == null) {
             applicant.applicantProfileImageUrl = ApiConstant.IMAGE_DISPLAY + 'PROFILE/default.png';
           } else {
@@ -70,6 +74,19 @@ export class MyJobComponent implements OnInit {
           } else if (applicant.status === "APPLIED") {
             job.pendingStatus = false;
           }
+        });
+        console.log("get User rating");
+        this._jobService.getUsersRating(usersIds.join(",")).then((res: ResponseModel) => {
+          if (res.responseStatus && res.result.length > 0) {
+            res.result.forEach(function(worker){
+              job.appliedJobsList.forEach(function(applicant) {
+                if (applicant.applicantId == worker.workerId) {
+                  applicant.rating = worker.workerReview;
+                }
+              });
+            });
+          }
+
         });
       }
     });

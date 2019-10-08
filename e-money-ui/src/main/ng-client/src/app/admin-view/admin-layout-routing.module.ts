@@ -3,7 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {
   ADD_BENEFIT_URL, ADD_JOB_CATEGORY_URL,
   EDIT_BENEFIT_URL, EDIT_JOB_CATEGORY_URL,
-  JOB_CATEGORY_URL,
+  JOB_CATEGORY_URL, JOB_TRANSACTION_URL,
   MAIN_URL,
   USER_MANAGEMENT_URL,
 } from "../core/utility/navigation-url";
@@ -30,6 +30,11 @@ const routes: Routes = [
       {
         path: USER_MANAGEMENT_URL,
         loadChildren: './user-management/user-management.module#UserManagementModule',
+        canLoad: [AdminAuthGuardService]
+      },
+      {
+        path: JOB_TRANSACTION_URL,
+        loadChildren: './user-transactions/user-transactions.module#UserTransactionsModule',
         canLoad: [AdminAuthGuardService]
       },
       {

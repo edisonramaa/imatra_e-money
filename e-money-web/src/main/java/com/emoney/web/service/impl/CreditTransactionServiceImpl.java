@@ -92,6 +92,12 @@ public class CreditTransactionServiceImpl extends CrudServiceImpl<CreditTransact
         return true;
     }
 
+    @Override
+    public List<CreditTransactionEntity> getUserCreditTransactions(Long userId) {
+        List<CreditTransactionEntity> ListOfCreditTransactions = creditTransactionRepository.getCreditTransactionsByUserId(userId);
+        return ListOfCreditTransactions;
+    }
+
     private Boolean makePaymentForJob(String qrCode) {
         Double deductionAmt;
         JobEntity jobEntity = this.jobService.getJobByQrCode(qrCode);

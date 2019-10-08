@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface ICreditTransactionRepository extends ICrudRepository<CreditTransactionEntity, Long> {
     List<CreditTransactionEntity> getCreditTransactionsByUserId(Long userId);
+    List<CreditTransactionEntity> getCreditTransactionsByUserAndJob(Long userId, Long jobId);
 }

@@ -46,85 +46,51 @@
   font-size: 15px;
 }
 
-#my-job /deep/ .br-unit:nth-of-type(1) {
-  background-color: #ff000069;
+
+#my-job /deep/ .br-unit {
+  background-color: grey;
 }
 
-#my-job /deep/ .br-unit:nth-of-type(2) {
-  background-color: #ff5b0069;
-}
-
-#my-job /deep/ .br-unit:nth-of-type(3) {
-  background-color: #ff8a0069;
-}
-
-#my-job /deep/ .br-unit:nth-of-type(4) {
-  background-color: #ffb90069;
-}
-
-#my-job /deep/ .br-unit:nth-of-type(5) {
-  background-color: #ffd10069;
-}
-
-#my-job /deep/ .br-unit:nth-of-type(6) {
-  background-color: #fff40069;
-}
-
-#my-job /deep/ .br-unit:nth-of-type(7) {
-  background-color: #cfff0069;
-}
-
-#my-job /deep/ .br-unit:nth-of-type(8) {
-  background-color: #b7ff0069;
-}
-
-#my-job /deep/ .br-unit:nth-of-type(9) {
-  background-color: #88ff0069;
-}
-
-#my-job /deep/ .br-unit:nth-of-type(10) {
-  background-color: #00ff0569;
-}
-
-#my-job /deep/ .br-unit:nth-of-type(1).br-selected {
+#my-job /deep/ .br-unit.br-selected:nth-of-type(1) {
   background-color: red;
 }
 
-#my-job /deep/ .br-unit:nth-of-type(2).br-selected {
+#my-job /deep/ .br-unit.br-selected:nth-of-type(2) {
   background-color: #ff5b00;
 }
 
-#my-job /deep/ .br-unit:nth-of-type(3).br-selected {
+#my-job /deep/ .br-unit.br-selected:nth-of-type(3) {
   background-color: #ff8a00;
 }
 
-#my-job /deep/ .br-unit:nth-of-type(4).br-selected {
+#my-job /deep/ .br-unit.br-selected:nth-of-type(4) {
   background-color: #ffb900;
 }
 
-#my-job /deep/ .br-unit:nth-of-type(5).br-selected {
+#my-job /deep/ .br-unit.br-selected:nth-of-type(5) {
   background-color: #ffd100;
 }
 
-#my-job /deep/ .br-unit:nth-of-type(6).br-selected {
+#my-job /deep/ .br-unit.br-selected:nth-of-type(6) {
   background-color: #fff400;
 }
 
-#my-job /deep/ .br-unit:nth-of-type(7).br-selected {
+#my-job /deep/ .br-unit.br-selected:nth-of-type(7) {
   background-color: #cfff00;
 }
 
-#my-job /deep/ .br-unit:nth-of-type(8).br-selected {
+#my-job /deep/ .br-unit.br-selected:nth-of-type(8) {
   background-color: #b7ff00;
 }
 
-#my-job /deep/ .br-unit:nth-of-type(9).br-selected {
+#my-job /deep/ .br-unit.br-selected:nth-of-type(9) {
   background-color: #88ff00;
 }
 
-#my-job /deep/ .br-unit:nth-of-type(10).br-selected {
+#my-job /deep/ .br-unit.br-selected:nth-of-type(10) {
   background-color: #00ff05;
 }
+
 
 #my-job /deep/ .br.br-horizontal > .br-units > .br-unit {
   width: 10px;

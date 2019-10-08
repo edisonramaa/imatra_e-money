@@ -50,6 +50,12 @@ export class UserProfileComponent implements OnInit {
             this.userProfilePictureUrl = ApiConstant.IMAGE_DISPLAY + 'PROFILE/' + `${this.userProfileModel.profileImageUrl}`;
             this.isMyProfile = false;
             this._eventService.setHeader(this.userProfileModel.name);
+
+            this._userProfile.getRating(applicantId).then((res: ResponseModel) => {
+              if (res.responseStatus && res.result.length > 0) {
+                this.userProfileModel.rating = res.result[0].workerReview;
+              }
+            });
           }
         });
       }
@@ -65,6 +71,11 @@ export class UserProfileComponent implements OnInit {
           this.myProfileModel.profileImageUrl = this.defaultPictureName;
         }
         this.myProfilePictureUrl = ApiConstant.IMAGE_DISPLAY + 'PROFILE/' + `${this.myProfileModel.profileImageUrl}`;
+        this._userProfile.getRating(-1).then((res: ResponseModel) => {
+          if (res.responseStatus && res.result.length > 0) {
+            this.myProfileModel.rating = res.result[0].workerReview;
+          }
+        });
         this.getUserProfile();
       }
     });
