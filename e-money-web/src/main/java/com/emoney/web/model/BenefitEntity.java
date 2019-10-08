@@ -3,6 +3,7 @@ package com.emoney.web.model;
 import com.emoney.core.model.EntityBase;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@Where(clause = "deleted = false")
 @Table(name = "benefit")
 public class BenefitEntity extends EntityBase {
     @Column(name = "name")

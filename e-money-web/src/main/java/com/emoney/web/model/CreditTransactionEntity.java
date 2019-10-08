@@ -3,6 +3,7 @@ package com.emoney.web.model;
 import com.emoney.core.model.EntityBase;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
+@Where(clause = "deleted = false")
 @Table(name = "credit_transaction")
 public class CreditTransactionEntity extends EntityBase {
     @ManyToOne(fetch = FetchType.LAZY)

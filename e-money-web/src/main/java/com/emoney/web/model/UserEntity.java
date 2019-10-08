@@ -4,6 +4,7 @@ import com.emoney.core.model.EntityBase;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Where(clause = "deleted = false")
 @Table(name = "user")
 public class UserEntity extends EntityBase {
     @Column(name = "name")
@@ -37,8 +39,13 @@ public class UserEntity extends EntityBase {
     @Column(name = "status")
     @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean status;
+    @Column(name = "profile_image_url")
+    private String profileImageUrl = "default.png";
 
     @Transient
     List<JobTransactionEntity> jobTransactionEntities;
+
+    @Transient
+    List<CreditTransactionEntity> creditTransactionEntities;
 
 }

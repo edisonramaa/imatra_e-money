@@ -5,9 +5,10 @@ import {LayoutComponent} from "./layout.component";
 import {CustomMaterialModule} from "../core/module/CustomMaterialModule";
 import {LayoutStructureModule} from "./layout-structure/layout-structure.module";
 import {BenefitService} from "./app-services/benefit.service";
-import {UserProfileService} from "./services/user-profile.service";
+import {UserProfileService} from "../core/lib/services/user-profile.service";
 import {LoginService} from "./app-services/login.service";
 import {SessionStorageService} from "../core/lib/services/session-storage.service";
+import {JobCategoryService} from "./app-services/job-category.service";
 
 @NgModule({
     imports: [
@@ -17,7 +18,7 @@ import {SessionStorageService} from "../core/lib/services/session-storage.servic
         LayoutStructureModule
     ],
     declarations: [LayoutComponent],
-  providers: [BenefitService, UserProfileService, LoginService, SessionStorageService]
+  providers: [BenefitService, UserProfileService, LoginService, SessionStorageService, JobCategoryService]
 })
 export class LayoutModule {
 }

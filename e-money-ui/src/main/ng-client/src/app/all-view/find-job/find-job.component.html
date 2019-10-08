@@ -6,9 +6,9 @@
           <agm-info-window [disableAutoPan]="false" #infoWindow>
 
             <div style="width: 150px;">
-              <p>{{job.jobTitle}} </p>
-              <p>{{ job.description.substring(0, 20)+"..."}}</p>
-              <p>{{ "Credits: " + job.credits}}</p>
+              <p>{{job.category.name}} </p>
+              <p>{{ job.category.description.substring(0, 20)+"..."}}</p>
+              <p>{{ "Credits: " + job.category.credits}}</p>
             </div>
             <div>
               <a href="" style="float: right;" class="mat-stroked-button mat-warn" (click)="markerClick($event, job);"><span>Details</span></a>
@@ -27,13 +27,13 @@
       <mat-expansion-panel *ngFor="let job of jobList;"  (closed)="onClosed(job)"(opened)="onPanelOpen(job)" [expanded]="job.checked">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            {{job.jobTitle}}
+            {{job.category.name}}
           </mat-panel-title>
-          <span class="credit-amount">{{job.credits}}</span>
+          <span class="credit-amount">{{job.category.credits}}</span>
           <mat-icon class="temp-credit-icon">copyright</mat-icon>
         </mat-expansion-panel-header>
         <p class="desc-st">Description:</p>
-        <p class="find-view-text-color">{{job.description}} </p>
+        <p class="find-view-text-color">{{job.category.description}} </p>
 
         <p class="find-view-text-color">{{job.totalSelected?job.totalSelected:0}}/{{job.noOfPeople}} people already
           selected. </p>

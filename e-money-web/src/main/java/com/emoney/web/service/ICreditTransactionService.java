@@ -2,6 +2,7 @@ package com.emoney.web.service;
 
 import com.emoney.core.service.ICrudService;
 import com.emoney.web.model.CreditTransactionEntity;
+import com.emoney.web.model.JobTransactionEntity;
 
 import java.util.List;
 
@@ -14,5 +15,8 @@ public interface ICreditTransactionService extends ICrudService<CreditTransactio
     List<CreditTransactionEntity> getCreditTransactionsByUserId(Long userId);
 
     Boolean makeTransfer(Double amount, String fromWalletId, String toWalletId);
+
+    List<CreditTransactionEntity> getUserCreditTransactions(Long userId);
+
 
 }

@@ -5,8 +5,10 @@ import com.emoney.core.model.FileInfoModel;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
+import java.net.URLConnection;
 import java.nio.file.*;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Anil Kumal on 02/02/2019.
@@ -157,6 +159,27 @@ public class MultiPartFileUtils {
         return null;
     }
 
+    public static String writeandRenameFile(String rootLocation, String folderLocation, byte [] bytes, String newName) {
+        String folderFileLocation = rootLocation + folderLocation;
+        File file = new File(folderFileLocation);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        Path path = Paths.get(folderFileLocation + File.separator + newName);
+        try {
+            Files.write(path, bytes);
+            return folderLocation + File.separator + newName;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static String getRandomName() {
+        UUID uuid = UUID.randomUUID();
+        String randomUUIDString = uuid.toString();
+        return randomUUIDString;
+    }
+
     private static String getNewFileName(FileInfoModel fileInfoModel) {
         return (StringUtils.isNotNull(fileInfoModel.getImage()) ? fileInfoModel.getImage() : fileInfoModel.getMultipartFile().getOriginalFilename());
     }
@@ -195,5 +218,19 @@ public class MultiPartFileUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static String getImageName(byte[] decodedByte) throws IOException {
+        String newFilename = MultiPartFileUtils.getRandomName();
+        InputStream is = new ByteArrayInputStream(decodedByte);
+        String mimeType = null;
+        String fileExtension = null;
+        mimeType = URLConnection.guessContentTypeFromStream(is);
+        System.out.println(mimeType);
+        String delimiter="[/]";
+        String[] tokens = mimeType.split(delimiter);
+        fileExtension = tokens[1];
+        newFilename = newFilename.concat("."+fileExtension);
+        return newFilename;
     }
 }

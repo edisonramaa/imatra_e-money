@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 public class CompletedJob extends ModelBase {
     private Long jobId;
-    private String jobJobTitle;
-    private Integer jobCredits;
+    private String jobJobCategoryName;
+    private Integer jobJobCategoryCredits;
 }

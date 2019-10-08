@@ -8,10 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserRatingResponseDto extends ResponseDtoBase {
-    private Integer posterReview;
-    private Integer workerReview;
-    private Long posterId;
-    private Long transactionId;
     private Long workerId;
+    private Double workerReview;
 
 }

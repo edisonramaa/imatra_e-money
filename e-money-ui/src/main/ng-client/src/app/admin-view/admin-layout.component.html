@@ -2,24 +2,26 @@
   <mat-sidenav-container class="all-wrap">
     <mat-sidenav #sidenav class="navbar-width">
 
-      <mat-card (click)="openUserProfile()" class="expanded-panel-container">
+      <mat-card  (click)="userProfileModel.name ? openUserProfile():''" class="expanded-panel-container">
         <mat-card-header>
-          <div class="user-avatar-image" mat-card-avatar></div>
-          <mat-card-title>Captain America</mat-card-title>
+          <img src="{{userProfilePictureUrl}}" class="user-avatar-image" mat-card-avatar/>
+          <mat-card-title>{{userProfileModel.name}}</mat-card-title>
           <mat-card-subtitle>My Profile</mat-card-subtitle>
         </mat-card-header>
-      </mat-card>
+       </mat-card>
 
       <mat-list>
         <mat-list-item (click)="logout()"  style="cursor: pointer"> Logout</mat-list-item>
-        <mat-list-item (click)="goToBenefitsList()" > Benefits List</mat-list-item>
-        <mat-list-item (click)="goToUserManagement()" > User Management</mat-list-item>
+        <mat-list-item (click)="goToBenefitsList()" > Benefits</mat-list-item>
+        <mat-list-item (click)="goToUserManagement()" > Users</mat-list-item>
+        <mat-list-item (click)="goToJobCategoryManagement()" > Job Categories </mat-list-item>
+        <mat-list-item (click)="goToClientApplication()" > eKolikko Client</mat-list-item>
       </mat-list>
     </mat-sidenav>
 
     <div class="page-wrap">
       <app-header [sideNavBar]="sidenav" [headerTitle]="headerTitle"></app-header>
-      <main class="content">
+      <main class="content" style="height: 100%;">
         <router-outlet></router-outlet>
       </main>
       <!--<app-footer></app-footer>-->

@@ -11,7 +11,7 @@ export class LoginService extends FTBaseService {
 
   serviceApi: string = '/emoney/user';
   authUrl: string = '/auth';
-  changePwdUrl: string = '/chhangepassword';
+  changePwdUrl: string = '/changepassword';
 
   locationUrl = "http://ip-api.com/json";
 

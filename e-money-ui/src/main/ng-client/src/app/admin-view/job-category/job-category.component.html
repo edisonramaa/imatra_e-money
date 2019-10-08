@@ -1,0 +1,23 @@
+<mat-list id="job-categories">
+  <div class="msg" *ngIf="categoriesList.length==0" class="center"><span>No Job Categories to show.</span></div>
+  <div *ngFor="let category of categoriesList">
+    <mat-list-item>
+      <h2 matLine style="color: #47525E;"><strong>{{category.name}}</strong></h2>
+
+      <div matLine>
+        <p class='ellipsis' matLine style="color: grey">{{category.credits}}
+        <p></div>
+      <div id="buttons-wrapper">
+        <button class="edit" color="primary" mat-flat-button (click)="editCategory(category)">Edit</button>
+        <button class="delete" color="warn" mat-flat-button (click)="confirmDelete(category)" >Delete</button>
+      </div>
+
+    </mat-list-item>
+    <mat-divider style="margin-bottom: 10px;"></mat-divider>
+  </div>
+
+</mat-list>
+
+<button mat-mini-fab (click)="createCategory()" id="add-category-btn">
+  +
+</button>

@@ -6,7 +6,7 @@ import {BaseFtModel} from "../../core/lib/model/base-ft.model";
 
 export class WalletModel extends BaseFtModel {
   jobEntityId: number;
-  jobEntityJobTitle: string;
+  jobEntityJobCategoryName: string;
   benefitEntityId: number;
   benefitEntityName: string;
   credits: number;

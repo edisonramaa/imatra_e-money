@@ -3,6 +3,7 @@ package com.emoney.web.repository;
 
 import com.emoney.core.repository.ICrudRepository;
 import com.emoney.web.model.JobEntity;
+import com.emoney.web.model.JobTransactionEntity;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface IJobRepository extends ICrudRepository<JobEntity, Long> {
     List<JobEntity> getMyJobs(Long id);
 
     JobEntity getJobByQrCode(String qrCode);
+
+
 }

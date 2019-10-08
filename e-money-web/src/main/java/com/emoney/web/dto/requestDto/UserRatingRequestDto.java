@@ -8,10 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserRatingRequestDto extends RequestDtoBase {
-    private Integer posterReview;
-    private Integer workerReview;
-    private Long posterId;
-    private Long transactionId;
     private Long workerId;
-
+    private String workerComment;
+    private Integer workerReview;
+    private Long jobId;
 }

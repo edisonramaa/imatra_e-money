@@ -2,8 +2,7 @@ package com.emoney.web.repository.impl;
 
 import com.emoney.core.repository.impl.CrudRepositoryImpl;
 import com.emoney.web.enums.JobApplyStatus;
-import com.emoney.web.model.JobTransactionEntity;
-import com.emoney.web.model.QJobTransactionEntity;
+import com.emoney.web.model.*;
 import com.emoney.web.repository.IJobTransactionRepository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
@@ -51,6 +50,22 @@ public class JobTransactionRepositoryImpl extends CrudRepositoryImpl<JobTransact
                 .where(qJobTransactionEntity.job.id.eq(jobId), qJobTransactionEntity.status.eq(JobApplyStatus.APPROVED.getJobApplyStatus()))
                 .fetch();
         return jobTransactionEntityList;
+    }
+
+    @Override
+    public List<JobTransactionEntity> getListOfTransactions(Long userId) {
+        QJobTransactionEntity qJobTransactionEntity = QJobTransactionEntity.jobTransactionEntity;
+        QUserEntity qUserEntity = QUserEntity.userEntity;
+        QJobEntity qJobEntity = QJobEntity.jobEntity;
+        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
+        List<JobTransactionEntity> result = jpaQueryFactory
+                .selectFrom(qJobTransactionEntity)
+                .innerJoin(qJobTransactionEntity.applicant, qUserEntity)
+                .innerJoin(qJobTransactionEntity.job, qJobEntity)
+                .where(qUserEntity.id.eq(userId))
+                .groupBy(qJobEntity.id)
+                .fetch();
+        return result;
     }
 
     @Override

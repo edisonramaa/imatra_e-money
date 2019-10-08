@@ -1,0 +1,38 @@
+button.edit {
+  background: #a2a1a1;
+  color: white;
+  margin-right: 10px;
+}
+
+button.edit, button.delete {
+  min-width: 70px;
+  line-height: 25px;
+  padding: 0 10px;
+  margin-top: 10px;
+  margin-right: 0px;
+}
+
+#add-category-btn.mat-mini-fab.mat-accent {
+  background: #ED6C41;
+  font-size: 50px;
+  color: white;
+  font-weight: lighter;
+  z-index: 9999;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+}
+
+#job-categories.msg {
+  text-align: center;
+}
+
+#buttons-wrapper {
+  margin-top: -20px;
+  text-align: right;
+}
+
+.center {
+  text-align: center;
+}

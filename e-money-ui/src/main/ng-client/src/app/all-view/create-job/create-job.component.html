@@ -1,27 +1,23 @@
-<form [formGroup]="jobFormGroup" method="post">
-    <mat-form-field>
-      <input matInput placeholder="Job title" name="jobTitle" formControlName="jobTitle" type="text">
-      <mat-error
-        *ngIf="jobFormGroup.controls['jobTitle'].hasError('required')">
-        Job Title is required.
-      </mat-error>
-      <mat-error
-        *ngIf="jobFormGroup.controls['jobTitle'].hasError('pattern')">
-        Please Enter Valid Job Title starting with a Letter (Special Characters are not allowed).
-      </mat-error>
+<form [formGroup]="jobFormGroup" method="post" style="padding-top: 20px;">
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select required formControlName="category">
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let category of categoriesList" [value]="category">{{category.name}}</mat-option>
+    </mat-select>
+    <mat-error
+      *ngIf="jobFormGroup.controls['category'].hasError('required')">
+     You should select a category
+    </mat-error>
+   <!-- <mat-hint>{{jobFormGroup.controls['categories'].value?.description}}</mat-hint>-->
+  </mat-form-field>
+  <div id="categoryDescP" *ngIf="!jobFormGroup.controls['category'].hasError('required')">
+    <mat-hint >{{jobFormGroup.controls['category'].value?.description}}</mat-hint>
+    <div id="separator"></div>
+    <mat-hint *ngIf="!jobFormGroup.controls['category'].hasError('required')">Credits: {{jobFormGroup.controls['category'].value?.credits}}</mat-hint>
+  </div>
 
-
-    </mat-form-field>
-
-    <mat-form-field>
-      <textarea matInput placeholder="Job description" name="description" formControlName="description"></textarea>
-      <mat-error
-        *ngIf="jobFormGroup.controls['description'].hasError('required')">
-        Job Description is required.
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
+  <mat-form-field>
       <input matInput name="noOfPeople" placeholder="No. of people needed for the job" formControlName="noOfPeople"
              type="number">
       <mat-error
@@ -51,14 +47,6 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput name="credits" placeholder="Job credits" type="number" formControlName="credits">
-      <mat-error
-        *ngIf="jobFormGroup.controls['credits'].hasError('required')">
-        Credit is required.
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
       <input matInput
              ngx-google-places-autocomplete #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"
              name="address1"
@@ -72,14 +60,6 @@
 
     <mat-form-field>
       <input matInput name="address2" placeholder="Address Line 2" formControlName="address2">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput name="postCode" placeholder="Post code" formControlName="postCode">
-      <mat-error
-        *ngIf="jobFormGroup.controls['postCode'].hasError('required')">
-        Post Code is required.
-      </mat-error>
     </mat-form-field>
 
     <mat-form-field>

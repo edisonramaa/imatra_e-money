@@ -4,12 +4,12 @@
 
             <mat-card  (click)="userProfileModel.name ? openUserProfile():''" class="expanded-panel-container">
                 <mat-card-header *ngIf="showLoggedInMenus">
-                    <div class="user-avatar-image" mat-card-avatar></div>
+                    <img src="{{userProfilePictureUrl}}" class="user-avatar-image" mat-card-avatar/>
                     <mat-card-title>{{userProfileModel.name}}</mat-card-title>
                     <mat-card-subtitle>My Profile</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-header *ngIf="!showLoggedInMenus">
-                    <div class="user-avatar-image" mat-card-avatar></div>
+                  <img src="{{userProfilePictureUrl}}" class="user-avatar-image" mat-card-avatar/>
                     <mat-card-title>Guest</mat-card-title>
                 </mat-card-header>
             </mat-card>
@@ -21,6 +21,9 @@
             <mat-list *ngIf="!showLoggedInMenus">
                 <mat-list-item (click)="login()" style="cursor: pointer">Login</mat-list-item>
             </mat-list>
+          <mat-list *ngIf="showLoggedInMenus && hasAdminAccess">
+            <mat-list-item (click)="goToAdminApp()" style="cursor: pointer">eKolikko Admin App</mat-list-item>
+           </mat-list>
         </mat-sidenav>
 
         <div class="page-wrap">

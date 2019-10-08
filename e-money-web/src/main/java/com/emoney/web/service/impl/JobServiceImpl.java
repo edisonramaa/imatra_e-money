@@ -64,7 +64,7 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
 
     @Override
     public JobEntity save(JobEntity jobEntity) {
-        Double totalCredit = jobEntity.getCredits() * jobEntity.getNoOfPeople();
+        Double totalCredit = jobEntity.getCategory().getCredits() * jobEntity.getNoOfPeople();
         UserEntity userEntity = this.userRepository.findOne(TokenUtils.getTokenModel().getUserId());
         if (userEntity.getBalanceCredits() < totalCredit) {
             throw  new EmoneyException("You don't enough balance to create this job.");
@@ -99,7 +99,7 @@ public class JobServiceImpl extends CrudServiceImpl<JobEntity, Long> implements 
                     jobTransactionRepository.update(jobTransaction);
                 }
             }
-            Double totalReturnCredits = job.getCredits() * job.getNoOfPeople();
+            Double totalReturnCredits = job.getCategory().getCredits() * job.getNoOfPeople();
             UserEntity userEntity = this.userRepository.findOne(TokenUtils.getTokenModel().getUserId());
             Double updatedReservedCredits = userEntity.getReserveCredits() - totalReturnCredits;
             userEntity.setReserveCredits(updatedReservedCredits);

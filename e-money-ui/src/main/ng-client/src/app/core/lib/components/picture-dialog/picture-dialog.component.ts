@@ -17,7 +17,6 @@ export class PictureDialogComponent {
     private _httpService: HttpService,
     private _sanitizer: DomSanitizer
   ) {
-    this.downloadFile(data.content);
     this.downloadFileName = data.title.toString().replace(/\s/g, "").concat(".png");
   }
 
@@ -25,19 +24,6 @@ export class PictureDialogComponent {
     this.dialogRef.close();
   }
 
-  downloadFile(downloadUrl: string) {
-    return this._httpService.downloadFile(downloadUrl)
-      .subscribe(
-        (res) => {
-          const blob = new Blob([res], {type: 'application/octet-stream'});
-
-          this.fileUrl = this._sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(blob));
-        }, error => {
-          console.log('download error:', JSON.stringify(error));
-        }, () => {
-          console.log('Completed file download.')
-        });
-  }
 
 }
 

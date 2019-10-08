@@ -10,5 +10,6 @@ import lombok.Setter;
 @Setter
 public class RequestDtoBase extends DtoBase {
     private Long id;
+    private Boolean deleted;
 
 }

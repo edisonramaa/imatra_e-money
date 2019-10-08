@@ -9,13 +9,11 @@ import java.util.Date;
 @Getter
 @Setter
 public class JobRequestDto extends RequestDtoBase {
-    private String jobTitle;
-    private String description;
+    private JobCategoryRequestDto category;
     private Integer noOfPeople;
     private Date dueDate;
     private String endTime;
     private String postedDate;
-    private Double credits;
     private String address1;
     private String address2;
     private String postCode;

@@ -13,4 +13,5 @@ export class UserProfileModel extends BaseFtModel {
   status: boolean;
   balanceCredits:number;
   jobTransactionEntities: any[];
+  profileImageUrl: string;
 }

@@ -3,23 +3,25 @@ package com.emoney.web.model;
 import com.emoney.core.model.EntityBase;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@Where(clause = "deleted = false")
 @Table(name = "job")
 public class JobEntity extends EntityBase {
-    @Column(name = "job_title")
-    private String jobTitle;
-    @Column(name = "description")
-    private String description;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity jobPoster;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private JobCategoryEntity category;
     @Column(name = "no_of_people")
     private Integer noOfPeople;
     @Column(name = "due_date")
@@ -28,8 +30,6 @@ public class JobEntity extends EntityBase {
     private Time dueTime;
     @Column(name="posted_date")
     private Date postedDate;
-    @Column(name = "credits")
-    private Double credits;
     @Column(name = "address1")
     private String address1;
     @Column(name = "address2")
@@ -49,5 +49,6 @@ public class JobEntity extends EntityBase {
     @Column(name = "lng")
     private String lng;
 
-
+    @Transient
+    List<CreditTransactionEntity> creditTransactionEntities;
 }

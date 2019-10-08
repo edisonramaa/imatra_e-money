@@ -15,6 +15,7 @@ import {HttpService} from "./core/lib/services/http.service";
 import {CustomValidator} from "./core/lib/services/custom-validator.service";
 import {EventService} from "./all-view/app-services/event.service";
 import {AdminAuthGuardService} from "./core/lib/services/admin-auth-guard.service";
+import { CustomImageFormControlComponent } from './custom-image-form-control/custom-image-form-control.component';
 
 @NgModule({
   declarations: [

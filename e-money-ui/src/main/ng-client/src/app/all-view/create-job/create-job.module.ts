@@ -6,11 +6,13 @@ import {CreateJobComponent} from "./create-job.component";
 import {CustomMaterialModule} from "../../core/module/CustomMaterialModule";
 import {GooglePlaceModule} from "ngx-google-places-autocomplete";
 import {AgmCoreModule} from "@agm/core";
+import {MatSelectModule} from "@angular/material";
 
 @NgModule({
   imports: [
     CommonModule,
     CreateJobRoutingModule,
+    MatSelectModule,
     //HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAKCaFt6BdyqUm95rDCrAWD0yG0940OrZs',

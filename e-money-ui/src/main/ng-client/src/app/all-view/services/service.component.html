@@ -1,7 +1,8 @@
 <div id="service-detail" *ngIf="benefitModel">
-  <h2 class="service-title" style="margin: 20px;">{{benefitModel.name}}</h2>
-  <p class="text-center">{{benefitModel.description}} <br>
-        Use your credit to pay for the service. Thank you!
+  <div id="mainContent" style="height: 100%; padding-bottom: 20px;">
+    <h2 class="service-title" style="margin: 20px;">{{benefitModel.name}}</h2>
+    <p class="text-center">{{benefitModel.description}} <br>
+      Use your credit to pay for the service. Thank you!
     </p>
     <p style="color: #47525E; align-items: center; justify-content: center;">
       <span style="margin-left: 31px;"
@@ -9,14 +10,16 @@
       <span style="margin-left: 31px;" *ngIf="serviceDuration<=0"><b>Please use another service to redeem. Validation period of this service has been expired.</b></span>
 
       <span style="float: right; margin-right: 31px;margin-left: 5px;"><mat-icon
-                class="temp-credit-icon">copyright</mat-icon>
+        class="temp-credit-icon">copyright</mat-icon>
   </span>
       <span style="float: right;"><b>Cost: {{benefitModel.credits}}</b></span>
     </p>
-  <div class="button-center-b" style="margin-top: 30px;margin-bottom: 30px;">
+    <div class="button-center-b">
       <button class="mat-stroked-button mat-warn button-padding" (click)="onPurchase()"><strong>Purchase</strong>
       </button>
     </div>
+  </div>
+
     <div class="center" id="test">
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12">
           <agm-marker [latitude]="benefitModel.latitude" [longitude]="benefitModel.longitude"></agm-marker>

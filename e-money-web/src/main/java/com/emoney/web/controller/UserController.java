@@ -4,21 +4,39 @@ package com.emoney.web.controller;
 import com.emoney.core.constant.WebResourceConstant;
 import com.emoney.core.controller.ControllerBase;
 import com.emoney.core.exception.EmoneyException;
+import com.emoney.core.model.FileInfoModel;
 import com.emoney.core.model.ResponseObj;
 import com.emoney.core.model.TokenModel;
+import com.emoney.core.utils.GlobalSettingUtils;
+import com.emoney.core.utils.IBeanMapper;
+import com.emoney.core.utils.MultiPartFileUtils;
 import com.emoney.core.utils.TokenUtils;
 import com.emoney.core.utils.impl.BeanMapperImpl;
 import com.emoney.web.dto.requestDto.*;
+import com.emoney.web.dto.responseDto.CreditTransactionResponseDto;
+import com.emoney.web.dto.responseDto.JobTransactionResponseDto;
 import com.emoney.web.dto.responseDto.UserResponseDto;
+import com.emoney.web.model.CreditTransactionEntity;
+import com.emoney.web.model.JobTransactionEntity;
 import com.emoney.web.model.UserEntity;
+import com.emoney.web.service.ICreditTransactionService;
+import com.emoney.web.service.IJobService;
+import com.emoney.web.service.IJobTransactionService;
 import com.emoney.web.service.IUserService;
 import com.emoney.web.util.IEmoneyToken;
+import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.UserTransaction;
 import javax.validation.Valid;
+import java.io.*;
+import java.net.URLConnection;
+import java.sql.SQLException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,12 +50,28 @@ public class UserController extends ControllerBase {
     public static final String BASE_URL = WebResourceConstant.EMONEY.USER;
     private IUserService userService;
     private IEmoneyToken emoneyToken;
+    private IJobService jobService;
+    private IJobTransactionService jobTransactionService;
+    private ICreditTransactionService creditTransactionService;
 
     @Autowired
-    public UserController(IUserService userService, IEmoneyToken emoneyToken) {
+    public UserController(IUserService userService, IEmoneyToken emoneyToken,
+                          IJobService jobService, IJobTransactionService jobTransactionService, ICreditTransactionService creditTransactionService) {
         super(userService, new BeanMapperImpl(UserEntity.class, UserRequestDto.class), new BeanMapperImpl(UserEntity.class, UserResponseDto.class));
         this.userService = userService;
         this.emoneyToken = emoneyToken;
+        this.jobService = jobService;
+        this.jobTransactionService = jobTransactionService;
+        this.creditTransactionService = creditTransactionService;
+    }
+
+    @Override
+    public ResponseEntity<ResponseObj> get(@PathVariable Long id) {
+        UserEntity entity = userService.getProfile(id);
+         if (entity == null) {
+            throw new EmoneyException("Sorry!! No Records Found");
+        }
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(entity)).message("Success").build(), HttpStatus.OK);
     }
 
     @PostMapping(WebResourceConstant.UserManagement.CHANGE_PASSWORD)
@@ -84,7 +118,7 @@ public class UserController extends ControllerBase {
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().message(userRequestDto.getCredits()+" credits have been added to the account.").build(), HttpStatus.OK);
     }
 
-    @DeleteMapping(WebResourceConstant.UserManagement.CHANGE_STATUS)
+    @PostMapping(WebResourceConstant.UserManagement.CHANGE_STATUS)
     public ResponseEntity<ResponseObj> changeStatus(@PathVariable Long userId) {
         Boolean userStatus = userService.changeStatus(userId);
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(userId).message("User status changed to: "+ (userStatus ? "Active" : "Deactivated")).build(), HttpStatus.OK);
@@ -110,7 +144,36 @@ public class UserController extends ControllerBase {
         return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(resBeanMapper.mapToDTO(appUsers)).message("Success").build(), HttpStatus.OK);
     }
 
+    @GetMapping(WebResourceConstant.UserManagement.GET_USER_TRANSACTIONS)
+    public ResponseEntity<ResponseObj> getUserTransactions(@PathVariable Long userId) {
+        List<JobTransactionEntity> transactionsList = jobTransactionService.getUserTransactions(userId);
+        if (transactionsList.isEmpty()) {
+            throw new EmoneyException("User Transactions list is empty");
+        }
+        IBeanMapper iBeanMapper = new BeanMapperImpl(JobTransactionEntity.class, JobTransactionResponseDto.class);
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(iBeanMapper.mapToDTO(transactionsList)).message("Success").build(), HttpStatus.OK);
+    }
 
+    @GetMapping(WebResourceConstant.UserManagement.GET_USER_CREDIT_TRANSACTIONS)
+    public ResponseEntity<ResponseObj> getUserCreditTransactions(@PathVariable Long userId) {
+        List<CreditTransactionEntity> creditTransactionList = creditTransactionService.getUserCreditTransactions(userId);
+        if (creditTransactionList.isEmpty()) {
+            throw new EmoneyException("User Credit Transaction list is empty");
+        }
+        IBeanMapper iBeanMapper = new BeanMapperImpl(CreditTransactionEntity.class, CreditTransactionResponseDto.class);
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(iBeanMapper.mapToDTO(creditTransactionList)).message("Success").build(), HttpStatus.OK);
+    }
+
+    @PostMapping(WebResourceConstant.UserManagement.CHANGE_PROFILE_PICTURE)
+    public ResponseEntity<ResponseObj> changeProfilePicture(@RequestBody @Valid UserProfileRequestDto userProfileRequestDto) {
+        try {
+            userService.updateProfilePicture(userProfileRequestDto.getImage());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result(e.getMessage()).build(), HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(new ResponseObj.ResponseObjBuilder().result("Success").build(), HttpStatus.OK);
+    }
     @PostMapping(WebResourceConstant.UserManagement.EMAIL)
     public ResponseEntity<ResponseObj> verifyUserByEmail(@RequestBody @Valid UserEmailRequestDto userEmailRequestDto) {
         UserEntity userEntity = this.userService.findByEmail(userEmailRequestDto.getEmail());

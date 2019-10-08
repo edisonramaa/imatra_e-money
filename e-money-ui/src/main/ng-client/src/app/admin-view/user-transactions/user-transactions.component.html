@@ -1,0 +1,47 @@
+<table *ngIf="transactionsList.length>0" mat-table [dataSource]="transactionsList" class="mat-elevation-z8">
+
+  <!-- Job Column -->
+  <ng-container matColumnDef="job">
+    <th mat-header-cell *matHeaderCellDef> Job </th>
+  </ng-container>
+
+
+  <!-- Status Column -->
+  <ng-container matColumnDef="updatedAt" style="text-align: end;">
+    <th style="text-align: end;" mat-header-cell *matHeaderCellDef> Last update </th>
+
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+</table>
+<p style="text-align: center" *ngIf="transactionsList.length == 0">No transactions for this user yet.</p>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let transaction of transactionsList;">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ transaction.jobJobCategoryName }}
+      </mat-panel-title>
+      <span class="credit-amount" style="margin-right: 10px;">{{ transaction.updatedAt | date:'short' }}</span>
+    </mat-expansion-panel-header>
+    <div>
+      <p class="desc-job">Job Title: {{transaction.jobJobCategoryName}}</p>
+      <p class="desc-job">Location: {{transaction.jobAddress1}}</p>
+      <p class="desc-job" style="margin-bottom: 0;">Selected candidates: {{transaction.jobTotalSelected}}</p>
+      <p class="desc-job" style="margin-bottom: 0;">Current rating for the job: N/A</p>
+      <mat-list style="padding-top:0" role="list" *ngFor="let credit of creditTransactionsList;" >
+        <mat-divider *ngIf="transaction.jobId == credit.jobEntityId"></mat-divider>
+        <mat-list-item *ngIf="transaction.jobId == credit.jobEntityId" role="listitem"><p style="font-size: smaller;">{{credit.transactionType.charAt(0).toUpperCase() + credit.transactionType.toLowerCase().slice(1)}} </p><span style="color: red;font-size: smaller; padding-left:6px;padding-right:6px;" class="credit-amount"> {{credit.credits}} credits</span>
+        <span style="font-size: smaller;" class="credit-amount"> on {{credit.transactionDate | date:'short'}}</span>
+        </mat-list-item>
+      </mat-list>
+      <mat-divider style="margin-bottom: 5px;"></mat-divider>
+          </div>
+    <div id="buttons-wrappers">
+      <div class="button-wrap">
+        <button  style="width: 45%;margin-right: 2px;float: left;background-color: #ED6C41;color:white;"  (click)="manageCredits(userId, transaction.jobId)" mat-flat-button >Manage Credits</button>
+        <button style="width: 45%;margin-right: 2px;float: right;background-color: #ED6C41;" (click)="rateUser(userId,transaction.jobId)" color="warn" mat-flat-button >Rate User</button>
+      </div>
+    </div>
+ </mat-expansion-panel>
+</mat-accordion>

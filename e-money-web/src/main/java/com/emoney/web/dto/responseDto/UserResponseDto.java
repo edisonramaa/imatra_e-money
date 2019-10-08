@@ -19,5 +19,6 @@ public class UserResponseDto extends ResponseDtoBase {
     private String walletId;
     private Boolean status;
     private Double balanceCredits;
+    private String profileImageUrl;
 
 }

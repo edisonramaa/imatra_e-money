@@ -61,8 +61,13 @@ public class CrudServiceImpl<T, ID extends Serializable> implements ICrudService
     @Override
     public boolean delete(ID id) {
         T entity = findOne(id);
-        crudRepository.delete(entity);
-        return true;
+        if (entity instanceof EntityBase) {
+            ((EntityBase) entity).setDeleted(true);
+            crudRepository.update(entity);
+            return true;
+        }
+        return crudRepository.delete(entity);
+
     }
 
 

@@ -59,10 +59,12 @@ public class DataSourceInitializer implements CommandLineRunner {
         GlobalSettingEntity imagePath = new GlobalSettingEntity(GlobalSettingUtils.IMAGE_UPLOAD_LOCATION, "/images");
         GlobalSettingEntity qrCodePath = new GlobalSettingEntity(GlobalSettingUtils.QR_JOB_LOCATION, "/QR-JOB");
         GlobalSettingEntity qrCodeServicePath = new GlobalSettingEntity(GlobalSettingUtils.QR_SERVICE, "/QR-SERVICE");
+        GlobalSettingEntity profilePicturePath = new GlobalSettingEntity(GlobalSettingUtils.PROFILE_PICTURE, "/PROFILE_PICTURE");
         globalSettingEntities.add(rootPath);
         globalSettingEntities.add(imagePath);
         globalSettingEntities.add(qrCodePath);
         globalSettingEntities.add(qrCodeServicePath);
+        globalSettingEntities.add(profilePicturePath);
         return globalSettingEntities;
     }
 
@@ -71,9 +73,10 @@ public class DataSourceInitializer implements CommandLineRunner {
         userEntity.setEmail("admin@gmail.com");
         userEntity.setPassword("$2a$10$aMz/HmSCNl2DMbUhTy0DbeAJ5Us7SBY5G1S4yQtfCn1o1SpKbKfRW");
         userEntity.setIsAdmin(true);
+        userEntity.setName("Administrator");
         userEntity.setVersion(0L);
         userEntity.setAge(11);
-        userEntity.setWalletId("ADM1234567890");
+        userEntity.setWalletId("ADM957593155");
         userEntity.setBalanceCredits(10000000.00);
         userEntity.setReserveCredits(0.00);
         userEntity.setStatus(true);

@@ -39,7 +39,7 @@ public class ImageController {
                 .rootLocation(GlobalSettingUtils.getGlobalSettingByKey(GlobalSettingUtils.ROOT_UPLOAD_LOCATION))
                 .multipartFile(uploadFile)
                 .build();
-        String newFilename = this.getRandomName();
+        String newFilename = MultiPartFileUtils.getRandomName();
         MultiPartFileUtils.writeandRenameFile(fileInfoModel, newFilename);
         ResponseObj fortunaResponseObj = new ResponseObj.ResponseObjBuilder().result(newFilename).message("success").build();
         return new ResponseEntity<>(fortunaResponseObj, HttpStatus.OK);
@@ -54,6 +54,8 @@ public class ImageController {
             key = GlobalSettingUtils.QR_JOB_LOCATION;
         } else if ("SERVICE".equalsIgnoreCase(type)) {
             key = GlobalSettingUtils.QR_SERVICE;
+        } else if ("PROFILE".equalsIgnoreCase(type)) {
+            key = GlobalSettingUtils.PROFILE_PICTURE;
         } else {
             return new ResponseEntity<>(null, httpHeaders, HttpStatus.BAD_REQUEST);
         }
@@ -68,11 +70,7 @@ public class ImageController {
 
     }
 
-    private String getRandomName() {
-        UUID uuid = UUID.randomUUID();
-        String randomUUIDString = uuid.toString();
-        return randomUUIDString;
-    }
+
 
 
 }

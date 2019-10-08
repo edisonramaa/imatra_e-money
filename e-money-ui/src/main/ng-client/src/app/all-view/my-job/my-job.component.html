@@ -1,14 +1,17 @@
 <div id="my-job">
-  <div *ngIf="myJobsList.length===0">
+  <div *ngIf="myJobsList.length===0 && hasAdminAccess">
     <p style="text-align: center">Currently, You have not posted any jobs.</p>
+  </div>
+  <div *ngIf="!hasAdminAccess">
+    <p style="text-align: center">Currently, only the City of Imatra can post jobs.</p>
   </div>
   <mat-accordion>
     <mat-expansion-panel *ngFor="let job of myJobsList;" (opened)="getAllApplicantsByJob(job)">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{ job.jobTitle }}
+          {{ job.category.name }}
         </mat-panel-title>
-        <span class="credit-amount">{{ job.credits }}</span>
+        <span class="credit-amount">{{ job.category.credits }}</span>
         <mat-icon class="temp-credit-icon">copyright</mat-icon>
       </mat-expansion-panel-header>
       <!--<p class="sub-header-jobs">View QR Code</p>
@@ -27,10 +30,12 @@
       <mat-card class="expanded-panel-container">
         <div *ngFor="let applicant of job.appliedJobsList">
           <mat-card-header *ngIf="applicant.status==='APPLIED'">
-            <div mat-card-avatar class="user-avatar-image"></div>
-            <mat-card-title>{{applicant.applicantName}}</mat-card-title>
-            <mat-card-subtitle>
-              <bar-rating [max]="10" [rate]="5" [readOnly]="true" [theme]="'horizontal'"></bar-rating>
+
+            <img (click)="openUserProfile(applicant.applicantId)"  src="{{applicant.applicantProfileImageUrl}}" class="user-avatar-image" mat-card-avatar/>
+
+            <mat-card-title (click)="openUserProfile(applicant.applicantId)" >{{applicant.applicantName}}</mat-card-title>
+            <mat-card-subtitle (click)="openUserProfile(applicant.applicantId)" >
+            <bar-rating [rate]="applicant.rating" [readOnly]="true" [max]="10" [theme]="'horizontal'"></bar-rating>
             </mat-card-subtitle>
 
             <div class="accept-decline-buttons-container">
@@ -51,10 +56,12 @@
       <mat-card class="expanded-panel-container">
         <div *ngFor="let applicant of job.appliedJobsList">
           <mat-card-header *ngIf="applicant.status==='APPROVED'">
-            <div class="user-avatar-image" mat-card-avatar></div>
+            <img (click)="openUserProfile(applicant.applicantId)"  src="{{applicant.applicantProfileImageUrl}}" class="user-avatar-image" mat-card-avatar/>
+
             <mat-card-title>{{applicant.applicantName}}</mat-card-title>
             <mat-card-subtitle>
-              <bar-rating [max]="10" [rate]="5" [readOnly]="true" [theme]="'horizontal'"></bar-rating>
+             <bar-rating [rate]="applicant.rating" [readOnly]="true" [max]="10" [theme]="'horizontal'"></bar-rating>
+
             </mat-card-subtitle>
           </mat-card-header>
         </div>
@@ -63,7 +70,7 @@
 
   </mat-accordion>
 
-  <button mat-mini-fab (click)="createJob()" id="add-job-btn">
+  <button *ngIf="hasAdminAccess" mat-mini-fab (click)="createJob()" id="add-job-btn">
     +
   </button>
 </div>
